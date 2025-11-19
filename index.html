@@ -1,1 +1,272 @@
-<h1> Portfolio </h1> 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (replace or remove as you wish) -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-XXXX');
+  </script> -->
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="Portfolio — Games, Projects, Art, Articles" />
+  <meta name="keywords" content="Games, Art, Portfolio, Game Dev, Music" />
+  <title>MY-PORTFOLIO</title>
+  <link rel="icon" type="image/ico" href="/svgs/tear.ico" />
+
+  <style>
+    /* Basic reset and layout to preserve the "windowed" retro look */
+    :root{ --bg:#0b0b0e; --panel:#111217; --accent:#66e0ff; --muted:#9aa3ad; }
+    *{box-sizing:border-box}
+    html,body{height:100%; margin:0; font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:linear-gradient(180deg,#07070a 0%, #0f0f12 100%); color:#e6eef6}
+    a{color:inherit}
+
+    header{padding:12px}
+    #topBarContainer{display:flex; align-items:center; gap:12px; justify-content:space-between}
+    .containerDuo{display:flex; gap:8px; align-items:center}
+    .interactableButton{background:transparent; border:1px solid rgba(255,255,255,0.06); padding:8px 10px; border-radius:6px; text-decoration:none; font-weight:600; color:var(--muted); cursor:pointer}
+    #socialsContainer{display:flex; gap:8px; align-items:center}
+    #clock p{margin:0; font-weight:700}
+
+    /* main grid */
+    #initialWindowLayout{display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:12px; margin-top:18px}
+    .draggableDiv{background:var(--panel); border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.6); overflow:hidden}
+    .draggableDivHeader, .draggableDivHeaderSupport{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:10px 12px; font-weight:700}
+    .boxInWindowContainer{display:flex; flex-wrap:wrap; gap:8px; padding:10px}
+    .boxInWindow{width:86px; height:86px; display:block; border-radius:8px; overflow:hidden; background:#0b0b0d; display:flex; align-items:center; justify-content:center; text-decoration:none}
+    .imageInBox{width:100%; height:100%; object-fit:cover}
+
+    .boxInWindowRectangle{width:100%; height:120px; display:flex; align-items:center; justify-content:center}
+    #order1 .imageInBox, #order2 .imageInBox{height:100%; object-fit:contain}
+
+    /* modals (simple) */
+    .modal{display:none; position:fixed; inset:0; z-index:1000; align-items:center; justify-content:center; background:linear-gradient(180deg, rgba(3,3,6,0.6), rgba(3,3,6,0.85));}
+    .modal-content{background:#0f1114; border-radius:10px; width:min(960px,95%); max-height:90%; overflow:auto; padding:12px}
+    .modal-DraggableDivTop{display:flex; align-items:center; justify-content:space-between; gap:8px; padding-bottom:8px}
+    .close{cursor:pointer}
+
+    /* gallery grid */
+    .gridPictureContainer{display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:8px; padding:8px}
+    .boxInPictureWindow{background:#0b0b0d; border-radius:8px; overflow:hidden}
+    .boxInPictureWindow img{width:100%; height:160px; object-fit:cover}
+
+    /* small responsive tweaks */
+    @media (max-width:700px){
+      .boxInWindow{width:72px; height:72px}
+      .imageInBox{object-fit:cover}
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div id="fullContainer">
+      <div id="topBarContainer">
+        <div class="containerDuo">
+          <a class="interactableButton" href="#games">GAMES</a>
+          <a class="interactableButton" href="#projects">PROJECTS</a>
+          <a class="interactableButton" href="#art">ART</a>
+          <a class="interactableButton" href="#articles">ARTICLES</a>
+        </div>
+
+        <div class="containerDuo">
+          <a id="aboutButton" class="interactableButton" onclick="openModal('myModalB')">ABOUT</a>
+          <a id="contactButton" class="interactableButton" onclick="openModal('myModalA')">CONTACT</a>
+        </div>
+
+        <a class="interactableButton" style="margin-left:1%" href="/index.html">MY-PORTFOLIO</a>
+
+        <div id="socialsContainer">
+          <a class="socialButton" href="#" target="_blank" rel="noopener noreferrer">INST</a>
+          <a class="socialButton" href="#" target="_blank" rel="noopener noreferrer">TW</a>
+          <a class="socialButton" href="#" target="_blank" rel="noopener noreferrer">ITCH</a>
+          <a class="socialButton" href="#" target="_blank" rel="noopener noreferrer">STEAM</a>
+        </div>
+
+        <div id="clock">
+          <p id="time">--:--</p>
+        </div>
+      </div>
+
+      <main id="initialWindowLayout">
+        <!-- GAMES window (order4) -->
+        <section id="order4" class="draggableDiv">
+          <div class="draggableDivHeader">FREE GAMES</div>
+          <div class="boxInWindowContainer">
+            <!-- Placeholder covers. Replace src with your images and href with your links -->
+            <a class="boxInWindow" href="#" target="_blank" rel="noopener noreferrer"><img class="imageInBox" src="/placeholders/game1.jpg" alt="Game 1"></a>
+            <a class="boxInWindow" href="#" target="_blank" rel="noopener noreferrer"><img class="imageInBox" src="/placeholders/game2.jpg" alt="Game 2"></a>
+            <a class="boxInWindow" href="#" target="_blank" rel="noopener noreferrer"><img class="imageInBox" src="/placeholders/game3.jpg" alt="Game 3"></a>
+            <a class="boxInWindow" href="#" target="_blank" rel="noopener noreferrer"><img class="imageInBox" src="/placeholders/game4.jpg" alt="Game 4"></a>
+          </div>
+        </section>
+
+        <!-- MUSIC / SOUND or PROJECTS window (order5) -->
+        <section id="order5" class="draggableDiv">
+          <div class="draggableDivHeader">PROJECTS</div>
+          <div class="boxInWindowContainer">
+            <a class="boxInWindow" href="#" id="projectA"><img class="imageInBox" src="/placeholders/project1.jpg" alt="Project 1"></a>
+            <a class="boxInWindow" href="#" id="projectB"><img class="imageInBox" src="/placeholders/project2.jpg" alt="Project 2"></a>
+            <a class="boxInWindow" href="#" id="projectC"><img class="imageInBox" src="/placeholders/project3.jpg" alt="Project 3"></a>
+          </div>
+        </section>
+
+        <!-- ART window (order3) -->
+        <section id="order3" class="draggableDiv">
+          <div class="draggableDivHeader">ART ARCHIVE</div>
+          <div class="boxInWindowContainer">
+            <div id="picturesButton" class="boxInWindow" onclick="openModal('myModalC')"><div style="padding:8px; text-align:center">OPEN GALLERY</div></div>
+            <a class="boxInWindow" href="#" target="_blank" rel="noopener noreferrer"><div style="padding:8px; text-align:center">VIDEOS</div></a>
+          </div>
+        </section>
+
+        <!-- WEB RING / LINKS (order6) -->
+        <section id="order6" class="draggableDiv">
+          <div class="draggableDivHeader">LINKS</div>
+          <div class="boxInWindowContainer">
+            <a class="boxInWindow" href="#" target="_blank" rel="noopener noreferrer"><img class="imageInBox" src="/placeholders/link1.jpg" alt="Link 1"></a>
+            <a class="boxInWindow" href="#" target="_blank" rel="noopener noreferrer"><img class="imageInBox" src="/placeholders/link2.jpg" alt="Link 2"></a>
+            <a class="boxInWindow" href="#" target="_blank" rel="noopener noreferrer"><img class="imageInBox" src="/placeholders/link3.jpg" alt="Link 3"></a>
+          </div>
+        </section>
+
+        <!-- Steam wishlist rectangle (order1) -->
+        <section id="order1" class="draggableDiv">
+          <div class="draggableDivHeaderSupport">STEAM WISHLIST</div>
+          <div class="boxInWindowContainer">
+            <a class="boxInWindowRectangle" href="#" target="_blank" rel="noopener noreferrer"><img class="imageInBox" style="object-fit:contain" src="/placeholders/steam.png" alt="Steam"></a>
+          </div>
+        </section>
+
+        <!-- Patreon rectangle (order2) -->
+        <section id="order2" class="draggableDiv">
+          <div class="draggableDivHeaderSupport">PATREON</div>
+          <div class="boxInWindowContainer">
+            <a class="boxInWindowRectangle" href="#" target="_blank" rel="noopener noreferrer"><img class="imageInBox" style="object-fit:contain" src="/placeholders/patreon.png" alt="Patreon"></a>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- CONTACT modal -->
+      <div id="myModalA" class="modal">
+        <div class="modal-content" role="dialog" aria-modal="true">
+          <div class="modal-DraggableDiv">
+            <div class="modal-DraggableDivTop"><span class="close" data-target="myModalA">&times;</span><strong>CONTACT</strong></div>
+            <div class="textInWindow" style="padding:8px">Please replace placeholders with your contact information.<br><br><i>email@example.com</i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ABOUT modal -->
+      <div id="myModalB" class="modal">
+        <div class="modal-content" role="dialog" aria-modal="true">
+          <div class="modal-DraggableDiv">
+            <div class="modal-DraggableDivTop"><span class="close" data-target="myModalB">&times;</span><strong>ABOUT</strong></div>
+            <div class="textContainer" style="padding:8px">
+              <p>Hi — I make games, art and write articles. This is a placeholder ABOUT text. Replace this with your own short bio.</p>
+              <p style="font-size:12px; color:var(--muted)">- last updated: October 2025 -</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GALLERY modal -->
+      <div id="myModalC" class="modal">
+        <div class="modal-content" role="dialog" aria-modal="true">
+          <div class="modal-DraggableDiv">
+            <div class="modal-DraggableDivTop">
+              <span class="close" data-target="myModalC">&times;</span>
+              <strong>GALLERY</strong>
+            </div>
+
+            <div class="gridPictureContainer" id="galleryGrid">
+              <!-- placeholders  -->
+              <div class="boxInPictureWindow"><img src="/placeholders/art_01.jpg" alt="Art 1"></div>
+              <div class="boxInPictureWindow"><img src="/placeholders/art_02.jpg" alt="Art 2"></div>
+              <div class="boxInPictureWindow"><img src="/placeholders/art_03.jpg" alt="Art 3"></div>
+              <div class="boxInPictureWindow"><img src="/placeholders/art_04.jpg" alt="Art 4"></div>
+              <div class="boxInPictureWindow"><img src="/placeholders/art_05.jpg" alt="Art 5"></div>
+              <div class="boxInPictureWindow"><img src="/placeholders/art_06.jpg" alt="Art 6"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <script>
+    // Simple clock
+    function updateClock(){
+      const now=new Date();
+      const h=String(now.getHours()).padStart(2,'0');
+      const m=String(now.getMinutes()).padStart(2,'0');
+      document.getElementById('time').textContent = h+':'+m;
+    }
+    setInterval(updateClock,1000);
+    updateClock();
+
+    // Modal helpers
+    function openModal(id){
+      const el=document.getElementById(id);
+      if(!el) return;
+      el.style.display='flex';
+    }
+    function closeModal(id){
+      const el=document.getElementById(id);
+      if(!el) return;
+      el.style.display='none';
+    }
+    // attach close buttons
+    document.addEventListener('click', function(e){
+      if(e.target.classList.contains('close')){
+        const target = e.target.getAttribute('data-target');
+        if(target) closeModal(target);
+        else{
+          // try to find parent modal
+          let p = e.target.closest('.modal'); if(p) p.style.display='none';
+        }
+      }
+    });
+
+    // Close modal on ESC
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ document.querySelectorAll('.modal').forEach(m=>m.style.display='none'); } });
+
+    // Simple drag for windows (desktop only, minimal)
+    (function(){
+      const draggables = document.querySelectorAll('.draggableDiv');
+      draggables.forEach(d=>{
+        let isDown=false, startX, startY, origX, origY;
+        const header = d.querySelector('.draggableDivHeader') || d.querySelector('.draggableDivHeaderSupport');
+        if(!header) return;
+        header.style.cursor='move';
+        header.addEventListener('mousedown', (ev)=>{
+          isDown=true; startX=ev.clientX; startY=ev.clientY;
+          const rect=d.getBoundingClientRect(); origX=rect.left; origY=rect.top;
+          d.style.position='fixed'; d.style.zIndex=900;
+        });
+        window.addEventListener('mousemove', (ev)=>{
+          if(!isDown) return; const dx=ev.clientX-startX; const dy=ev.clientY-startY; d.style.left=(origX+dx)+'px'; d.style.top=(origY+dy)+'px';
+        });
+        window.addEventListener('mouseup', ()=>{ isDown=false; });
+      });
+    })();
+
+    // Make gallery images clickable to open in new tab (simple behavior)
+    document.getElementById('galleryGrid').addEventListener('click', function(e){
+      const img = e.target.closest('img'); if(!img) return; const src = img.getAttribute('src'); if(src) window.open(src,'_blank');
+    });
+
+    // Accessibility: allow opening gallery via Enter when focused
+    document.getElementById('picturesButton')?.addEventListener('keydown', function(e){ if(e.key==='Enter') openModal('myModalC'); });
+
+  </script>
+</body>
+
+</html>
