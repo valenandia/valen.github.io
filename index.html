@@ -1,272 +1,925 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <!-- Google tag (replace or remove as you wish) -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} 
-    gtag('js', new Date());
-    gtag('config', 'G-XXXX');
-  </script> -->
-
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="description" content="Portfolio — Games, Projects, Art, Articles" />
-  <meta name="keywords" content="Games, Art, Portfolio, Game Dev, Music" />
+  <meta name="description" content="Portfolio — Valentina Godovets" />
   <title>VALENTINA GODOVETS</title>
-  <link rel="icon" type="image/ico" href="/svgs/tear.ico" />
-
   <style>
-    /* Basic reset and layout to preserve the "windowed" retro look */
-    :root{ --bg:#0b0b0e; --panel:#111217; --accent:#66e0ff; --muted:#9aa3ad; }
-    *{box-sizing:border-box}
-    html,body{height:100%; margin:0; font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:linear-gradient(180deg,#07070a 0%, #0f0f12 100%); color:#e6eef6}
-    a{color:inherit}
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;700;800&display=swap');
 
-    header{padding:12px}
-    #topBarContainer{display:flex; align-items:center; gap:12px; justify-content:space-between}
-    .containerDuo{display:flex; gap:8px; align-items:center}
-    .interactableButton{background:transparent; border:1px solid rgba(255,255,255,0.06); padding:8px 10px; border-radius:6px; text-decoration:none; font-weight:600; color:var(--muted); cursor:pointer}
-    #socialsContainer{display:flex; gap:8px; align-items:center}
-    #clock p{margin:0; font-weight:700}
-
-    /* main grid */
-    #initialWindowLayout{display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:12px; margin-top:18px}
-    .draggableDiv{background:var(--panel); border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.6); overflow:hidden}
-    .draggableDivHeader, .draggableDivHeaderSupport{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:10px 12px; font-weight:700}
-    .boxInWindowContainer{display:flex; flex-wrap:wrap; gap:8px; padding:10px}
-    .boxInWindow{width:86px; height:86px; display:block; border-radius:8px; overflow:hidden; background:#0b0b0d; display:flex; align-items:center; justify-content:center; text-decoration:none}
-    .imageInBox{width:100%; height:100%; object-fit:cover}
-
-    .boxInWindowRectangle{width:100%; height:120px; display:flex; align-items:center; justify-content:center}
-    #order1 .imageInBox, #order2 .imageInBox{height:100%; object-fit:contain}
-
-    /* modals (simple) */
-    .modal{display:none; position:fixed; inset:0; z-index:1000; align-items:center; justify-content:center; background:linear-gradient(180deg, rgba(3,3,6,0.6), rgba(3,3,6,0.85));}
-    .modal-content{background:#0f1114; border-radius:10px; width:min(960px,95%); max-height:90%; overflow:auto; padding:12px}
-    .modal-DraggableDivTop{display:flex; align-items:center; justify-content:space-between; gap:8px; padding-bottom:8px}
-    .close{cursor:pointer}
-
-    /* gallery grid */
-    .gridPictureContainer{display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:8px; padding:8px}
-    .boxInPictureWindow{background:#0b0b0d; border-radius:8px; overflow:hidden}
-    .boxInPictureWindow img{width:100%; height:160px; object-fit:cover}
-
-    /* small responsive tweaks */
-    @media (max-width:700px){
-      .boxInWindow{width:72px; height:72px}
-      .imageInBox{object-fit:cover}
+    :root {
+      --bg: #0b0b0e;
+      --panel: #111217;
+      --panel-border: rgba(102,224,255,0.08);
+      --accent: #66e0ff;
+      --accent2: #ff6ec7;
+      --muted: #6a7580;
+      --text: #e6eef6;
+      --header-h: 46px;
     }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%; overflow: hidden;
+      font-family: 'Syne', system-ui, sans-serif;
+      background: var(--bg);
+      background-image:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(102,224,255,0.04) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 90%, rgba(255,110,199,0.03) 0%, transparent 60%);
+      color: var(--text);
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--header-h);
+      background: rgba(11,11,14,0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--panel-border);
+      display: flex; align-items: center;
+      padding: 0 14px; gap: 6px; z-index: 9999;
+    }
+    .btn {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.07);
+      padding: 5px 11px; border-radius: 5px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 10px;
+      color: var(--muted); cursor: pointer;
+      letter-spacing: 0.08em;
+      transition: color .15s, border-color .15s;
+    }
+    .btn:hover { color: var(--accent); border-color: rgba(102,224,255,0.3); }
+    #site-title {
+      font-size: 12px; font-weight: 800; letter-spacing: 0.12em;
+      margin: 0 auto;
+    }
+    #clock {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13px; color: var(--muted);
+    }
+    .sep { width: 1px; height: 16px; background: rgba(255,255,255,0.07); margin: 0 3px; }
+    #socials { display: flex; gap: 5px; }
+    .soc {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.07em;
+      color: var(--muted); padding: 4px 7px;
+      border: 1px solid rgba(255,255,255,0.06); border-radius: 4px;
+      transition: color .15s, border-color .15s;
+    }
+    .soc:hover { color: var(--accent2); border-color: rgba(255,110,199,0.3); }
+
+    /* ── DESKTOP ── */
+    #desktop {
+      position: fixed;
+      top: var(--header-h); left: 0; right: 0; bottom: 0;
+      overflow: hidden;
+    }
+    #desktop::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.012) 2px, rgba(0,0,0,0.012) 4px);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ── WINDOWS ── */
+    .win {
+      position: absolute;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: 11px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.7), 0 0 0 0.5px rgba(255,255,255,0.03);
+      min-width: 200px; z-index: 10;
+      transition: box-shadow .15s;
+    }
+    .win.active {
+      box-shadow: 0 14px 50px rgba(0,0,0,0.85), 0 0 0 1px rgba(102,224,255,0.16);
+    }
+
+    .win-header {
+      display: flex; align-items: center; gap: 8px;
+      padding: 9px 12px; cursor: grab;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      border-radius: 11px 11px 0 0;
+      background: linear-gradient(90deg, rgba(255,255,255,0.025), rgba(255,255,255,0.01));
+    }
+    .win-header:active { cursor: grabbing; }
+    .dots { display: flex; gap: 5px; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.09); }
+    .win-title {
+      font-size: 10px; font-weight: 800;
+      letter-spacing: 0.14em; color: var(--muted);
+    }
+
+    .win-body {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+      gap: 10px; padding: 12px;
+    }
+
+    /* ── ITEM CARDS ── */
+    .item {
+      background: #0d0d11;
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 9px; overflow: hidden;
+      cursor: pointer;
+      transition: transform .13s, border-color .13s, box-shadow .13s;
+      display: flex; flex-direction: column;
+    }
+    .item:hover {
+      transform: translateY(-2px);
+      border-color: rgba(102,224,255,0.28);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    }
+    .item-thumb {
+      width: 100%; aspect-ratio: 1;
+      background: #0a0a0d;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .item-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .item-thumb .pi { font-size: 28px; opacity: 0.22; }
+    .item-label {
+      padding: 7px 8px;
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.08em; color: var(--muted);
+      line-height: 1.4; text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .dot-c { background: rgba(102,224,255,0.5); }
+    .dot-p { background: rgba(255,110,199,0.5); }
+    .dot-g { background: rgba(100,255,180,0.5); }
+    .dot-y { background: rgba(255,220,80,0.5); }
+    .dot-v { background: rgba(180,130,255,0.5); }
+    .dot-o { background: rgba(255,160,80,0.5); }
+
+    /* ── POSITIONS ── */
+    #win-projects   { left: 18px;  top: 18px;  width: 330px; }
+    #win-wishlist   { left: 366px; top: 18px;  width: 330px; }
+    #win-encounters { left: 714px; top: 18px;  width: 310px; }
+    #win-work       { left: 18px;  top: 270px; width: 350px; }
+    #win-art        { left: 386px; top: 270px; width: 310px; }
+    #win-links      { left: 714px; top: 270px; width: 310px; }
+
+    /* ── MODAL OVERLAY ── */
+    .modal {
+      display: none; position: fixed; inset: 0;
+      z-index: 20000;
+      align-items: center; justify-content: center;
+      background: rgba(3,3,6,0.78);
+      backdrop-filter: blur(6px);
+    }
+    .modal.open { display: flex; }
+
+    .modal-win {
+      background: #0f1115;
+      border: 1px solid rgba(102,224,255,0.13);
+      border-radius: 11px;
+      width: min(600px, 93vw);
+      max-height: 85vh; overflow-y: auto;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.85);
+      animation: popIn .18s ease;
+    }
+    @keyframes popIn {
+      from { transform: scale(0.94); opacity: 0; }
+      to   { transform: scale(1);    opacity: 1; }
+    }
+
+    .modal-header {
+      display: flex; align-items: center; gap: 8px;
+      padding: 11px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      position: sticky; top: 0; background: #0f1115; z-index: 1;
+      border-radius: 11px 11px 0 0;
+    }
+    .modal-tag {
+      font-size: 9px; font-weight: 800; letter-spacing: 0.14em;
+      color: var(--accent); background: rgba(102,224,255,0.08);
+      padding: 2px 7px; border-radius: 20px;
+    }
+    .modal-title-text {
+      font-size: 13px; font-weight: 800; letter-spacing: 0.06em;
+    }
+    .modal-close {
+      margin-left: auto; background: none; border: none;
+      color: var(--muted); font-size: 20px; cursor: pointer;
+      line-height: 1; padding: 2px 6px; border-radius: 4px;
+      font-family: sans-serif;
+      transition: color .15s, background .15s;
+    }
+    .modal-close:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+
+    .modal-body { padding: 16px 18px 22px; }
+
+    .modal-hero {
+      width: 100%; height: 180px;
+      border-radius: 8px; margin-bottom: 14px;
+      background: #0d0d11;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 52px; opacity: .22;
+    }
+    .modal-desc {
+      font-size: 13px; line-height: 1.75; color: #9fb0bf;
+    }
+    .modal-desc strong { color: var(--text); }
+    .modal-meta {
+      display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px;
+    }
+    .chip {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.1em;
+      padding: 4px 9px; border-radius: 20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+    }
+    .modal-link {
+      display: inline-block; margin-top: 16px;
+      font-size: 10px; font-weight: 800; letter-spacing: 0.1em;
+      color: var(--accent); border: 1px solid rgba(102,224,255,0.3);
+      padding: 7px 14px; border-radius: 6px;
+      transition: background .15s;
+    }
+    .modal-link:hover { background: rgba(102,224,255,0.08); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 7px; margin-top: 14px;
+    }
+    .gcell {
+      border-radius: 7px; overflow: hidden;
+      background: #0a0a0d; aspect-ratio: 1;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; opacity: .2;
+    }
+    .gcell img { width:100%; height:100%; object-fit:cover; opacity:1; }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 10px; }
   </style>
 </head>
-
 <body>
-  <header>
-    <div id="fullContainer">
-      <div id="topBarContainer">
-        <div class="containerDuo">
-          <a class="interactableButton" href="#games">GAMES</a>
-          <a class="interactableButton" href="#projects">PROJECTS</a>
-          <a class="interactableButton" href="#art">ART</a>
-          <a class="interactableButton" href="#articles">ARTICLES</a>
-        </div>
 
-        <div class="containerDuo">
-          <a id="aboutButton" class="interactableButton" onclick="openModal('myModalB')">ABOUT</a>
-          <a id="contactButton" class="interactableButton" onclick="openModal('myModalA')">CONTACT</a>
-        </div>
+<!-- HEADER -->
+<header>
+  <!-- Left: window shortcuts -->
+  <div style="display:flex;gap:5px;flex-shrink:0">
+    <button class="btn" onclick="bringToFront('win-projects')">PROJECTS</button>
+    <button class="btn" onclick="bringToFront('win-wishlist')">WISHLIST</button>
+    <button class="btn" onclick="bringToFront('win-encounters')">ENCOUNTERS</button>
+    <button class="btn" onclick="bringToFront('win-work')">WORK</button>
+    <button class="btn" onclick="bringToFront('win-art')">ART</button>
+    <button class="btn" onclick="bringToFront('win-links')">LINKS</button>
+  </div>
 
-        <a class="interactableButton" style="margin-left:1%" href="/index.html">MY-PORTFOLIO</a>
+  <div class="sep"></div>
 
-        <div id="socialsContainer">
-          <a class="socialButton" href="#" target="_blank" rel="noopener noreferrer">INST</a>
-          <a class="socialButton" href="#" target="_blank" rel="noopener noreferrer">TW</a>
-          <a class="socialButton" href="#" target="_blank" rel="noopener noreferrer">ITCH</a>
-          <a class="socialButton" href="#" target="_blank" rel="noopener noreferrer">STEAM</a>
-        </div>
+  <!-- Centre: site identity -->
+  <span id="site-title">VALENTINA GODOVETS</span>
 
-        <div id="clock">
-          <p id="time">--:--</p>
-        </div>
-      </div>
+  <div class="sep"></div>
 
-      <main id="initialWindowLayout">
-        <!-- GAMES window (order4) -->
-        <section id="order4" class="draggableDiv">
-          <div class="draggableDivHeader">FREE GAMES</div>
-          <div class="boxInWindowContainer">
-            <!-- Placeholder covers. Replace src with your images and href with your links -->
-            <a class="boxInWindow" href="#" target="_blank" rel="noopener noreferrer"><img class="imageInBox" src="/placeholders/game1.jpg" alt="Game 1"></a>
-            <a class="boxInWindow" href="#" target="_blank" rel="noopener noreferrer"><img class="imageInBox" src="/placeholders/game2.jpg" alt="Game 2"></a>
-            <a class="boxInWindow" href="#" target="_blank" rel="noopener noreferrer"><img class="imageInBox" src="/placeholders/game3.jpg" alt="Game 3"></a>
-            <a class="boxInWindow" href="#" target="_blank" rel="noopener noreferrer"><img class="imageInBox" src="/placeholders/game4.jpg" alt="Game 4"></a>
-          </div>
-        </section>
+  <!-- Right group 1: info modals -->
+  <div style="display:flex;gap:5px;flex-shrink:0">
+    <button class="btn" onclick="openModal('modal-about')">ABOUT</button>
+    <button class="btn" onclick="openModal('modal-press')">PRESS</button>
+    <button class="btn" onclick="openModal('modal-resume')">RESUME</button>
+    <button class="btn" onclick="openModal('modal-contact')">CONTACT</button>
+    <button class="btn" onclick="openModal('modal-articles')">ARTICLES</button>
+  </div>
 
-        <!-- MUSIC / SOUND or PROJECTS window (order5) -->
-        <section id="order5" class="draggableDiv">
-          <div class="draggableDivHeader">PROJECTS</div>
-          <div class="boxInWindowContainer">
-            <a class="boxInWindow" href="#" id="projectA"><img class="imageInBox" src="/placeholders/project1.jpg" alt="Project 1"></a>
-            <a class="boxInWindow" href="#" id="projectB"><img class="imageInBox" src="/placeholders/project2.jpg" alt="Project 2"></a>
-            <a class="boxInWindow" href="#" id="projectC"><img class="imageInBox" src="/placeholders/project3.jpg" alt="Project 3"></a>
-          </div>
-        </section>
+  <div class="sep"></div>
 
-        <!-- ART window (order3) -->
-        <section id="order3" class="draggableDiv">
-          <div class="draggableDivHeader">ART ARCHIVE</div>
-          <div class="boxInWindowContainer">
-            <div id="picturesButton" class="boxInWindow" onclick="openModal('myModalC')"><div style="padding:8px; text-align:center">OPEN GALLERY</div></div>
-            <a class="boxInWindow" href="#" target="_blank" rel="noopener noreferrer"><div style="padding:8px; text-align:center">VIDEOS</div></a>
-          </div>
-        </section>
+  <!-- Right group 2: social links -->
+  <div id="socials">
+    <a class="soc" href="#" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
+    <a class="soc" href="#" target="_blank" rel="noopener noreferrer">X / TW</a>
+    <a class="soc" href="#" target="_blank" rel="noopener noreferrer">BACKLOGGERY</a>
+  </div>
 
-        <!-- WEB RING / LINKS (order6) -->
-        <section id="order6" class="draggableDiv">
-          <div class="draggableDivHeader">LINKS</div>
-          <div class="boxInWindowContainer">
-            <a class="boxInWindow" href="#" target="_blank" rel="noopener noreferrer"><img class="imageInBox" src="/placeholders/link1.jpg" alt="Link 1"></a>
-            <a class="boxInWindow" href="#" target="_blank" rel="noopener noreferrer"><img class="imageInBox" src="/placeholders/link2.jpg" alt="Link 2"></a>
-            <a class="boxInWindow" href="#" target="_blank" rel="noopener noreferrer"><img class="imageInBox" src="/placeholders/link3.jpg" alt="Link 3"></a>
-          </div>
-        </section>
+  <div class="sep"></div>
+  <div id="clock">--:--</div>
+</header>
 
-        <!-- Steam wishlist rectangle (order1) -->
-        <section id="order1" class="draggableDiv">
-          <div class="draggableDivHeaderSupport">STEAM WISHLIST</div>
-          <div class="boxInWindowContainer">
-            <a class="boxInWindowRectangle" href="#" target="_blank" rel="noopener noreferrer"><img class="imageInBox" style="object-fit:contain" src="/placeholders/steam.png" alt="Steam"></a>
-          </div>
-        </section>
+<!-- DESKTOP -->
+<div id="desktop">
 
-        <!-- Patreon rectangle (order2) -->
-        <section id="order2" class="draggableDiv">
-          <div class="draggableDivHeaderSupport">PATREON</div>
-          <div class="boxInWindowContainer">
-            <a class="boxInWindowRectangle" href="#" target="_blank" rel="noopener noreferrer"><img class="imageInBox" style="object-fit:contain" src="/placeholders/patreon.png" alt="Patreon"></a>
-          </div>
-        </section>
-
-      </main>
-
-      <!-- CONTACT modal -->
-      <div id="myModalA" class="modal">
-        <div class="modal-content" role="dialog" aria-modal="true">
-          <div class="modal-DraggableDiv">
-            <div class="modal-DraggableDivTop"><span class="close" data-target="myModalA">&times;</span><strong>CONTACT</strong></div>
-            <div class="textInWindow" style="padding:8px">Please replace placeholders with your contact information.<br><br><i>email@example.com</i></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ABOUT modal -->
-      <div id="myModalB" class="modal">
-        <div class="modal-content" role="dialog" aria-modal="true">
-          <div class="modal-DraggableDiv">
-            <div class="modal-DraggableDivTop"><span class="close" data-target="myModalB">&times;</span><strong>ABOUT</strong></div>
-            <div class="textContainer" style="padding:8px">
-              <p>Hi — I make games, art and write articles. This is a placeholder ABOUT text. Replace this with your own short bio.</p>
-              <p style="font-size:12px; color:var(--muted)">- last updated: October 2025 -</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- GALLERY modal -->
-      <div id="myModalC" class="modal">
-        <div class="modal-content" role="dialog" aria-modal="true">
-          <div class="modal-DraggableDiv">
-            <div class="modal-DraggableDivTop">
-              <span class="close" data-target="myModalC">&times;</span>
-              <strong>GALLERY</strong>
-            </div>
-
-            <div class="gridPictureContainer" id="galleryGrid">
-              <!-- placeholders  -->
-              <div class="boxInPictureWindow"><img src="/placeholders/art_01.jpg" alt="Art 1"></div>
-              <div class="boxInPictureWindow"><img src="/placeholders/art_02.jpg" alt="Art 2"></div>
-              <div class="boxInPictureWindow"><img src="/placeholders/art_03.jpg" alt="Art 3"></div>
-              <div class="boxInPictureWindow"><img src="/placeholders/art_04.jpg" alt="Art 4"></div>
-              <div class="boxInPictureWindow"><img src="/placeholders/art_05.jpg" alt="Art 5"></div>
-              <div class="boxInPictureWindow"><img src="/placeholders/art_06.jpg" alt="Art 6"></div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
+  <!-- PROJECTS -->
+  <div class="win" id="win-projects">
+    <div class="win-header" data-win="win-projects">
+      <div class="dots"><div class="dot dot-c"></div><div class="dot"></div><div class="dot"></div></div>
+      <span class="win-title">PROJECTS</span>
     </div>
-  </header>
+    <div class="win-body">
+      <div class="item" onclick="openModal('mp1')">
+        <div class="item-thumb"><span class="pi">🎮</span></div>
+        <div class="item-label">PROJECT ONE</div>
+      </div>
+      <div class="item" onclick="openModal('mp2')">
+        <div class="item-thumb"><span class="pi">🎮</span></div>
+        <div class="item-label">PROJECT TWO</div>
+      </div>
+      <div class="item" onclick="openModal('mp3')">
+        <div class="item-thumb"><span class="pi">🎮</span></div>
+        <div class="item-label">PROJECT THREE</div>
+      </div>
+    </div>
+  </div>
 
-  <script>
-    // Simple clock
-    function updateClock(){
-      const now=new Date();
-      const h=String(now.getHours()).padStart(2,'0');
-      const m=String(now.getMinutes()).padStart(2,'0');
-      document.getElementById('time').textContent = h+':'+m;
+  <!-- WISHLIST -->
+  <div class="win" id="win-wishlist">
+    <div class="win-header" data-win="win-wishlist">
+      <div class="dots"><div class="dot dot-p"></div><div class="dot"></div><div class="dot"></div></div>
+      <span class="win-title">WISHLIST</span>
+    </div>
+    <div class="win-body">
+      <div class="item" onclick="openModal('mw1')">
+        <div class="item-thumb"><span class="pi">⭐</span></div>
+        <div class="item-label">ITEM ONE</div>
+      </div>
+      <div class="item" onclick="openModal('mw2')">
+        <div class="item-thumb"><span class="pi">⭐</span></div>
+        <div class="item-label">ITEM TWO</div>
+      </div>
+      <div class="item" onclick="openModal('mw3')">
+        <div class="item-thumb"><span class="pi">⭐</span></div>
+        <div class="item-label">ITEM THREE</div>
+      </div>
+      <div class="item" onclick="openModal('mw4')">
+        <div class="item-thumb"><span class="pi">⭐</span></div>
+        <div class="item-label">ITEM FOUR</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENCOUNTERS -->
+  <div class="win" id="win-encounters">
+    <div class="win-header" data-win="win-encounters">
+      <div class="dots"><div class="dot dot-g"></div><div class="dot"></div><div class="dot"></div></div>
+      <span class="win-title">ENCOUNTERS</span>
+    </div>
+    <div class="win-body">
+      <div class="item" onclick="openModal('me1')">
+        <div class="item-thumb"><span class="pi">🤝</span></div>
+        <div class="item-label">ENCOUNTER 1</div>
+      </div>
+      <div class="item" onclick="openModal('me2')">
+        <div class="item-thumb"><span class="pi">🤝</span></div>
+        <div class="item-label">ENCOUNTER 2</div>
+      </div>
+      <div class="item" onclick="openModal('me3')">
+        <div class="item-thumb"><span class="pi">🤝</span></div>
+        <div class="item-label">ENCOUNTER 3</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORK EXAMPLES -->
+  <div class="win" id="win-work">
+    <div class="win-header" data-win="win-work">
+      <div class="dots"><div class="dot dot-y"></div><div class="dot"></div><div class="dot"></div></div>
+      <span class="win-title">WORK EXAMPLES</span>
+    </div>
+    <div class="win-body">
+      <div class="item" onclick="openModal('mwo1')">
+        <div class="item-thumb"><span class="pi">💼</span></div>
+        <div class="item-label">WORK ONE</div>
+      </div>
+      <div class="item" onclick="openModal('mwo2')">
+        <div class="item-thumb"><span class="pi">💼</span></div>
+        <div class="item-label">WORK TWO</div>
+      </div>
+      <div class="item" onclick="openModal('mwo3')">
+        <div class="item-thumb"><span class="pi">💼</span></div>
+        <div class="item-label">WORK THREE</div>
+      </div>
+      <div class="item" onclick="openModal('mwo4')">
+        <div class="item-thumb"><span class="pi">💼</span></div>
+        <div class="item-label">WORK FOUR</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ART ARCHIVE -->
+  <div class="win" id="win-art">
+    <div class="win-header" data-win="win-art">
+      <div class="dots"><div class="dot dot-v"></div><div class="dot"></div><div class="dot"></div></div>
+      <span class="win-title">ART ARCHIVE</span>
+    </div>
+    <div class="win-body">
+      <div class="item" onclick="openModal('ma1')">
+        <div class="item-thumb"><span class="pi">🖼</span></div>
+        <div class="item-label">SERIES ONE</div>
+      </div>
+      <div class="item" onclick="openModal('ma2')">
+        <div class="item-thumb"><span class="pi">🖼</span></div>
+        <div class="item-label">SERIES TWO</div>
+      </div>
+      <div class="item" onclick="openModal('ma3')">
+        <div class="item-thumb"><span class="pi">🖼</span></div>
+        <div class="item-label">SERIES THREE</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LINKS -->
+  <div class="win" id="win-links">
+    <div class="win-header" data-win="win-links">
+      <div class="dots"><div class="dot dot-o"></div><div class="dot"></div><div class="dot"></div></div>
+      <span class="win-title">LINKS / WEB RING</span>
+    </div>
+    <div class="win-body">
+      <div class="item" onclick="openModal('ml1')">
+        <div class="item-thumb"><span class="pi">🔗</span></div>
+        <div class="item-label">FRIEND SITE 1</div>
+      </div>
+      <div class="item" onclick="openModal('ml2')">
+        <div class="item-thumb"><span class="pi">🔗</span></div>
+        <div class="item-label">FRIEND SITE 2</div>
+      </div>
+      <div class="item" onclick="openModal('ml3')">
+        <div class="item-thumb"><span class="pi">🔗</span></div>
+        <div class="item-label">FRIEND SITE 3</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /desktop -->
+
+
+<!-- ══════════ MODALS ══════════ -->
+
+<!-- helper macro: each modal follows the same pattern -->
+<!-- ABOUT -->
+<div id="modal-about" class="modal" onclick="bgClose(event,this)"><div class="modal-win">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-c"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag">INFO</span><span class="modal-title-text">Valentina Godovets</span>
+    <button class="modal-close" onclick="closeModal('modal-about')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <p class="modal-desc">Hi — I make games, art and write articles. Replace this with your own short bio. Tell them who you are, what drives you, what you love making.</p>
+    <p class="modal-desc" style="margin-top:10px;color:var(--muted);font-size:11px">— last updated: 2025 —</p>
+  </div>
+</div></div>
+
+<!-- CONTACT -->
+<div id="modal-contact" class="modal" onclick="bgClose(event,this)"><div class="modal-win">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-c"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag">CONTACT</span><span class="modal-title-text">Get in Touch</span>
+    <button class="modal-close" onclick="closeModal('modal-contact')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <p class="modal-desc">For collaborations, commissions or just to say hi:</p>
+    <p class="modal-desc" style="margin-top:8px;color:var(--accent)">email@example.com</p>
+    <p class="modal-desc" style="margin-top:10px">Also reachable through socials above.</p>
+  </div>
+</div></div>
+
+<!-- PRESS -->
+<div id="modal-press" class="modal" onclick="bgClose(event,this)"><div class="modal-win">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-c"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag">PRESS</span><span class="modal-title-text">Press Kit</span>
+    <button class="modal-close" onclick="closeModal('modal-press')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <p class="modal-desc"><strong>Short Bio</strong></p>
+    <p class="modal-desc" style="margin-top:6px">Replace this with your short press bio — 2–3 sentences describing who you are and what you make.</p>
+    <p class="modal-desc" style="margin-top:14px"><strong>Long Bio</strong></p>
+    <p class="modal-desc" style="margin-top:6px">Replace this with a longer version for features, interviews, or write-ups.</p>
+    <div class="modal-meta" style="margin-top:16px">
+      <span class="chip">GAME DEV</span><span class="chip">ARTIST</span><span class="chip">WRITER</span>
+    </div>
+    <a class="modal-link" href="#" target="_blank">↗ DOWNLOAD PRESS KIT</a>
+  </div>
+</div></div>
+
+<!-- RESUME -->
+<div id="modal-resume" class="modal" onclick="bgClose(event,this)"><div class="modal-win">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-c"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag">RESUME</span><span class="modal-title-text">CV / Resume</span>
+    <button class="modal-close" onclick="closeModal('modal-resume')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <p class="modal-desc" style="color:var(--muted);font-size:10px;letter-spacing:0.12em">EXPERIENCE</p>
+    <div style="margin-top:10px;border-left:2px solid rgba(102,224,255,0.15);padding-left:12px">
+      <p class="modal-desc"><strong>Role Title — Studio / Company</strong></p>
+      <p class="modal-desc" style="font-size:11px;color:var(--muted);margin-top:2px">2023 – present</p>
+      <p class="modal-desc" style="margin-top:5px;font-size:12px">Short description of what you did here.</p>
+    </div>
+    <div style="margin-top:12px;border-left:2px solid rgba(255,255,255,0.06);padding-left:12px">
+      <p class="modal-desc"><strong>Role Title — Studio / Company</strong></p>
+      <p class="modal-desc" style="font-size:11px;color:var(--muted);margin-top:2px">2021 – 2023</p>
+      <p class="modal-desc" style="margin-top:5px;font-size:12px">Short description of what you did here.</p>
+    </div>
+    <p class="modal-desc" style="color:var(--muted);font-size:10px;letter-spacing:0.12em;margin-top:20px">SKILLS</p>
+    <div class="modal-meta" style="margin-top:8px">
+      <span class="chip">UNITY / C#</span><span class="chip">3D MODELING</span><span class="chip">SOUND DESIGN</span><span class="chip">ILLUSTRATION</span>
+    </div>
+    <a class="modal-link" href="#" target="_blank">↗ DOWNLOAD PDF</a>
+  </div>
+</div></div>
+
+<!-- ARTICLES -->
+<div id="modal-articles" class="modal" onclick="bgClose(event,this)"><div class="modal-win">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-c"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag">ARTICLES</span><span class="modal-title-text">Writing</span>
+    <button class="modal-close" onclick="closeModal('modal-articles')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:12px 14px">
+        <p style="font-size:10px;color:var(--muted);letter-spacing:0.1em">2025 · ARTICLE</p>
+        <p class="modal-desc" style="margin-top:5px"><strong>Article Title One</strong></p>
+        <p class="modal-desc" style="margin-top:4px;font-size:12px">Short description or excerpt of what this article is about.</p>
+        <a class="modal-link" style="margin-top:10px;font-size:9px;padding:5px 10px;display:inline-block" href="#" target="_blank">↗ READ</a>
+      </div>
+      <div style="border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:12px 14px">
+        <p style="font-size:10px;color:var(--muted);letter-spacing:0.1em">2024 · ARTICLE</p>
+        <p class="modal-desc" style="margin-top:5px"><strong>Article Title Two</strong></p>
+        <p class="modal-desc" style="margin-top:4px;font-size:12px">Short description or excerpt of what this article is about.</p>
+        <a class="modal-link" style="margin-top:10px;font-size:9px;padding:5px 10px;display:inline-block" href="#" target="_blank">↗ READ</a>
+      </div>
+      <div style="border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:12px 14px">
+        <p style="font-size:10px;color:var(--muted);letter-spacing:0.1em">2024 · ARTICLE</p>
+        <p class="modal-desc" style="margin-top:5px"><strong>Article Title Three</strong></p>
+        <p class="modal-desc" style="margin-top:4px;font-size:12px">Short description or excerpt of what this article is about.</p>
+        <a class="modal-link" style="margin-top:10px;font-size:9px;padding:5px 10px;display:inline-block" href="#" target="_blank">↗ READ</a>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- PROJECTS -->
+<div id="mp1" class="modal" onclick="bgClose(event,this)"><div class="modal-win">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-c"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag">PROJECT</span><span class="modal-title-text">Project One</span>
+    <button class="modal-close" onclick="closeModal('mp1')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-hero">🎮</div>
+    <p class="modal-desc"><strong>Project One</strong> — Replace this with your project description. What is it? What did you make? What was your role? What tools did you use?</p>
+    <div class="modal-meta"><span class="chip">GAME DEV</span><span class="chip">UNITY</span><span class="chip">2024</span></div>
+    <a class="modal-link" href="#" target="_blank">↗ VIEW PROJECT</a>
+  </div>
+</div></div>
+
+<div id="mp2" class="modal" onclick="bgClose(event,this)"><div class="modal-win">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-c"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag">PROJECT</span><span class="modal-title-text">Project Two</span>
+    <button class="modal-close" onclick="closeModal('mp2')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-hero">🎮</div>
+    <p class="modal-desc"><strong>Project Two</strong> — Replace this with your project description.</p>
+    <div class="modal-meta"><span class="chip">GAME DEV</span><span class="chip">2024</span></div>
+    <a class="modal-link" href="#" target="_blank">↗ VIEW PROJECT</a>
+  </div>
+</div></div>
+
+<div id="mp3" class="modal" onclick="bgClose(event,this)"><div class="modal-win">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-c"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag">PROJECT</span><span class="modal-title-text">Project Three</span>
+    <button class="modal-close" onclick="closeModal('mp3')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-hero">🎮</div>
+    <p class="modal-desc"><strong>Project Three</strong> — Replace this with your project description.</p>
+    <div class="modal-meta"><span class="chip">GAME DEV</span><span class="chip">2024</span></div>
+    <a class="modal-link" href="#" target="_blank">↗ VIEW PROJECT</a>
+  </div>
+</div></div>
+
+<!-- WISHLIST -->
+<div id="mw1" class="modal" onclick="bgClose(event,this)"><div class="modal-win">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-p"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag" style="color:var(--accent2);background:rgba(255,110,199,0.08)">WISHLIST</span><span class="modal-title-text">Wishlist Item One</span>
+    <button class="modal-close" onclick="closeModal('mw1')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-hero">⭐</div>
+    <p class="modal-desc"><strong>Item One</strong> — A game, tool, book or anything you want to spotlight. Describe why it matters to you or why others should check it out.</p>
+    <div class="modal-meta"><span class="chip">GAME</span><span class="chip">STEAM</span></div>
+    <a class="modal-link" style="color:var(--accent2);border-color:rgba(255,110,199,0.3)" href="#" target="_blank">↗ VIEW ON STEAM</a>
+  </div>
+</div></div>
+
+<div id="mw2" class="modal" onclick="bgClose(event,this)"><div class="modal-win">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-p"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag" style="color:var(--accent2);background:rgba(255,110,199,0.08)">WISHLIST</span><span class="modal-title-text">Wishlist Item Two</span>
+    <button class="modal-close" onclick="closeModal('mw2')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-hero">⭐</div>
+    <p class="modal-desc"><strong>Item Two</strong> — Description goes here.</p>
+    <div class="modal-meta"><span class="chip">GAME</span></div>
+    <a class="modal-link" style="color:var(--accent2);border-color:rgba(255,110,199,0.3)" href="#" target="_blank">↗ VIEW</a>
+  </div>
+</div></div>
+
+<div id="mw3" class="modal" onclick="bgClose(event,this)"><div class="modal-win">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-p"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag" style="color:var(--accent2);background:rgba(255,110,199,0.08)">WISHLIST</span><span class="modal-title-text">Wishlist Item Three</span>
+    <button class="modal-close" onclick="closeModal('mw3')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-hero">⭐</div>
+    <p class="modal-desc"><strong>Item Three</strong> — Description goes here.</p>
+    <div class="modal-meta"><span class="chip">GAME</span></div>
+    <a class="modal-link" style="color:var(--accent2);border-color:rgba(255,110,199,0.3)" href="#" target="_blank">↗ VIEW</a>
+  </div>
+</div></div>
+
+<div id="mw4" class="modal" onclick="bgClose(event,this)"><div class="modal-win">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-p"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag" style="color:var(--accent2);background:rgba(255,110,199,0.08)">WISHLIST</span><span class="modal-title-text">Wishlist Item Four</span>
+    <button class="modal-close" onclick="closeModal('mw4')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-hero">⭐</div>
+    <p class="modal-desc"><strong>Item Four</strong> — Description goes here.</p>
+    <div class="modal-meta"><span class="chip">GAME</span></div>
+    <a class="modal-link" style="color:var(--accent2);border-color:rgba(255,110,199,0.3)" href="#" target="_blank">↗ VIEW</a>
+  </div>
+</div></div>
+
+<!-- ENCOUNTERS -->
+<div id="me1" class="modal" onclick="bgClose(event,this)"><div class="modal-win">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-g"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag" style="color:#64ffb4;background:rgba(100,255,180,0.08)">ENCOUNTER</span><span class="modal-title-text">Encounter One</span>
+    <button class="modal-close" onclick="closeModal('me1')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-hero">🤝</div>
+    <p class="modal-desc"><strong>Encounter One</strong> — A person, place, or moment that shaped your work. Tell the story: how you met, what you created together, or why they matter to you.</p>
+    <div class="modal-meta"><span class="chip">COLLABORATION</span><span class="chip">2024</span></div>
+    <a class="modal-link" style="color:#64ffb4;border-color:rgba(100,255,180,0.3)" href="#" target="_blank">↗ THEIR SITE</a>
+  </div>
+</div></div>
+
+<div id="me2" class="modal" onclick="bgClose(event,this)"><div class="modal-win">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-g"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag" style="color:#64ffb4;background:rgba(100,255,180,0.08)">ENCOUNTER</span><span class="modal-title-text">Encounter Two</span>
+    <button class="modal-close" onclick="closeModal('me2')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-hero">🤝</div>
+    <p class="modal-desc"><strong>Encounter Two</strong> — Description goes here.</p>
+    <div class="modal-meta"><span class="chip">COLLABORATION</span></div>
+    <a class="modal-link" style="color:#64ffb4;border-color:rgba(100,255,180,0.3)" href="#" target="_blank">↗ THEIR SITE</a>
+  </div>
+</div></div>
+
+<div id="me3" class="modal" onclick="bgClose(event,this)"><div class="modal-win">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-g"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag" style="color:#64ffb4;background:rgba(100,255,180,0.08)">ENCOUNTER</span><span class="modal-title-text">Encounter Three</span>
+    <button class="modal-close" onclick="closeModal('me3')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-hero">🤝</div>
+    <p class="modal-desc"><strong>Encounter Three</strong> — Description goes here.</p>
+    <div class="modal-meta"><span class="chip">COLLABORATION</span></div>
+    <a class="modal-link" style="color:#64ffb4;border-color:rgba(100,255,180,0.3)" href="#" target="_blank">↗ THEIR SITE</a>
+  </div>
+</div></div>
+
+<!-- WORK EXAMPLES -->
+<div id="mwo1" class="modal" onclick="bgClose(event,this)"><div class="modal-win">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-y"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag" style="color:#ffdc50;background:rgba(255,220,80,0.08)">WORK</span><span class="modal-title-text">Work Example One</span>
+    <button class="modal-close" onclick="closeModal('mwo1')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-hero">💼</div>
+    <p class="modal-desc"><strong>Work Example One</strong> — A piece of professional or commissioned work. Describe the brief, what you created, tools used, and the outcome.</p>
+    <div class="modal-meta"><span class="chip">3D ART</span><span class="chip">CLIENT WORK</span><span class="chip">2024</span></div>
+    <a class="modal-link" style="color:#ffdc50;border-color:rgba(255,220,80,0.3)" href="#" target="_blank">↗ VIEW FULL</a>
+  </div>
+</div></div>
+
+<div id="mwo2" class="modal" onclick="bgClose(event,this)"><div class="modal-win">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-y"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag" style="color:#ffdc50;background:rgba(255,220,80,0.08)">WORK</span><span class="modal-title-text">Work Example Two</span>
+    <button class="modal-close" onclick="closeModal('mwo2')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-hero">💼</div>
+    <p class="modal-desc"><strong>Work Example Two</strong> — Description goes here.</p>
+    <div class="modal-meta"><span class="chip">CLIENT WORK</span></div>
+    <a class="modal-link" style="color:#ffdc50;border-color:rgba(255,220,80,0.3)" href="#" target="_blank">↗ VIEW FULL</a>
+  </div>
+</div></div>
+
+<div id="mwo3" class="modal" onclick="bgClose(event,this)"><div class="modal-win">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-y"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag" style="color:#ffdc50;background:rgba(255,220,80,0.08)">WORK</span><span class="modal-title-text">Work Example Three</span>
+    <button class="modal-close" onclick="closeModal('mwo3')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-hero">💼</div>
+    <p class="modal-desc"><strong>Work Example Three</strong> — Description goes here.</p>
+    <div class="modal-meta"><span class="chip">CLIENT WORK</span></div>
+    <a class="modal-link" style="color:#ffdc50;border-color:rgba(255,220,80,0.3)" href="#" target="_blank">↗ VIEW FULL</a>
+  </div>
+</div></div>
+
+<div id="mwo4" class="modal" onclick="bgClose(event,this)"><div class="modal-win">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-y"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag" style="color:#ffdc50;background:rgba(255,220,80,0.08)">WORK</span><span class="modal-title-text">Work Example Four</span>
+    <button class="modal-close" onclick="closeModal('mwo4')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-hero">💼</div>
+    <p class="modal-desc"><strong>Work Example Four</strong> — Description goes here.</p>
+    <div class="modal-meta"><span class="chip">CLIENT WORK</span></div>
+    <a class="modal-link" style="color:#ffdc50;border-color:rgba(255,220,80,0.3)" href="#" target="_blank">↗ VIEW FULL</a>
+  </div>
+</div></div>
+
+<!-- ART ARCHIVE -->
+<div id="ma1" class="modal" onclick="bgClose(event,this)"><div class="modal-win" style="width:min(720px,93vw)">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-v"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag" style="color:#b482ff;background:rgba(180,130,255,0.08)">ART</span><span class="modal-title-text">Series One</span>
+    <button class="modal-close" onclick="closeModal('ma1')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <p class="modal-desc"><strong>Series One</strong> — Describe this series. When was it made? What themes does it explore? What medium or tools?</p>
+    <div class="modal-meta"><span class="chip">DIGITAL</span><span class="chip">2024</span></div>
+    <div class="gallery-grid">
+      <div class="gcell">🖼</div><div class="gcell">🖼</div><div class="gcell">🖼</div>
+      <div class="gcell">🖼</div><div class="gcell">🖼</div><div class="gcell">🖼</div>
+    </div>
+  </div>
+</div></div>
+
+<div id="ma2" class="modal" onclick="bgClose(event,this)"><div class="modal-win" style="width:min(720px,93vw)">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-v"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag" style="color:#b482ff;background:rgba(180,130,255,0.08)">ART</span><span class="modal-title-text">Series Two</span>
+    <button class="modal-close" onclick="closeModal('ma2')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <p class="modal-desc"><strong>Series Two</strong> — Description goes here.</p>
+    <div class="modal-meta"><span class="chip">DIGITAL</span></div>
+    <div class="gallery-grid">
+      <div class="gcell">🖼</div><div class="gcell">🖼</div><div class="gcell">🖼</div><div class="gcell">🖼</div>
+    </div>
+  </div>
+</div></div>
+
+<div id="ma3" class="modal" onclick="bgClose(event,this)"><div class="modal-win" style="width:min(720px,93vw)">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-v"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag" style="color:#b482ff;background:rgba(180,130,255,0.08)">ART</span><span class="modal-title-text">Series Three</span>
+    <button class="modal-close" onclick="closeModal('ma3')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <p class="modal-desc"><strong>Series Three</strong> — Description goes here.</p>
+    <div class="modal-meta"><span class="chip">DIGITAL</span></div>
+    <div class="gallery-grid">
+      <div class="gcell">🖼</div><div class="gcell">🖼</div><div class="gcell">🖼</div><div class="gcell">🖼</div>
+    </div>
+  </div>
+</div></div>
+
+<!-- LINKS -->
+<div id="ml1" class="modal" onclick="bgClose(event,this)"><div class="modal-win">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-o"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag" style="color:#ffa050;background:rgba(255,160,80,0.08)">LINK</span><span class="modal-title-text">Friend Site 1</span>
+    <button class="modal-close" onclick="closeModal('ml1')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-hero" style="height:130px">🔗</div>
+    <p class="modal-desc"><strong>Friend Site 1</strong> — Who is this? Why are they in your web ring? A sentence or two about what makes their work special.</p>
+    <div class="modal-meta"><span class="chip">ARTIST</span><span class="chip">GAME DEV</span></div>
+    <a class="modal-link" style="color:#ffa050;border-color:rgba(255,160,80,0.3)" href="#" target="_blank">↗ VISIT SITE</a>
+  </div>
+</div></div>
+
+<div id="ml2" class="modal" onclick="bgClose(event,this)"><div class="modal-win">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-o"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag" style="color:#ffa050;background:rgba(255,160,80,0.08)">LINK</span><span class="modal-title-text">Friend Site 2</span>
+    <button class="modal-close" onclick="closeModal('ml2')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-hero" style="height:130px">🔗</div>
+    <p class="modal-desc"><strong>Friend Site 2</strong> — Description goes here.</p>
+    <div class="modal-meta"><span class="chip">ARTIST</span></div>
+    <a class="modal-link" style="color:#ffa050;border-color:rgba(255,160,80,0.3)" href="#" target="_blank">↗ VISIT SITE</a>
+  </div>
+</div></div>
+
+<div id="ml3" class="modal" onclick="bgClose(event,this)"><div class="modal-win">
+  <div class="modal-header">
+    <div class="dots"><div class="dot dot-o"></div><div class="dot"></div><div class="dot"></div></div>
+    <span class="modal-tag" style="color:#ffa050;background:rgba(255,160,80,0.08)">LINK</span><span class="modal-title-text">Friend Site 3</span>
+    <button class="modal-close" onclick="closeModal('ml3')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-hero" style="height:130px">🔗</div>
+    <p class="modal-desc"><strong>Friend Site 3</strong> — Description goes here.</p>
+    <div class="modal-meta"><span class="chip">ARTIST</span></div>
+    <a class="modal-link" style="color:#ffa050;border-color:rgba(255,160,80,0.3)" href="#" target="_blank">↗ VISIT SITE</a>
+  </div>
+</div></div>
+
+<!-- SCRIPTS -->
+<script>
+  // Clock
+  function tick() {
+    const n = new Date();
+    document.getElementById('clock').textContent =
+      String(n.getHours()).padStart(2,'0') + ':' + String(n.getMinutes()).padStart(2,'0');
+  }
+  setInterval(tick, 1000); tick();
+
+  // Z-order
+  let zTop = 10;
+  function bringToFront(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.zIndex = ++zTop;
+    document.querySelectorAll('.win').forEach(w => w.classList.remove('active'));
+    el.classList.add('active');
+    // scroll into view on small screens
+    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+  document.querySelectorAll('.win').forEach(w => {
+    w.addEventListener('mousedown', () => bringToFront(w.id));
+  });
+
+  // Drag
+  let dragTarget = null, dragOx = 0, dragOy = 0;
+
+  document.querySelectorAll('.win-header').forEach(header => {
+    const win = document.getElementById(header.dataset.win);
+    function startDrag(cx, cy) {
+      dragTarget = win;
+      bringToFront(win.id);
+      const rect = win.getBoundingClientRect();
+      const desk = document.getElementById('desktop').getBoundingClientRect();
+      dragOx = cx - (rect.left - desk.left);
+      dragOy = cy - (rect.top  - desk.top);
+      win.style.left = (rect.left - desk.left) + 'px';
+      win.style.top  = (rect.top  - desk.top)  + 'px';
     }
-    setInterval(updateClock,1000);
-    updateClock();
+    header.addEventListener('mousedown', e => { startDrag(e.clientX, e.clientY); e.preventDefault(); });
+    header.addEventListener('touchstart', e => {
+      const t = e.touches[0]; startDrag(t.clientX, t.clientY);
+    }, { passive: true });
+  });
 
-    // Modal helpers
-    function openModal(id){
-      const el=document.getElementById(id);
-      if(!el) return;
-      el.style.display='flex';
-    }
-    function closeModal(id){
-      const el=document.getElementById(id);
-      if(!el) return;
-      el.style.display='none';
-    }
-    // attach close buttons
-    document.addEventListener('click', function(e){
-      if(e.target.classList.contains('close')){
-        const target = e.target.getAttribute('data-target');
-        if(target) closeModal(target);
-        else{
-          // try to find parent modal
-          let p = e.target.closest('.modal'); if(p) p.style.display='none';
-        }
-      }
-    });
+  function doMove(cx, cy) {
+    if (!dragTarget) return;
+    const desk = document.getElementById('desktop').getBoundingClientRect();
+    let nx = Math.max(0, Math.min(cx - dragOx, desk.width  - dragTarget.offsetWidth));
+    let ny = Math.max(0, Math.min(cy - dragOy, desk.height - dragTarget.offsetHeight));
+    dragTarget.style.left = nx + 'px';
+    dragTarget.style.top  = ny + 'px';
+  }
 
-    // Close modal on ESC
-    document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ document.querySelectorAll('.modal').forEach(m=>m.style.display='none'); } });
+  document.addEventListener('mousemove', e => doMove(e.clientX, e.clientY));
+  document.addEventListener('mouseup',   () => { dragTarget = null; });
+  document.addEventListener('touchmove', e => {
+    if (!dragTarget) return;
+    doMove(e.touches[0].clientX, e.touches[0].clientY);
+    e.preventDefault();
+  }, { passive: false });
+  document.addEventListener('touchend', () => { dragTarget = null; });
 
-    // Simple drag for windows (desktop only, minimal)
-    (function(){
-      const draggables = document.querySelectorAll('.draggableDiv');
-      draggables.forEach(d=>{
-        let isDown=false, startX, startY, origX, origY;
-        const header = d.querySelector('.draggableDivHeader') || d.querySelector('.draggableDivHeaderSupport');
-        if(!header) return;
-        header.style.cursor='move';
-        header.addEventListener('mousedown', (ev)=>{
-          isDown=true; startX=ev.clientX; startY=ev.clientY;
-          const rect=d.getBoundingClientRect(); origX=rect.left; origY=rect.top;
-          d.style.position='fixed'; d.style.zIndex=900;
-        });
-        window.addEventListener('mousemove', (ev)=>{
-          if(!isDown) return; const dx=ev.clientX-startX; const dy=ev.clientY-startY; d.style.left=(origX+dx)+'px'; d.style.top=(origY+dy)+'px';
-        });
-        window.addEventListener('mouseup', ()=>{ isDown=false; });
-      });
-    })();
-
-    // Make gallery images clickable to open in new tab (simple behavior)
-    document.getElementById('galleryGrid').addEventListener('click', function(e){
-      const img = e.target.closest('img'); if(!img) return; const src = img.getAttribute('src'); if(src) window.open(src,'_blank');
-    });
-
-    // Accessibility: allow opening gallery via Enter when focused
-    document.getElementById('picturesButton')?.addEventListener('keydown', function(e){ if(e.key==='Enter') openModal('myModalC'); });
-
-  </script>
+  // Modals
+  function openModal(id)  { document.getElementById(id).classList.add('open'); }
+  function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+  function bgClose(e, el) { if (e.target === el) el.classList.remove('open'); }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape')
+      document.querySelectorAll('.modal.open').forEach(m => m.classList.remove('open'));
+  });
+</script>
 </body>
-
 </html>
