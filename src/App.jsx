@@ -317,12 +317,12 @@ const windows = [
 ];
 
 const initialPositions = {
-  projects: { x: 18, y: 18 },
-  wishlist: { x: 365, y: 18 },
-  encounters: { x: 18, y: 190 },
-  work: { x: 365, y: 260 },
-  games: { x: 18, y: 360 },
-  links: { x: 710, y: 18 },
+  projects: { x: 32, y: 28 },
+  wishlist: { x: 520, y: 32 },
+  encounters: { x: 940, y: 38 },
+  work: { x: 72, y: 300 },
+  games: { x: 560, y: 360 },
+  links: { x: 980, y: 330 },
 };
 
 function Clock() {
@@ -729,63 +729,51 @@ button { font: inherit; }
 .window {
   position: absolute;
   z-index: 1;
-  min-width: 220px;
-  max-width: min(95vw, 700px);
-  background:
-    linear-gradient(145deg, rgba(247, 240, 245, 0.78) 0%, rgba(242, 232, 241, 0.58) 100%);
-  border: 1px solid rgba(247, 240, 245, 0.22);
-  border-radius: var(--radius-xl);
+  min-width: 210px;
+  max-width: min(95vw, 640px);
+  background: rgba(247, 240, 245, 0.92);
+  border: 1px solid rgba(236, 200, 247, 0.55);
+  border-radius: 10px;
   box-shadow:
-    0 18px 54px rgba(0, 0, 0, 0.38),
-    inset 0 1px 0 rgba(255, 255, 255, 0.42),
-    0 0 0 1px rgba(236, 200, 247, 0.08);
-  backdrop-filter: blur(18px) saturate(1.15);
-  -webkit-backdrop-filter: blur(18px) saturate(1.15);
+    8px 8px 0 rgba(0, 0, 0, 0.28),
+    0 0 28px rgba(236, 200, 247, 0.06);
   overflow: hidden;
 }
 
 .window::before {
   content: "";
   position: absolute;
-  inset: 0;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: inherit;
+  inset: 4px;
+  border: 1px solid rgba(13, 12, 13, 0.08);
+  border-radius: 7px;
   pointer-events: none;
 }
 
 .window::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.28), transparent 22%),
-    radial-gradient(circle at 92% 8%, rgba(236, 200, 247, 0.18), transparent 26%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.16), transparent 46%);
-  pointer-events: none;
-  opacity: 0.75;
+  content: none;
 }
 
 .window.active {
+  border-color: rgba(236, 200, 247, 0.78);
   box-shadow:
-    0 0 0 1px rgba(80, 133, 77, 0.32),
-    0 0 34px rgba(80, 133, 77, 0.16),
-    0 24px 64px rgba(0, 0, 0, 0.44),
-    inset 0 1px 0 rgba(255, 255, 255, 0.48);
+    10px 10px 0 rgba(0, 0, 0, 0.34),
+    0 0 0 1px rgba(80, 133, 77, 0.28),
+    0 0 28px rgba(80, 133, 77, 0.10);
 }
 
 .window-header,
 .modal-header {
-  height: 46px;
+  height: 38px;
   position: relative;
   display: flex;
   align-items: center;
   gap: 10px;
-  padding-inline: 14px;
+  padding-inline: 12px;
   user-select: none;
-  border-bottom: 1px solid rgba(13, 12, 13, 0.08);
+  border-bottom: 1px solid rgba(236, 200, 247, 0.24);
   background:
-    linear-gradient(90deg, rgba(13, 12, 13, 0.08), transparent 22%, transparent 78%, rgba(13, 12, 13, 0.08)),
-    linear-gradient(180deg, rgba(247, 240, 245, 0.34) 0%, rgba(236, 200, 247, 0.16) 100%);
+    linear-gradient(90deg, rgba(236, 200, 247, 0.08), transparent 28%, transparent 72%, rgba(80, 133, 77, 0.10)),
+    rgba(13, 12, 13, 0.94);
 }
 
 .window-header { cursor: grab; }
@@ -793,9 +781,9 @@ button { font: inherit; }
 
 .window.active .window-header {
   background:
-    linear-gradient(90deg, rgba(255,230,0,0.08), transparent 18%, transparent 82%, rgba(236,200,247,0.12)),
-    linear-gradient(90deg, rgba(80, 133, 77, 0.86) 0%, rgba(61, 109, 58, 0.72) 100%);
-  border-bottom-color: rgba(255, 255, 255, 0.16);
+    linear-gradient(90deg, rgba(255,230,0,0.07), transparent 18%, transparent 82%, rgba(236,200,247,0.14)),
+    rgba(13, 12, 13, 0.98);
+  border-bottom-color: rgba(236, 200, 247, 0.32);
 }
 
 .modal-header {
@@ -809,15 +797,16 @@ button { font: inherit; }
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: 0.035em;
-  color: var(--text);
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #F7F0F5;
   white-space: nowrap;
+  text-transform: uppercase;
 }
 
-.window.active .window-header > span { color: #F7F0F5; }
+.window.active .window-header > span { color: var(--pink); }
 
 .dots {
   position: relative;
@@ -827,10 +816,11 @@ button { font: inherit; }
 }
 
 .dots span {
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: rgba(13, 12, 13, 0.14);
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  border: 1px solid rgba(247, 240, 245, 0.38);
+  background: rgba(247, 240, 245, 0.12);
 }
 
 .dots span:first-child { background: var(--pink); }
@@ -850,29 +840,25 @@ button { font: inherit; }
   z-index: 1;
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
-  padding: 16px;
+  gap: 12px;
+  padding: 14px;
   background:
-    linear-gradient(rgba(255,255,255,0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
-  background-size: 24px 24px;
+    radial-gradient(circle at 12px 12px, rgba(13,12,13,0.045) 1px, transparent 1px),
+    rgba(247, 240, 245, 0.86);
+  background-size: 18px 18px;
 }
 
 .item-card {
-  width: 108px;
-  min-height: 146px;
+  width: 102px;
+  min-height: 136px;
   display: flex;
   flex-direction: column;
   padding: 0;
   overflow: hidden;
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(13, 12, 13, 0.08);
-  background: rgba(255, 255, 255, 0.38);
-  box-shadow:
-    0 8px 18px rgba(0,0,0,0.12),
-    inset 0 1px 0 rgba(255,255,255,0.34);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  border-radius: 8px;
+  border: 1px solid rgba(13, 12, 13, 0.12);
+  background: rgba(255, 255, 255, 0.62);
+  box-shadow: 4px 4px 0 rgba(13,12,13,0.12);
   cursor: pointer;
   transition: 0.18s ease;
 }
@@ -889,8 +875,8 @@ button { font: inherit; }
 .item-card:active { transform: translateY(-1px); }
 
 .item-icon {
-  width: 108px;
-  height: 104px;
+  width: 102px;
+  height: 96px;
   display: grid;
   place-items: center;
   background:
@@ -924,15 +910,23 @@ button { font: inherit; }
   color: var(--text);
 }
 
+.window.large {
+  min-width: 260px;
+}
+
+.window.large .window-body {
+  padding: 18px;
+}
+
 .window.large .item-card {
-  width: 168px;
-  min-height: 210px;
+  width: 220px;
+  min-height: 258px;
 }
 
 .window.large .item-icon {
-  width: 168px;
-  height: 166px;
-  font-size: 56px;
+  width: 220px;
+  height: 208px;
+  font-size: 68px;
 }
 
 .modal-backdrop {
