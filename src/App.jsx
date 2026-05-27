@@ -284,33 +284,27 @@ const windows = [
     items: [
       {
         id: "encounter-1",
-        icon: "🤝",
-        label: "ENCOUNTER 1",
-        modalTitle: "Encounter One",
+        icon: "⚔️",
+        label: "Combat Prototype",
+        modalTitle: "Combat Prototype",
         tag: "ENCOUNTER",
-        description: "A person, place, or moment that shaped your work and changed how you think about design.",
-        chips: ["COLLABORATION", "2024"],
-        action: "THEIR SITE",
+        body: <p className="under-construction">Under the construction</p>,
       },
       {
         id: "encounter-2",
-        icon: "🤝",
-        label: "ENCOUNTER 2",
-        modalTitle: "Encounter Two",
+        icon: "👑",
+        label: "Boss Fight Encounter",
+        modalTitle: "Boss Fight Encounter",
         tag: "ENCOUNTER",
-        description: "Describe a collaboration, event, conference, jam, or creative meeting.",
-        chips: ["COLLABORATION"],
-        action: "THEIR SITE",
+        body: <p className="under-construction">Under the construction</p>,
       },
       {
         id: "encounter-3",
-        icon: "🤝",
-        label: "ENCOUNTER 3",
-        modalTitle: "Encounter Three",
+        icon: "🌊",
+        label: "Wave-Based Encounter",
+        modalTitle: "Wave-Based Encounter",
         tag: "ENCOUNTER",
-        description: "Another meaningful creative connection or experience.",
-        chips: ["COLLABORATION"],
-        action: "THEIR SITE",
+        body: <p className="under-construction">Under the construction</p>,
       },
     ],
   },
@@ -348,12 +342,12 @@ const windows = [
 ];
 
 const initialPositions = {
-  projects: { x: 34, y: 28 },
-  wishlist: { x: 455, y: 34 },
-  encounters: { x: 780, y: 40 },
-  work: { x: 34, y: 350 },
-  games: { x: 640, y: 310 },
-  links: { x: 820, y: 510 },
+  projects: { x: 120, y: 54 },
+  wishlist: { x: 548, y: 64 },
+  encounters: { x: 820, y: 58 },
+  work: { x: 80, y: 330 },
+  games: { x: 575, y: 330 },
+  links: { x: 890, y: 348 },
 };
 
 function Clock() {
@@ -473,7 +467,7 @@ function DesktopWindow({ win, active, onFocus, onOpen }) {
   return (
     <section
       className={`window window-${win.id} ${active ? "active" : ""} ${win.large ? "large" : ""}`}
-      style={{ left: position.x, top: position.y }}
+      style={{ left: position.x, top: position.y, zIndex: active ? 20 : 1 }}
       onMouseDown={() => onFocus(win.id)}
     >
       <div className={`window-header ${win.accent}`} onMouseDown={startDrag} onTouchStart={startDrag}>
@@ -589,7 +583,7 @@ function Modal({ modal, onClose }) {
 }
 
 export default function App() {
-  const [activeWindow, setActiveWindow] = useState("projects");
+  const [activeWindow, setActiveWindow] = useState("wishlist");
   const [modal, setModal] = useState(null);
 
   const currentYear = useMemo(() => new Date().getFullYear(), []);
@@ -676,11 +670,11 @@ button { font: inherit; }
   position: relative;
   isolation: isolate;
   background:
-    linear-gradient(rgba(13, 12, 13, 0.58), rgba(13, 12, 13, 0.76)),
-    radial-gradient(circle at 18% 18%, rgba(81, 73, 94, 0.24), transparent 30%),
-    radial-gradient(circle at 82% 20%, rgba(236, 200, 247, 0.12), transparent 26%),
-    url("https://raw.githubusercontent.com/valenandia/valen.github.io/main/%D0%91%D0%B5%D0%B7%20%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F%20(5).png") center center / cover no-repeat fixed,
-    #0D0C0D;
+    radial-gradient(circle at 14% 18%, rgba(80, 133, 77, 0.30), transparent 34%),
+    radial-gradient(circle at 82% 16%, rgba(81, 73, 94, 0.42), transparent 32%),
+    radial-gradient(circle at 48% 78%, rgba(236, 200, 247, 0.12), transparent 38%),
+    radial-gradient(circle at 88% 84%, rgba(80, 133, 77, 0.16), transparent 30%),
+    linear-gradient(135deg, #0D0C0D 0%, #17121A 34%, #1D1725 62%, #0E1610 100%);
 }
 
 .app-shell::before {
@@ -690,9 +684,9 @@ button { font: inherit; }
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(circle at center, transparent 30%, rgba(13, 12, 13, 0.52) 100%),
-    linear-gradient(rgba(13, 12, 13, 0.10), rgba(13, 12, 13, 0.34)),
-    linear-gradient(90deg, rgba(81, 73, 94, 0.12), rgba(13, 12, 13, 0.08));
+    radial-gradient(circle at center, transparent 34%, rgba(13, 12, 13, 0.38) 100%),
+    linear-gradient(120deg, rgba(80, 133, 77, 0.08), transparent 36%, rgba(81, 73, 94, 0.12)),
+    linear-gradient(rgba(13, 12, 13, 0.04), rgba(13, 12, 13, 0.20));
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
@@ -805,6 +799,10 @@ button { font: inherit; }
   position: fixed;
   inset: 64px 0 24px 0;
   overflow: hidden;
+  max-width: 1240px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
 }
 
 .window {
@@ -1000,14 +998,16 @@ button { font: inherit; }
 
 .item-label {
   flex: 1;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
   padding: 8px 8px 10px;
   font-family: var(--main-font);
   font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.01em;
-  line-height: 1.18;
+  letter-spacing: 0;
+  line-height: 1.2;
   text-align: center;
   background: rgba(255, 255, 255, 0.20);
   color: var(--text);
@@ -1025,9 +1025,45 @@ button { font: inherit; }
   min-width: 360px;
 }
 
+.window-encounters {
+  width: 390px;
+  min-width: 390px;
+  max-width: 390px;
+}
+
+.window-encounters .window-body {
+  gap: 12px;
+  padding: 14px;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.window-encounters .item-card {
+  width: 112px;
+  min-width: 112px;
+  max-width: 112px;
+  min-height: 152px;
+  flex: 0 0 112px;
+}
+
+.window-encounters .item-icon {
+  width: 112px;
+  min-width: 112px;
+  height: 96px;
+}
+
+.window-encounters .item-label {
+  min-height: 56px;
+  padding: 8px 8px 10px;
+  font-size: 11px;
+  line-height: 1.18;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
 .window-work {
-  width: 332px;
-  min-width: 332px;
+  width: 652px;
+  min-width: 652px;
 }
 
 .window-work .window-body {
@@ -1035,10 +1071,12 @@ button { font: inherit; }
   padding: 14px;
   align-items: stretch;
   justify-content: flex-start;
+  flex-wrap: nowrap;
 }
 
 .window-work .item-card {
   width: 145px;
+  min-width: 145px;
   min-height: 222px;
 }
 
@@ -1050,8 +1088,9 @@ button { font: inherit; }
 .window-work .item-label {
   min-height: 76px;
   padding: 8px 9px 10px;
-  font-size: 10px;
-  line-height: 1.24;
+  font-size: 11px;
+  line-height: 1.18;
+  letter-spacing: 0;
 }
 
 .window-links .window-header > span {
