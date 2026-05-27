@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 const profile = {
   name: "VALENTINA GODOVETS",
@@ -420,6 +420,7 @@ function Header({ onOpen }) {
 }
 
 function DesktopWindow({ win, active, onFocus, onOpen }) {
+  const windowRef = useRef(null);
   const [position, setPosition] = useState(initialPositions[win.id] || { x: 24, y: 24 });
   const [drag, setDrag] = useState(null);
 
@@ -427,13 +428,14 @@ function DesktopWindow({ win, active, onFocus, onOpen }) {
     if (!drag) return;
 
     const handleMove = (event) => {
+      if (event.cancelable) event.preventDefault();
       const clientX = event.touches?.[0]?.clientX ?? event.clientX;
       const clientY = event.touches?.[0]?.clientY ?? event.clientY;
-      const maxX = Math.max(0, window.innerWidth - drag.width - 8);
-      const maxY = Math.max(0, window.innerHeight - drag.height - 40);
+      const maxX = Math.max(0, drag.containerWidth - drag.width);
+      const maxY = Math.max(0, drag.containerHeight - drag.height);
       setPosition({
-        x: Math.min(Math.max(0, clientX - drag.offsetX), maxX),
-        y: Math.min(Math.max(0, clientY - drag.offsetY), maxY),
+        x: Math.min(Math.max(0, clientX - drag.containerLeft - drag.offsetX), maxX),
+        y: Math.min(Math.max(0, clientY - drag.containerTop - drag.offsetY), maxY),
       });
     };
 
@@ -456,16 +458,40 @@ function DesktopWindow({ win, active, onFocus, onOpen }) {
     const clientX = event.touches?.[0]?.clientX ?? event.clientX;
     const clientY = event.touches?.[0]?.clientY ?? event.clientY;
     const rect = event.currentTarget.closest(".window").getBoundingClientRect();
+    const desktopRect = event.currentTarget.closest(".desktop").getBoundingClientRect();
     setDrag({
       offsetX: clientX - rect.left,
       offsetY: clientY - rect.top,
       width: rect.width,
       height: rect.height,
+      containerLeft: desktopRect.left,
+      containerTop: desktopRect.top,
+      containerWidth: desktopRect.width,
+      containerHeight: desktopRect.height,
     });
   };
 
+  useEffect(() => {
+    const clampPosition = () => {
+      const node = windowRef.current;
+      const desktop = node?.closest(".desktop");
+      if (!node || !desktop) return;
+      const desktopRect = desktop.getBoundingClientRect();
+      const rect = node.getBoundingClientRect();
+      setPosition((current) => ({
+        x: Math.min(Math.max(0, current.x), Math.max(0, desktopRect.width - rect.width)),
+        y: Math.min(Math.max(0, current.y), Math.max(0, desktopRect.height - rect.height)),
+      }));
+    };
+
+    clampPosition();
+    window.addEventListener("resize", clampPosition);
+    return () => window.removeEventListener("resize", clampPosition);
+  }, []);
+
   return (
     <section
+      ref={windowRef}
       className={`window window-${win.id} ${active ? "active" : ""} ${win.large ? "large" : ""}`}
       style={{ left: position.x, top: position.y, zIndex: active ? 20 : 1 }}
       onMouseDown={() => onFocus(win.id)}
@@ -797,12 +823,12 @@ button { font: inherit; }
 
 .desktop {
   position: fixed;
-  inset: 64px 0 24px 0;
+  top: 64px;
+  bottom: 24px;
+  left: 50%;
+  width: min(1240px, 100vw);
+  transform: translateX(-50%);
   overflow: hidden;
-  max-width: 1240px;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
 }
 
 .window {
@@ -1022,13 +1048,14 @@ button { font: inherit; }
 }
 
 .window-links {
-  min-width: 360px;
+  width: min(360px, calc(100vw - 24px));
+  min-width: min(360px, calc(100vw - 24px));
 }
 
 .window-encounters {
-  width: 390px;
-  min-width: 390px;
-  max-width: 390px;
+  width: min(390px, calc(100vw - 24px));
+  min-width: min(390px, calc(100vw - 24px));
+  max-width: min(390px, calc(100vw - 24px));
 }
 
 .window-encounters .window-body {
@@ -1062,8 +1089,8 @@ button { font: inherit; }
 }
 
 .window-work {
-  width: 652px;
-  min-width: 652px;
+  width: min(652px, calc(100vw - 24px));
+  min-width: min(652px, calc(100vw - 24px));
 }
 
 .window-work .window-body {
@@ -1072,6 +1099,7 @@ button { font: inherit; }
   align-items: stretch;
   justify-content: flex-start;
   flex-wrap: nowrap;
+  overflow-x: hidden;
 }
 
 .window-work .item-card {
@@ -1939,6 +1967,11 @@ footer {
   .window-body {
     overflow-x: auto;
     flex-wrap: nowrap;
+  }
+
+  .window-work .window-body {
+    overflow-x: visible;
+    flex-wrap: wrap;
   }
 
   footer {
