@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 
 const profile = {
   name: "VALENTINA GODOVETS",
-  subtitle: "Game Designer · Level Designer · Systems Designer",
+  subtitle: "Game Designer · Level Designer",
   email: "godovets.valya@gmail.com",
   socials: [
     { label: "LINKEDIN", href: "https://www.linkedin.com/in/valenandia/" },
@@ -54,14 +54,17 @@ const navModals = [
           title="Game Designer & Level Designer — NDA Project"
           date="Apr 2025 – Present"
           text="Designed and interconnected core and meta systems, balanced mechanics, created UX documentation, and worked on player customization features."
+          chips={["SYSTEM DESIGN", "LEVEL DESIGN", "ENVIRONMENTAL PUZZLES", "UNREAL ENGINE"]}
         />
         <TimelineItem
           title="Game Designer — Eriars"
           date="Dec 2024 – Present"
           text="Prototyped core gameplay systems, designed magic combat and movement mechanics, and collaborated with narrative and art teams."
+          chips={["COMBAT DESIGN", "ENCOUNTER DESIGN", "GAME AI", "UNREAL ENGINE", "ARTICY"]}
         />
-        <Chips items={["COMBAT DESIGN", "LEVEL DESIGN", "ENCOUNTER DESIGN", "UNREAL ENGINE", "ARTICY", "NOTION", "GITHUB"]} />
-        <a className="modal-link no-dot" href="#">DOWNLOAD PDF</a>
+        <div className="resume-actions">
+          <a className="modal-link no-dot" href="#">DOWNLOAD PDF</a>
+        </div>
       </>
     ),
   },
@@ -72,7 +75,7 @@ const navModals = [
     accent: "green",
     body: (
       <div className="contact-panel">
-        <p>For collaborations, commissions, hiring, or just to say hi:</p>
+        <p>I’m open to collaborations, creative projects, game design work, and professional opportunities.</p>
 
         <div className="contact-actions">
           <a className="contact-button" href="https://t.me/valenandia" target="_blank" rel="noreferrer">
@@ -84,13 +87,23 @@ const navModals = [
           <a className="contact-button" href="https://www.linkedin.com/in/valenandia/" target="_blank" rel="noreferrer">
             LinkedIn
           </a>
-          <a className="contact-button" href="https://www.backloggery.com/valenandia" target="_blank" rel="noreferrer">
-            Backloggery
-          </a>
-          <a className="contact-button" href="https://x.com/valenandia" target="_blank" rel="noreferrer">
-            X / TW
-          </a>
         </div>
+
+        <form className="contact-form" action={`mailto:${profile.email}`} method="POST" encType="text/plain">
+          <label>
+            Your name
+            <input name="name" type="text" placeholder="Name" />
+          </label>
+          <label>
+            Your email
+            <input name="email" type="email" placeholder="email@example.com" />
+          </label>
+          <label>
+            Message
+            <textarea name="message" rows="5" placeholder="Write your message..." />
+          </label>
+          <button type="submit" className="contact-button contact-submit">Send message</button>
+        </form>
       </div>
     ),
   },
@@ -192,6 +205,7 @@ const windows = [
           ["Platforms", "TBA"],
           ["Engine", "Unreal Engine 5"],
         ],
+        contributionsIntro: "Game Designer",
         contributions: [
           "Contributed to location customization and screen map design to enhance user experience.",
           "Optimized and balanced mini-games to ensure engaging gameplay.",
@@ -216,12 +230,32 @@ const windows = [
       {
         id: "project-3",
         icon: "🎮",
-        label: "PROJECT THREE",
-        modalTitle: "Project Three",
+        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/images%20(1).jpg",
+        projectImage: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/screenshot120.png",
+        label: "TAMRIEL REBUILT",
+        modalTitle: "Tamriel Rebuilt",
         tag: "PROJECT",
-        description: "Use this slot for a polished portfolio piece with screenshots, links, and your contribution.",
-        chips: ["LEVEL DESIGN", "2024"],
+        status: "Somewhere in 2010s — 2019",
+        description: "Tamriel Rebuilt is a large-scale TES III mod project for Morrowind and OpenMW. My work combined game generalist tasks, level design, quest work, narrative design, and testing across Tamriel’s mainland regions.",
+        meta: [
+          ["Genre", "TES III: Mod"],
+          ["Role", "Game Generalist"],
+          ["Involvement", "2010s — 2019"],
+          ["Platforms", "Nexus Mods"],
+          ["Engine", "OpenMW"],
+        ],
+        contributionsIntro: "Game Generalist, Level Designer, Narrative Designer",
+        contributions: [
+          "Developed engaging quests and character narratives to enhance player immersion across Tamriel’s mainland regions.",
+          "Utilized Morrowind’s Construction Set to construct detailed exterior landscapes, cities, and interior spaces, ensuring lore consistency and visual quality.",
+          "Conducted thorough testing of quests to verify functionality, balance, and a seamless player experience.",
+        ],
+        awardImage: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/azbsetn.png",
+        awardLabel: "Community Project Award",
         action: "VIEW PROJECT",
+        href: "https://www.nexusmods.com/morrowind/mods/42145",
+        secondaryAction: "OFFICIAL SITE",
+        secondaryHref: "https://www.tamriel-rebuilt.org/",
       },
     ],
   },
@@ -317,12 +351,12 @@ const windows = [
 ];
 
 const initialPositions = {
-  projects: { x: 32, y: 28 },
-  wishlist: { x: 520, y: 32 },
-  encounters: { x: 940, y: 38 },
-  work: { x: 72, y: 300 },
-  games: { x: 560, y: 360 },
-  links: { x: 980, y: 330 },
+  projects: { x: 34, y: 28 },
+  wishlist: { x: 455, y: 34 },
+  encounters: { x: 780, y: 40 },
+  work: { x: 34, y: 330 },
+  games: { x: 640, y: 310 },
+  links: { x: 900, y: 540 },
 };
 
 function Clock() {
@@ -345,12 +379,13 @@ function Chips({ items = [] }) {
   return <div className="chips">{items.map((item) => <span className="chip" key={item}>{item}</span>)}</div>;
 }
 
-function TimelineItem({ title, date, text }) {
+function TimelineItem({ title, date, text, chips = [] }) {
   return (
     <div className="timeline-item">
-      <p><strong>{title}</strong></p>
+      <p><strong className="timeline-title">{title}</strong></p>
       <span>{date}</span>
       <p>{text}</p>
+      {chips.length > 0 && <Chips items={chips} />}
     </div>
   );
 }
@@ -384,7 +419,7 @@ function Header({ onOpen }) {
 
       <div className="nav-actions">
         {navModals.map((item) => (
-          <button className={`menu-button ${item.id === "press" ? "yellow" : ""}`} onClick={() => onOpen(item)} key={item.id}>{item.label}</button>
+          <button className={`menu-button nav-button ${item.id === "about" ? "about-nav" : ""} ${item.id === "press" ? "yellow" : ""}`} onClick={() => onOpen(item)} key={item.id}>{item.label}</button>
         ))}
         <div className="sep" />
         <Clock />
@@ -450,7 +485,7 @@ function DesktopWindow({ win, active, onFocus, onOpen }) {
       </div>
       <div className="window-body">
         {win.items.map((item) => (
-          <button className="item-card" onClick={() => onOpen({ ...item, accent: win.accent })} key={item.id}>
+          <button className="item-card" onClick={() => onOpen({ ...item, accent: win.accent, folderTitle: win.title })} key={item.id}>
             <span className="item-icon">{item.image ? <img src={item.image} alt={item.label} /> : item.icon}</span>
             <span className="item-label">{item.label}</span>
           </button>
@@ -486,10 +521,10 @@ function Modal({ modal, onClose }) {
 
   return (
     <div className="modal-backdrop" onMouseDown={onClose}>
-      <dialog className="modal-window" open onMouseDown={(event) => event.stopPropagation()}>
+      <dialog className={`modal-window ${modal.id ? `modal-${modal.id}` : ""}`} open onMouseDown={(event) => event.stopPropagation()}>
         <div className={`modal-header ${modal.accent || "purple"}`}>
           <WindowDots accent={modal.accent || "purple"} />
-          <span className="modal-tag">{modal.label || modal.tag}</span>
+          <span className="modal-tag">{modal.folderTitle || modal.label || modal.tag}</span>
           <strong>{modal.title || modal.modalTitle}</strong>
           <button onClick={onClose} aria-label="Close modal">×</button>
         </div>
@@ -515,6 +550,11 @@ function Modal({ modal, onClose }) {
                   </div>
                 )}
               </div>
+              {modal.projectImage && (
+                <div className="project-preview-card">
+                  <img src={modal.projectImage} alt={`${modal.modalTitle} project preview`} />
+                </div>
+              )}
               {modal.meta && (
                 <div className="project-meta">
                   {modal.meta.map(([key, value]) => (
@@ -528,9 +568,16 @@ function Modal({ modal, onClose }) {
               {modal.contributions && (
                 <div className="project-contributions">
                   <h3>Contributions</h3>
+                  {modal.contributionsIntro && <p className="project-contributions-intro">{modal.contributionsIntro}</p>}
                   <ul>
                     {modal.contributions.map((item) => <li key={item}>{item}</li>)}
                   </ul>
+                </div>
+              )}
+              {modal.awardImage && (
+                <div className="project-award-card">
+                  <h3>{modal.awardLabel || "Award"}</h3>
+                  <img src={modal.awardImage} alt={modal.awardLabel || `${modal.modalTitle} award`} />
                 </div>
               )}
               {!modal.href && (
@@ -572,7 +619,7 @@ export default function App() {
 }
 
 const styles = `
-@import url('https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700;800&family=Fraunces:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Eagle+Lake&family=Cormorant+Garamond:wght@500;600;700;800&family=Share+Tech+Mono&display=swap');
 
 @font-face {
   font-family: "KelmscotDecorative";
@@ -587,6 +634,9 @@ const styles = `
   --pink: #ECC8F7;
   --ink: #0D0C0D;
   --yellow: #FFE600;
+  --modal-accent: #51495E;
+  --modal-accent-soft: rgba(81, 73, 94, 0.14);
+  --modal-accent-border: rgba(81, 73, 94, 0.28);
 
   --bg: #0D0C0D;
   --bg-soft: #171517;
@@ -604,6 +654,8 @@ const styles = `
   --radius-lg: 18px;
   --radius-md: 14px;
   --radius-sm: 10px;
+  --text-font: "Times New Roman", Times, serif;
+  --main-font: "Eagle Lake", Georgia, serif;
   --decorative-font: "KelmscotDecorative", "Cormorant Garamond", Georgia, serif;
 }
 
@@ -614,7 +666,7 @@ html, body, #root { min-height: 100%; }
 body {
   margin: 0;
   color: var(--text);
-  font-family: "Spectral", Georgia, serif;
+  font-family: var(--text-font);
   background: #0D0C0D;
 }
 
@@ -667,7 +719,7 @@ button { font: inherit; }
 
 .brand strong {
   font-family: var(--decorative-font);
-  font-size: 28px;
+  font-size: 29px;
   font-weight: 400;
   letter-spacing: 0.025em;
   color: #F7F0F5;
@@ -675,7 +727,7 @@ button { font: inherit; }
 
 .brand span {
   margin-top: 2px;
-  font-family: "Fraunces", Georgia, serif;
+  font-family: var(--decorative-font);
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.055em;
@@ -705,8 +757,13 @@ button { font: inherit; }
 }
 
 .menu-button {
-  font-family: "Fraunces", Georgia, serif;
+  font-family: var(--decorative-font);
   letter-spacing: 0.025em;
+}
+
+.nav-button.about-nav {
+  font-size: 15px;
+  padding-inline: 18px;
 }
 
 .menu-button:hover {
@@ -930,9 +987,9 @@ button { font: inherit; }
   display: grid;
   place-items: center;
   padding: 8px 8px 10px;
-  font-family: "Fraunces", Georgia, serif;
+  font-family: var(--main-font);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.01em;
   line-height: 1.18;
   text-align: center;
@@ -1007,9 +1064,9 @@ button { font: inherit; }
 .modal-tag {
   position: relative;
   z-index: 1;
-  font-family: "Fraunces", Georgia, serif;
-  font-size: 10px;
-  font-weight: 500;
+  font-family: var(--decorative-font);
+  font-size: 15px;
+  font-weight: 400;
   letter-spacing: 0.11em;
   text-transform: uppercase;
   color: rgba(247, 240, 245, 0.68);
@@ -1019,10 +1076,10 @@ button { font: inherit; }
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  font-family: var(--decorative-font);
-  font-size: 28px;
+  font-family: var(--main-font);
+  font-size: 24px;
   font-weight: 400;
-  letter-spacing: 0.025em;
+  letter-spacing: 0.01em;
   color: #F7F0F5;
   white-space: nowrap;
 }
@@ -1048,7 +1105,8 @@ button { font: inherit; }
 
 .modal-body {
   padding: 28px 32px 34px;
-  font-size: 16px;
+  font-family: var(--text-font);
+  font-size: 17px;
   font-weight: 400;
   line-height: 1.65;
   background:
@@ -1062,16 +1120,16 @@ button { font: inherit; }
 
 .modal-body h3 {
   margin: 14px 0 6px;
-  font-family: var(--decorative-font);
+  font-family: var(--main-font);
   font-size: 22px;
   font-weight: 400;
   letter-spacing: 0.01em;
-  color: var(--green);
+  color: var(--modal-accent);
 }
 
 .modal-body strong {
   color: var(--text);
-  font-family: "Spectral", Georgia, serif;
+  font-family: var(--text-font);
   font-weight: 600;
 }
 
@@ -1097,6 +1155,31 @@ button { font: inherit; }
 
 .project-hero {
   height: 260px;
+}
+
+.project-preview-card {
+  margin-top: 14px;
+  margin-bottom: 14px;
+  padding: 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(247, 240, 245, 0.18);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.36), rgba(236,200,247,0.14)),
+    rgba(255,255,255,0.26);
+  box-shadow:
+    0 12px 26px rgba(0,0,0,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.24);
+  backdrop-filter: blur(12px) saturate(1.08);
+  -webkit-backdrop-filter: blur(12px) saturate(1.08);
+}
+
+.project-preview-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.14);
 }
 
 .project-intro-card {
@@ -1133,10 +1216,10 @@ button { font: inherit; }
 }
 
 .project-link.secondary {
-  background: rgba(80, 133, 77, 0.12);
-  color: var(--green);
+  background: var(--modal-accent-soft);
+  color: var(--modal-accent);
   box-shadow: none;
-  border: 1px solid rgba(80, 133, 77, 0.22);
+  border: 1px solid var(--modal-accent-border);
 }
 
 .project-status {
@@ -1144,11 +1227,11 @@ button { font: inherit; }
   margin: 0 0 12px;
   padding: 6px 12px;
   border-radius: 999px;
-  background: rgba(80, 133, 77, 0.10);
-  color: var(--green);
-  font-family: "Fraunces", Georgia, serif;
-  font-size: 12px;
-  font-weight: 600;
+  background: var(--modal-accent-soft);
+  color: var(--modal-accent);
+  font-family: var(--main-font);
+  font-size: 13px;
+  font-weight: 400;
 }
 
 .project-meta {
@@ -1158,7 +1241,7 @@ button { font: inherit; }
   padding: 16px 18px;
   border-radius: 18px;
   background:
-    linear-gradient(135deg, rgba(255,255,255,0.36), rgba(80,133,77,0.08)),
+    linear-gradient(135deg, rgba(255,255,255,0.36), rgba(81,73,94,0.10)),
     rgba(255,255,255,0.26);
   border: 1px solid rgba(247,240,245,0.18);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.26);
@@ -1175,11 +1258,14 @@ button { font: inherit; }
 
 .project-meta-row span {
   color: var(--muted);
+  font-family: var(--main-font);
   font-size: 13px;
 }
 
 .project-meta-row strong {
-  font-size: 15px;
+  font-family: var(--text-font);
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .project-contributions {
@@ -1195,16 +1281,98 @@ button { font: inherit; }
   -webkit-backdrop-filter: blur(12px) saturate(1.08);
 }
 
+.project-contributions h3 {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.project-contributions-intro {
+  width: fit-content;
+  margin: 8px auto 14px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--modal-accent-border);
+  background: rgba(81, 73, 94, 0.14);
+  font-family: var(--main-font);
+  font-size: 13px;
+  color: var(--modal-accent);
+  text-align: center;
+}
+
 .project-contributions ul {
-  margin: 8px 0 0;
+  margin: 10px 0 0;
   padding-left: 0;
   list-style: none;
   display: grid;
-  gap: 8px;
+  gap: 10px;
+  counter-reset: contribution;
 }
 
 .project-contributions li {
-  padding-left: 0;
+  position: relative;
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 8px;
+  align-items: start;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(81, 73, 94, 0.18);
+  background: rgba(255, 255, 255, 0.28);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.22);
+}
+
+.project-contributions li::before {
+  counter-increment: contribution;
+  content: counter(contribution) ".";
+  width: auto;
+  height: auto;
+  display: block;
+  padding-top: 1px;
+  border-radius: 0;
+  background: transparent;
+  border: 0;
+  color: rgba(81, 73, 94, 0.72);
+  font-family: var(--main-font);
+  font-size: 13px;
+  line-height: 1.45;
+  box-shadow: none;
+}
+
+.project-award-card {
+  margin-top: 14px;
+  padding: 16px 18px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(247, 240, 245, 0.18);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.36), rgba(236,200,247,0.14)),
+    rgba(255,255,255,0.26);
+  box-shadow:
+    0 12px 26px rgba(0,0,0,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.24);
+  backdrop-filter: blur(12px) saturate(1.08);
+  -webkit-backdrop-filter: blur(12px) saturate(1.08);
+}
+
+.project-award-card h3 {
+  color: var(--modal-accent);
+  text-align: center;
+  margin-top: 0;
+}
+
+.project-award-card img {
+  width: min(420px, 100%);
+  display: block;
+  margin: 14px auto 0;
+  padding: 14px;
+  border-radius: 16px;
+  object-fit: contain;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(236, 200, 247, 0.10), transparent 58%),
+    linear-gradient(145deg, rgba(31, 27, 37, 0.96), rgba(13, 12, 13, 0.94));
+  box-shadow:
+    0 12px 26px rgba(0,0,0,0.26),
+    inset 0 1px 0 rgba(255,255,255,0.12);
 }
 
 .chips {
@@ -1215,36 +1383,37 @@ button { font: inherit; }
 }
 
 .chip {
-  padding: 6px 12px;
+  padding: 5px 10px;
   border-radius: 999px;
-  background: rgba(80, 133, 77, 0.10);
-  border: 1px solid rgba(80, 133, 77, 0.18);
-  color: var(--text);
-  font-family: "Fraunces", Georgia, serif;
+  background: rgba(81, 73, 94, 0.32);
+  border: 1px solid rgba(81, 73, 94, 0.56);
+  color: #14101a;
+  font-family: var(--main-font);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.01em;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.24);
 }
 
 .chip:nth-child(2n) {
-  background: rgba(236, 200, 247, 0.28);
-  border-color: rgba(236, 200, 247, 0.34);
+  background: rgba(81, 73, 94, 0.32);
+  border-color: rgba(81, 73, 94, 0.56);
 }
 
 .modal-link {
-  font-family: "Fraunces", Georgia, serif;
+  font-family: var(--main-font);
   display: inline-flex;
   align-items: center;
   gap: 8px;
   margin-top: 18px;
   padding: 10px 16px;
   border-radius: 999px;
-  background: var(--green);
+  background: var(--modal-accent);
   color: #F7F0F5;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 400;
   letter-spacing: 0.015em;
-  box-shadow: 0 10px 20px rgba(80, 133, 77, 0.22);
+  box-shadow: 0 10px 20px rgba(81, 73, 94, 0.24);
 }
 
 .modal-link::after {
@@ -1278,9 +1447,33 @@ button { font: inherit; }
 }
 
 .timeline-item {
-  margin-bottom: 14px;
+  margin-bottom: 18px;
   padding-left: 16px;
-  border-left: 2px solid rgba(80, 133, 77, 0.28);
+  border-left: 2px solid var(--modal-accent-border);
+}
+
+.timeline-item .chips {
+  margin-top: 10px;
+}
+
+.timeline-title {
+  font-family: var(--main-font) !important;
+  font-size: 18px;
+  font-weight: 600 !important;
+  color: #17121d;
+  letter-spacing: 0.005em;
+}
+
+.resume-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.resume-actions .modal-link {
+  margin-top: 0;
 }
 
 .timeline-item span,
@@ -1288,9 +1481,9 @@ button { font: inherit; }
   display: inline-block;
   margin: 3px 0 6px;
   color: var(--muted);
-  font-family: "Spectral", Georgia, serif;
+  font-family: var(--main-font);
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0;
 }
 
@@ -1331,14 +1524,14 @@ button { font: inherit; }
   bottom: 12px;
   width: 3px;
   border-radius: 999px;
-  background: var(--green);
+  background: var(--modal-accent);
   opacity: 0.75;
 }
 
 .press-card strong {
-  font-family: "Spectral", Georgia, serif;
-  font-size: 16px;
-  font-weight: 600;
+  font-family: var(--text-font);
+  font-size: 17px;
+  font-weight: 400;
   letter-spacing: 0;
   line-height: 1.35;
 }
@@ -1346,14 +1539,14 @@ button { font: inherit; }
 .press-card p {
   margin: 0;
   color: var(--muted);
-  font-family: "Spectral", Georgia, serif;
-  font-size: 16px;
+  font-family: var(--text-font);
+  font-size: 17px;
 }
 
 .press-year {
-  font-family: "Spectral", Georgia, serif;
+  font-family: var(--main-font);
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0;
   color: var(--muted);
 }
@@ -1363,17 +1556,17 @@ button { font: inherit; }
   margin-top: 4px;
   padding: 7px 12px;
   border-radius: 999px;
-  background: rgba(80, 133, 77, 0.12);
-  border: 1px solid rgba(80, 133, 77, 0.22);
-  color: var(--green);
-  font-family: "Fraunces", Georgia, serif;
-  font-size: 12px;
-  font-weight: 600;
+  background: var(--modal-accent-soft);
+  border: 1px solid var(--modal-accent-border);
+  color: var(--modal-accent);
+  font-family: var(--main-font);
+  font-size: 15px;
+  font-weight: 400;
   transition: 0.18s ease;
 }
 
 .press-link:hover {
-  background: rgba(80, 133, 77, 0.18);
+  background: rgba(81, 73, 94, 0.20);
   transform: translateY(-1px);
 }
 
@@ -1396,7 +1589,7 @@ button { font: inherit; }
 .article-row h3 {
   margin: 0 auto;
   color: var(--text);
-  font-family: var(--decorative-font);
+  font-family: var(--main-font);
   font-size: 26px;
   font-weight: 400;
   letter-spacing: 0.01em;
@@ -1418,7 +1611,7 @@ button { font: inherit; }
     radial-gradient(circle at 50% 50%, rgba(236, 200, 247, 0.36), transparent 58%),
     linear-gradient(180deg, rgba(255,255,255,0.72), rgba(80,133,77,0.10));
   color: var(--muted);
-  font-family: "Fraunces", Georgia, serif;
+  font-family: var(--main-font);
   font-size: 12px;
 }
 
@@ -1433,51 +1626,59 @@ button { font: inherit; }
   margin: 0 auto;
   max-width: 62ch;
   text-align: center;
+  font-family: var(--text-font);
+  font-size: 17px;
 }
 
 .community-section {
-  margin-top: 20px;
-  padding-top: 14px;
+  margin-top: 22px;
+  padding-top: 16px;
   border-top: 1px solid rgba(13, 12, 13, 0.08);
+}
+
+.community-section h3 {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .community-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 12px;
+  gap: 14px;
+  margin-top: 14px;
 }
 
 .community-card {
-  min-height: 82px;
+  height: 108px;
   display: grid;
   place-items: center;
-  padding: 10px;
-  border-radius: 18px;
-  border: 1px solid rgba(247, 240, 245, 0.18);
+  padding: 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(81, 73, 94, 0.16);
   background:
-    linear-gradient(135deg, rgba(255,255,255,0.32), rgba(236,200,247,0.14)),
-    rgba(255,255,255,0.22);
+    linear-gradient(145deg, rgba(255,255,255,0.46), rgba(236,200,247,0.16)),
+    rgba(255,255,255,0.32);
   box-shadow:
-    0 10px 22px rgba(0,0,0,0.06),
-    inset 0 1px 0 rgba(255,255,255,0.24);
+    0 12px 24px rgba(0,0,0,0.07),
+    inset 0 1px 0 rgba(255,255,255,0.34);
   backdrop-filter: blur(12px) saturate(1.08);
   -webkit-backdrop-filter: blur(12px) saturate(1.08);
   overflow: hidden;
 }
 
 .community-card img {
+  width: 100%;
+  height: 100%;
   max-width: 100%;
-  max-height: 64px;
+  max-height: 84px;
   object-fit: contain;
   display: block;
-  padding: 6px;
+  padding: 0;
   border-radius: 12px;
-  border: 1px solid rgba(13, 12, 13, 0.12);
-  background: rgba(255, 255, 255, 0.62);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.56),
-    0 4px 10px rgba(0,0,0,0.06);
+  border: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .contact-panel {
@@ -1485,10 +1686,63 @@ button { font: inherit; }
   gap: 16px;
 }
 
+.contact-panel p {
+  margin: 0 auto;
+  max-width: 58ch;
+  font-family: var(--text-font);
+  font-size: 17px;
+  line-height: 1.65;
+  text-align: center;
+}
+
 .contact-actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
+}
+
+.contact-form {
+  display: grid;
+  gap: 12px;
+  width: min(520px, 100%);
+  margin: 8px auto 0;
+}
+
+.contact-form label {
+  display: grid;
+  gap: 6px;
+  font-family: var(--main-font);
+  font-size: 13px;
+  color: var(--modal-accent);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--modal-accent-border);
+  background: rgba(255, 255, 255, 0.38);
+  color: var(--text);
+  font-family: var(--text-font);
+  font-size: 16px;
+  outline: none;
+  resize: vertical;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.24);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: rgba(81, 73, 94, 0.52);
+  background: rgba(255, 255, 255, 0.52);
+}
+
+.contact-submit {
+  width: fit-content;
+  min-width: 170px;
+  margin: 4px auto 0;
+  cursor: pointer;
 }
 
 .contact-button {
@@ -1499,24 +1753,24 @@ button { font: inherit; }
   padding: 10px 16px;
   border-radius: 999px;
   border: 0;
-  background: var(--green);
+  background: var(--modal-accent);
   color: #F7F0F5;
-  font-family: "Fraunces", Georgia, serif;
-  font-size: 13px;
-  font-weight: 600;
-  box-shadow: 0 10px 20px rgba(80, 133, 77, 0.22);
+  font-family: var(--main-font);
+  font-size: 17px;
+  font-weight: 400;
+  box-shadow: 0 10px 20px rgba(81, 73, 94, 0.24);
   transition: 0.18s ease;
 }
 
 .contact-button:hover {
-  background: #5f965b;
+  background: #62586f;
   transform: translateY(-1px);
-  box-shadow: 0 12px 24px rgba(80, 133, 77, 0.28);
+  box-shadow: 0 12px 24px rgba(81, 73, 94, 0.30);
 }
 
 .contact-email {
-  color: var(--green);
-  font-weight: 600;
+  color: var(--modal-accent);
+  font-weight: 400;
 }
 
 footer {
@@ -1528,8 +1782,8 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Fraunces", Georgia, serif;
-  font-size: 11px;
+  font-family: var(--decorative-font);
+  font-size: 15px;
   color: rgba(247, 240, 245, 0.54);
   background: transparent;
 }
@@ -1584,6 +1838,8 @@ footer {
 
 @media (max-width: 520px) {
   .community-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .community-card { height: 96px; }
+  .nav-button.about-nav { font-size: 13px; }
   .article-row h3 { font-size: 22px; }
   .article-cover { width: 100%; }
   .brand strong { font-size: 22px; }
@@ -1592,7 +1848,9 @@ footer {
   .clock { font-size: 11px; padding-inline: 12px; }
   .window-header > span,
   .modal-header strong { font-size: 22px; }
-  .modal-body { padding: 20px; font-size: 15px; }
+  .modal-about .modal-header strong { font-size: 20px; }
+  .modal-body { padding: 20px; font-size: 16px; }
   .modal-header strong { max-width: 56%; overflow: hidden; text-overflow: ellipsis; }
 }
 `;
+
