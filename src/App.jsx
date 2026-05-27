@@ -316,20 +316,18 @@ const windows = [
   },
   {
     id: "work",
-    title: "WORK EXAMPLES",
+    title: "WORK",
     accent: "violet",
     items: [
-      { id: "work-1", icon: "💼", label: "WORK ONE", modalTitle: "Work Example One", tag: "WORK", description: "Describe the brief, what you created, tools used, and the outcome.", chips: ["CLIENT WORK", "2024"], action: "VIEW FULL" },
-      { id: "work-2", icon: "💼", label: "WORK TWO", modalTitle: "Work Example Two", tag: "WORK", description: "Add a second work sample here.", chips: ["CLIENT WORK"], action: "VIEW FULL" },
-      { id: "work-3", icon: "💼", label: "WORK THREE", modalTitle: "Work Example Three", tag: "WORK", description: "Add a third work sample here.", chips: ["CLIENT WORK"], action: "VIEW FULL" },
-      { id: "work-4", icon: "💼", label: "WORK FOUR", modalTitle: "Work Example Four", tag: "WORK", description: "Add a fourth work sample here.", chips: ["CLIENT WORK"], action: "VIEW FULL" },
-      { id: "work-5", icon: "💼", label: "WORK FIVE", modalTitle: "Work Example Five", tag: "WORK", description: "Add a fifth work sample here.", chips: ["CLIENT WORK"], action: "VIEW FULL" },
-      { id: "work-6", icon: "💼", label: "WORK SIX", modalTitle: "Work Example Six", tag: "WORK", description: "Add a sixth work sample here.", chips: ["CLIENT WORK"], action: "VIEW FULL" },
+      { id: "work-1", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking....png", label: "Blood & HP Exchange Mechanics: A Combat Framework", modalTitle: "Blood & HP Exchange Mechanics: A Combat Framework", tag: "WORK", body: <p className="under-construction">Under the construction</p> },
+      { id: "work-2", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking....png", label: "Environment Puzzle Framework", modalTitle: "Environment Puzzle Framework", tag: "WORK", body: <p className="under-construction">Under the construction</p> },
+      { id: "work-3", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking....png", label: "Combat Design Framework", modalTitle: "Combat Design Framework", tag: "WORK", body: <p className="under-construction">Under the construction</p> },
+      { id: "work-4", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking....png", label: "Pitch Doc: The Tale of Mind", modalTitle: "Pitch Doc: The Tale of Mind", tag: "WORK", body: <p className="under-construction">Under the construction</p> },
     ],
   },
   {
     id: "games",
-    title: "FREE GAMES",
+    title: "GAME JAMS",
     accent: "red",
     items: [
       { id: "game-1", icon: "🕹", label: "GAME ONE", modalTitle: "Game One", tag: "GAME", description: "Describe this game: genre, story, play time, and where to download it.", chips: ["FREE", "ITCH.IO", "2024"], action: "PLAY FREE" },
@@ -340,12 +338,11 @@ const windows = [
   },
   {
     id: "links",
-    title: "LINKS / WEB RING",
+    title: "ANALYSES",
     accent: "green",
     items: [
-      { id: "link-1", icon: "🔗", label: "FRIEND SITE 1", modalTitle: "Friend Site 1", tag: "LINK", description: "Who is this? Why are they in your web ring?", chips: ["ARTIST", "GAME DEV"], action: "VISIT SITE" },
-      { id: "link-2", icon: "🔗", label: "FRIEND SITE 2", modalTitle: "Friend Site 2", tag: "LINK", description: "Add a friend, collaborator, or reference website.", chips: ["ARTIST"], action: "VISIT SITE" },
-      { id: "link-3", icon: "🔗", label: "FRIEND SITE 3", modalTitle: "Friend Site 3", tag: "LINK", description: "Add another friend, collaborator, or reference website.", chips: ["ARTIST"], action: "VISIT SITE" },
+      { id: "deconstruct-1", icon: "🔍", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Untitled%20design%20(1).png", label: "OCARINA OF TIME", modalTitle: "The Legend of Zelda: Ocarina of Time", tag: "ANALYSES", body: <p className="under-construction">Under the construction</p> },
+      { id: "deconstruct-2", icon: "🔍", label: "ANALYSIS 2", modalTitle: "Analysis Two", tag: "ANALYSES", description: "Another deconstruction slot for a game, feature, level, or design pattern.", chips: ["ANALYSIS"], action: "VIEW FULL" },
     ],
   },
 ];
@@ -354,9 +351,9 @@ const initialPositions = {
   projects: { x: 34, y: 28 },
   wishlist: { x: 455, y: 34 },
   encounters: { x: 780, y: 40 },
-  work: { x: 34, y: 330 },
+  work: { x: 34, y: 350 },
   games: { x: 640, y: 310 },
-  links: { x: 900, y: 540 },
+  links: { x: 820, y: 510 },
 };
 
 function Clock() {
@@ -475,7 +472,7 @@ function DesktopWindow({ win, active, onFocus, onOpen }) {
 
   return (
     <section
-      className={`window ${active ? "active" : ""} ${win.large ? "large" : ""}`}
+      className={`window window-${win.id} ${active ? "active" : ""} ${win.large ? "large" : ""}`}
       style={{ left: position.x, top: position.y }}
       onMouseDown={() => onFocus(win.id)}
     >
@@ -676,12 +673,28 @@ button { font: inherit; }
 .app-shell {
   min-height: 100vh;
   overflow: hidden;
+  position: relative;
+  isolation: isolate;
   background:
-    radial-gradient(circle at 16% 16%, rgba(80, 133, 77, 0.18), transparent 32%),
-    radial-gradient(circle at 82% 18%, rgba(236, 200, 247, 0.13), transparent 30%),
-    radial-gradient(circle at 54% 84%, rgba(236, 200, 247, 0.10), transparent 34%),
-    radial-gradient(circle at 86% 82%, rgba(80, 133, 77, 0.10), transparent 28%),
+    linear-gradient(rgba(13, 12, 13, 0.58), rgba(13, 12, 13, 0.76)),
+    radial-gradient(circle at 18% 18%, rgba(81, 73, 94, 0.24), transparent 30%),
+    radial-gradient(circle at 82% 20%, rgba(236, 200, 247, 0.12), transparent 26%),
+    url("https://raw.githubusercontent.com/valenandia/valen.github.io/main/%D0%91%D0%B5%D0%B7%20%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F%20(5).png") center center / cover no-repeat fixed,
     #0D0C0D;
+}
+
+.app-shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at center, transparent 30%, rgba(13, 12, 13, 0.52) 100%),
+    linear-gradient(rgba(13, 12, 13, 0.10), rgba(13, 12, 13, 0.34)),
+    linear-gradient(90deg, rgba(81, 73, 94, 0.12), rgba(13, 12, 13, 0.08));
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .topbar {
@@ -880,6 +893,9 @@ button { font: inherit; }
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  max-width: calc(100% - 92px);
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-family: var(--decorative-font);
   font-size: 20px;
   font-weight: 400;
@@ -1001,6 +1017,51 @@ button { font: inherit; }
   min-width: 260px;
 }
 
+.window:has(.window-header span) {
+  min-width: 230px;
+}
+
+.window-links {
+  min-width: 360px;
+}
+
+.window-work {
+  width: 332px;
+  min-width: 332px;
+}
+
+.window-work .window-body {
+  gap: 12px;
+  padding: 14px;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.window-work .item-card {
+  width: 145px;
+  min-height: 222px;
+}
+
+.window-work .item-icon {
+  width: 145px;
+  height: 145px;
+}
+
+.window-work .item-label {
+  min-height: 76px;
+  padding: 8px 9px 10px;
+  font-size: 10px;
+  line-height: 1.24;
+}
+
+.window-links .window-header > span {
+  max-width: calc(100% - 104px);
+}
+
+.window-links .window-body {
+  justify-content: center;
+}
+
 .window.large .window-body {
   padding: 18px;
 }
@@ -1077,7 +1138,7 @@ button { font: inherit; }
   left: 50%;
   transform: translateX(-50%);
   font-family: var(--main-font);
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 400;
   letter-spacing: 0.01em;
   color: #F7F0F5;
@@ -1681,6 +1742,17 @@ button { font: inherit; }
   box-shadow: none;
 }
 
+.under-construction {
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  font-family: var(--main-font);
+  font-size: 24px;
+  color: var(--modal-accent);
+  text-align: center;
+}
+
 .contact-panel {
   display: grid;
   gap: 16px;
@@ -1847,10 +1919,9 @@ footer {
   .menu-button,
   .clock { font-size: 11px; padding-inline: 12px; }
   .window-header > span,
-  .modal-header strong { font-size: 22px; }
+  .modal-header strong { font-size: 20px; }
   .modal-about .modal-header strong { font-size: 20px; }
   .modal-body { padding: 20px; font-size: 16px; }
   .modal-header strong { max-width: 56%; overflow: hidden; text-overflow: ellipsis; }
 }
 `;
-
