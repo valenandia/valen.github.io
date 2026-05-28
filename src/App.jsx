@@ -459,6 +459,19 @@ function Article({ title, text, image, href = "#" }) {
 }
 
 function Header({ onOpen }) {
+  useEffect(() => {
+    const faviconHref = "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Frame%204.png";
+    let favicon = document.querySelector('link[rel="icon"]');
+
+    if (!favicon) {
+      favicon = document.createElement("link");
+      favicon.rel = "icon";
+      document.head.appendChild(favicon);
+    }
+
+    favicon.href = faviconHref;
+  }, []);
+
   return (
     <header className="topbar">
       <div className="socials">
@@ -468,7 +481,9 @@ function Header({ onOpen }) {
       </div>
 
       <div className="brand">
-        <strong className="brand-name">VALENTINA GODOVETS</strong>
+        <strong className="brand-name">
+          <img src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Valentina%20Godovets.png" alt="Valentina Godovets" />
+        </strong>
         <span className="brand-subtitle">{profile.subtitle}</span>
       </div>
 
@@ -837,14 +852,16 @@ button { font: inherit; }
 }
 
 .brand-name {
-  display: block;
-  font-family: var(--decorative-font);
-  font-size: 28px;
-  font-weight: 400;
-  letter-spacing: 0.025em;
+  display: grid;
+  place-items: center;
   line-height: 1;
-  color: #F7F0F5;
-  text-align: center;
+}
+
+.brand-name img {
+  display: block;
+  width: min(315px, 34vw);
+  max-height: 54px;
+  object-fit: contain;
 }
 
 .brand-subtitle {
@@ -2275,7 +2292,7 @@ footer {
   .article-row h3 { font-size: 22px; }
   .article-cover { width: 100%; }
   .brand { min-width: 220px; }
-  .brand-name { font-size: 22px; }
+  .brand-name img { width: min(260px, 84vw); max-height: 45px; }
   .brand-subtitle { font-size: 10px; margin-top: 4px; }
   .menu-button,
   .clock { font-size: 12px; padding-inline: 13px; min-height: 36px; }
