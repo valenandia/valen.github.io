@@ -400,7 +400,7 @@ const windows = [
     accent: "green",
     items: [
       { id: "deconstruct-1", icon: "🔍", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Untitled%20design-.png", label: "OCARINA OF TIME", modalTitle: "The Legend of Zelda: Ocarina of Time", tag: "ANALYSES", body: <p className="under-construction">Under Construction</p> },
-      { id: "deconstruct-2", icon: "🔍", label: "ANALYSIS TWO", modalTitle: "Analysis Two", tag: "ANALYSES", description: "Another deconstruction slot for a game, feature, level, or design pattern.", chips: ["ANALYSIS"], action: "VIEW FULL" },
+      { id: "deconstruct-2", icon: "🔍", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Untitled%20desig6n.png", label: "HOTLINE MIAMI", modalTitle: "Hotline Miami", tag: "ANALYSES", body: <p className="under-construction">Under Construction</p> },
     ],
   },
 ];
@@ -1341,7 +1341,8 @@ button { font: inherit; }
 
 .window-wishlist .item-card {
   width: 262px;
-  min-height: 268px;
+  min-height: auto;
+  height: fit-content;
 }
 
 .window-wishlist .item-icon {
@@ -1354,6 +1355,7 @@ button { font: inherit; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 .window-wishlist .item-label {
