@@ -266,7 +266,7 @@ const windows = [
       {
         id: "wishlist-1",
         icon: "⭐",
-        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/photo_2025-09-05_10-23-57.jpg",
+        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/logiss1.png",
         label: "TRACES OF NYPHS",
         modalTitle: "Traces of Nyphs",
         tag: "WISHLIST",
@@ -310,7 +310,7 @@ const windows = [
   },
   {
     id: "work",
-    title: "WORK SAMPLES",
+    title: "WORK EXAMPLES",
     accent: "violet",
     items: [
       { id: "work-1", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(1).png", label: "BLOOD & HP FRAMEWORK", modalTitle: "Blood & HP Framework", tag: "WORK", body: <p className="under-construction">Under Construction</p> },
@@ -399,7 +399,7 @@ const windows = [
     title: "ANALYSES",
     accent: "green",
     items: [
-      { id: "deconstruct-1", icon: "🔍", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Untitled%20design%20(1).png", label: "OCARINA OF TIME", modalTitle: "The Legend of Zelda: Ocarina of Time", tag: "ANALYSES", body: <p className="under-construction">Under Construction</p> },
+      { id: "deconstruct-1", icon: "🔍", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Untitled%20design-.png", label: "OCARINA OF TIME", modalTitle: "The Legend of Zelda: Ocarina of Time", tag: "ANALYSES", body: <p className="under-construction">Under Construction</p> },
       { id: "deconstruct-2", icon: "🔍", label: "ANALYSIS TWO", modalTitle: "Analysis Two", tag: "ANALYSES", description: "Another deconstruction slot for a game, feature, level, or design pattern.", chips: ["ANALYSIS"], action: "VIEW FULL" },
     ],
   },
@@ -1261,14 +1261,14 @@ button { font: inherit; }
   width: 112px;
   min-width: 112px;
   max-width: 112px;
-  min-height: 152px;
+  min-height: 170px;
   flex: 0 0 112px;
 }
 
 .window-encounters .item-icon {
   width: 112px;
   min-width: 112px;
-  height: 96px;
+  height: 112px;
 }
 
 .window-encounters .item-label {
@@ -1310,9 +1310,9 @@ button { font: inherit; }
 .window-work .item-label {
   min-height: 74px;
   padding: 8px 8px 10px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 550;
-  line-height: 1.13;
+  line-height: 1.08;
   letter-spacing: 0;
 }
 
@@ -1337,6 +1337,23 @@ button { font: inherit; }
   width: 262px;
   height: 252px;
   font-size: 68px;
+}
+
+.window-wishlist .item-card {
+  width: 262px;
+  min-height: 268px;
+}
+
+.window-wishlist .item-icon {
+  width: 262px;
+  height: auto;
+  aspect-ratio: 5 / 4;
+}
+
+.window-wishlist .item-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .window-wishlist .item-label {
