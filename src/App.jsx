@@ -205,7 +205,6 @@ const windows = [
           ["Platforms", "TBA"],
           ["Engine", "Unreal Engine 5"],
         ],
-        contributionsIntro: "Game Designer",
         contributions: [
           "Contributed to location customization and screen map design to enhance user experience.",
           "Optimized and balanced mini-games to ensure engaging gameplay.",
@@ -239,12 +238,11 @@ const windows = [
         description: "Tamriel Rebuilt is a large-scale TES III mod project for Morrowind and OpenMW. My work combined game generalist tasks, level design, quest work, narrative design, and testing across Tamriel’s mainland regions.",
         meta: [
           ["Genre", "TES III: Mod"],
-          ["Role", "Game Generalist"],
+          ["Role", "Game Generalist, Level Designer, Narrative Designer"],
           ["Involvement", "2010s — 2019"],
           ["Platforms", "Nexus Mods"],
           ["Engine", "OpenMW"],
         ],
-        contributionsIntro: "Game Generalist, Level Designer, Narrative Designer",
         contributions: [
           "Developed engaging quests and character narratives to enhance player immersion across Tamriel’s mainland regions.",
           "Utilized Morrowind’s Construction Set to construct detailed exterior landscapes, cities, and interior spaces, ensuring lore consistency and visual quality.",
@@ -252,6 +250,8 @@ const windows = [
         ],
         awardImage: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/azbsetn.png",
         awardLabel: "Community Project Award",
+        awardPlacement: "top",
+        awardSize: "large",
         action: "VIEW PROJECT",
         href: "https://www.nexusmods.com/morrowind/mods/42145",
         secondaryAction: "OFFICIAL SITE",
@@ -268,12 +268,11 @@ const windows = [
       {
         id: "wishlist-1",
         icon: "⭐",
-        label: "WISHLIST ITEM",
-        modalTitle: "Wishlist Item",
+        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/photo_2025-09-05_10-23-57.jpg",
+        label: "TRACES OF NYPHS",
+        modalTitle: "Traces of Nyphs",
         tag: "WISHLIST",
-        description: "A game, book, tool, or reference that matters to your design taste. Explain why you recommend it.",
-        chips: ["GAME", "STEAM"],
-        action: "VIEW ON STEAM",
+        body: <p className="under-construction">Under Construction</p>,
       },
     ],
   },
@@ -285,38 +284,41 @@ const windows = [
       {
         id: "encounter-1",
         icon: "⚔️",
-        label: "Combat Prototype",
+        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking....png",
+        label: "COMBAT PROTOTYPE",
         modalTitle: "Combat Prototype",
         tag: "ENCOUNTER",
-        body: <p className="under-construction">Under the construction</p>,
+        body: <p className="under-construction">Under Construction</p>,
       },
       {
         id: "encounter-2",
         icon: "👑",
-        label: "Boss Fight Encounter",
+        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking....png",
+        label: "BOSS FIGHT ENCOUNTER",
         modalTitle: "Boss Fight Encounter",
         tag: "ENCOUNTER",
-        body: <p className="under-construction">Under the construction</p>,
+        body: <p className="under-construction">Under Construction</p>,
       },
       {
         id: "encounter-3",
         icon: "🌊",
-        label: "Wave-Based Encounter",
+        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking....png",
+        label: "WAVE-BASED ENCOUNTER",
         modalTitle: "Wave-Based Encounter",
         tag: "ENCOUNTER",
-        body: <p className="under-construction">Under the construction</p>,
+        body: <p className="under-construction">Under Construction</p>,
       },
     ],
   },
   {
     id: "work",
-    title: "WORK",
+    title: "WORK SAMPLES",
     accent: "violet",
     items: [
-      { id: "work-1", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking....png", label: "Blood & HP Exchange Mechanics: A Combat Framework", modalTitle: "Blood & HP Exchange Mechanics: A Combat Framework", tag: "WORK", body: <p className="under-construction">Under the construction</p> },
-      { id: "work-2", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking....png", label: "Environment Puzzle Framework", modalTitle: "Environment Puzzle Framework", tag: "WORK", body: <p className="under-construction">Under the construction</p> },
-      { id: "work-3", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking....png", label: "Combat Design Framework", modalTitle: "Combat Design Framework", tag: "WORK", body: <p className="under-construction">Under the construction</p> },
-      { id: "work-4", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking....png", label: "Pitch Doc: The Tale of Mind", modalTitle: "Pitch Doc: The Tale of Mind", tag: "WORK", body: <p className="under-construction">Under the construction</p> },
+      { id: "work-1", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking....png", label: "BLOOD & HP EXCHANGE MECHANICS: A COMBAT FRAMEWORK", modalTitle: "Blood & HP Exchange Mechanics: A Combat Framework", tag: "WORK", body: <p className="under-construction">Under Construction</p> },
+      { id: "work-2", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking....png", label: "ENVIRONMENT PUZZLE FRAMEWORK", modalTitle: "Environment Puzzle Framework", tag: "WORK", body: <p className="under-construction">Under Construction</p> },
+      { id: "work-3", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking....png", label: "COMBAT DESIGN FRAMEWORK", modalTitle: "Combat Design Framework", tag: "WORK", body: <p className="under-construction">Under Construction</p> },
+      { id: "work-4", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking....png", label: "PITCH DOC: THE TALE OF MIND", modalTitle: "Pitch Doc: The Tale of Mind", tag: "WORK", body: <p className="under-construction">Under Construction</p> },
     ],
   },
   {
@@ -324,7 +326,36 @@ const windows = [
     title: "GAME JAMS",
     accent: "red",
     items: [
-      { id: "game-1", icon: "🕹", label: "GAME ONE", modalTitle: "Game One", tag: "GAME", description: "Describe this game: genre, story, play time, and where to download it.", chips: ["FREE", "ITCH.IO", "2024"], action: "PLAY FREE" },
+      {
+        id: "game-1",
+        icon: "🕹",
+        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/kcNATH.png",
+        label: "THE MINOTAUR'S LABYRINTH",
+        modalTitle: "The Minotaur's Labyrinth",
+        tag: "GAME JAM",
+        status: "July, 2023",
+        description: "The Minotaur's Labyrinth is a puzzle maze game created during a game jam. I worked as a game generalist and contributed to level design, custom tile assets, brainstorming, and in-engine assembly.",
+        meta: [
+          ["Genre", "Puzzle, Maze"],
+          ["Role", "Game Generalist"],
+          ["Involvement", "July 2024"],
+          ["Platforms", "Itch.io"],
+          ["Engine", "Unity"],
+        ],
+        contributions: [
+          "Developed comprehensive level designs and layouts.",
+          "Created and optimized custom tile assets for levels.",
+          "Participated in strategic brainstorming and asset curation.",
+          "Integrated and assembled all elements within the game engine.",
+        ],
+        href: "https://owlrazum.itch.io/maze",
+        action: "ITCH.IO",
+        secondaryAction: "GDD",
+        secondaryHref: "https://docs.google.com/document/d/1HkyJHvpvJ54A559XAo-mI5n2L9os1gfZq6uJ7IaByYg/edit?usp=sharing",
+        awardImage: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/BcvkIk.png",
+        awardLabel: "Community Award",
+        awardPlacement: "top",
+      },
       { id: "game-2", icon: "🕹", label: "GAME TWO", modalTitle: "Game Two", tag: "GAME", description: "Add a second free game here.", chips: ["FREE", "ITCH.IO"], action: "PLAY FREE" },
       { id: "game-3", icon: "🕹", label: "GAME THREE", modalTitle: "Game Three", tag: "GAME", description: "Add a third free game here.", chips: ["FREE", "ITCH.IO"], action: "PLAY FREE" },
       { id: "game-4", icon: "🕹", label: "GAME FOUR", modalTitle: "Game Four", tag: "GAME", description: "Add a fourth free game here.", chips: ["FREE", "ITCH.IO"], action: "PLAY FREE" },
@@ -335,19 +366,19 @@ const windows = [
     title: "ANALYSES",
     accent: "green",
     items: [
-      { id: "deconstruct-1", icon: "🔍", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Untitled%20design%20(1).png", label: "OCARINA OF TIME", modalTitle: "The Legend of Zelda: Ocarina of Time", tag: "ANALYSES", body: <p className="under-construction">Under the construction</p> },
-      { id: "deconstruct-2", icon: "🔍", label: "ANALYSIS 2", modalTitle: "Analysis Two", tag: "ANALYSES", description: "Another deconstruction slot for a game, feature, level, or design pattern.", chips: ["ANALYSIS"], action: "VIEW FULL" },
+      { id: "deconstruct-1", icon: "🔍", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Untitled%20design%20(1).png", label: "OCARINA OF TIME", modalTitle: "The Legend of Zelda: Ocarina of Time", tag: "ANALYSES", body: <p className="under-construction">Under Construction</p> },
+      { id: "deconstruct-2", icon: "🔍", label: "ANALYSIS TWO", modalTitle: "Analysis Two", tag: "ANALYSES", description: "Another deconstruction slot for a game, feature, level, or design pattern.", chips: ["ANALYSIS"], action: "VIEW FULL" },
     ],
   },
 ];
 
 const initialPositions = {
-  projects: { x: 120, y: 54 },
-  wishlist: { x: 548, y: 64 },
-  encounters: { x: 820, y: 58 },
-  work: { x: 80, y: 330 },
-  games: { x: 575, y: 330 },
-  links: { x: 890, y: 348 },
+  projects: { x: 70, y: 48 },
+  wishlist: { x: 492, y: 52 },
+  encounters: { x: 780, y: 48 },
+  work: { x: 70, y: 320 },
+  games: { x: 760, y: 314 },
+  links: { x: 912, y: 530 },
 };
 
 function Clock() {
@@ -404,8 +435,11 @@ function Header({ onOpen }) {
       </div>
 
       <div className="brand">
-        <strong>{profile.name}</strong>
-        <span>{profile.subtitle}</span>
+        <strong className="brand-name">
+          <span>VALENTINA</span>
+          <span>GODOVETS</span>
+        </strong>
+        <span className="brand-subtitle">{profile.subtitle}</span>
       </div>
 
       <div className="nav-actions">
@@ -499,6 +533,7 @@ function DesktopWindow({ win, active, onFocus, onOpen }) {
       <div className={`window-header ${win.accent}`} onMouseDown={startDrag} onTouchStart={startDrag}>
         <WindowDots accent={win.accent} />
         <span>{win.title}</span>
+        <WindowDots accent={win.accent} side="right" />
       </div>
       <div className="window-body">
         {win.items.map((item) => (
@@ -512,12 +547,10 @@ function DesktopWindow({ win, active, onFocus, onOpen }) {
   );
 }
 
-function WindowDots({ accent }) {
+function WindowDots({ accent, side = "left" }) {
   return (
-    <div className="dots" aria-hidden="true">
-      <span />
-      <span />
-      <span className={accent} />
+    <div className={`dots ${side}`} aria-hidden="true">
+      <span className={`window-star ${accent || "purple"}`}>✦</span>
     </div>
   );
 }
@@ -543,6 +576,7 @@ function Modal({ modal, onClose }) {
           <WindowDots accent={modal.accent || "purple"} />
           <span className="modal-tag">{modal.folderTitle || modal.label || modal.tag}</span>
           <strong>{modal.title || modal.modalTitle}</strong>
+          <WindowDots accent={modal.accent || "purple"} side="right" />
           <button onClick={onClose} aria-label="Close modal">×</button>
         </div>
         <div className="modal-body">
@@ -550,6 +584,11 @@ function Modal({ modal, onClose }) {
             modal.body
           ) : (
             <>
+              {modal.awardImage && modal.awardPlacement === "top" && (
+                <div className={`project-award-card compact-award ${modal.awardSize === "large" ? "large-award" : ""}`}>
+                  <img src={modal.awardImage} alt={modal.awardLabel || `${modal.modalTitle} award`} />
+                </div>
+              )}
               {!modal.meta && (
                 <div className="modal-hero project-hero">
                   {modal.image ? <img src={modal.image} alt={modal.modalTitle} /> : modal.icon}
@@ -591,9 +630,8 @@ function Modal({ modal, onClose }) {
                   </ul>
                 </div>
               )}
-              {modal.awardImage && (
+              {modal.awardImage && modal.awardPlacement !== "top" && (
                 <div className="project-award-card">
-                  <h3>{modal.awardLabel || "Award"}</h3>
                   <img src={modal.awardImage} alt={modal.awardLabel || `${modal.modalTitle} award`} />
                 </div>
               )}
@@ -651,9 +689,9 @@ const styles = `
   --pink: #ECC8F7;
   --ink: #0D0C0D;
   --yellow: #FFE600;
-  --modal-accent: #51495E;
-  --modal-accent-soft: rgba(81, 73, 94, 0.14);
-  --modal-accent-border: rgba(81, 73, 94, 0.28);
+  --modal-accent: #171544;
+  --modal-accent-soft: rgba(23, 21, 68, 0.14);
+  --modal-accent-border: rgba(23, 21, 68, 0.30);
 
   --bg: #0D0C0D;
   --bg-soft: #171517;
@@ -696,11 +734,11 @@ button { font: inherit; }
   position: relative;
   isolation: isolate;
   background:
-    radial-gradient(circle at 14% 18%, rgba(80, 133, 77, 0.30), transparent 34%),
-    radial-gradient(circle at 82% 16%, rgba(81, 73, 94, 0.42), transparent 32%),
-    radial-gradient(circle at 48% 78%, rgba(236, 200, 247, 0.12), transparent 38%),
-    radial-gradient(circle at 88% 84%, rgba(80, 133, 77, 0.16), transparent 30%),
-    linear-gradient(135deg, #0D0C0D 0%, #17121A 34%, #1D1725 62%, #0E1610 100%);
+    radial-gradient(circle at 12% 18%, rgba(96, 116, 158, 0.62), transparent 34%),
+    radial-gradient(circle at 86% 14%, rgba(177, 128, 121, 0.44), transparent 32%),
+    radial-gradient(circle at 48% 76%, rgba(128, 111, 151, 0.50), transparent 38%),
+    radial-gradient(circle at 88% 84%, rgba(98, 122, 158, 0.46), transparent 30%),
+    linear-gradient(135deg, #53698f 0%, #7d6e99 34%, #b6857b 68%, #617ba1 100%);
 }
 
 .app-shell::before {
@@ -710,15 +748,15 @@ button { font: inherit; }
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(circle at center, transparent 34%, rgba(13, 12, 13, 0.38) 100%),
-    linear-gradient(120deg, rgba(80, 133, 77, 0.08), transparent 36%, rgba(81, 73, 94, 0.12)),
-    linear-gradient(rgba(13, 12, 13, 0.04), rgba(13, 12, 13, 0.20));
+    radial-gradient(circle at 50% 20%, rgba(255,255,255,0.10), transparent 32%),
+    radial-gradient(circle at center, transparent 40%, rgba(23, 21, 68, 0.20) 100%),
+    linear-gradient(180deg, rgba(23, 21, 68, 0.08), rgba(13, 12, 13, 0.18));
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
 
 .topbar {
-  height: 64px;
+  height: 82px;
   position: fixed;
   inset: 0 0 auto;
   z-index: 100;
@@ -726,7 +764,7 @@ button { font: inherit; }
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 18px;
-  padding: 10px 18px;
+  padding: 12px 20px;
   background: linear-gradient(180deg, rgba(15, 14, 15, 0.62) 0%, rgba(15, 14, 15, 0.36) 100%);
   backdrop-filter: blur(18px) saturate(1.18);
   -webkit-backdrop-filter: blur(18px) saturate(1.18);
@@ -746,26 +784,40 @@ button { font: inherit; }
 .brand {
   display: grid;
   justify-items: center;
-  line-height: 1.02;
+  align-content: center;
+  line-height: 1;
   white-space: nowrap;
+  min-width: 260px;
 }
 
-.brand strong {
+.brand-name {
+  display: grid;
+  justify-items: center;
+  gap: 1px;
   font-family: var(--decorative-font);
-  font-size: 29px;
+  font-size: 27px;
   font-weight: 400;
   letter-spacing: 0.025em;
+  line-height: 0.88;
   color: #F7F0F5;
 }
 
-.brand span {
-  margin-top: 2px;
+.brand-name span {
+  display: block;
+}
+
+.brand-subtitle {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
   font-family: var(--decorative-font);
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.055em;
+  line-height: 1;
+  text-align: center;
   text-transform: uppercase;
-  color: rgba(236, 200, 247, 0.76);
+  color: rgba(236, 200, 247, 0.82);
 }
 
 .menu-button,
@@ -823,7 +875,7 @@ button { font: inherit; }
 
 .desktop {
   position: fixed;
-  top: 64px;
+  top: 82px;
   bottom: 24px;
   left: 50%;
   width: min(1240px, 100vw);
@@ -835,7 +887,7 @@ button { font: inherit; }
   position: absolute;
   z-index: 1;
   min-width: 210px;
-  max-width: min(95vw, 640px);
+  max-width: calc(100vw - 24px);
   background: linear-gradient(145deg, rgba(247, 240, 245, 0.56), rgba(236, 200, 247, 0.22));
   border: 1px solid rgba(247, 240, 245, 0.24);
   border-radius: 18px;
@@ -869,11 +921,11 @@ button { font: inherit; }
 }
 
 .window.active {
-  border-color: rgba(236, 200, 247, 0.42);
+  border-color: rgba(238, 194, 181, 0.50);
   box-shadow:
     0 24px 60px rgba(0, 0, 0, 0.34),
-    0 0 42px rgba(236, 200, 247, 0.10),
-    0 0 0 1px rgba(80, 133, 77, 0.20),
+    0 0 42px rgba(238, 194, 181, 0.14),
+    0 0 0 1px rgba(23, 21, 68, 0.22),
     inset 0 1px 0 rgba(255,255,255,0.30);
 }
 
@@ -888,7 +940,7 @@ button { font: inherit; }
   user-select: none;
   border-bottom: 1px solid rgba(247, 240, 245, 0.12);
   background:
-    linear-gradient(90deg, rgba(236, 200, 247, 0.10), transparent 28%, transparent 72%, rgba(80, 133, 77, 0.12)),
+    linear-gradient(90deg, rgba(236, 200, 247, 0.10), transparent 28%, transparent 72%, rgba(23, 21, 68, 0.18)),
     rgba(13, 12, 13, 0.56);
   backdrop-filter: blur(16px) saturate(1.12);
   -webkit-backdrop-filter: blur(16px) saturate(1.12);
@@ -899,14 +951,14 @@ button { font: inherit; }
 
 .window.active .window-header {
   background:
-    linear-gradient(90deg, rgba(255,230,0,0.05), transparent 18%, transparent 82%, rgba(236,200,247,0.18)),
-    rgba(13, 12, 13, 0.68);
-  border-bottom-color: rgba(236, 200, 247, 0.22);
+    linear-gradient(90deg, rgba(238,194,181,0.10), transparent 18%, transparent 82%, rgba(236,200,247,0.20)),
+    rgba(23, 21, 68, 0.72);
+  border-bottom-color: rgba(238, 194, 181, 0.26);
 }
 
 .modal-header {
   background:
-    linear-gradient(90deg, rgba(236, 200, 247, 0.12), transparent 24%, transparent 76%, rgba(80, 133, 77, 0.14)),
+    linear-gradient(90deg, rgba(236, 200, 247, 0.12), transparent 24%, transparent 76%, rgba(23, 21, 68, 0.18)),
     rgba(13, 12, 13, 0.62);
   border-bottom-color: rgba(247, 240, 245, 0.16);
   backdrop-filter: blur(18px) saturate(1.14);
@@ -929,34 +981,41 @@ button { font: inherit; }
   text-transform: none;
 }
 
-.window.active .window-header > span { color: var(--pink); }
+.window.active .window-header > span { color: #F7F0F5; }
 
 .dots {
   position: relative;
   z-index: 1;
-  display: flex;
-  gap: 5px;
+  width: 22px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 22px;
 }
 
-.dots span {
-  width: 9px;
-  height: 9px;
-  border-radius: 2px;
-  border: 1px solid rgba(247, 240, 245, 0.38);
-  background: rgba(247, 240, 245, 0.12);
+.dots.right {
+  margin-left: auto;
 }
 
-.dots span:first-child { background: var(--pink); }
-
-.dots span.purple,
-.dots span.violet,
-.dots span.gold,
-.dots span.green,
-.dots span.red {
-  background: rgba(80, 133, 77, 0.64);
+.window-star {
+  display: block;
+  color: rgba(247, 240, 245, 0.46);
+  font-family: Georgia, serif;
+  font-size: 14px;
+  line-height: 1;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.28));
+  transform: translateY(-1px);
+  transition: 0.18s ease;
 }
 
-.window.active .dots span:first-child { background: var(--yellow); }
+.window.active .window-star,
+.modal-header .window-star {
+  color: #eec2b5;
+  text-shadow: 0 0 10px rgba(238, 194, 181, 0.32);
+}
+
+.window.active .window-star {
+  transform: translateY(-1px) scale(1.12);
+}
 
 .window-body {
   position: relative;
@@ -1030,32 +1089,57 @@ button { font: inherit; }
   min-height: 40px;
   padding: 8px 8px 10px;
   font-family: var(--main-font);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0;
-  line-height: 1.2;
+  font-size: 13px;
+  font-weight: 550;
+  letter-spacing: 0.01em;
+  line-height: 1.18;
   text-align: center;
+  text-transform: uppercase;
   background: rgba(255, 255, 255, 0.20);
   color: var(--text);
 }
 
 .window.large {
-  min-width: 260px;
+  width: 256px;
+  min-width: 256px;
 }
 
 .window:has(.window-header span) {
   min-width: 230px;
 }
 
+.window-projects {
+  width: 360px;
+  min-width: 360px;
+}
+
+.window-projects .window-body {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+
+.window-projects .item-card {
+  flex: 0 0 102px;
+}
+
+.window-games {
+  width: 474px;
+  min-width: 474px;
+}
+
+.window-games .window-body {
+  flex-wrap: nowrap;
+}
+
 .window-links {
-  width: min(360px, calc(100vw - 24px));
-  min-width: min(360px, calc(100vw - 24px));
+  width: 250px;
+  min-width: 250px;
 }
 
 .window-encounters {
-  width: min(390px, calc(100vw - 24px));
-  min-width: min(390px, calc(100vw - 24px));
-  max-width: min(390px, calc(100vw - 24px));
+  width: 390px;
+  min-width: 390px;
+  max-width: 390px;
 }
 
 .window-encounters .window-body {
@@ -1082,15 +1166,16 @@ button { font: inherit; }
 .window-encounters .item-label {
   min-height: 56px;
   padding: 8px 8px 10px;
-  font-size: 11px;
-  line-height: 1.18;
+  font-size: 12px;
+  font-weight: 550;
+  line-height: 1.16;
   white-space: normal;
   overflow-wrap: anywhere;
 }
 
 .window-work {
-  width: min(652px, calc(100vw - 24px));
-  min-width: min(652px, calc(100vw - 24px));
+  width: 640px;
+  min-width: 640px;
 }
 
 .window-work .window-body {
@@ -1099,25 +1184,26 @@ button { font: inherit; }
   align-items: stretch;
   justify-content: flex-start;
   flex-wrap: nowrap;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .window-work .item-card {
-  width: 145px;
-  min-width: 145px;
+  width: 143px;
+  min-width: 143px;
   min-height: 222px;
 }
 
 .window-work .item-icon {
-  width: 145px;
-  height: 145px;
+  width: 143px;
+  height: 143px;
 }
 
 .window-work .item-label {
   min-height: 76px;
   padding: 8px 9px 10px;
-  font-size: 11px;
-  line-height: 1.18;
+  font-size: 12px;
+  font-weight: 550;
+  line-height: 1.14;
   letter-spacing: 0;
 }
 
@@ -1215,7 +1301,7 @@ button { font: inherit; }
 .modal-header button {
   position: relative;
   z-index: 1;
-  margin-left: auto;
+  margin-left: 0;
   width: 30px;
   height: 30px;
   display: grid;
@@ -1421,7 +1507,7 @@ button { font: inherit; }
   padding: 7px 12px;
   border-radius: 999px;
   border: 1px solid var(--modal-accent-border);
-  background: rgba(81, 73, 94, 0.14);
+  background: rgba(23, 21, 68, 0.14);
   font-family: var(--main-font);
   font-size: 13px;
   color: var(--modal-accent);
@@ -1445,7 +1531,7 @@ button { font: inherit; }
   align-items: start;
   padding: 12px 14px;
   border-radius: 16px;
-  border: 1px solid rgba(81, 73, 94, 0.18);
+  border: 1px solid rgba(23, 21, 68, 0.18);
   background: rgba(255, 255, 255, 0.28);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.22);
 }
@@ -1460,7 +1546,7 @@ button { font: inherit; }
   border-radius: 0;
   background: transparent;
   border: 0;
-  color: rgba(81, 73, 94, 0.72);
+  color: rgba(23, 21, 68, 0.72);
   font-family: var(--main-font);
   font-size: 13px;
   line-height: 1.45;
@@ -1491,7 +1577,7 @@ button { font: inherit; }
 .project-award-card img {
   width: min(420px, 100%);
   display: block;
-  margin: 14px auto 0;
+  margin: 0 auto;
   padding: 14px;
   border-radius: 16px;
   object-fit: contain;
@@ -1501,6 +1587,33 @@ button { font: inherit; }
   box-shadow:
     0 12px 26px rgba(0,0,0,0.26),
     inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+.compact-award {
+  width: fit-content;
+  margin: 0 auto 14px;
+  padding: 8px;
+  border-radius: 14px;
+}
+
+.compact-award img {
+  width: 150px;
+  max-width: 42vw;
+  padding: 8px;
+  border-radius: 12px;
+}
+
+.large-award {
+  width: min(460px, 100%);
+  margin-bottom: 16px;
+  padding: 12px;
+}
+
+.large-award img {
+  width: 100%;
+  max-width: 100%;
+  padding: 14px;
+  border-radius: 16px;
 }
 
 .chips {
@@ -1513,8 +1626,8 @@ button { font: inherit; }
 .chip {
   padding: 5px 10px;
   border-radius: 999px;
-  background: rgba(81, 73, 94, 0.32);
-  border: 1px solid rgba(81, 73, 94, 0.56);
+  background: rgba(23, 21, 68, 0.32);
+  border: 1px solid rgba(23, 21, 68, 0.56);
   color: #14101a;
   font-family: var(--main-font);
   font-size: 12px;
@@ -1524,8 +1637,8 @@ button { font: inherit; }
 }
 
 .chip:nth-child(2n) {
-  background: rgba(81, 73, 94, 0.32);
-  border-color: rgba(81, 73, 94, 0.56);
+  background: rgba(23, 21, 68, 0.32);
+  border-color: rgba(23, 21, 68, 0.56);
 }
 
 .modal-link {
@@ -1541,7 +1654,7 @@ button { font: inherit; }
   font-size: 16px;
   font-weight: 400;
   letter-spacing: 0.015em;
-  box-shadow: 0 10px 20px rgba(81, 73, 94, 0.24);
+  box-shadow: 0 10px 20px rgba(23, 21, 68, 0.24);
 }
 
 .modal-link::after {
@@ -1694,7 +1807,7 @@ button { font: inherit; }
 }
 
 .press-link:hover {
-  background: rgba(81, 73, 94, 0.20);
+  background: rgba(23, 21, 68, 0.20);
   transform: translateY(-1px);
 }
 
@@ -1783,7 +1896,7 @@ button { font: inherit; }
   place-items: center;
   padding: 12px;
   border-radius: 20px;
-  border: 1px solid rgba(81, 73, 94, 0.16);
+  border: 1px solid rgba(23, 21, 68, 0.16);
   background:
     linear-gradient(145deg, rgba(255,255,255,0.46), rgba(236,200,247,0.16)),
     rgba(255,255,255,0.32);
@@ -1873,7 +1986,7 @@ button { font: inherit; }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-  border-color: rgba(81, 73, 94, 0.52);
+  border-color: rgba(23, 21, 68, 0.52);
   background: rgba(255, 255, 255, 0.52);
 }
 
@@ -1897,14 +2010,14 @@ button { font: inherit; }
   font-family: var(--main-font);
   font-size: 17px;
   font-weight: 400;
-  box-shadow: 0 10px 20px rgba(81, 73, 94, 0.24);
+  box-shadow: 0 10px 20px rgba(23, 21, 68, 0.24);
   transition: 0.18s ease;
 }
 
 .contact-button:hover {
-  background: #62586f;
+  background: #211f5a;
   transform: translateY(-1px);
-  box-shadow: 0 12px 24px rgba(81, 73, 94, 0.30);
+  box-shadow: 0 12px 24px rgba(23, 21, 68, 0.30);
 }
 
 .contact-email {
@@ -1928,6 +2041,23 @@ footer {
 }
 
 @media (max-width: 920px) {
+  .window-projects,
+  .window-games,
+  .window-links,
+  .window-encounters,
+  .window-work,
+  .window.large {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .window-games .window-body,
+  .window-encounters .window-body,
+  .window-work .window-body {
+    flex-wrap: wrap;
+  }
+
   .topbar {
     position: sticky;
     height: auto;
@@ -1986,8 +2116,9 @@ footer {
   .nav-button.about-nav { font-size: 13px; }
   .article-row h3 { font-size: 22px; }
   .article-cover { width: 100%; }
-  .brand strong { font-size: 22px; }
-  .brand span { font-size: 10px; }
+  .brand { min-width: 220px; }
+  .brand-name { font-size: 21px; }
+  .brand-subtitle { font-size: 10px; margin-top: 4px; }
   .menu-button,
   .clock { font-size: 11px; padding-inline: 12px; }
   .window-header > span,
