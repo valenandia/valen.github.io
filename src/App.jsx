@@ -65,46 +65,42 @@ const navModals = [
         <div className="resume-actions">
           <a className="modal-link no-dot" href="#">DOWNLOAD PDF</a>
         </div>
-      </>
-    ),
-  },
-  {
-    id: "contact",
-    label: "CONTACT",
-    title: "Get in Touch",
-    accent: "green",
-    body: (
-      <div className="contact-panel">
-        <p>I’m open to collaborations, creative projects, game design work, and professional opportunities.</p>
 
-        <div className="contact-actions">
-          <a className="contact-button" href="https://t.me/valenandia" target="_blank" rel="noreferrer">
-            Telegram
-          </a>
-          <a className="contact-button" href={`mailto:${profile.email}`}>
-            Email
-          </a>
-          <a className="contact-button" href="https://www.linkedin.com/in/valenandia/" target="_blank" rel="noreferrer">
-            LinkedIn
-          </a>
+        <div className="resume-contact-divider" />
+
+        <div className="contact-panel resume-contact-panel">
+          <h3>Contact</h3>
+          <p>I’m open to collaborations, creative projects, game design work, and professional opportunities.</p>
+
+          <div className="contact-actions">
+            <a className="contact-button" href="https://t.me/valenandia" target="_blank" rel="noreferrer">
+              Telegram
+            </a>
+            <a className="contact-button" href={`mailto:${profile.email}`}>
+              Email
+            </a>
+            <a className="contact-button" href="https://www.linkedin.com/in/valenandia/" target="_blank" rel="noreferrer">
+              LinkedIn
+            </a>
+          </div>
+
+          <form className="contact-form" action={`mailto:${profile.email}`} method="POST" encType="text/plain">
+            <label>
+              Your name
+              <input name="name" type="text" placeholder="Name" />
+            </label>
+            <label>
+              Your email
+              <input name="email" type="email" placeholder="email@example.com" />
+            </label>
+            <label>
+              Message
+              <textarea name="message" rows="5" placeholder="Write your message..." />
+            </label>
+            <button type="submit" className="contact-button contact-submit">Send message</button>
+          </form>
         </div>
-
-        <form className="contact-form" action={`mailto:${profile.email}`} method="POST" encType="text/plain">
-          <label>
-            Your name
-            <input name="name" type="text" placeholder="Name" />
-          </label>
-          <label>
-            Your email
-            <input name="email" type="email" placeholder="email@example.com" />
-          </label>
-          <label>
-            Message
-            <textarea name="message" rows="5" placeholder="Write your message..." />
-          </label>
-          <button type="submit" className="contact-button contact-submit">Send message</button>
-        </form>
-      </div>
+      </>
     ),
   },
   {
@@ -206,10 +202,12 @@ const windows = [
           ["Engine", "Unreal Engine 5"],
         ],
         contributions: [
-          "Contributed to location customization and screen map design to enhance user experience.",
-          "Optimized and balanced mini-games to ensure engaging gameplay.",
-          "Led feature completion efforts during the pre-release phase to meet project timelines.",
-          "Collaborated effectively with the team, offering support and expertise across all aspects of the project.",
+          "Assisted in the creation and documentation of game design documents, including documents about features, customization, and game balance.",
+          "Contributed to the creation of mechanics prototypes and screen UI mockups.",
+          "Assisted in the implementation of game content using engines such as Unreal Engine and Unity.",
+          "Collaborated with artists, programmers, and other team members to create game features.",
+          "Participated in gameplay testing sessions and provided feedback.",
+          "Took on additional tasks and responsibilities as needed to support the overall development.",
         ],
         action: "VIEW PROJECT",
         href: "https://eriars.com/en/store-simulator-en/",
@@ -356,7 +354,42 @@ const windows = [
         awardLabel: "Community Award",
         awardPlacement: "top",
       },
-      { id: "game-2", icon: "🕹", label: "GAME TWO", modalTitle: "Game Two", tag: "GAME", description: "Add a second free game here.", chips: ["FREE", "ITCH.IO"], action: "PLAY FREE" },
+      {
+        id: "game-2",
+        icon: "🕹",
+        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/logo.7194929.png",
+        topImages: [
+          "https://raw.githubusercontent.com/valenandia/valen.github.io/main/logo.7194929.png",
+          "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202025-06-06%20150006.png",
+          "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202025-06-06%20172547.png",
+        ],
+        label: "GERAVIM VS DEMONS",
+        modalTitle: "Geravim vs Demons",
+        tag: "GAME JAM",
+        status: "October, 2024",
+        description: "Geravim vs Demons is a rogue-lite game jam project built around class mechanics, weapon balance, skill sets, and myth-inspired combat design.",
+        meta: [
+          ["Genre", "Rogue-lite"],
+          ["Role", "Game Designer, Jammer, Generalist"],
+          ["Involvement", "October 2024"],
+          ["Platforms", "Itch.io"],
+          ["Engine", "Unreal Engine 5"],
+          ["Awards & Recognition", "Finalist in the ‘Regions and Languages of Russia’ category at the ‘Start a Game’ contest; finalist in the ‘Mythology in Art’ category, with the additional theme ‘O is Not Just a Letter’ / History of Vologda, at the ‘SINEUS’ contest."],
+        ],
+        contributions: [
+          "Developed balance for weapons, skill sets, and class mechanics.",
+          "Conducted asset sourcing.",
+          "Engaged in strategic brainstorming sessions.",
+          "Managed music direction, including asset selection and creation.",
+        ],
+        href: "https://mikhaile.itch.io/gerasimvsbesi",
+        action: "ITCH.IO",
+        secondaryAction: "CONCEPT DOC",
+        secondaryHref: "https://docs.google.com/document/d/1oPbnDe0Q8RlAx0XEw5MaR6Xi4B6Fk9rtXqiKR9v1Kg0/edit?tab=t.0#heading=h.1fs3h2986tyf",
+        extraActions: [
+          { label: "PITCH DOC RU", href: "https://docs.google.com/presentation/d/1Bi2XfUUYwEkIC_r1DoHzfHXQJ_QyrjKyO1kpRlRgXVk/edit?slide=id.p#slide=id.p" },
+        ],
+      },
       { id: "game-3", icon: "🕹", label: "GAME THREE", modalTitle: "Game Three", tag: "GAME", description: "Add a third free game here.", chips: ["FREE", "ITCH.IO"], action: "PLAY FREE" },
       { id: "game-4", icon: "🕹", label: "GAME FOUR", modalTitle: "Game Four", tag: "GAME", description: "Add a fourth free game here.", chips: ["FREE", "ITCH.IO"], action: "PLAY FREE" },
     ],
@@ -435,10 +468,7 @@ function Header({ onOpen }) {
       </div>
 
       <div className="brand">
-        <strong className="brand-name">
-          <span>VALENTINA</span>
-          <span>GODOVETS</span>
-        </strong>
+        <strong className="brand-name">VALENTINA GODOVETS</strong>
         <span className="brand-subtitle">{profile.subtitle}</span>
       </div>
 
@@ -446,8 +476,6 @@ function Header({ onOpen }) {
         {navModals.map((item) => (
           <button className={`menu-button nav-button ${item.id === "about" ? "about-nav" : ""} ${item.id === "press" ? "yellow" : ""}`} onClick={() => onOpen(item)} key={item.id}>{item.label}</button>
         ))}
-        <div className="sep" />
-        <Clock />
       </div>
     </header>
   );
@@ -589,6 +617,20 @@ function Modal({ modal, onClose }) {
                   <img src={modal.awardImage} alt={modal.awardLabel || `${modal.modalTitle} award`} />
                 </div>
               )}
+              {modal.topImages && (
+                <div className="project-top-images">
+                  {modal.topImages.map((image, index) => (
+                    <div className="project-award-card compact-award top-image-card" key={image}>
+                      <img src={image} alt={`${modal.modalTitle} image ${index + 1}`} />
+                    </div>
+                  ))}
+                </div>
+              )}
+              {modal.projectLogo && (
+                <div className="project-logo-card">
+                  <img src={modal.projectLogo} alt={`${modal.modalTitle} logo`} />
+                </div>
+              )}
               {!modal.meta && (
                 <div className="modal-hero project-hero">
                   {modal.image ? <img src={modal.image} alt={modal.modalTitle} /> : modal.icon}
@@ -603,6 +645,9 @@ function Modal({ modal, onClose }) {
                     {modal.secondaryAction && (
                       <a className="modal-link no-dot project-link secondary" href={modal.secondaryHref || "#"} target="_blank" rel="noreferrer">{modal.secondaryAction}</a>
                     )}
+                    {modal.extraActions?.map((action) => (
+                      <a className="modal-link no-dot project-link secondary" href={action.href || "#"} target="_blank" rel="noreferrer" key={action.label}>{action.label}</a>
+                    ))}
                   </div>
                 )}
               </div>
@@ -635,6 +680,7 @@ function Modal({ modal, onClose }) {
                   <img src={modal.awardImage} alt={modal.awardLabel || `${modal.modalTitle} award`} />
                 </div>
               )}
+              
               {!modal.href && (
                 <a className="modal-link" href="#">{modal.action}</a>
               )}
@@ -756,15 +802,15 @@ button { font: inherit; }
 }
 
 .topbar {
-  height: 82px;
+  height: 88px;
   position: fixed;
   inset: 0 0 auto;
   z-index: 100;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 18px;
-  padding: 12px 20px;
+  gap: 22px;
+  padding: 14px 22px;
   background: linear-gradient(180deg, rgba(15, 14, 15, 0.62) 0%, rgba(15, 14, 15, 0.36) 100%);
   backdrop-filter: blur(18px) saturate(1.18);
   -webkit-backdrop-filter: blur(18px) saturate(1.18);
@@ -775,7 +821,7 @@ button { font: inherit; }
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   min-width: 0;
 }
 
@@ -791,25 +837,20 @@ button { font: inherit; }
 }
 
 .brand-name {
-  display: grid;
-  justify-items: center;
-  gap: 1px;
+  display: block;
   font-family: var(--decorative-font);
-  font-size: 27px;
+  font-size: 28px;
   font-weight: 400;
   letter-spacing: 0.025em;
-  line-height: 0.88;
+  line-height: 1;
   color: #F7F0F5;
-}
-
-.brand-name span {
-  display: block;
+  text-align: center;
 }
 
 .brand-subtitle {
   display: block;
   width: 100%;
-  margin-top: 4px;
+  margin-top: 5px;
   font-family: var(--decorative-font);
   font-size: 11px;
   font-weight: 500;
@@ -822,11 +863,11 @@ button { font: inherit; }
 
 .menu-button,
 .clock {
-  min-height: 34px;
+  min-height: 40px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 14px;
+  padding: 8px 17px;
   border-radius: 999px;
   border: 1px solid rgba(236, 200, 247, 0.24);
   background: linear-gradient(180deg, rgba(247, 240, 245, 0.16), rgba(236, 200, 247, 0.07));
@@ -834,7 +875,7 @@ button { font: inherit; }
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 6px 14px rgba(0,0,0,0.12);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.03em;
   cursor: pointer;
@@ -847,8 +888,8 @@ button { font: inherit; }
 }
 
 .nav-button.about-nav {
-  font-size: 15px;
-  padding-inline: 18px;
+  font-size: 16px;
+  padding-inline: 20px;
 }
 
 .menu-button:hover {
@@ -875,7 +916,7 @@ button { font: inherit; }
 
 .desktop {
   position: fixed;
-  top: 82px;
+  top: 88px;
   bottom: 24px;
   left: 50%;
   width: min(1240px, 100vw);
@@ -1248,7 +1289,9 @@ button { font: inherit; }
 .modal-window {
   width: min(760px, 96vw);
   max-height: 90vh;
-  overflow: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   padding: 0;
   border: 1px solid rgba(247,240,245,0.26);
   border-radius: 22px;
@@ -1270,9 +1313,10 @@ button { font: inherit; }
 }
 
 .modal-header {
-  position: sticky;
+  position: relative;
   top: 0;
   z-index: 2;
+  flex: 0 0 auto;
 }
 
 .modal-tag {
@@ -1302,27 +1346,37 @@ button { font: inherit; }
   position: relative;
   z-index: 1;
   margin-left: 0;
-  width: 30px;
+  width: 24px;
   height: 30px;
   display: grid;
   place-items: center;
   border: 0;
-  border-radius: 999px;
-  background: rgba(247,240,245,0.14);
-  color: #F7F0F5;
-  font-size: 18px;
+  border-radius: 0;
+  background: transparent;
+  color: rgba(247, 240, 245, 0.82);
+  font-size: 22px;
+  line-height: 1;
   cursor: pointer;
   transition: 0.18s ease;
 }
 
-.modal-header button:hover { background: rgba(247,240,245,0.24); }
+.modal-header button:hover {
+  background: transparent;
+  color: #eec2b5;
+  transform: scale(1.08);
+}
 
 .modal-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
   padding: 28px 32px 34px;
   font-family: var(--text-font);
   font-size: 17px;
   font-weight: 400;
   line-height: 1.65;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(23, 21, 68, 0.36) rgba(247, 240, 245, 0.10);
   background:
     radial-gradient(circle at 16px 16px, rgba(255,255,255,0.055) 1px, transparent 1px),
     linear-gradient(145deg, rgba(247, 240, 245, 0.40), rgba(236, 200, 247, 0.18));
@@ -1369,6 +1423,58 @@ button { font: inherit; }
 
 .project-hero {
   height: 260px;
+}
+
+.project-top-images {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto 16px;
+}
+
+.top-image-card {
+  width: 126px;
+  margin: 0;
+  padding: 8px;
+  border-radius: 14px;
+}
+
+.top-image-card img {
+  width: 100%;
+  height: 82px;
+  display: block;
+  object-fit: contain;
+  padding: 8px;
+  border-radius: 12px;
+}
+
+.project-logo-card {
+  width: fit-content;
+  max-width: min(340px, 100%);
+  margin: 0 auto 14px;
+  padding: 14px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(247, 240, 245, 0.18);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.36), rgba(236,200,247,0.14)),
+    rgba(255,255,255,0.26);
+  box-shadow:
+    0 12px 26px rgba(0,0,0,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.24);
+  backdrop-filter: blur(12px) saturate(1.08);
+  -webkit-backdrop-filter: blur(12px) saturate(1.08);
+}
+
+.project-logo-card img {
+  max-width: 260px;
+  max-height: 150px;
+  display: block;
+  object-fit: contain;
+  border-radius: 12px;
 }
 
 .project-preview-card {
@@ -1614,6 +1720,22 @@ button { font: inherit; }
   max-width: 100%;
   padding: 14px;
   border-radius: 16px;
+}
+
+.project-awards-gallery h3 {
+  text-align: center;
+  margin-top: 0;
+}
+
+.project-award-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.project-award-grid img {
+  width: 100%;
+  margin: 0;
 }
 
 .chips {
@@ -1884,27 +2006,30 @@ button { font: inherit; }
 }
 
 .community-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
 }
 
 .community-card {
-  height: 108px;
+  width: 126px;
+  height: 92px;
   display: grid;
   place-items: center;
-  padding: 12px;
-  border-radius: 20px;
-  border: 1px solid rgba(23, 21, 68, 0.16);
+  padding: 8px;
+  border-radius: 24px;
+  border: 1px solid rgba(247, 240, 245, 0.20);
   background:
-    linear-gradient(145deg, rgba(255,255,255,0.46), rgba(236,200,247,0.16)),
-    rgba(255,255,255,0.32);
+    linear-gradient(135deg, rgba(255,255,255,0.46), rgba(236,200,247,0.16)),
+    rgba(255,255,255,0.30);
   box-shadow:
-    0 12px 24px rgba(0,0,0,0.07),
-    inset 0 1px 0 rgba(255,255,255,0.34);
-  backdrop-filter: blur(12px) saturate(1.08);
-  -webkit-backdrop-filter: blur(12px) saturate(1.08);
+    0 10px 20px rgba(0,0,0,0.09),
+    inset 0 1px 0 rgba(255,255,255,0.26);
+  backdrop-filter: blur(10px) saturate(1.06);
+  -webkit-backdrop-filter: blur(10px) saturate(1.06);
   overflow: hidden;
 }
 
@@ -1912,14 +2037,14 @@ button { font: inherit; }
   width: 100%;
   height: 100%;
   max-width: 100%;
-  max-height: 84px;
+  max-height: 76px;
   object-fit: contain;
   display: block;
-  padding: 0;
-  border-radius: 12px;
+  padding: 6px;
+  border-radius: 18px;
   border: 0;
-  background: transparent;
-  box-shadow: none;
+  background: rgba(255,255,255,0.18);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.18);
 }
 
 .under-construction {
@@ -1933,9 +2058,20 @@ button { font: inherit; }
   text-align: center;
 }
 
+.resume-contact-divider {
+  height: 1px;
+  margin: 22px 0 20px;
+  background: linear-gradient(90deg, transparent, rgba(23, 21, 68, 0.22), transparent);
+}
+
 .contact-panel {
   display: grid;
   gap: 16px;
+}
+
+.resume-contact-panel h3 {
+  margin: 0 auto 2px;
+  text-align: center;
 }
 
 .contact-panel p {
@@ -2040,6 +2176,28 @@ footer {
   background: transparent;
 }
 
+.modal-body::-webkit-scrollbar {
+  width: 7px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  margin: 10px 0 14px;
+  background: rgba(247, 240, 245, 0.10);
+  border-radius: 999px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  border: 2px solid rgba(247, 240, 245, 0.22);
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(238, 194, 181, 0.46), rgba(23, 21, 68, 0.34));
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background:
+    linear-gradient(180deg, rgba(238, 194, 181, 0.60), rgba(23, 21, 68, 0.48));
+}
+
 @media (max-width: 920px) {
   .window-projects,
   .window-games,
@@ -2111,16 +2269,16 @@ footer {
 }
 
 @media (max-width: 520px) {
-  .community-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .community-card { height: 96px; }
+  .community-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .community-card { width: 100%; height: 96px; }
   .nav-button.about-nav { font-size: 13px; }
   .article-row h3 { font-size: 22px; }
   .article-cover { width: 100%; }
   .brand { min-width: 220px; }
-  .brand-name { font-size: 21px; }
+  .brand-name { font-size: 22px; }
   .brand-subtitle { font-size: 10px; margin-top: 4px; }
   .menu-button,
-  .clock { font-size: 11px; padding-inline: 12px; }
+  .clock { font-size: 12px; padding-inline: 13px; min-height: 36px; }
   .window-header > span,
   .modal-header strong { font-size: 20px; }
   .modal-about .modal-header strong { font-size: 20px; }
