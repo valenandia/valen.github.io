@@ -970,9 +970,10 @@ button { font: inherit; }
   position: fixed;
   top: 88px;
   bottom: 24px;
-  left: 50%;
-  width: min(1240px, calc(100vw - 32px));
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  width: 100vw;
+  transform: none;
   overflow: hidden;
 }
 
