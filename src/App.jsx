@@ -282,7 +282,7 @@ const windows = [
       {
         id: "encounter-1",
         icon: "⚔️",
-        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking....png",
+        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(2).png",
         label: "COMBAT PROTOTYPE",
         modalTitle: "Combat Prototype",
         tag: "ENCOUNTER",
@@ -291,7 +291,7 @@ const windows = [
       {
         id: "encounter-2",
         icon: "👑",
-        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking....png",
+        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(2).png",
         label: "BOSS FIGHT ENCOUNTER",
         modalTitle: "Boss Fight Encounter",
         tag: "ENCOUNTER",
@@ -300,7 +300,7 @@ const windows = [
       {
         id: "encounter-3",
         icon: "🌊",
-        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking....png",
+        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(2).png",
         label: "WAVE-BASED ENCOUNTER",
         modalTitle: "Wave-Based Encounter",
         tag: "ENCOUNTER",
@@ -313,10 +313,10 @@ const windows = [
     title: "WORK SAMPLES",
     accent: "violet",
     items: [
-      { id: "work-1", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking....png", label: "BLOOD & HP EXCHANGE MECHANICS: A COMBAT FRAMEWORK", modalTitle: "Blood & HP Exchange Mechanics: A Combat Framework", tag: "WORK", body: <p className="under-construction">Under Construction</p> },
-      { id: "work-2", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking....png", label: "ENVIRONMENT PUZZLE FRAMEWORK", modalTitle: "Environment Puzzle Framework", tag: "WORK", body: <p className="under-construction">Under Construction</p> },
-      { id: "work-3", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking....png", label: "COMBAT DESIGN FRAMEWORK", modalTitle: "Combat Design Framework", tag: "WORK", body: <p className="under-construction">Under Construction</p> },
-      { id: "work-4", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking....png", label: "PITCH DOC: THE TALE OF MIND", modalTitle: "Pitch Doc: The Tale of Mind", tag: "WORK", body: <p className="under-construction">Under Construction</p> },
+      { id: "work-1", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(1).png", label: "BLOOD & HP FRAMEWORK", modalTitle: "Blood & HP Framework", tag: "WORK", body: <p className="under-construction">Under Construction</p> },
+      { id: "work-2", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(1).png", label: "ENVIRONMENT PUZZLE FRAMEWORK", modalTitle: "Environment Puzzle Framework", tag: "WORK", body: <p className="under-construction">Under Construction</p> },
+      { id: "work-3", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(1).png", label: "COMBAT DESIGN FRAMEWORK", modalTitle: "Combat Design Framework", tag: "WORK", body: <p className="under-construction">Under Construction</p> },
+      { id: "work-4", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(1).png", label: "PITCH DOC: THE TALE OF MIND", modalTitle: "Pitch Doc: The Tale of Mind", tag: "WORK", body: <p className="under-construction">Under Construction</p> },
     ],
   },
   {
@@ -405,14 +405,32 @@ const windows = [
   },
 ];
 
-const initialPositions = {
-  projects: { x: 70, y: 48 },
-  wishlist: { x: 492, y: 52 },
-  encounters: { x: 780, y: 48 },
-  work: { x: 70, y: 320 },
-  games: { x: 760, y: 314 },
-  links: { x: 912, y: 530 },
+const initialPositionRatios = {
+  projects: { x: 0.04, y: 0.07 },
+  wishlist: { x: 0.43, y: 0.08 },
+  encounters: { x: 0.74, y: 0.07 },
+  work: { x: 0.04, y: 0.48 },
+  games: { x: 0.62, y: 0.47 },
+  links: { x: 0.80, y: 0.78 },
 };
+
+function getResponsivePosition(id, node) {
+  const ratio = initialPositionRatios[id] || { x: 0.04, y: 0.06 };
+  const desktop = node?.closest(".desktop");
+
+  if (!node || !desktop) return { x: 24, y: 24 };
+
+  const desktopRect = desktop.getBoundingClientRect();
+  const rect = node.getBoundingClientRect();
+  const safeGap = 12;
+  const maxX = Math.max(safeGap, desktopRect.width - rect.width - safeGap);
+  const maxY = Math.max(safeGap, desktopRect.height - rect.height - safeGap);
+
+  return {
+    x: Math.min(Math.max(safeGap, desktopRect.width * ratio.x), maxX),
+    y: Math.min(Math.max(safeGap, desktopRect.height * ratio.y), maxY),
+  };
+}
 
 function Clock() {
   const [time, setTime] = useState("--:--");
@@ -460,7 +478,7 @@ function Article({ title, text, image, href = "#" }) {
 
 function Header({ onOpen }) {
   useEffect(() => {
-    const faviconHref = "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Frame%204.png";
+    const faviconHref = "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Frame%2045.png";
     let favicon = document.querySelector('link[rel="icon"]');
 
     if (!favicon) {
@@ -498,7 +516,7 @@ function Header({ onOpen }) {
 
 function DesktopWindow({ win, active, onFocus, onOpen }) {
   const windowRef = useRef(null);
-  const [position, setPosition] = useState(initialPositions[win.id] || { x: 24, y: 24 });
+  const [position, setPosition] = useState({ x: 24, y: 24 });
   const [drag, setDrag] = useState(null);
 
   useEffect(() => {
@@ -508,11 +526,12 @@ function DesktopWindow({ win, active, onFocus, onOpen }) {
       if (event.cancelable) event.preventDefault();
       const clientX = event.touches?.[0]?.clientX ?? event.clientX;
       const clientY = event.touches?.[0]?.clientY ?? event.clientY;
-      const maxX = Math.max(0, drag.containerWidth - drag.width);
-      const maxY = Math.max(0, drag.containerHeight - drag.height);
+      const safeGap = 12;
+      const maxX = Math.max(safeGap, drag.containerWidth - drag.width - safeGap);
+      const maxY = Math.max(safeGap, drag.containerHeight - drag.height - safeGap);
       setPosition({
-        x: Math.min(Math.max(0, clientX - drag.containerLeft - drag.offsetX), maxX),
-        y: Math.min(Math.max(0, clientY - drag.containerTop - drag.offsetY), maxY),
+        x: Math.min(Math.max(safeGap, clientX - drag.containerLeft - drag.offsetX), maxX),
+        y: Math.min(Math.max(safeGap, clientY - drag.containerTop - drag.offsetY), maxY),
       });
     };
 
@@ -549,22 +568,38 @@ function DesktopWindow({ win, active, onFocus, onOpen }) {
   };
 
   useEffect(() => {
-    const clampPosition = () => {
-      const node = windowRef.current;
-      const desktop = node?.closest(".desktop");
-      if (!node || !desktop) return;
+    const node = windowRef.current;
+    if (!node) return;
+
+    const safeGap = 12;
+    let wasInitialized = false;
+
+    const placeOrClampWindow = () => {
+      const desktop = node.closest(".desktop");
+      if (!desktop) return;
+
       const desktopRect = desktop.getBoundingClientRect();
       const rect = node.getBoundingClientRect();
-      setPosition((current) => ({
-        x: Math.min(Math.max(0, current.x), Math.max(0, desktopRect.width - rect.width)),
-        y: Math.min(Math.max(0, current.y), Math.max(0, desktopRect.height - rect.height)),
-      }));
+      const maxX = Math.max(safeGap, desktopRect.width - rect.width - safeGap);
+      const maxY = Math.max(safeGap, desktopRect.height - rect.height - safeGap);
+
+      setPosition((current) => {
+        if (!wasInitialized) {
+          wasInitialized = true;
+          return getResponsivePosition(win.id, node);
+        }
+
+        return {
+          x: Math.min(Math.max(safeGap, current.x), maxX),
+          y: Math.min(Math.max(safeGap, current.y), maxY),
+        };
+      });
     };
 
-    clampPosition();
-    window.addEventListener("resize", clampPosition);
-    return () => window.removeEventListener("resize", clampPosition);
-  }, []);
+    placeOrClampWindow();
+    window.addEventListener("resize", placeOrClampWindow);
+    return () => window.removeEventListener("resize", placeOrClampWindow);
+  }, [win.id]);
 
   return (
     <section
@@ -859,8 +894,8 @@ button { font: inherit; }
 
 .brand-name img {
   display: block;
-  width: min(315px, 34vw);
-  max-height: 54px;
+  width: min(350px, 38vw);
+  max-height: 60px;
   object-fit: contain;
 }
 
@@ -936,7 +971,7 @@ button { font: inherit; }
   top: 88px;
   bottom: 24px;
   left: 50%;
-  width: min(1240px, 100vw);
+  width: min(1240px, calc(100vw - 32px));
   transform: translateX(-50%);
   overflow: hidden;
 }
@@ -945,7 +980,7 @@ button { font: inherit; }
   position: absolute;
   z-index: 1;
   min-width: 210px;
-  max-width: calc(100vw - 24px);
+  max-width: 100%;
   background: linear-gradient(145deg, rgba(247, 240, 245, 0.56), rgba(236, 200, 247, 0.22));
   border: 1px solid rgba(247, 240, 245, 0.24);
   border-radius: 18px;
@@ -1158,8 +1193,8 @@ button { font: inherit; }
 }
 
 .window.large {
-  width: 256px;
-  min-width: 256px;
+  width: 304px;
+  min-width: 304px;
 }
 
 .window:has(.window-header span) {
@@ -1167,8 +1202,8 @@ button { font: inherit; }
 }
 
 .window-projects {
-  width: 360px;
-  min-width: 360px;
+  width: 420px;
+  min-width: 420px;
 }
 
 .window-projects .window-body {
@@ -1177,12 +1212,26 @@ button { font: inherit; }
 }
 
 .window-projects .item-card {
-  flex: 0 0 102px;
+  width: 122px;
+  min-width: 122px;
+  min-height: 158px;
+  flex: 0 0 122px;
+}
+
+.window-projects .item-icon {
+  width: 122px;
+  height: 114px;
+}
+
+.window-projects .item-label {
+  min-height: 44px;
+  font-size: 13px;
 }
 
 .window-games {
   width: 474px;
   min-width: 474px;
+  max-width: 100%;
 }
 
 .window-games .window-body {
@@ -1232,8 +1281,9 @@ button { font: inherit; }
 }
 
 .window-work {
-  width: 640px;
-  min-width: 640px;
+  width: 588px;
+  min-width: 588px;
+  max-width: 100%;
 }
 
 .window-work .window-body {
@@ -1246,22 +1296,22 @@ button { font: inherit; }
 }
 
 .window-work .item-card {
-  width: 143px;
-  min-width: 143px;
-  min-height: 222px;
+  width: 130px;
+  min-width: 130px;
+  min-height: 204px;
 }
 
 .window-work .item-icon {
-  width: 143px;
-  height: 143px;
+  width: 130px;
+  height: 130px;
 }
 
 .window-work .item-label {
-  min-height: 76px;
-  padding: 8px 9px 10px;
-  font-size: 12px;
+  min-height: 74px;
+  padding: 8px 8px 10px;
+  font-size: 11px;
   font-weight: 550;
-  line-height: 1.14;
+  line-height: 1.13;
   letter-spacing: 0;
 }
 
@@ -1278,14 +1328,21 @@ button { font: inherit; }
 }
 
 .window.large .item-card {
-  width: 220px;
-  min-height: 258px;
+  width: 262px;
+  min-height: 302px;
 }
 
 .window.large .item-icon {
-  width: 220px;
-  height: 208px;
+  width: 262px;
+  height: 252px;
   font-size: 68px;
+}
+
+.window-wishlist .item-label {
+  font-size: 16px;
+  font-weight: 550;
+  line-height: 1.14;
+  letter-spacing: 0.015em;
 }
 
 .modal-backdrop {
@@ -2292,7 +2349,7 @@ footer {
   .article-row h3 { font-size: 22px; }
   .article-cover { width: 100%; }
   .brand { min-width: 220px; }
-  .brand-name img { width: min(260px, 84vw); max-height: 45px; }
+  .brand-name img { width: min(285px, 86vw); max-height: 50px; }
   .brand-subtitle { font-size: 10px; margin-top: 4px; }
   .menu-button,
   .clock { font-size: 12px; padding-inline: 13px; min-height: 36px; }
