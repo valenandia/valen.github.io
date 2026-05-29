@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 
 const profile = {
   name: "VALENTINA GODOVETS",
@@ -23,22 +23,37 @@ const navModals = [
         <p>I enjoy building mechanics that create readable goals, <strong>strong gameplay loops</strong>, and memorable player moments.</p>
         <p>Currently, I’m also expanding my expertise in <strong>AI systems in games</strong> and how they can support gameplay architecture and emergent interactions.</p>
 
-        <div className="community-section">
-          <h3>As a member of community</h3>
-          <div className="community-grid">
-            <div className="community-card">
-              <img src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202025-06-06%20150254.png" alt="Community membership badge" />
-            </div>
-            <div className="community-card">
-              <img src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202025-06-30%20212941.png" alt="Community membership badge" />
-            </div>
-            <div className="community-card">
-              <img src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202025-08-28%20220716.png" alt="Community membership badge" />
-            </div>
-            <div className="community-card">
-              <img src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/images.jpeg" alt="Community membership badge" />
-            </div>
+        <div className="community-grid">
+          <div className="community-card">
+            <img src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202025-06-06%20150254.png" alt="Community membership badge" />
           </div>
+          <div className="community-card">
+            <img src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202025-06-30%20212941.png" alt="Community membership badge" />
+          </div>
+          <div className="community-card">
+            <img src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202025-08-28%20220716.png" alt="Community membership badge" />
+          </div>
+          <div className="community-card">
+            <img src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/images.jpeg" alt="Community membership badge" />
+          </div>
+        </div>
+
+        <div className="resume-contact-divider" />
+
+        <div className="contact-panel resume-contact-panel">
+          <h3>Contact</h3>
+          <p>I’m open to collaborations, creative projects, game design work, and professional opportunities.</p>
+          <div className="contact-actions">
+            <a className="contact-button" href="https://t.me/valenandia" target="_blank" rel="noreferrer">Telegram</a>
+            <a className="contact-button" href={`mailto:${profile.email}`}>Email</a>
+            <a className="contact-button" href="https://www.linkedin.com/in/valenandia/" target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
+          <form className="contact-form" action={`mailto:${profile.email}`} method="POST" encType="text/plain">
+            <label>Your name<input name="name" type="text" placeholder="Name" /></label>
+            <label>Your email<input name="email" type="email" placeholder="email@example.com" /></label>
+            <label>Message<textarea name="message" rows="5" placeholder="Write your message..." /></label>
+            <button type="submit" className="contact-button contact-submit">Send message</button>
+          </form>
         </div>
       </>
     ),
@@ -50,55 +65,34 @@ const navModals = [
     accent: "purple",
     body: (
       <>
-        <TimelineItem
-          title="Game Designer & Level Designer — NDA Project"
-          date="Apr 2025 – Present"
-          text="Designed and interconnected core and meta systems, balanced mechanics, created UX documentation, and worked on player customization features."
-          chips={["SYSTEM DESIGN", "LEVEL DESIGN", "ENVIRONMENTAL PUZZLES", "UNREAL ENGINE"]}
-        />
-        <TimelineItem
-          title="Game Designer — Eriars"
-          date="Dec 2024 – Present"
-          text="Prototyped core gameplay systems, designed magic combat and movement mechanics, and collaborated with narrative and art teams."
-          chips={["COMBAT DESIGN", "ENCOUNTER DESIGN", "GAME AI", "UNREAL ENGINE", "ARTICY"]}
-        />
+        <p className="resume-experience-note">Nearly 10+ years of experience creating mods for various games and platforms, covering content, cosmetics and NSFW+</p>
+
+        <article className="press-card">
+          <span className="press-year">June 2025 – Present</span>
+          <strong>Middle Game Designer — NDA</strong>
+          <p>NDA</p>
+        </article>
+
+        <article className="press-card">
+          <span className="press-year">Apr 2025 – Present</span>
+          <strong>Game Designer &amp; Level Designer — NDA Project</strong>
+          <p>Designed and interconnected core and meta systems, balanced mechanics, created UX documentation, and worked on player customization features.</p>
+          <div className="chips" style={{marginTop:"8px"}}>
+            {["SYSTEM DESIGN","LEVEL DESIGN","ENVIRONMENTAL PUZZLES","UNREAL ENGINE"].map(c=><span className="chip" key={c}>{c}</span>)}
+          </div>
+        </article>
+
+        <article className="press-card">
+          <span className="press-year">Dec 2024 – Present</span>
+          <strong>Game Designer — Eriars</strong>
+          <p>Prototyped core gameplay systems, designed magic combat and movement mechanics, and collaborated with narrative and art teams.</p>
+          <div className="chips" style={{marginTop:"8px"}}>
+            {["COMBAT DESIGN","ENCOUNTER DESIGN","GAME AI","UNREAL ENGINE","ARTICY"].map(c=><span className="chip" key={c}>{c}</span>)}
+          </div>
+        </article>
+
         <div className="resume-actions">
           <a className="modal-link no-dot" href="#">DOWNLOAD PDF</a>
-        </div>
-
-        <div className="resume-contact-divider" />
-
-        <div className="contact-panel resume-contact-panel">
-          <h3>Contact</h3>
-          <p>I’m open to collaborations, creative projects, game design work, and professional opportunities.</p>
-
-          <div className="contact-actions">
-            <a className="contact-button" href="https://t.me/valenandia" target="_blank" rel="noreferrer">
-              Telegram
-            </a>
-            <a className="contact-button" href={`mailto:${profile.email}`}>
-              Email
-            </a>
-            <a className="contact-button" href="https://www.linkedin.com/in/valenandia/" target="_blank" rel="noreferrer">
-              LinkedIn
-            </a>
-          </div>
-
-          <form className="contact-form" action={`mailto:${profile.email}`} method="POST" encType="text/plain">
-            <label>
-              Your name
-              <input name="name" type="text" placeholder="Name" />
-            </label>
-            <label>
-              Your email
-              <input name="email" type="email" placeholder="email@example.com" />
-            </label>
-            <label>
-              Message
-              <textarea name="message" rows="5" placeholder="Write your message..." />
-            </label>
-            <button type="submit" className="contact-button contact-submit">Send message</button>
-          </form>
         </div>
       </>
     ),
@@ -188,7 +182,7 @@ const windows = [
       {
         id: "project-1",
         icon: "🎮",
-        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202026-05-26%20191956.png",
+        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202026-05-28%20150131.png",
         label: "STORE SIMULATOR",
         modalTitle: "Store Simulator",
         tag: "PROJECT",
@@ -217,12 +211,11 @@ const windows = [
       {
         id: "project-2",
         icon: "🎮",
-        label: "PROJECT TWO",
-        modalTitle: "Project Two",
+        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(3).png",
+        label: "UNANNOUNCED PROJECT",
+        modalTitle: "Unannounced Project",
         tag: "PROJECT",
-        description: "Add a short case study here: goal, constraints, design decisions, and outcome.",
-        chips: ["GAME DESIGN", "SYSTEMS"],
-        action: "VIEW PROJECT",
+        body: <p className="under-construction">Under Construction</p>,
       },
       {
         id: "project-3",
@@ -266,7 +259,7 @@ const windows = [
       {
         id: "wishlist-1",
         icon: "⭐",
-        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/logiss1.png",
+        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/logo1.png",
         label: "TRACES OF NYPHS",
         modalTitle: "Traces of Nyphs",
         tag: "WISHLIST",
@@ -327,7 +320,7 @@ const windows = [
       {
         id: "game-1",
         icon: "🕹",
-        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/kcNATH.png",
+        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Untitled%20design89.png",
         label: "THE MINOTAUR'S LABYRINTH",
         modalTitle: "The Minotaur's Labyrinth",
         tag: "GAME JAM",
@@ -357,9 +350,9 @@ const windows = [
       {
         id: "game-2",
         icon: "🕹",
-        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/logo.7194929.png",
+        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Untitled%20design777.png",
         topImages: [
-          "https://raw.githubusercontent.com/valenandia/valen.github.io/main/logo.7194929.png",
+          "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Untitled%20design777.png",
           "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202025-06-06%20150006.png",
           "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202025-06-06%20172547.png",
         ],
@@ -390,8 +383,39 @@ const windows = [
           { label: "PITCH DOC RU", href: "https://docs.google.com/presentation/d/1Bi2XfUUYwEkIC_r1DoHzfHXQJ_QyrjKyO1kpRlRgXVk/edit?slide=id.p#slide=id.p" },
         ],
       },
-      { id: "game-3", icon: "🕹", label: "GAME THREE", modalTitle: "Game Three", tag: "GAME", description: "Add a third free game here.", chips: ["FREE", "ITCH.IO"], action: "PLAY FREE" },
-      { id: "game-4", icon: "🕹", label: "GAME FOUR", modalTitle: "Game Four", tag: "GAME", description: "Add a fourth free game here.", chips: ["FREE", "ITCH.IO"], action: "PLAY FREE" },
+      {
+        id: "game-3",
+        icon: "🕹",
+        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202026-05-28%20153217.png",
+        label: "TAP A PAW!",
+        modalTitle: "Tap a Paw!",
+        tag: "GAME JAM",
+        status: "2024",
+        description: "Tap a Paw: Match-3 is a solo developer match-3 mobile game featuring cute paw mechanics and casual gameplay.",
+        meta: [
+          ["Role", "Game Designer, Solo Developer"],
+          ["Platforms", "Itch.io, Yandex.Games"],
+          ["Engine", "Godot"],
+        ],
+        contributions: [
+          "Sourced and curated a variety of assets to enhance the visual and functional elements of the game.",
+          "Integrated all game materials into the engine, ensuring a seamless transition from design to implementation.",
+          "Utilized ChatGPT to assist in coding, improving efficiency and functionality of game mechanics.",
+        ],
+        action: "ITCH.IO",
+        href: "https://valenandia.itch.io/tapapaw",
+        secondaryAction: "WATCH VIDEO",
+        secondaryHref: "https://drive.google.com/file/d/1tEBiLoD-LjCUgI_lVaLRp1E9Z2VFTIg3/view?usp=sharing",
+      },
+      {
+        id: "game-4",
+        icon: "🕹",
+        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(9).png",
+        label: "UNANNOUNCED JAM",
+        modalTitle: "Unannounced Jam",
+        tag: "GAME JAM",
+        body: <p className="under-construction">Under Construction</p>,
+      },
     ],
   },
   {
@@ -507,7 +531,7 @@ function Header({ onOpen }) {
 
       <div className="nav-actions">
         {navModals.map((item) => (
-          <button className={`menu-button nav-button ${item.id === "about" ? "about-nav" : ""} ${item.id === "press" ? "yellow" : ""}`} onClick={() => onOpen(item)} key={item.id}>{item.label}</button>
+          <button className={`menu-button nav-button ${item.id === "about" ? "about-nav" : ""}`} onClick={() => onOpen(item)} key={item.id}>{item.label}</button>
         ))}
       </div>
     </header>
@@ -516,7 +540,7 @@ function Header({ onOpen }) {
 
 function DesktopWindow({ win, active, onFocus, onOpen }) {
   const windowRef = useRef(null);
-  const [position, setPosition] = useState({ x: 24, y: 24 });
+  const [position, setPosition] = useState(null);
   const [drag, setDrag] = useState(null);
 
   useEffect(() => {
@@ -567,7 +591,7 @@ function DesktopWindow({ win, active, onFocus, onOpen }) {
     });
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const node = windowRef.current;
     if (!node) return;
 
@@ -605,7 +629,7 @@ function DesktopWindow({ win, active, onFocus, onOpen }) {
     <section
       ref={windowRef}
       className={`window window-${win.id} ${active ? "active" : ""} ${win.large ? "large" : ""}`}
-      style={{ left: position.x, top: position.y, zIndex: active ? 20 : 1 }}
+      style={{ left: position?.x ?? -9999, top: position?.y ?? 0, zIndex: active ? 20 : 1, visibility: position ? "visible" : "hidden" }}
       onMouseDown={() => onFocus(win.id)}
     >
       <div className={`window-header ${win.accent}`} onMouseDown={startDrag} onTouchStart={startDrag}>
@@ -894,40 +918,40 @@ button { font: inherit; }
 
 .brand-name img {
   display: block;
-  width: min(350px, 38vw);
-  max-height: 60px;
+  width: min(420px, 44vw);
+  max-height: 74px;
   object-fit: contain;
 }
 
 .brand-subtitle {
   display: block;
   width: 100%;
-  margin-top: 5px;
+  margin-top: 6px;
   font-family: var(--decorative-font);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.055em;
   line-height: 1;
   text-align: center;
   text-transform: uppercase;
-  color: rgba(236, 200, 247, 0.82);
+  color: rgba(236, 200, 247, 0.88);
 }
 
 .menu-button,
 .clock {
-  min-height: 40px;
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 17px;
+  padding: 9px 20px;
   border-radius: 999px;
-  border: 1px solid rgba(236, 200, 247, 0.24);
-  background: linear-gradient(180deg, rgba(247, 240, 245, 0.16), rgba(236, 200, 247, 0.07));
+  border: 1px solid rgba(236, 200, 247, 0.34);
+  background: linear-gradient(180deg, rgba(247, 240, 245, 0.18), rgba(236, 200, 247, 0.10));
   color: #F7F0F5;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 6px 14px rgba(0,0,0,0.12);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  font-size: 14px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), 0 6px 16px rgba(0,0,0,0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.03em;
   cursor: pointer;
@@ -945,19 +969,20 @@ button { font: inherit; }
 }
 
 .menu-button:hover {
-  background: linear-gradient(180deg, rgba(80, 133, 77, 0.28), rgba(236, 200, 247, 0.10));
-  border-color: rgba(80, 133, 77, 0.46);
+  background: linear-gradient(180deg, rgba(247, 240, 245, 0.28), rgba(236, 200, 247, 0.18));
+  border-color: rgba(236, 200, 247, 0.56);
   transform: translateY(-1px);
 }
 
 .menu-button.yellow {
-  background: linear-gradient(180deg, rgba(247, 240, 245, 0.18), rgba(236, 200, 247, 0.08));
+  border-color: rgba(255, 230, 0, 0.28);
 }
 
 .clock {
   font-family: "Share Tech Mono", monospace;
   color: var(--pink);
-  background: linear-gradient(180deg, rgba(236, 200, 247, 0.14), rgba(80, 133, 77, 0.07));
+  background: linear-gradient(180deg, rgba(236, 200, 247, 0.18), rgba(236, 200, 247, 0.08));
+  border-color: rgba(236, 200, 247, 0.34);
 }
 
 .sep {
@@ -1933,6 +1958,19 @@ button { font: inherit; }
   margin-top: 0;
 }
 
+.resume-experience-note {
+  margin: 0 0 18px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border-left: 3px solid var(--modal-accent-border);
+  background: rgba(23, 21, 68, 0.06);
+  font-family: var(--text-font);
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
 .timeline-item span,
 .article-row span {
   display: inline-block;
@@ -2103,18 +2141,20 @@ button { font: inherit; }
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 12px;
-  margin-top: 16px;
+  margin-top: 18px;
+  overflow-x: auto;
 }
 
 .community-card {
-  width: 126px;
-  height: 92px;
+  width: 158px;
+  height: 118px;
+  flex-shrink: 0;
   display: grid;
   place-items: center;
-  padding: 8px;
-  border-radius: 24px;
+  padding: 4px;
+  border-radius: 20px;
   border: 1px solid rgba(247, 240, 245, 0.20);
   background:
     linear-gradient(135deg, rgba(255,255,255,0.46), rgba(236,200,247,0.16)),
@@ -2131,14 +2171,11 @@ button { font: inherit; }
   width: 100%;
   height: 100%;
   max-width: 100%;
-  max-height: 76px;
+  max-height: 110px;
   object-fit: contain;
   display: block;
-  padding: 6px;
-  border-radius: 18px;
-  border: 0;
-  background: rgba(255,255,255,0.18);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.18);
+  padding: 2px;
+  border-radius: 16px;
 }
 
 .under-construction {
@@ -2340,15 +2377,16 @@ footer {
   .window,
   .window.large {
     position: static;
-    width: 100%;
+    width: min(100%, 680px);
     max-width: 100%;
+    margin: 0 auto;
   }
 
   .window-header { cursor: default; }
 
   .window-body {
-    overflow-x: auto;
-    flex-wrap: nowrap;
+    overflow-x: visible;
+    flex-wrap: wrap;
   }
 
   .window-work .window-body {
@@ -2363,8 +2401,8 @@ footer {
 }
 
 @media (max-width: 520px) {
-  .community-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .community-card { width: 100%; height: 96px; }
+  .community-grid { flex-wrap: wrap; justify-content: center; }
+  .community-card { width: 120px; height: 92px; }
   .nav-button.about-nav { font-size: 13px; }
   .article-row h3 { font-size: 22px; }
   .article-cover { width: 100%; }
