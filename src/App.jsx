@@ -65,31 +65,33 @@ const navModals = [
     accent: "purple",
     body: (
       <>
+        <div className="resume-list">
+          <article className="press-card">
+            <span className="press-year">June 2025 – Present</span>
+            <strong>Middle Game Designer — NDA</strong>
+            <p>NDA</p>
+          </article>
+
+          <article className="press-card">
+            <span className="press-year">Apr 2025 – Present</span>
+            <strong>Game Designer &amp; Level Designer — Drakaura Games</strong>
+            <p>Designed and interconnected core and meta systems, balanced mechanics, created UX documentation, and worked on player customization features.</p>
+            <div className="chips" style={{marginTop:"8px"}}>
+              {["SYSTEM DESIGN","LEVEL DESIGN","ENVIRONMENTAL PUZZLES","UNREAL ENGINE"].map(c=><span className="chip" key={c}>{c}</span>)}
+            </div>
+          </article>
+
+          <article className="press-card">
+            <span className="press-year">Dec 2024 – Present</span>
+            <strong>Game Designer — Eriars</strong>
+            <p>Prototyped core gameplay systems, designed magic combat and movement mechanics, and collaborated with narrative and art teams.</p>
+            <div className="chips" style={{marginTop:"8px"}}>
+              {["COMBAT DESIGN","ENCOUNTER DESIGN","GAME AI","UNREAL ENGINE","ARTICY"].map(c=><span className="chip" key={c}>{c}</span>)}
+            </div>
+          </article>
+        </div>
+
         <p className="resume-experience-note">Nearly 10+ years of experience creating mods for various games and platforms, covering content, cosmetics and NSFW+</p>
-
-        <article className="press-card">
-          <span className="press-year">June 2025 – Present</span>
-          <strong>Middle Game Designer — NDA</strong>
-          <p>NDA</p>
-        </article>
-
-        <article className="press-card">
-          <span className="press-year">Apr 2025 – Present</span>
-          <strong>Game Designer &amp; Level Designer — NDA Project</strong>
-          <p>Designed and interconnected core and meta systems, balanced mechanics, created UX documentation, and worked on player customization features.</p>
-          <div className="chips" style={{marginTop:"8px"}}>
-            {["SYSTEM DESIGN","LEVEL DESIGN","ENVIRONMENTAL PUZZLES","UNREAL ENGINE"].map(c=><span className="chip" key={c}>{c}</span>)}
-          </div>
-        </article>
-
-        <article className="press-card">
-          <span className="press-year">Dec 2024 – Present</span>
-          <strong>Game Designer — Eriars</strong>
-          <p>Prototyped core gameplay systems, designed magic combat and movement mechanics, and collaborated with narrative and art teams.</p>
-          <div className="chips" style={{marginTop:"8px"}}>
-            {["COMBAT DESIGN","ENCOUNTER DESIGN","GAME AI","UNREAL ENGINE","ARTICY"].map(c=><span className="chip" key={c}>{c}</span>)}
-          </div>
-        </article>
 
         <div className="resume-actions">
           <a className="modal-link no-dot" href="#">DOWNLOAD PDF</a>
@@ -213,6 +215,7 @@ const windows = [
         icon: "🎮",
         image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(3).png",
         label: "UNANNOUNCED PROJECT",
+        labelNode: <><span style={{display:"block"}}>UNANNOUNCED</span><span style={{display:"block"}}>PROJECT</span></>,
         modalTitle: "Unannounced Project",
         tag: "PROJECT",
         body: <p className="under-construction">Under Construction</p>,
@@ -352,7 +355,6 @@ const windows = [
         icon: "🕹",
         image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Untitled%20design777.png",
         topImages: [
-          "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Untitled%20design777.png",
           "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202025-06-06%20150006.png",
           "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202025-06-06%20172547.png",
         ],
@@ -412,6 +414,7 @@ const windows = [
         icon: "🕹",
         image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(9).png",
         label: "UNANNOUNCED JAM",
+        labelNode: <><span style={{display:"block"}}>UNANNOUNCED</span><span style={{display:"block"}}>JAM</span></>,
         modalTitle: "Unannounced Jam",
         tag: "GAME JAM",
         body: <p className="under-construction">Under Construction</p>,
@@ -523,9 +526,14 @@ function Header({ onOpen }) {
       </div>
 
       <div className="brand">
-        <strong className="brand-name">
+        <button
+          className="brand-name"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          title="Home"
+          aria-label="Go to top"
+        >
           <img src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Valentina%20Godovets.png" alt="Valentina Godovets" />
-        </strong>
+        </button>
         <span className="brand-subtitle">{profile.subtitle}</span>
       </div>
 
@@ -641,7 +649,7 @@ function DesktopWindow({ win, active, onFocus, onOpen }) {
         {win.items.map((item) => (
           <button className="item-card" onClick={() => onOpen({ ...item, accent: win.accent, folderTitle: win.title })} key={item.id}>
             <span className="item-icon">{item.image ? <img src={item.image} alt={item.label} /> : item.icon}</span>
-            <span className="item-label">{item.label}</span>
+            <span className="item-label">{item.labelNode ?? item.label}</span>
           </button>
         ))}
       </div>
@@ -676,7 +684,6 @@ function Modal({ modal, onClose }) {
       <dialog className={`modal-window ${modal.id ? `modal-${modal.id}` : ""}`} open onMouseDown={(event) => event.stopPropagation()}>
         <div className={`modal-header ${modal.accent || "purple"}`}>
           <WindowDots accent={modal.accent || "purple"} />
-          <span className="modal-tag">{modal.folderTitle || modal.label || modal.tag}</span>
           <strong>{modal.title || modal.modalTitle}</strong>
           <WindowDots accent={modal.accent || "purple"} side="right" />
           <button onClick={onClose} aria-label="Close modal">×</button>
@@ -876,15 +883,16 @@ button { font: inherit; }
 }
 
 .topbar {
-  height: 88px;
+  min-height: 96px;
+  height: auto;
   position: fixed;
   inset: 0 0 auto;
   z-index: 100;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 22px;
-  padding: 14px 22px;
+  gap: 18px;
+  padding: 16px 24px;
   background: linear-gradient(180deg, rgba(15, 14, 15, 0.62) 0%, rgba(15, 14, 15, 0.36) 100%);
   backdrop-filter: blur(18px) saturate(1.18);
   -webkit-backdrop-filter: blur(18px) saturate(1.18);
@@ -914,7 +922,13 @@ button { font: inherit; }
   display: grid;
   place-items: center;
   line-height: 1;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity 0.18s ease;
 }
+.brand-name:hover { opacity: 0.82; }
 
 .brand-name img {
   display: block;
@@ -993,7 +1007,7 @@ button { font: inherit; }
 
 .desktop {
   position: fixed;
-  top: 88px;
+  top: 96px;
   bottom: 24px;
   left: 0;
   right: 0;
@@ -1208,7 +1222,7 @@ button { font: inherit; }
   min-height: 40px;
   padding: 8px 8px 10px;
   font-family: var(--main-font);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 550;
   letter-spacing: 0.01em;
   line-height: 1.18;
@@ -1251,13 +1265,23 @@ button { font: inherit; }
 
 .window-projects .item-label {
   min-height: 44px;
-  font-size: 13px;
+  font-size: 12px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.2;
 }
 
 .window-games {
   width: 474px;
   min-width: 474px;
   max-width: 100%;
+}
+
+.window-games .item-label {
+  font-size: 12px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.2;
 }
 
 .window-games .window-body {
@@ -1299,7 +1323,7 @@ button { font: inherit; }
 .window-encounters .item-label {
   min-height: 56px;
   padding: 8px 8px 10px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 550;
   line-height: 1.16;
   white-space: normal;
@@ -1335,7 +1359,7 @@ button { font: inherit; }
 .window-work .item-label {
   min-height: 74px;
   padding: 8px 8px 10px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 550;
   line-height: 1.08;
   letter-spacing: 0;
@@ -1370,6 +1394,10 @@ button { font: inherit; }
   height: fit-content;
 }
 
+.window-wishlist .window-body {
+  justify-content: center;
+}
+
 .window-wishlist .item-icon {
   width: 262px;
   height: auto;
@@ -1384,7 +1412,7 @@ button { font: inherit; }
 }
 
 .window-wishlist .item-label {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 550;
   line-height: 1.14;
   letter-spacing: 0.015em;
@@ -1548,7 +1576,7 @@ button { font: inherit; }
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 6px;
   flex-wrap: wrap;
   width: 100%;
   max-width: 100%;
@@ -1556,7 +1584,7 @@ button { font: inherit; }
 }
 
 .top-image-card {
-  width: 126px;
+  width: 148px;
   margin: 0;
   padding: 8px;
   border-radius: 14px;
@@ -1564,10 +1592,10 @@ button { font: inherit; }
 
 .top-image-card img {
   width: 100%;
-  height: 82px;
+  height: 96px;
   display: block;
   object-fit: contain;
-  padding: 8px;
+  padding: 6px;
   border-radius: 12px;
 }
 
@@ -1958,17 +1986,30 @@ button { font: inherit; }
   margin-top: 0;
 }
 
+.resume-list {
+  display: grid;
+  gap: 14px;
+}
+
+.resume-list .press-card strong {
+  font-family: var(--main-font);
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--text);
+}
+
 .resume-experience-note {
-  margin: 0 0 18px;
-  padding: 12px 16px;
+  margin: 18px 0 0;
+  padding: 14px 18px;
   border-radius: 14px;
-  border-left: 3px solid var(--modal-accent-border);
-  background: rgba(23, 21, 68, 0.06);
-  font-family: var(--text-font);
-  font-size: 16px;
-  font-style: italic;
+  border-left: 3px solid rgba(23, 21, 68, 0.50);
+  background: rgba(23, 21, 68, 0.10);
+  font-family: var(--main-font);
+  font-size: 15px;
   line-height: 1.55;
-  color: var(--muted);
+  color: var(--text);
+  font-weight: 400;
 }
 
 .timeline-item span,
@@ -2153,29 +2194,24 @@ button { font: inherit; }
   flex-shrink: 0;
   display: grid;
   place-items: center;
-  padding: 4px;
+  padding: 6px;
   border-radius: 20px;
   border: 1px solid rgba(247, 240, 245, 0.20);
   background:
-    linear-gradient(135deg, rgba(255,255,255,0.46), rgba(236,200,247,0.16)),
-    rgba(255,255,255,0.30);
+    radial-gradient(circle at 50% 50%, rgba(236, 200, 247, 0.10), transparent 58%),
+    linear-gradient(145deg, rgba(31, 27, 37, 0.96), rgba(13, 12, 13, 0.94));
   box-shadow:
-    0 10px 20px rgba(0,0,0,0.09),
-    inset 0 1px 0 rgba(255,255,255,0.26);
-  backdrop-filter: blur(10px) saturate(1.06);
-  -webkit-backdrop-filter: blur(10px) saturate(1.06);
+    0 12px 26px rgba(0,0,0,0.26),
+    inset 0 1px 0 rgba(255,255,255,0.12);
   overflow: hidden;
 }
 
 .community-card img {
   width: 100%;
   height: 100%;
-  max-width: 100%;
-  max-height: 110px;
   object-fit: contain;
   display: block;
-  padding: 2px;
-  border-radius: 16px;
+  border-radius: 14px;
 }
 
 .under-construction {
@@ -2336,15 +2372,36 @@ footer {
   .window-encounters,
   .window-work,
   .window.large {
-    width: 100%;
     min-width: 0;
     max-width: 100%;
   }
 
+  .window,
+  .window-projects,
+  .window-games,
+  .window-links,
+  .window-encounters,
+  .window-work,
+  .window.large {
+    position: static;
+    width: min(100%, 680px);
+    max-width: calc(100vw - 36px);
+    margin: 0 auto;
+  }
+
+  .window-wishlist { order: -1; }
+
   .window-games .window-body,
   .window-encounters .window-body,
+  .window-projects .window-body,
   .window-work .window-body {
     flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .window-projects .item-card,
+  .window-games .item-card {
+    flex-shrink: 1;
   }
 
   .topbar {
@@ -2363,6 +2420,7 @@ footer {
 
   .desktop {
     position: static;
+    top: 0;
     display: grid;
     gap: 18px;
     padding: 18px;
@@ -2372,14 +2430,6 @@ footer {
   .app-shell {
     overflow: visible;
     padding-bottom: 24px;
-  }
-
-  .window,
-  .window.large {
-    position: static;
-    width: min(100%, 680px);
-    max-width: 100%;
-    margin: 0 auto;
   }
 
   .window-header { cursor: default; }
@@ -2397,6 +2447,26 @@ footer {
   footer {
     position: static;
     padding: 12px 0 18px;
+  }
+}
+
+@media (min-width: 521px) and (max-width: 920px) {
+  .topbar {
+    grid-template-columns: 1fr auto 1fr;
+    justify-items: unset;
+    padding: 12px 20px;
+  }
+  .socials { justify-content: flex-start; }
+  .nav-actions { justify-content: flex-end; }
+  .brand {
+    min-width: 0;
+    max-width: 260px;
+  }
+  .brand-name img { width: min(220px, 28vw); max-height: 52px; }
+  .brand-subtitle { font-size: 11px; }
+  .menu-button, .clock { font-size: 13px; padding-inline: 14px; min-height: 38px; }
+  .window, .window-projects, .window-games, .window-links, .window-encounters, .window-work, .window.large {
+    width: min(100%, 600px);
   }
 }
 
