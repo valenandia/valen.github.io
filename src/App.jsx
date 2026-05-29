@@ -24,16 +24,16 @@ const navModals = [
         <p>Currently, I’m also expanding my expertise in <strong>AI systems in games</strong> and how they can support gameplay architecture and emergent interactions.</p>
 
         <div className="community-grid">
-          <div className="community-card">
+          <div className="community-card" style={{background:"#fbf9f9"}}>
             <img src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202025-06-06%20150254.png" alt="Community membership badge" />
           </div>
-          <div className="community-card">
+          <div className="community-card" style={{background:"#fbf9f9"}}>
             <img src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202025-06-30%20212941.png" alt="Community membership badge" />
           </div>
-          <div className="community-card">
+          <div className="community-card" style={{background:"#1c306b"}}>
             <img src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202025-08-28%20220716.png" alt="Community membership badge" />
           </div>
-          <div className="community-card">
+          <div className="community-card" style={{background:"#4321aa"}}>
             <img src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/images.jpeg" alt="Community membership badge" />
           </div>
         </div>
@@ -214,8 +214,7 @@ const windows = [
         id: "project-2",
         icon: "🎮",
         image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(3).png",
-        label: "UNANNOUNCED PROJECT",
-        labelNode: <><span style={{display:"block"}}>UNANNOUNCED</span><span style={{display:"block"}}>PROJECT</span></>,
+        label: "UNANNOUNCED",
         modalTitle: "Unannounced Project",
         tag: "PROJECT",
         body: <p className="under-construction">Under Construction</p>,
@@ -413,8 +412,7 @@ const windows = [
         id: "game-4",
         icon: "🕹",
         image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(9).png",
-        label: "UNANNOUNCED JAM",
-        labelNode: <><span style={{display:"block"}}>UNANNOUNCED</span><span style={{display:"block"}}>JAM</span></>,
+        label: "UNANNOUNCED",
         modalTitle: "Unannounced Jam",
         tag: "GAME JAM",
         body: <p className="under-construction">Under Construction</p>,
@@ -649,7 +647,7 @@ function DesktopWindow({ win, active, onFocus, onOpen }) {
         {win.items.map((item) => (
           <button className="item-card" onClick={() => onOpen({ ...item, accent: win.accent, folderTitle: win.title })} key={item.id}>
             <span className="item-icon">{item.image ? <img src={item.image} alt={item.label} /> : item.icon}</span>
-            <span className="item-label">{item.labelNode ?? item.label}</span>
+            <span className="item-label">{item.label}</span>
           </button>
         ))}
       </div>
