@@ -2188,28 +2188,20 @@ button { font: inherit; }
 
 .community-card {
   width: 158px;
-  height: 118px;
   flex-shrink: 0;
-  display: grid;
-  place-items: center;
-  padding: 6px;
-  border-radius: 20px;
-  border: 1px solid rgba(247, 240, 245, 0.20);
-  background:
-    radial-gradient(circle at 50% 50%, rgba(236, 200, 247, 0.10), transparent 58%),
-    linear-gradient(145deg, rgba(31, 27, 37, 0.96), rgba(13, 12, 13, 0.94));
-  box-shadow:
-    0 12px 26px rgba(0,0,0,0.26),
-    inset 0 1px 0 rgba(255,255,255,0.12);
+  display: block;
+  padding: 0;
+  border-radius: 14px;
+  border: 1.5px solid rgba(0, 0, 0, 0.18);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.14), 0 4px 14px rgba(0,0,0,0.22);
   overflow: hidden;
 }
 
 .community-card img {
   width: 100%;
-  height: 100%;
-  object-fit: contain;
+  height: auto;
   display: block;
-  border-radius: 14px;
+  border-radius: 0;
 }
 
 .under-construction {
@@ -2470,7 +2462,7 @@ footer {
 
 @media (max-width: 520px) {
   .community-grid { flex-wrap: wrap; justify-content: center; }
-  .community-card { width: 120px; height: 92px; }
+  .community-card { width: 120px; }
   .nav-button.about-nav { font-size: 13px; }
   .article-row h3 { font-size: 22px; }
   .article-cover { width: 100%; }
