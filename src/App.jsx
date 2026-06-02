@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 const profile = {
   name: "VALENTINA GODOVETS",
@@ -439,21 +439,17 @@ const initialPositionRatios = {
   links: { x: 0.80, y: 0.78 },
 };
 
-function getResponsivePosition(id, node) {
+const TOPBAR_H = 96;
+const FOOTER_H = 24;
+
+function getInitialPosition(id) {
   const ratio = initialPositionRatios[id] || { x: 0.04, y: 0.06 };
-  const desktop = node?.closest(".desktop");
-
-  if (!node || !desktop) return { x: 24, y: 24 };
-
-  const desktopRect = desktop.getBoundingClientRect();
-  const rect = node.getBoundingClientRect();
   const safeGap = 12;
-  const maxX = Math.max(safeGap, desktopRect.width - rect.width - safeGap);
-  const maxY = Math.max(safeGap, desktopRect.height - rect.height - safeGap);
-
+  const availW = window.innerWidth;
+  const availH = window.innerHeight - TOPBAR_H - FOOTER_H;
   return {
-    x: Math.min(Math.max(safeGap, desktopRect.width * ratio.x), maxX),
-    y: Math.min(Math.max(safeGap, desktopRect.height * ratio.y), maxY),
+    x: Math.max(safeGap, Math.round(ratio.x * availW)),
+    y: Math.max(safeGap, Math.round(ratio.y * availH)),
   };
 }
 
@@ -546,7 +542,7 @@ function Header({ onOpen }) {
 
 function DesktopWindow({ win, active, onFocus, onOpen }) {
   const windowRef = useRef(null);
-  const [position, setPosition] = useState(null);
+  const [position, setPosition] = useState(() => getInitialPosition(win.id));
   const [drag, setDrag] = useState(null);
 
   useEffect(() => {
@@ -597,45 +593,34 @@ function DesktopWindow({ win, active, onFocus, onOpen }) {
     });
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const node = windowRef.current;
     if (!node) return;
-
     const safeGap = 12;
-    let wasInitialized = false;
 
-    const placeOrClampWindow = () => {
+    const clampPosition = () => {
       const desktop = node.closest(".desktop");
       if (!desktop) return;
-
       const desktopRect = desktop.getBoundingClientRect();
       const rect = node.getBoundingClientRect();
+      if (desktopRect.width === 0) return;
       const maxX = Math.max(safeGap, desktopRect.width - rect.width - safeGap);
       const maxY = Math.max(safeGap, desktopRect.height - rect.height - safeGap);
-
-      setPosition((current) => {
-        if (!wasInitialized) {
-          wasInitialized = true;
-          return getResponsivePosition(win.id, node);
-        }
-
-        return {
-          x: Math.min(Math.max(safeGap, current.x), maxX),
-          y: Math.min(Math.max(safeGap, current.y), maxY),
-        };
-      });
+      setPosition((current) => ({
+        x: Math.min(Math.max(safeGap, current.x), maxX),
+        y: Math.min(Math.max(safeGap, current.y), maxY),
+      }));
     };
 
-    placeOrClampWindow();
-    window.addEventListener("resize", placeOrClampWindow);
-    return () => window.removeEventListener("resize", placeOrClampWindow);
-  }, [win.id]);
+    window.addEventListener("resize", clampPosition);
+    return () => window.removeEventListener("resize", clampPosition);
+  }, []);
 
   return (
     <section
       ref={windowRef}
       className={`window window-${win.id} ${active ? "active" : ""} ${win.large ? "large" : ""}`}
-      style={{ left: position?.x ?? -9999, top: position?.y ?? 0, zIndex: active ? 20 : 1, visibility: position ? "visible" : "hidden" }}
+      style={{ left: position.x, top: position.y, zIndex: active ? 20 : 1 }}
       onMouseDown={() => onFocus(win.id)}
     >
       <div className={`window-header ${win.accent}`} onMouseDown={startDrag} onTouchStart={startDrag}>
