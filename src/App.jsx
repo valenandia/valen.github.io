@@ -1,2465 +1,2277 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-const profile = {
-  name: "VALENTINA GODOVETS",
-  subtitle: "Game Designer · Level Designer",
-  email: "godovets.valya@gmail.com",
-  socials: [
-    { label: "LINKEDIN", href: "https://www.linkedin.com/in/valenandia/" },
-    { label: "BACKLOGGERY", href: "https://www.backloggery.com/valenandia" },
-    { label: "X / TW", href: "https://x.com/valenandia" },
-  ],
-};
+  <meta
+    name="description"
+    content="Valentina Godovets — game designer and level designer. Projects, case studies, research and game jams."
+  >
 
-const navModals = [
-  {
-    id: "about",
-    label: "ABOUT",
-    title: "Valentina Godovets",
-    accent: "purple",
-    body: (
-      <>
-        <p>Hi! My name is <strong>Valentina</strong>, and I’m a <strong>game designer</strong> focused on <strong>gameplay systems</strong>, <strong>level design</strong>, <strong>combat design</strong>, exploration, encounters, and <strong>player experience</strong>.</p>
-        <p>I enjoy building mechanics that create readable goals, <strong>strong gameplay loops</strong>, and memorable player moments.</p>
-        <p>Currently, I’m also expanding my expertise in <strong>AI systems in games</strong> and how they can support gameplay architecture and emergent interactions.</p>
+  <meta name="theme-color" content="#ffffff">
 
-        <div className="community-grid">
-          <div className="community-card" style={{background:"#fbf9f9"}}>
-            <img src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202025-06-06%20150254.png" alt="Community membership badge" />
-          </div>
-          <div className="community-card" style={{background:"#fbf9f9"}}>
-            <img src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202025-06-30%20212941.png" alt="Community membership badge" />
-          </div>
-          <div className="community-card" style={{background:"#1c306b"}}>
-            <img src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202025-08-28%20220716.png" alt="Community membership badge" />
-          </div>
-          <div className="community-card" style={{background:"#4321aa"}}>
-            <img src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/images.jpeg" alt="Community membership badge" />
-          </div>
-        </div>
+  <title>Valentina Godovets — Portfolio</title>
 
-        <div className="resume-contact-divider" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-        <div className="contact-panel resume-contact-panel">
-          <h3>Contact</h3>
-          <p>I’m open to collaborations, creative projects, game design work, and professional opportunities.</p>
-          <div className="contact-actions">
-            <a className="contact-button" href="https://t.me/valenandia" target="_blank" rel="noreferrer">Telegram</a>
-            <a className="contact-button" href={`mailto:${profile.email}`}>Email</a>
-            <a className="contact-button" href="https://www.linkedin.com/in/valenandia/" target="_blank" rel="noreferrer">LinkedIn</a>
-          </div>
-          <form className="contact-form" action={`mailto:${profile.email}`} method="POST" encType="text/plain">
-            <label>Your name<input name="name" type="text" placeholder="Name" /></label>
-            <label>Your email<input name="email" type="email" placeholder="email@example.com" /></label>
-            <label>Message<textarea name="message" rows="5" placeholder="Write your message..." /></label>
-            <button type="submit" className="contact-button contact-submit">Send message</button>
-          </form>
-        </div>
-      </>
-    ),
-  },
-  {
-    id: "resume",
-    label: "RESUME",
-    title: "CV / Resume",
-    accent: "purple",
-    body: (
-      <>
-        <div className="resume-list">
-          <article className="press-card">
-            <span className="press-year">June 2025 – Present</span>
-            <strong>Middle Game Designer — NDA</strong>
-            <p>NDA</p>
-          </article>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Eagle+Lake&family=Cormorant+Garamond:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
-          <article className="press-card">
-            <span className="press-year">Apr 2025 – Present</span>
-            <strong>Game Designer &amp; Level Designer — Drakaura Games</strong>
-            <p>Designed and interconnected core and meta systems, balanced mechanics, created UX documentation, and worked on player customization features.</p>
-            <div className="chips" style={{marginTop:"8px"}}>
-              {["SYSTEM DESIGN","LEVEL DESIGN","ENVIRONMENTAL PUZZLES","UNREAL ENGINE"].map(c=><span className="chip" key={c}>{c}</span>)}
-            </div>
-          </article>
+  <style>
+    /* ========================================
+       BASIC SETTINGS
+    ======================================== */
 
-          <article className="press-card">
-            <span className="press-year">Dec 2024 – Present</span>
-            <strong>Game Designer — Eriars</strong>
-            <p>Prototyped core gameplay systems, designed magic combat and movement mechanics, and collaborated with narrative and art teams.</p>
-            <div className="chips" style={{marginTop:"8px"}}>
-              {["COMBAT DESIGN","ENCOUNTER DESIGN","GAME AI","UNREAL ENGINE","ARTICY"].map(c=><span className="chip" key={c}>{c}</span>)}
-            </div>
-          </article>
-        </div>
+    :root {
+      color-scheme: light;
 
-        <p className="resume-experience-note">Nearly 10+ years of experience creating mods for various games and platforms, covering content, cosmetics and NSFW+</p>
+      --background: #ffffff;
+      --text: #322c3b;
+      --muted: #786b80;
+      --purple: #745584;
 
-        <div className="resume-actions">
-          <a className="modal-link no-dot" href="#">DOWNLOAD PDF</a>
-        </div>
-      </>
-    ),
-  },
-  {
-    id: "articles",
-    label: "ARTICLES",
-    title: "Writing",
-    accent: "purple",
-    body: (
-      <div className="articles-list">
-        <Article
-          title="The Work of the Algorithm A* in 3D Games on Unreal Engine 5"
-          text="For my work, I came across the idea of implementing the A* Algorithm and a pathfinding system in 3D generated worlds based on Voronoi maps. Here is my implementation to make all the systems work."
-          image="https://raw.githubusercontent.com/valenandia/valen.github.io/main/istockphoto-1224500457-2048x2048.jpg"
-        />
-        <Article
-          title="Let’s Make MAGIC! — How Magic Is Incorporated in Gameplay in ‘The Sims 2: Making Magic’"
-          text="I have been a big fan of The Sims for many years of gaming. I didn’t know much about The Sims 2, because I started playing from the 3d games in the series, but I really wanted to see what the second part offered to players. In this article, I researched the most interesting mechanics: magic, and how it helped the gameplay come through."
-          image="https://raw.githubusercontent.com/valenandia/valen.github.io/main/hq720.jpg"
-        />
-        <Article
-          title="90s Waifu — What Hypercasual Mechanics Adult Games Use?"
-          text="A few years ago, when I browsed the internet for some references, I found a website full of adult games and was intrigued by that. So I went deeper and found out that a lot of these games use the same hypercasual mechanics, and it worked. Of course, it was because of naked ladies, but I wrote an article about what old games use and what we can incorporate into other projects."
-          image="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202026-05-26%20185513.png"
-        />
-        <Article
-          title="Exploring the Mechanics and Level Design of Journey"
-          text="For this article, I wanted to show how indie games — for example, the one discussed here — can demonstrate interesting level design using diegetic ways to create a world. It was a fun experience, and I wanted to share my interpretation of that."
-          image="https://raw.githubusercontent.com/valenandia/valen.github.io/main/1_hotJOMYOkumqOVsl9Th2jw.jpg"
-        />
-      </div>
-    ),
-  },
-  {
-    id: "press",
-    label: "PRESS",
-    title: "Press",
-    accent: "gold",
-    body: (
-      <div className="press-list">
-        <h3>2025</h3>
-
-        <article className="press-card">
-          <span className="press-year">May, 2025 · Cyber.Sports.ru</span>
-          <strong>Featured in the article about the game “The Tale of Mind”</strong>
-          <a className="press-link" href="https://cyber.sports.ru/games/blogs/3321384.html" target="_blank" rel="noreferrer">Read Press</a>
-        </article>
-
-        <article className="press-card">
-          <span className="press-year">March, 2025 · Prototype.Indie</span>
-          <strong>Featured at the pitch-session — “The Tale of Mind”</strong>
-          <a className="press-link" href="https://vk.com/video-212496568_456245939?to=L3ZpZGVvLTIxMjQ5NjU2OF80NTYyNDU5Mzk/" target="_blank" rel="noreferrer">Watch Press</a>
-        </article>
-
-        <h3>2024</h3>
-
-        <article className="press-card">
-          <span className="press-year">December, 2024 · Russia, Moscow</span>
-          <strong>Finalist of hackathon “Start a Game!” — “Gerasim vs Besi”</strong>
-          <a className="press-link" href="https://startgame.rsv.ru/" target="_blank" rel="noreferrer">Contest Page</a>
-        </article>
-
-        <article className="press-card">
-          <span className="press-year">October, 2024 · Russia, Vologda</span>
-          <strong>Finalist of hackathon “Sineus” — “Gerasim vs Besi”</strong>
-          <a className="press-link" href="https://drive.google.com/drive/folders/134ZJqQUbmhEh2ZzI4UrpnsukokoDOdwK" target="_blank" rel="noreferrer">View Press</a>
-        </article>
-
-        <article className="press-card">
-          <span className="press-year">August, 2024 · Astrum Entertainment</span>
-          <strong>One of the best work on the course — “Paws and Cards”</strong>
-          <p>Conceptualization Basics: 2nd</p>
-          <a className="press-link" href="https://drive.google.com/drive/folders/134ZJqQUbmhEh2ZzI4UrpnsukokoDOdwK" target="_blank" rel="noreferrer">View Press</a>
-        </article>
-      </div>
-    ),
-  },
-];
-
-const windows = [
-  {
-    id: "projects",
-    title: "PROJECTS",
-    accent: "purple",
-    items: [
-      {
-        id: "project-1",
-        icon: "🎮",
-        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202026-05-28%20150131.png",
-        label: "STORE SIMULATOR",
-        modalTitle: "Store Simulator",
-        tag: "PROJECT",
-        status: "In production, 2026",
-        description: "Store Simulator is a management simulator developed on Unreal Engine 5. My work focuses on game design, location customization, mini-game balance, and feature completion during production.",
-        meta: [
-          ["Genre", "Management Simulator"],
-          ["Role", "Game Designer"],
-          ["Involvement", "October 2023 — Present"],
-          ["Platforms", "TBA"],
-          ["Engine", "Unreal Engine 5"],
-        ],
-        contributions: [
-          "Assisted in the creation and documentation of game design documents, including documents about features, customization, and game balance.",
-          "Contributed to the creation of mechanics prototypes and screen UI mockups.",
-          "Assisted in the implementation of game content using engines such as Unreal Engine and Unity.",
-          "Collaborated with artists, programmers, and other team members to create game features.",
-          "Participated in gameplay testing sessions and provided feedback.",
-          "Took on additional tasks and responsibilities as needed to support the overall development.",
-        ],
-        action: "VIEW PROJECT",
-        href: "https://eriars.com/en/store-simulator-en/",
-        secondaryAction: "GDD EXAMPLE",
-        secondaryHref: "#",
-      },
-      {
-        id: "project-2",
-        icon: "🎮",
-        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(3).png",
-        label: "UNANNOUNCED",
-        modalTitle: "Unannounced Project",
-        tag: "PROJECT",
-        body: <p className="under-construction">Under Construction</p>,
-      },
-      {
-        id: "project-3",
-        icon: "🎮",
-        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/images%20(1).jpg",
-        projectImage: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/screenshot120.png",
-        label: "TAMRIEL REBUILT",
-        modalTitle: "Tamriel Rebuilt",
-        tag: "PROJECT",
-        status: "Somewhere in 2010s — 2019",
-        description: "Tamriel Rebuilt is a large-scale TES III mod project for Morrowind and OpenMW. My work combined game generalist tasks, level design, quest work, narrative design, and testing across Tamriel’s mainland regions.",
-        meta: [
-          ["Genre", "TES III: Mod"],
-          ["Role", "Game Generalist, Level Designer, Narrative Designer"],
-          ["Involvement", "2010s — 2019"],
-          ["Platforms", "Nexus Mods"],
-          ["Engine", "OpenMW"],
-        ],
-        contributions: [
-          "Developed engaging quests and character narratives to enhance player immersion across Tamriel’s mainland regions.",
-          "Utilized Morrowind’s Construction Set to construct detailed exterior landscapes, cities, and interior spaces, ensuring lore consistency and visual quality.",
-          "Conducted thorough testing of quests to verify functionality, balance, and a seamless player experience.",
-        ],
-        awardImage: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/azbsetn.png",
-        awardLabel: "Community Project Award",
-        awardPlacement: "top",
-        awardSize: "large",
-        action: "VIEW PROJECT",
-        href: "https://www.nexusmods.com/morrowind/mods/42145",
-        secondaryAction: "OFFICIAL SITE",
-        secondaryHref: "https://www.tamriel-rebuilt.org/",
-      },
-    ],
-  },
-  {
-    id: "wishlist",
-    title: "WISHLIST",
-    accent: "violet",
-    large: true,
-    items: [
-      {
-        id: "wishlist-1",
-        icon: "⭐",
-        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/logo1.png",
-        label: "TRACES OF NYPHS",
-        modalTitle: "Traces of Nyphs",
-        tag: "WISHLIST",
-        body: <p className="under-construction">Under Construction</p>,
-      },
-    ],
-  },
-  {
-    id: "encounters",
-    title: "ENCOUNTERS",
-    accent: "gold",
-    items: [
-      {
-        id: "encounter-1",
-        icon: "⚔️",
-        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(2).png",
-        label: "COMBAT PROTOTYPE",
-        modalTitle: "Combat Prototype",
-        tag: "ENCOUNTER",
-        body: <p className="under-construction">Under Construction</p>,
-      },
-      {
-        id: "encounter-2",
-        icon: "👑",
-        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(2).png",
-        label: "BOSS FIGHT ENCOUNTER",
-        modalTitle: "Boss Fight Encounter",
-        tag: "ENCOUNTER",
-        body: <p className="under-construction">Under Construction</p>,
-      },
-      {
-        id: "encounter-3",
-        icon: "🌊",
-        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(2).png",
-        label: "WAVE-BASED ENCOUNTER",
-        modalTitle: "Wave-Based Encounter",
-        tag: "ENCOUNTER",
-        body: <p className="under-construction">Under Construction</p>,
-      },
-    ],
-  },
-  {
-    id: "work",
-    title: "WORK EXAMPLES",
-    accent: "violet",
-    items: [
-      { id: "work-1", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(1).png", label: "BLOOD & HP FRAMEWORK", modalTitle: "Blood & HP Framework", tag: "WORK", body: <p className="under-construction">Under Construction</p> },
-      { id: "work-2", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(1).png", label: "ENVIRONMENT PUZZLE FRAMEWORK", modalTitle: "Environment Puzzle Framework", tag: "WORK", body: <p className="under-construction">Under Construction</p> },
-      { id: "work-3", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(1).png", label: "COMBAT DESIGN FRAMEWORK", modalTitle: "Combat Design Framework", tag: "WORK", body: <p className="under-construction">Under Construction</p> },
-      { id: "work-4", icon: "💼", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(1).png", label: "PITCH DOC: THE TALE OF MIND", modalTitle: "Pitch Doc: The Tale of Mind", tag: "WORK", body: <p className="under-construction">Under Construction</p> },
-    ],
-  },
-  {
-    id: "games",
-    title: "GAME JAMS",
-    accent: "red",
-    items: [
-      {
-        id: "game-1",
-        icon: "🕹",
-        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Untitled%20design89.png",
-        label: "THE MINOTAUR'S LABYRINTH",
-        modalTitle: "The Minotaur's Labyrinth",
-        tag: "GAME JAM",
-        status: "July, 2023",
-        description: "The Minotaur's Labyrinth is a puzzle maze game created during a game jam. I worked as a game generalist and contributed to level design, custom tile assets, brainstorming, and in-engine assembly.",
-        meta: [
-          ["Genre", "Puzzle, Maze"],
-          ["Role", "Game Generalist"],
-          ["Involvement", "July 2024"],
-          ["Platforms", "Itch.io"],
-          ["Engine", "Unity"],
-        ],
-        contributions: [
-          "Developed comprehensive level designs and layouts.",
-          "Created and optimized custom tile assets for levels.",
-          "Participated in strategic brainstorming and asset curation.",
-          "Integrated and assembled all elements within the game engine.",
-        ],
-        href: "https://owlrazum.itch.io/maze",
-        action: "ITCH.IO",
-        secondaryAction: "GDD",
-        secondaryHref: "https://docs.google.com/document/d/1HkyJHvpvJ54A559XAo-mI5n2L9os1gfZq6uJ7IaByYg/edit?usp=sharing",
-        awardImage: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/BcvkIk.png",
-        awardLabel: "Community Award",
-        awardPlacement: "top",
-      },
-      {
-        id: "game-2",
-        icon: "🕹",
-        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Untitled%20design777.png",
-        topImages: [
-          "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202025-06-06%20150006.png",
-          "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202025-06-06%20172547.png",
-        ],
-        label: "GERAVIM VS DEMONS",
-        modalTitle: "Geravim vs Demons",
-        tag: "GAME JAM",
-        status: "October, 2024",
-        description: "Geravim vs Demons is a rogue-lite game jam project built around class mechanics, weapon balance, skill sets, and myth-inspired combat design.",
-        meta: [
-          ["Genre", "Rogue-lite"],
-          ["Role", "Game Designer, Jammer, Generalist"],
-          ["Involvement", "October 2024"],
-          ["Platforms", "Itch.io"],
-          ["Engine", "Unreal Engine 5"],
-          ["Awards & Recognition", "Finalist in the ‘Regions and Languages of Russia’ category at the ‘Start a Game’ contest; finalist in the ‘Mythology in Art’ category, with the additional theme ‘O is Not Just a Letter’ / History of Vologda, at the ‘SINEUS’ contest."],
-        ],
-        contributions: [
-          "Developed balance for weapons, skill sets, and class mechanics.",
-          "Conducted asset sourcing.",
-          "Engaged in strategic brainstorming sessions.",
-          "Managed music direction, including asset selection and creation.",
-        ],
-        href: "https://mikhaile.itch.io/gerasimvsbesi",
-        action: "ITCH.IO",
-        secondaryAction: "CONCEPT DOC",
-        secondaryHref: "https://docs.google.com/document/d/1oPbnDe0Q8RlAx0XEw5MaR6Xi4B6Fk9rtXqiKR9v1Kg0/edit?tab=t.0#heading=h.1fs3h2986tyf",
-        extraActions: [
-          { label: "PITCH DOC RU", href: "https://docs.google.com/presentation/d/1Bi2XfUUYwEkIC_r1DoHzfHXQJ_QyrjKyO1kpRlRgXVk/edit?slide=id.p#slide=id.p" },
-        ],
-      },
-      {
-        id: "game-3",
-        icon: "🕹",
-        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202026-05-28%20153217.png",
-        label: "TAP A PAW!",
-        modalTitle: "Tap a Paw!",
-        tag: "GAME JAM",
-        status: "2024",
-        description: "Tap a Paw: Match-3 is a solo developer match-3 mobile game featuring cute paw mechanics and casual gameplay.",
-        meta: [
-          ["Role", "Game Designer, Solo Developer"],
-          ["Platforms", "Itch.io, Yandex.Games"],
-          ["Engine", "Godot"],
-        ],
-        contributions: [
-          "Sourced and curated a variety of assets to enhance the visual and functional elements of the game.",
-          "Integrated all game materials into the engine, ensuring a seamless transition from design to implementation.",
-          "Utilized ChatGPT to assist in coding, improving efficiency and functionality of game mechanics.",
-        ],
-        action: "ITCH.IO",
-        href: "https://valenandia.itch.io/tapapaw",
-        secondaryAction: "WATCH VIDEO",
-        secondaryHref: "https://drive.google.com/file/d/1tEBiLoD-LjCUgI_lVaLRp1E9Z2VFTIg3/view?usp=sharing",
-      },
-      {
-        id: "game-4",
-        icon: "🕹",
-        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(9).png",
-        label: "UNANNOUNCED",
-        modalTitle: "Unannounced Jam",
-        tag: "GAME JAM",
-        body: <p className="under-construction">Under Construction</p>,
-      },
-    ],
-  },
-  {
-    id: "links",
-    title: "ANALYSES",
-    accent: "green",
-    items: [
-      { id: "deconstruct-1", icon: "🔍", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Untitled%20design-.png", label: "OCARINA OF TIME", modalTitle: "The Legend of Zelda: Ocarina of Time", tag: "ANALYSES", body: <p className="under-construction">Under Construction</p> },
-      { id: "deconstruct-2", icon: "🔍", image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Untitled%20desig6n.png", label: "HOTLINE MIAMI", modalTitle: "Hotline Miami", tag: "ANALYSES", body: <p className="under-construction">Under Construction</p> },
-    ],
-  },
-];
-
-const initialPositionRatios = {
-  projects: { x: 0.04, y: 0.07 },
-  wishlist: { x: 0.43, y: 0.08 },
-  encounters: { x: 0.74, y: 0.07 },
-  work: { x: 0.04, y: 0.48 },
-  games: { x: 0.62, y: 0.47 },
-  links: { x: 0.80, y: 0.78 },
-};
-
-const TOPBAR_H = 96;
-const FOOTER_H = 24;
-
-function getInitialPosition(id) {
-  const ratio = initialPositionRatios[id] || { x: 0.04, y: 0.06 };
-  const safeGap = 12;
-  const availW = window.innerWidth;
-  const availH = window.innerHeight - TOPBAR_H - FOOTER_H;
-  return {
-    x: Math.max(safeGap, Math.round(ratio.x * availW)),
-    y: Math.max(safeGap, Math.round(ratio.y * availH)),
-  };
-}
-
-function Clock() {
-  const [time, setTime] = useState("--:--");
-
-  useEffect(() => {
-    const tick = () => {
-      const now = new Date();
-      setTime(`${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`);
-    };
-    tick();
-    const timer = window.setInterval(tick, 1000);
-    return () => window.clearInterval(timer);
-  }, []);
-
-  return <div className="clock">{time}</div>;
-}
-
-function Chips({ items = [] }) {
-  return <div className="chips">{items.map((item) => <span className="chip" key={item}>{item}</span>)}</div>;
-}
-
-function TimelineItem({ title, date, text, chips = [] }) {
-  return (
-    <div className="timeline-item">
-      <p><strong className="timeline-title">{title}</strong></p>
-      <span>{date}</span>
-      <p>{text}</p>
-      {chips.length > 0 && <Chips items={chips} />}
-    </div>
-  );
-}
-
-function Article({ title, text, image, href = "#" }) {
-  return (
-    <article className="article-row">
-      <h3>{title}</h3>
-      <div className="article-cover">
-        {image ? <img src={image} alt={title} /> : <span>Image coming soon</span>}
-      </div>
-      <p>{text}</p>
-      <a className="modal-link small" href={href}>READ</a>
-    </article>
-  );
-}
-
-function Header({ onOpen }) {
-  useEffect(() => {
-    const faviconHref = "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Frame%2045.png";
-    let favicon = document.querySelector('link[rel="icon"]');
-
-    if (!favicon) {
-      favicon = document.createElement("link");
-      favicon.rel = "icon";
-      document.head.appendChild(favicon);
+      --body-font: "Times New Roman", Times, serif;
+      --title-font: "Eagle Lake", Georgia, serif;
+      --detail-font: "Cormorant Garamond", Georgia, serif;
     }
 
-    favicon.href = faviconHref;
-  }, []);
+    * {
+      box-sizing: border-box;
+    }
 
-  return (
-    <header className="topbar">
-      <div className="socials">
-        {profile.socials.map((social) => (
-          <a className="menu-button" href={social.href} target="_blank" rel="noreferrer" key={social.label}>{social.label}</a>
-        ))}
-      </div>
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: var(--body-font);
+    }
 
-      <div className="brand">
-        <button
-          className="brand-name"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          title="Home"
-          aria-label="Go to top"
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--purple);
+      outline-offset: 5px;
+    }
+
+    .icon {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    .svg-library {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+
+    /* ========================================
+       PAGE LAYOUT
+    ======================================== */
+
+    .site-frame {
+      max-width: 1600px;
+      margin: auto;
+      padding: 0 72px;
+    }
+
+    .site-header {
+      height: 170px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .wordmark {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-image {
+      width: min(500px, 70vw);
+      max-height: 92px;
+      object-fit: contain;
+      filter: brightness(0);
+    }
+
+    .brand-subtitle {
+      font-family: var(--detail-font);
+      font-size: 15px;
+      letter-spacing: .055em;
+      text-transform: uppercase;
+      color: #67506d;
+    }
+
+    .site-layout {
+      display: grid;
+      grid-template-columns: 64px minmax(0, 1fr);
+      gap: 54px;
+      min-height: calc(100vh - 235px);
+    }
+
+    .main-content {
+      min-width: 0;
+      padding: 48px 0 70px;
+    }
+
+    .main-content:focus {
+      outline: none;
+    }
+
+    .page-heading {
+      margin-bottom: 35px;
+    }
+
+    .page-heading h1 {
+      font-family: var(--title-font);
+      font-size: clamp(24px, 2.4vw, 32px);
+      font-weight: 400;
+      line-height: 1.55;
+      overflow-wrap: anywhere;
+    }
+
+    /* ========================================
+       LEFT NAVIGATION
+    ======================================== */
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      align-self: start;
+      padding-top: 48px;
+      z-index: 10;
+    }
+
+    .main-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .nav-link {
+      position: relative;
+      display: flex;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-icon {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+
+      color: #745584;
+      border: 1px solid #d8c8e3;
+      border-radius: 12px;
+
+      background:
+        radial-gradient(
+          circle at 18% 10%,
+          #ffffff99,
+          transparent 65%
+        ),
+        linear-gradient(
+          145deg,
+          #f2e8f8,
+          #dacce8
+        );
+
+      box-shadow:
+        inset 0 1px 0 #ffffff,
+        0 4px 12px #80618d18;
+    }
+
+    .nav-link:hover .nav-icon,
+    .nav-link[aria-current="page"] .nav-icon {
+      color: #61406f;
+      border-color: #c9a8d5;
+
+      background:
+        radial-gradient(
+          circle at 18% 8%,
+          #ffffff99,
+          transparent 65%
+        ),
+        linear-gradient(
+          145deg,
+          #f1deef,
+          #e2cceb
+        );
+    }
+
+    .nav-tooltip {
+      position: absolute;
+      top: 50%;
+      left: calc(100% + 13px);
+      transform: translateY(-50%);
+
+      width: max-content;
+      max-width: 260px;
+
+      padding: 10px 14px;
+      border-radius: 5px;
+
+      background: #f7f0f5;
+      color: #43324f;
+      box-shadow: 0 6px 22px #17154420;
+
+      font-family: var(--detail-font);
+      font-size: 17px;
+      line-height: 1.5;
+
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .nav-link:hover .nav-tooltip,
+    .nav-link:focus-visible .nav-tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* ========================================
+       HOME
+    ======================================== */
+
+    .home-hero {
+      display: grid;
+      grid-template-columns:
+        minmax(0, .85fr)
+        minmax(0, 1.15fr);
+
+      align-items: center;
+      gap: clamp(24px, 3vw, 44px);
+
+      max-width: 1040px;
+      margin: auto;
+      padding: 16px 0 40px;
+    }
+
+    .portrait-wrap {
+      width: 100%;
+      max-width: 380px;
+      justify-self: end;
+    }
+
+    .photo-placeholder {
+      position: relative;
+      aspect-ratio: 4 / 5;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      overflow: hidden;
+      border: 1px solid #ddd0e2;
+      border-radius: 110px 110px 3px 3px;
+
+      background: #e9e1ed;
+      color: #887291;
+    }
+
+    .photo-placeholder::before,
+    .photo-placeholder::after {
+      content: "";
+
+      position: absolute;
+      width: 175%;
+      height: 110%;
+      top: 42%;
+      left: -35%;
+
+      border: 1px solid #d9cadd;
+      border-radius: 50%;
+
+      transform: rotate(-25deg);
+    }
+
+    .photo-placeholder::after {
+      top: 51%;
+      left: -5%;
+      transform: rotate(25deg);
+    }
+
+    .portrait-center {
+      position: relative;
+      z-index: 1;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .portrait-center .icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .portrait-center span {
+      font-size: 12px;
+    }
+
+    .portrait-caption {
+      position: absolute;
+      bottom: 22px;
+
+      font-size: 9px;
+      letter-spacing: .15em;
+    }
+
+    .home-copy {
+      min-width: 0;
+      max-width: 560px;
+    }
+
+    .bio p {
+      font-family: var(--body-font);
+      font-size: 18px;
+      line-height: 1.9;
+      color: #4c4254;
+    }
+
+    .bio p + p {
+      margin-top: 22px;
+    }
+
+    .bio strong {
+      font-weight: 700;
+    }
+
+    /* ========================================
+       CONTACTS
+    ======================================== */
+
+    .contact-strip {
+      padding: 30px 0;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .contact-strip > p {
+      font-family: var(--title-font);
+      font-size: 27px;
+      font-weight: 400;
+      line-height: 1.65;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 19px;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      font-family: var(--title-font);
+      font-size: 13px;
+      line-height: 1.5;
+
+      color: #6b5d74;
+    }
+
+    .social-links .icon {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* ========================================
+       PROJECT AND CASE CARDS
+    ======================================== */
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 32px 22px;
+    }
+
+    .portfolio-card {
+      display: block;
+      min-width: 0;
+    }
+
+    .card-cover {
+      position: relative;
+      aspect-ratio: 1.6;
+
+      overflow: hidden;
+      border-radius: 3px;
+
+      background: #e8e1eb;
+    }
+
+    .card-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .2s;
+    }
+
+    .portfolio-card:hover .card-cover img {
+      transform: scale(1.025);
+    }
+
+    .card-copy {
+      padding-top: 17px;
+    }
+
+    .eyebrow {
+      color: #786083;
+
+      font-family: var(--detail-font);
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.7;
+
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .card-copy h2 {
+      margin-top: 7px;
+
+      font-family: var(--title-font);
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.65;
+
+      overflow-wrap: anywhere;
+    }
+
+    .card-copy p {
+      margin-top: 6px;
+      color: #75637e;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ========================================
+       TABS
+    ======================================== */
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-bottom: 32px;
+    }
+
+    .tabs a {
+      padding: 9px 2px;
+      color: #806788;
+
+      font-family: var(--title-font);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .tabs a[aria-current="page"] {
+      padding-inline: 14px;
+      border-radius: 7px;
+
+      color: #171544;
+      background: #ecc8f733;
+    }
+
+    .empty-section {
+      min-height: 180px;
+    }
+
+    .under-construction {
+      margin: 30px 0;
+      color: #75637e;
+
+      font-family: var(--title-font);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    /* ========================================
+       CASE AND PROJECT PAGES
+    ======================================== */
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+
+      margin-bottom: 30px;
+      color: #8a7b94;
+
+      font-size: 14px;
+    }
+
+    .back-link .icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .case-banner {
+      height: 300px;
+    }
+
+    .case-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .case-pagination {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      margin-top: 45px;
+    }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+
+      color: #60466e;
+
+      font-family: var(--title-font);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .project-hero img {
+      width: 100%;
+      max-height: 420px;
+      object-fit: contain;
+    }
+
+    .project-description {
+      max-width: 760px;
+      margin: 30px 0 24px;
+
+      font-size: 18px;
+      line-height: 1.9;
+      color: #6e6376;
+    }
+
+    .project-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin: 20px 0 35px;
+    }
+
+    .project-meta {
+      margin: 30px 0;
+    }
+
+    .project-meta > div {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 20px;
+
+      padding: 12px 0;
+
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .project-meta dt {
+      color: var(--muted);
+    }
+
+    .project-meta dd {
+      margin: 0;
+    }
+
+    .contributions h2 {
+      font-family: var(--title-font);
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    .contributions li {
+      margin: 12px 0;
+
+      font-size: 16px;
+      line-height: 1.85;
+      color: #776a80;
+    }
+
+    .project-award {
+      margin-top: 30px;
+    }
+
+    .project-award img {
+      max-height: 260px;
+      object-fit: contain;
+    }
+
+    /* ========================================
+       ARTICLES
+    ======================================== */
+
+    .articles-list {
+      display: grid;
+      gap: 30px;
+    }
+
+    .article-card {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 26px;
+      padding-bottom: 30px;
+    }
+
+    .article-card img {
+      width: 100%;
+      aspect-ratio: 1.4;
+      object-fit: cover;
+    }
+
+    .article-card h2 {
+      margin: 5px 0 12px;
+
+      font-family: var(--title-font);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.8;
+    }
+
+    .article-card p {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    /* ========================================
+       AWARDS AND PRESS
+    ======================================== */
+
+    .award-card {
+      padding: 14px 0;
+    }
+
+    .award-icon {
+      height: 90px;
+
+      display: flex;
+      align-items: center;
+
+      color: #806189;
+    }
+
+    .award-icon .icon {
+      width: 34px;
+      height: 34px;
+    }
+
+    .award-card h2 {
+      margin: 10px 0;
+
+      font-family: var(--title-font);
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.7;
+    }
+
+    .award-card p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .award-card small {
+      display: block;
+      margin-top: 8px;
+
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .year {
+      color: #8c7295;
+
+      font-family: var(--detail-font);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .press-year-section {
+      margin-bottom: 45px;
+    }
+
+    .press-year-section > h2 {
+      margin-bottom: 22px;
+      color: #7f648a;
+
+      font-family: var(--detail-font);
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .press-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .press-card h3 {
+      font-family: var(--title-font);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.8;
+    }
+
+    .press-card p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* ========================================
+       FOOTER AND ACCESSIBILITY
+    ======================================== */
+
+    .site-footer {
+      padding: 22px 0;
+      text-align: center;
+
+      color: #918797;
+      font-size: 12px;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: -60px;
+      left: 20px;
+
+      z-index: 100;
+      padding: 10px;
+      background: #ffffff;
+    }
+
+    .skip-link:focus {
+      top: 10px;
+    }
+
+    /* ========================================
+       RESPONSIVE LAYOUT
+    ======================================== */
+
+    @media (min-width: 1450px) {
+      .site-layout {
+        gap: 75px;
+      }
+
+      .home-hero {
+        padding-top: 25px;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .site-frame {
+        padding-inline: 48px;
+      }
+
+      .site-layout {
+        grid-template-columns: 54px minmax(0, 1fr);
+        gap: 35px;
+      }
+
+      .nav-link {
+        width: 42px;
+        height: 42px;
+      }
+
+      .card-copy h2 {
+        font-size: 17px;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .site-frame {
+        padding-inline: 32px;
+      }
+
+      .site-header {
+        height: 145px;
+      }
+
+      .brand-image {
+        width: min(450px, 75vw);
+      }
+
+      .brand-subtitle {
+        font-size: 13px;
+      }
+
+      .site-layout {
+        grid-template-columns: 45px minmax(0, 1fr);
+        gap: 24px;
+      }
+
+      .sidebar {
+        padding-top: 30px;
+      }
+
+      .nav-link {
+        width: 40px;
+        height: 40px;
+      }
+
+      .main-content {
+        padding-top: 30px;
+      }
+
+      .page-heading h1 {
+        font-size: 28px;
+      }
+
+      .home-hero {
+        gap: 24px;
+        padding-top: 0;
+      }
+
+      .bio p {
+        font-size: 17px;
+        line-height: 1.8;
+      }
+
+      .card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 30px 18px;
+      }
+
+      .article-card {
+        grid-template-columns: 1fr;
+      }
+
+      .article-card img {
+        max-width: 340px;
+      }
+
+      .contact-strip > p {
+        font-size: 24px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .site-frame {
+        padding-inline: 24px;
+      }
+
+      .home-hero {
+        grid-template-columns: minmax(0, 1fr);
+        max-width: 430px;
+        gap: 24px;
+      }
+
+      .portrait-wrap {
+        width: min(100%, 270px);
+        justify-self: center;
+      }
+
+      .bio p + p {
+        margin-top: 18px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .site-header {
+        height: 125px;
+      }
+
+      .brand-image {
+        width: 85vw;
+      }
+
+      .brand-subtitle {
+        font-size: 11px;
+      }
+
+      .site-layout {
+        grid-template-columns: 36px minmax(0, 1fr);
+        gap: 18px;
+      }
+
+      .main-content {
+        padding-bottom: 40px;
+      }
+
+      .main-nav {
+        gap: 15px;
+      }
+
+      .nav-link {
+        width: 34px;
+        height: 36px;
+      }
+
+      .nav-icon .icon {
+        width: 18px;
+        height: 18px;
+      }
+
+      .nav-tooltip {
+        max-width: 220px;
+        font-size: 15px;
+      }
+
+      .page-heading h1 {
+        font-size: 24px;
+      }
+
+      .card-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .card-copy h2 {
+        font-size: 17px;
+      }
+
+      .tabs {
+        gap: 17px;
+      }
+
+      .tabs a {
+        font-size: 12px;
+      }
+
+      .contact-strip > p {
+        font-size: 21px;
+      }
+
+      .social-links {
+        gap: 20px;
+      }
+
+      .social-links a {
+        font-size: 11px;
+      }
+
+      .case-banner {
+        height: 190px;
+      }
+
+      .case-pagination .text-link {
+        font-size: 11px;
+      }
+
+      .project-meta > div {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Reusable navigation icons -->
+  <svg
+    class="svg-library"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <symbol id="icon-projects" viewBox="0 0 24 24">
+      <path d="M3 7h7l2-3h9v16H3Z M3 9h18"/>
+    </symbol>
+
+    <symbol id="icon-cases" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="7" height="7" rx="1"/>
+      <rect x="14" y="3" width="7" height="7" rx="1"/>
+      <rect x="3" y="14" width="7" height="7" rx="1"/>
+      <rect x="14" y="14" width="7" height="7" rx="1"/>
+    </symbol>
+
+    <symbol id="icon-research" viewBox="0 0 24 24">
+      <path d="M12 5C8 2 4 3 2 4v15c4-2 7-1 10 1 3-2 6-3 10-1V4c-3-1-7-2-10 1Zm0 0v15 M5 8h4m-4 4h4m6-4h4m-4 4h4"/>
+    </symbol>
+
+    <symbol id="icon-mentoring" viewBox="0 0 24 24">
+      <path d="m2 8 10-5 10 5-10 5Z M6 10v6c4 3 8 3 12 0v-6M22 8v8"/>
+    </symbol>
+
+    <symbol id="icon-about" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M12 11v6m0-10v.1M10 17h4"/>
+    </symbol>
+
+    <symbol id="icon-photo" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="18" height="18" rx="2"/>
+      <circle cx="8" cy="8" r="2"/>
+      <path d="m3 17 5-5 4 4 4-7 5 8"/>
+    </symbol>
+
+    <symbol id="icon-external" viewBox="0 0 24 24">
+      <path d="M14 3h7v7m0-7L10 14M10 3H3v18h18v-7"/>
+    </symbol>
+
+    <symbol id="icon-mail" viewBox="0 0 24 24">
+      <rect x="2" y="5" width="20" height="14" rx="2"/>
+      <path d="m2 6 10 7L22 6"/>
+    </symbol>
+
+    <symbol id="icon-back" viewBox="0 0 24 24">
+      <path d="M20 12H4m6-6-6 6 6 6"/>
+    </symbol>
+
+    <symbol id="icon-awards" viewBox="0 0 24 24">
+      <path d="M7 3h10v5a5 5 0 0 1-10 0ZM7 5H3v3a4 4 0 0 0 5 4m9-7h4v3a4 4 0 0 1-5 4M12 13v6m-5 2h10"/>
+    </symbol>
+  </svg>
+
+  <a class="skip-link" href="#main-content">
+    Skip to content
+  </a>
+
+  <div class="site-frame">
+    <header class="site-header">
+      <a
+        class="wordmark"
+        href="#/"
+        aria-label="Valentina Godovets — Home"
+      >
+        <img
+          class="brand-image"
+          src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Valentina%20Godovets.png"
+          alt="Valentina Godovets"
         >
-          <img src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Valentina%20Godovets.png" alt="Valentina Godovets" />
-        </button>
-        <span className="brand-subtitle">{profile.subtitle}</span>
-      </div>
 
-      <div className="nav-actions">
-        {navModals.map((item) => (
-          <button className={`menu-button nav-button ${item.id === "about" ? "about-nav" : ""}`} onClick={() => onOpen(item)} key={item.id}>{item.label}</button>
-        ))}
-      </div>
+        <span class="brand-subtitle">
+          Game Designer · Level Designer
+        </span>
+      </a>
     </header>
-  );
-}
 
-function DesktopWindow({ win, active, onFocus, onOpen }) {
-  const windowRef = useRef(null);
-  const [position, setPosition] = useState(() => getInitialPosition(win.id));
-  const [drag, setDrag] = useState(null);
+    <div class="site-layout">
+      <aside class="sidebar">
+        <nav
+          class="main-nav"
+          aria-label="Main navigation"
+          id="main-navigation"
+        ></nav>
+      </aside>
 
-  useEffect(() => {
-    if (!drag) return;
+      <main
+        class="main-content"
+        id="main-content"
+        tabindex="-1"
+      ></main>
+    </div>
 
-    const handleMove = (event) => {
-      if (event.cancelable) event.preventDefault();
-      const clientX = event.touches?.[0]?.clientX ?? event.clientX;
-      const clientY = event.touches?.[0]?.clientY ?? event.clientY;
-      const safeGap = 12;
-      const maxX = Math.max(safeGap, drag.containerWidth - drag.width - safeGap);
-      const maxY = Math.max(safeGap, drag.containerHeight - drag.height - safeGap);
-      setPosition({
-        x: Math.min(Math.max(safeGap, clientX - drag.containerLeft - drag.offsetX), maxX),
-        y: Math.min(Math.max(safeGap, clientY - drag.containerTop - drag.offsetY), maxY),
-      });
-    };
+    <footer class="site-footer">
+      © <span id="year"></span> Valentina Godovets
+    </footer>
+  </div>
 
-    const stopDrag = () => setDrag(null);
-    window.addEventListener("mousemove", handleMove);
-    window.addEventListener("mouseup", stopDrag);
-    window.addEventListener("touchmove", handleMove, { passive: false });
-    window.addEventListener("touchend", stopDrag);
+  <!-- HOME PAGE -->
+  <template id="home-template">
+    <section class="home-hero">
+      <div class="portrait-wrap">
+        <!-- Replace this placeholder with your portrait when ready. -->
+        <div
+          class="photo-placeholder"
+          role="img"
+          aria-label="Reserved for Valentina’s portrait"
+        >
+          <div class="portrait-center">
+            <svg class="icon" aria-hidden="true">
+              <use href="#icon-photo"></use>
+            </svg>
 
-    return () => {
-      window.removeEventListener("mousemove", handleMove);
-      window.removeEventListener("mouseup", stopDrag);
-      window.removeEventListener("touchmove", handleMove);
-      window.removeEventListener("touchend", stopDrag);
-    };
-  }, [drag]);
+            <span>Portrait coming soon</span>
+          </div>
 
-  const startDrag = (event) => {
-    onFocus(win.id);
-    const clientX = event.touches?.[0]?.clientX ?? event.clientX;
-    const clientY = event.touches?.[0]?.clientY ?? event.clientY;
-    const rect = event.currentTarget.closest(".window").getBoundingClientRect();
-    const desktopRect = event.currentTarget.closest(".desktop").getBoundingClientRect();
-    setDrag({
-      offsetX: clientX - rect.left,
-      offsetY: clientY - rect.top,
-      width: rect.width,
-      height: rect.height,
-      containerLeft: desktopRect.left,
-      containerTop: desktopRect.top,
-      containerWidth: desktopRect.width,
-      containerHeight: desktopRect.height,
-    });
-  };
-
-  useEffect(() => {
-    const node = windowRef.current;
-    if (!node) return;
-    const safeGap = 12;
-
-    const clampPosition = () => {
-      const desktop = node.closest(".desktop");
-      if (!desktop) return;
-      const desktopRect = desktop.getBoundingClientRect();
-      const rect = node.getBoundingClientRect();
-      if (desktopRect.width === 0) return;
-      const maxX = Math.max(safeGap, desktopRect.width - rect.width - safeGap);
-      const maxY = Math.max(safeGap, desktopRect.height - rect.height - safeGap);
-      setPosition((current) => ({
-        x: Math.min(Math.max(safeGap, current.x), maxX),
-        y: Math.min(Math.max(safeGap, current.y), maxY),
-      }));
-    };
-
-    window.addEventListener("resize", clampPosition);
-    return () => window.removeEventListener("resize", clampPosition);
-  }, []);
-
-  return (
-    <section
-      ref={windowRef}
-      className={`window window-${win.id} ${active ? "active" : ""} ${win.large ? "large" : ""}`}
-      style={{ left: position.x, top: position.y, zIndex: active ? 20 : 1 }}
-      onMouseDown={() => onFocus(win.id)}
-    >
-      <div className={`window-header ${win.accent}`} onMouseDown={startDrag} onTouchStart={startDrag}>
-        <WindowDots accent={win.accent} />
-        <span>{win.title}</span>
-        <WindowDots accent={win.accent} side="right" />
+          <span class="portrait-caption">
+            VALENTINA / GAME DESIGNER
+          </span>
+        </div>
       </div>
-      <div className="window-body">
-        {win.items.map((item) => (
-          <button className="item-card" onClick={() => onOpen({ ...item, accent: win.accent, folderTitle: win.title })} key={item.id}>
-            <span className="item-icon">{item.image ? <img src={item.image} alt={item.label} /> : item.icon}</span>
-            <span className="item-label">{item.label}</span>
-          </button>
-        ))}
+
+      <div class="home-copy bio">
+        <p>
+          Hi! My name is <strong>Valentina</strong>, and I’m a
+          <strong>game designer</strong> focused on
+          <strong>gameplay systems</strong>,
+          <strong>level design</strong>,
+          <strong>combat design</strong>, exploration, encounters, and
+          <strong>player experience</strong>.
+        </p>
+
+        <p>
+          I enjoy building mechanics that create readable goals,
+          <strong>strong gameplay loops</strong>, and memorable player moments.
+        </p>
+
+        <p>
+          Currently, I’m also expanding my expertise in
+          <strong>AI systems in games</strong> and how they can support
+          gameplay architecture and emergent interactions.
+        </p>
       </div>
     </section>
-  );
-}
+  </template>
 
-function WindowDots({ accent, side = "left" }) {
-  return (
-    <div className={`dots ${side}`} aria-hidden="true">
-      <span className={`window-star ${accent || "purple"}`}>✦</span>
-    </div>
-  );
-}
+  <script>
+    /* ========================================
+       IMAGE SETTINGS
+    ======================================== */
 
-function Modal({ modal, onClose }) {
-  useEffect(() => {
-    if (!modal) return;
-    const handleKey = (event) => {
-      if (event.key === "Escape") onClose();
+    const ASSET_ROOT =
+      "https://raw.githubusercontent.com/valenandia/valen.github.io/main/";
+
+    const FRAMEWORK_IMAGE =
+      ASSET_ROOT + "thinking...%20(1).png";
+
+    /* ========================================
+       PORTFOLIO CONTENT
+
+       Edit these entries to update cards,
+       descriptions, links and project pages.
+    ======================================== */
+
+    const content = {
+      projects: [
+        {
+          id: "project-1",
+          image:
+            ASSET_ROOT + "Screenshot%202026-05-28%20150131.png",
+
+          modalTitle: "Store Simulator",
+          tag: "PROJECT",
+          status: "In production, 2026",
+
+          description:
+            "Store Simulator is a management simulator developed on Unreal Engine 5. My work focuses on game design, location customization, mini-game balance, and feature completion during production.",
+
+          meta: [
+            ["Genre", "Management Simulator"],
+            ["Role", "Game Designer"],
+            ["Involvement", "October 2023 — Present"],
+            ["Platforms", "TBA"],
+            ["Engine", "Unreal Engine 5"]
+          ],
+
+          contributions: [
+            "Assisted in the creation and documentation of game design documents, including documents about features, customization, and game balance.",
+            "Contributed to the creation of mechanics prototypes and screen UI mockups.",
+            "Assisted in the implementation of game content using engines such as Unreal Engine and Unity.",
+            "Collaborated with artists, programmers, and other team members to create game features.",
+            "Participated in gameplay testing sessions and provided feedback.",
+            "Took on additional tasks and responsibilities as needed to support the overall development."
+          ],
+
+          action: "VIEW PROJECT",
+          href: "https://eriars.com/en/store-simulator-en/",
+
+          secondaryAction: "GDD EXAMPLE",
+          secondaryHref: "#",
+
+          construction: false
+        },
+
+        {
+          id: "project-2",
+          image: ASSET_ROOT + "thinking...%20(3).png",
+
+          modalTitle: "Unannounced Project",
+          tag: "PROJECT",
+
+          construction: true
+        },
+
+        {
+          id: "project-3",
+          image: ASSET_ROOT + "images%20(1).jpg",
+          projectImage: ASSET_ROOT + "screenshot120.png",
+
+          modalTitle: "Tamriel Rebuilt",
+          tag: "PROJECT",
+          status: "Somewhere in 2010s — 2019",
+
+          description:
+            "Tamriel Rebuilt is a large-scale TES III mod project for Morrowind and OpenMW. My work combined game generalist tasks, level design, quest work, narrative design, and testing across Tamriel’s mainland regions.",
+
+          meta: [
+            ["Genre", "TES III: Mod"],
+            [
+              "Role",
+              "Game Generalist, Level Designer, Narrative Designer"
+            ],
+            ["Involvement", "2010s — 2019"],
+            ["Platforms", "Nexus Mods"],
+            ["Engine", "OpenMW"]
+          ],
+
+          contributions: [
+            "Developed engaging quests and character narratives to enhance player immersion across Tamriel’s mainland regions.",
+            "Utilized Morrowind’s Construction Set to construct detailed exterior landscapes, cities, and interior spaces, ensuring lore consistency and visual quality.",
+            "Conducted thorough testing of quests to verify functionality, balance, and a seamless player experience."
+          ],
+
+          awardImage: ASSET_ROOT + "azbsetn.png",
+          awardLabel: "Community Project Award",
+
+          action: "VIEW PROJECT",
+          href: "https://www.nexusmods.com/morrowind/mods/42145",
+
+          secondaryAction: "OFFICIAL SITE",
+          secondaryHref: "https://www.tamriel-rebuilt.org/",
+
+          construction: false
+        }
+      ],
+
+      cases: [
+        {
+          id: "combat-design",
+          title: "Combat Design Framework",
+          subtitle: "JRPG Boss Design & Hitbox/Hit Zone Systems",
+          category: "Combat design"
+        },
+
+        {
+          id: "environment-puzzles",
+          title: "Environment Puzzle Framework",
+          subtitle: "Open-World Adventure Puzzle Design",
+          category: "Puzzle design"
+        },
+
+        {
+          id: "blood-hp",
+          title: "Blood & HP Exchange Mechanics",
+          subtitle: "Health Resource Exchange System",
+          category: "Systems design"
+        },
+
+        {
+          id: "magic-performance",
+          title: "Magic Performance Combat System",
+          subtitle: "Outfit-Based Builds & Elemental Abilities",
+          category: "Combat design"
+        },
+
+        {
+          id: "gameplay-progression",
+          title: "Gameplay Loop & Progression Design",
+          subtitle: "Investigation Action-Adventure",
+          category: "Gameplay design"
+        },
+
+        {
+          id: "dungeon-design",
+          title: "Dungeon Level Design & Gameplay Metrics",
+          subtitle: "PvE & PvP Dungeon Spaces",
+          category: "Level design"
+        },
+
+        {
+          id: "npc-ai",
+          title: "NPC AI Framework (Behavior Trees + GOAP)",
+          subtitle: "Fairy Town",
+          category: "AI design"
+        }
+      ],
+
+      research: [
+        {
+          id: "deconstruct-1",
+          image: ASSET_ROOT + "Untitled%20design-.png",
+
+          modalTitle: "The Legend of Zelda: Ocarina of Time",
+          tag: "ANALYSES",
+
+          construction: true
+        },
+
+        {
+          id: "deconstruct-2",
+          image: ASSET_ROOT + "Untitled%20desig6n.png",
+
+          modalTitle: "Hotline Miami",
+          tag: "ANALYSES",
+
+          construction: true
+        }
+      ],
+
+      articles: [
+        {
+          title:
+            "The Work of the Algorithm A* in 3D Games on Unreal Engine 5",
+
+          text:
+            "For my work, I came across the idea of implementing the A* Algorithm and a pathfinding system in 3D generated worlds based on Voronoi maps. Here is my implementation to make all the systems work.",
+
+          image:
+            ASSET_ROOT + "istockphoto-1224500457-2048x2048.jpg"
+        },
+
+        {
+          title:
+            "Let’s Make MAGIC! — How Magic Is Incorporated in Gameplay in ‘The Sims 2: Making Magic’",
+
+          text:
+            "I have been a big fan of The Sims for many years of gaming. I didn’t know much about The Sims 2, because I started playing from the 3d games in the series, but I really wanted to see what the second part offered to players. In this article, I researched the most interesting mechanics: magic, and how it helped the gameplay come through.",
+
+          image: ASSET_ROOT + "hq720.jpg"
+        },
+
+        {
+          title:
+            "90s Waifu — What Hypercasual Mechanics Adult Games Use?",
+
+          text:
+            "A few years ago, when I browsed the internet for some references, I found a website full of adult games and was intrigued by that. So I went deeper and found out that a lot of these games use the same hypercasual mechanics, and it worked. Of course, it was because of naked ladies, but I wrote an article about what old games use and what we can incorporate into other projects.",
+
+          image:
+            ASSET_ROOT + "Screenshot%202026-05-26%20185513.png"
+        },
+
+        {
+          title:
+            "Exploring the Mechanics and Level Design of Journey",
+
+          text:
+            "For this article, I wanted to show how indie games — for example, the one discussed here — can demonstrate interesting level design using diegetic ways to create a world. It was a fun experience, and I wanted to share my interpretation of that.",
+
+          image:
+            ASSET_ROOT + "1_hotJOMYOkumqOVsl9Th2jw.jpg"
+        }
+      ],
+
+      games: [
+        {
+          id: "game-1",
+          image: ASSET_ROOT + "Untitled%20design89.png",
+
+          modalTitle: "The Minotaur's Labyrinth",
+          tag: "GAME JAM",
+          status: "July, 2023",
+
+          description:
+            "The Minotaur's Labyrinth is a puzzle maze game created during a game jam. I worked as a game generalist and contributed to level design, custom tile assets, brainstorming, and in-engine assembly.",
+
+          meta: [
+            ["Genre", "Puzzle, Maze"],
+            ["Role", "Game Generalist"],
+            ["Involvement", "July 2024"],
+            ["Platforms", "Itch.io"],
+            ["Engine", "Unity"]
+          ],
+
+          contributions: [
+            "Developed comprehensive level designs and layouts.",
+            "Created and optimized custom tile assets for levels.",
+            "Participated in strategic brainstorming and asset curation.",
+            "Integrated and assembled all elements within the game engine."
+          ],
+
+          action: "ITCH.IO",
+          href: "https://owlrazum.itch.io/maze",
+
+          secondaryAction: "GDD",
+          secondaryHref:
+            "https://docs.google.com/document/d/1HkyJHvpvJ54A559XAo-mI5n2L9os1gfZq6uJ7IaByYg/edit?usp=sharing",
+
+          awardImage: ASSET_ROOT + "BcvkIk.png",
+          awardLabel: "Community Award",
+
+          construction: false
+        },
+
+        {
+          id: "game-2",
+          image: ASSET_ROOT + "Untitled%20design777.png",
+
+          modalTitle: "Geravim vs Demons",
+          tag: "GAME JAM",
+          status: "October, 2024",
+
+          description:
+            "Geravim vs Demons is a rogue-lite game jam project built around class mechanics, weapon balance, skill sets, and myth-inspired combat design.",
+
+          meta: [
+            ["Genre", "Rogue-lite"],
+            ["Role", "Game Designer, Jammer, Generalist"],
+            ["Involvement", "October 2024"],
+            ["Platforms", "Itch.io"],
+            ["Engine", "Unreal Engine 5"],
+            [
+              "Awards & Recognition",
+              "Finalist in the ‘Regions and Languages of Russia’ category at the ‘Start a Game’ contest; finalist in the ‘Mythology in Art’ category, with the additional theme ‘O is Not Just a Letter’ / History of Vologda, at the ‘SINEUS’ contest."
+            ]
+          ],
+
+          contributions: [
+            "Developed balance for weapons, skill sets, and class mechanics.",
+            "Conducted asset sourcing.",
+            "Engaged in strategic brainstorming sessions.",
+            "Managed music direction, including asset selection and creation."
+          ],
+
+          action: "ITCH.IO",
+          href: "https://mikhaile.itch.io/gerasimvsbesi",
+
+          secondaryAction: "CONCEPT DOC",
+          secondaryHref:
+            "https://docs.google.com/document/d/1oPbnDe0Q8RlAx0XEw5MaR6Xi4B6Fk9rtXqiKR9v1Kg0/edit?tab=t.0#heading=h.1fs3h2986tyf",
+
+          extraActions: [
+            {
+              label: "PITCH DOC RU",
+              href:
+                "https://docs.google.com/presentation/d/1Bi2XfUUYwEkIC_r1DoHzfHXQJ_QyrjKyO1kpRlRgXVk/edit?slide=id.p#slide=id.p"
+            }
+          ],
+
+          construction: false
+        },
+
+        {
+          id: "game-3",
+          image:
+            ASSET_ROOT + "Screenshot%202026-05-28%20153217.png",
+
+          modalTitle: "Tap a Paw!",
+          tag: "GAME JAM",
+          status: "2024",
+
+          description:
+            "Tap a Paw: Match-3 is a solo developer match-3 mobile game featuring cute paw mechanics and casual gameplay.",
+
+          meta: [
+            ["Role", "Game Designer, Solo Developer"],
+            ["Platforms", "Itch.io, Yandex.Games"],
+            ["Engine", "Godot"]
+          ],
+
+          contributions: [
+            "Sourced and curated a variety of assets to enhance the visual and functional elements of the game.",
+            "Integrated all game materials into the engine, ensuring a seamless transition from design to implementation.",
+            "Utilized ChatGPT to assist in coding, improving efficiency and functionality of game mechanics."
+          ],
+
+          action: "ITCH.IO",
+          href: "https://valenandia.itch.io/tapapaw",
+
+          secondaryAction: "WATCH VIDEO",
+          secondaryHref:
+            "https://drive.google.com/file/d/1tEBiLoD-LjCUgI_lVaLRp1E9Z2VFTIg3/view?usp=sharing",
+
+          construction: false
+        },
+
+        {
+          id: "game-4",
+          image: ASSET_ROOT + "thinking...%20(9).png",
+
+          modalTitle: "Unannounced Jam",
+          tag: "GAME JAM",
+
+          construction: true
+        }
+      ],
+
+      press: {
+        "2026": [],
+
+        "2025": [
+          {
+            date: "May, 2025 · Cyber.Sports.ru",
+            title:
+              "Featured in the article about the game “The Tale of Mind”",
+
+            href:
+              "https://cyber.sports.ru/games/blogs/3321384.html",
+
+            action: "Read Press"
+          },
+
+          {
+            date: "March, 2025 · Prototype.Indie",
+            title:
+              "Featured at the pitch-session — “The Tale of Mind”",
+
+            href:
+              "https://vk.com/video-212496568_456245939?to=L3ZpZGVvLTIxMjQ5NjU2OF80NTYyNDU5Mzk/",
+
+            action: "Watch Press"
+          }
+        ],
+
+        "2024": [
+          {
+            date: "December, 2024 · Russia, Moscow",
+            title:
+              "Finalist of hackathon “Start a Game!” — “Gerasim vs Besi”",
+
+            href: "https://startgame.rsv.ru/",
+            action: "Contest Page"
+          },
+
+          {
+            date: "October, 2024 · Russia, Vologda",
+            title:
+              "Finalist of hackathon “Sineus” — “Gerasim vs Besi”",
+
+            href:
+              "https://drive.google.com/drive/folders/134ZJqQUbmhEh2ZzI4UrpnsukokoDOdwK",
+
+            action: "View Press"
+          },
+
+          {
+            date: "August, 2024 · Astrum Entertainment",
+            title:
+              "One of the best work on the course — “Paws and Cards”",
+
+            note: "Conceptualization Basics: 2nd",
+
+            href:
+              "https://drive.google.com/drive/folders/134ZJqQUbmhEh2ZzI4UrpnsukokoDOdwK",
+
+            action: "View Press"
+          }
+        ]
+      }
     };
-    window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
-  }, [modal, onClose]);
 
-  if (!modal) return null;
+    /* ========================================
+       NAVIGATION SETTINGS
+    ======================================== */
 
-  const isCustomBody = Boolean(modal.body);
+    const navigation = [
+      {
+        id: "projects",
+        label: "Projects",
+        icon: "projects"
+      },
 
-  return (
-    <div className="modal-backdrop" onMouseDown={onClose}>
-      <dialog className={`modal-window ${modal.id ? `modal-${modal.id}` : ""}`} open onMouseDown={(event) => event.stopPropagation()}>
-        <div className={`modal-header ${modal.accent || "purple"}`}>
-          <WindowDots accent={modal.accent || "purple"} />
-          <strong>{modal.title || modal.modalTitle}</strong>
-          <WindowDots accent={modal.accent || "purple"} side="right" />
-          <button onClick={onClose} aria-label="Close modal">×</button>
-        </div>
-        <div className="modal-body">
-          {isCustomBody ? (
-            modal.body
-          ) : (
-            <>
-              {modal.awardImage && modal.awardPlacement === "top" && (
-                <div className={`project-award-card compact-award ${modal.awardSize === "large" ? "large-award" : ""}`}>
-                  <img src={modal.awardImage} alt={modal.awardLabel || `${modal.modalTitle} award`} />
-                </div>
-              )}
-              {modal.topImages && (
-                <div className="project-top-images">
-                  {modal.topImages.map((image, index) => (
-                    <div className="project-award-card compact-award top-image-card" key={image}>
-                      <img src={image} alt={`${modal.modalTitle} image ${index + 1}`} />
-                    </div>
-                  ))}
-                </div>
-              )}
-              {modal.projectLogo && (
-                <div className="project-logo-card">
-                  <img src={modal.projectLogo} alt={`${modal.modalTitle} logo`} />
-                </div>
-              )}
-              {!modal.meta && (
-                <div className="modal-hero project-hero">
-                  {modal.image ? <img src={modal.image} alt={modal.modalTitle} /> : modal.icon}
-                </div>
-              )}
-              <div className="project-intro-card">
-                {modal.status && <p className="project-status">{modal.status}</p>}
-                <p><strong>{modal.modalTitle}</strong> — {modal.description}</p>
-                {modal.href && (
-                  <div className="project-actions">
-                    <a className="modal-link no-dot project-link" href={modal.href} target="_blank" rel="noreferrer">{modal.action}</a>
-                    {modal.secondaryAction && (
-                      <a className="modal-link no-dot project-link secondary" href={modal.secondaryHref || "#"} target="_blank" rel="noreferrer">{modal.secondaryAction}</a>
-                    )}
-                    {modal.extraActions?.map((action) => (
-                      <a className="modal-link no-dot project-link secondary" href={action.href || "#"} target="_blank" rel="noreferrer" key={action.label}>{action.label}</a>
-                    ))}
-                  </div>
-                )}
+      {
+        id: "case-studies",
+        label: "Featured Case Studies",
+        icon: "cases"
+      },
+
+      {
+        id: "explorations",
+        label: "Research, Articles & Game Jams",
+        icon: "research"
+      },
+
+      {
+        id: "mentoring",
+        label: "Mentoring & Collaboration",
+        icon: "mentoring"
+      },
+
+      {
+        id: "about",
+        label: "About",
+        icon: "about"
+      }
+    ];
+
+    const main = document.getElementById("main-content");
+
+    /* ========================================
+       REUSABLE HELPERS
+    ======================================== */
+
+    function escapeHTML(value = "") {
+      return String(value).replace(
+        /[&<>"']/g,
+        character => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        })[character]
+      );
+    }
+
+    function icon(name) {
+      return `
+        <svg class="icon" aria-hidden="true">
+          <use href="#icon-${name}"></use>
+        </svg>
+      `;
+    }
+
+    function externalLink(label, href) {
+      if (!href || href === "#") {
+        return "";
+      }
+
+      return `
+        <a
+          class="text-link"
+          href="${escapeHTML(href)}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ${escapeHTML(label)}
+          ${icon("external")}
+        </a>
+      `;
+    }
+
+    function heading(title) {
+      return `
+        <header class="page-heading">
+          <h1>${escapeHTML(title)}</h1>
+        </header>
+      `;
+    }
+
+    function construction() {
+      return `
+        <p class="under-construction">
+          Under construction
+        </p>
+      `;
+    }
+
+    function contact() {
+      return `
+        <section class="contact-strip" aria-label="Contact">
+          <p>Feel free to contact me.</p>
+
+          <div class="social-links">
+            <a
+              href="https://www.linkedin.com/in/valenandia/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn
+              ${icon("external")}
+            </a>
+
+            <a
+              href="https://x.com/valenandia"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              X
+              ${icon("external")}
+            </a>
+
+            <a href="mailto:godovets.valya@gmail.com">
+              Email
+              ${icon("mail")}
+            </a>
+          </div>
+        </section>
+      `;
+    }
+
+    function tabs(base, entries, selected, label) {
+      return `
+        <nav class="tabs" aria-label="${escapeHTML(label)}">
+          ${entries.map(([id, title]) => `
+            <a
+              href="#/${base}/${id}"
+              ${id === selected ? 'aria-current="page"' : ""}
+            >
+              ${escapeHTML(title)}
+            </a>
+          `).join("")}
+        </nav>
+      `;
+    }
+
+    /* ========================================
+       CARD GRIDS
+    ======================================== */
+
+    function cards(items, base, caseStudies = false) {
+      return `
+        <div class="card-grid">
+          ${items.map(item => `
+            <a
+              class="portfolio-card"
+              href="#/${base}/${item.id}"
+            >
+              <div class="card-cover">
+                <img
+                  src="${escapeHTML(
+                    caseStudies ? FRAMEWORK_IMAGE : item.image
+                  )}"
+                  alt=""
+                  loading="lazy"
+                >
               </div>
-              {modal.projectImage && (
-                <div className="project-preview-card">
-                  <img src={modal.projectImage} alt={`${modal.modalTitle} project preview`} />
-                </div>
-              )}
-              {modal.meta && (
-                <div className="project-meta">
-                  {modal.meta.map(([key, value]) => (
-                    <div className="project-meta-row" key={key}>
-                      <span>{key}</span>
-                      <strong>{value}</strong>
-                    </div>
-                  ))}
-                </div>
-              )}
-              {modal.contributions && (
-                <div className="project-contributions">
-                  <h3>Contributions</h3>
-                  {modal.contributionsIntro && <p className="project-contributions-intro">{modal.contributionsIntro}</p>}
-                  <ul>
-                    {modal.contributions.map((item) => <li key={item}>{item}</li>)}
-                  </ul>
-                </div>
-              )}
-              {modal.awardImage && modal.awardPlacement !== "top" && (
-                <div className="project-award-card">
-                  <img src={modal.awardImage} alt={modal.awardLabel || `${modal.modalTitle} award`} />
-                </div>
-              )}
-              
-              {!modal.href && (
-                <a className="modal-link" href="#">{modal.action}</a>
-              )}
-            </>
-          )}
+
+              <div class="card-copy">
+                <span class="eyebrow">
+                  ${escapeHTML(
+                    caseStudies ? item.category : item.tag
+                  )}
+                </span>
+
+                <h2>
+                  ${escapeHTML(
+                    caseStudies ? item.title : item.modalTitle
+                  )}
+                </h2>
+
+                ${
+                  item.subtitle || item.status
+                    ? `<p>${escapeHTML(item.subtitle || item.status)}</p>`
+                    : ""
+                }
+              </div>
+            </a>
+          `).join("")}
         </div>
-      </dialog>
-    </div>
-  );
-}
-
-export default function App() {
-  const [activeWindow, setActiveWindow] = useState("wishlist");
-  const [modal, setModal] = useState(null);
-
-  const currentYear = useMemo(() => new Date().getFullYear(), []);
-
-  return (
-    <main className="app-shell">
-      <style>{styles}</style>
-      <Header onOpen={setModal} />
-      <section className="desktop" aria-label="Portfolio desktop">
-        {windows.map((win) => (
-          <DesktopWindow
-            win={win}
-            active={activeWindow === win.id}
-            onFocus={setActiveWindow}
-            onOpen={setModal}
-            key={win.id}
-          />
-        ))}
-      </section>
-      <footer>@valenandia {currentYear}</footer>
-      <Modal modal={modal} onClose={() => setModal(null)} />
-    </main>
-  );
-}
-
-const styles = `
-@import url('https://fonts.googleapis.com/css2?family=Eagle+Lake&family=Cormorant+Garamond:wght@500;600;700;800&family=Share+Tech+Mono&display=swap');
-
-@font-face {
-  font-family: "KelmscotDecorative";
-  src: url("/fonts/KELMSCOT.TTF?v=2") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-:root {
-  --green: #50854D;
-  --pink: #ECC8F7;
-  --ink: #0D0C0D;
-  --yellow: #FFE600;
-  --modal-accent: #171544;
-  --modal-accent-soft: rgba(23, 21, 68, 0.14);
-  --modal-accent-border: rgba(23, 21, 68, 0.30);
-
-  --bg: #0D0C0D;
-  --bg-soft: #171517;
-  --panel: #F7F0F5;
-  --panel-2: #F2E8F1;
-  --panel-border: rgba(13, 12, 13, 0.14);
-  --text: #181518;
-  --muted: rgba(24, 21, 24, 0.68);
-
-  --shadow-lg: 0 18px 48px rgba(0, 0, 0, 0.34);
-  --shadow-md: 0 10px 24px rgba(0, 0, 0, 0.18);
-  --shadow-sm: 0 6px 14px rgba(0, 0, 0, 0.1);
-
-  --radius-xl: 22px;
-  --radius-lg: 18px;
-  --radius-md: 14px;
-  --radius-sm: 10px;
-  --text-font: "Times New Roman", Times, serif;
-  --main-font: "Eagle Lake", Georgia, serif;
-  --decorative-font: "KelmscotDecorative", "Cormorant Garamond", Georgia, serif;
-}
-
-* { box-sizing: border-box; }
-
-html, body, #root { min-height: 100%; }
-
-body {
-  margin: 0;
-  color: var(--text);
-  font-family: var(--text-font);
-  background: #0D0C0D;
-}
-
-a { color: inherit; text-decoration: none; }
-button { font: inherit; }
-
-.app-shell {
-  min-height: 100vh;
-  overflow: hidden;
-  position: relative;
-  isolation: isolate;
-  background:
-    radial-gradient(circle at 12% 18%, rgba(96, 116, 158, 0.62), transparent 34%),
-    radial-gradient(circle at 86% 14%, rgba(177, 128, 121, 0.44), transparent 32%),
-    radial-gradient(circle at 48% 76%, rgba(128, 111, 151, 0.50), transparent 38%),
-    radial-gradient(circle at 88% 84%, rgba(98, 122, 158, 0.46), transparent 30%),
-    linear-gradient(135deg, #53698f 0%, #7d6e99 34%, #b6857b 68%, #617ba1 100%);
-}
-
-.app-shell::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 50% 20%, rgba(255,255,255,0.10), transparent 32%),
-    radial-gradient(circle at center, transparent 40%, rgba(23, 21, 68, 0.20) 100%),
-    linear-gradient(180deg, rgba(23, 21, 68, 0.08), rgba(13, 12, 13, 0.18));
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-
-.topbar {
-  min-height: 96px;
-  height: auto;
-  position: fixed;
-  inset: 0 0 auto;
-  z-index: 100;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 18px;
-  padding: 16px 24px;
-  background: linear-gradient(180deg, rgba(15, 14, 15, 0.62) 0%, rgba(15, 14, 15, 0.36) 100%);
-  backdrop-filter: blur(18px) saturate(1.18);
-  -webkit-backdrop-filter: blur(18px) saturate(1.18);
-  border-bottom: 1px solid rgba(236, 200, 247, 0.10);
-}
-
-.socials,
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-width: 0;
-}
-
-.nav-actions { justify-content: flex-end; }
-
-.brand {
-  display: grid;
-  justify-items: center;
-  align-content: center;
-  line-height: 1;
-  white-space: nowrap;
-  min-width: 260px;
-}
-
-.brand-name {
-  display: grid;
-  place-items: center;
-  line-height: 1;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  transition: opacity 0.18s ease;
-}
-.brand-name:hover { opacity: 0.82; }
-
-.brand-name img {
-  display: block;
-  width: min(420px, 44vw);
-  max-height: 74px;
-  object-fit: contain;
-}
-
-.brand-subtitle {
-  display: block;
-  width: 100%;
-  margin-top: 6px;
-  font-family: var(--decorative-font);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.055em;
-  line-height: 1;
-  text-align: center;
-  text-transform: uppercase;
-  color: rgba(236, 200, 247, 0.88);
-}
-
-.menu-button,
-.clock {
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 9px 20px;
-  border-radius: 999px;
-  border: 1px solid rgba(236, 200, 247, 0.34);
-  background: linear-gradient(180deg, rgba(247, 240, 245, 0.18), rgba(236, 200, 247, 0.10));
-  color: #F7F0F5;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), 0 6px 16px rgba(0,0,0,0.18);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-  cursor: pointer;
-  transition: 0.18s ease;
-}
-
-.menu-button {
-  font-family: var(--decorative-font);
-  letter-spacing: 0.025em;
-}
-
-.nav-button.about-nav {
-  font-size: 16px;
-  padding-inline: 20px;
-}
-
-.menu-button:hover {
-  background: linear-gradient(180deg, rgba(247, 240, 245, 0.28), rgba(236, 200, 247, 0.18));
-  border-color: rgba(236, 200, 247, 0.56);
-  transform: translateY(-1px);
-}
-
-.menu-button.yellow {
-  border-color: rgba(255, 230, 0, 0.28);
-}
-
-.clock {
-  font-family: "Share Tech Mono", monospace;
-  color: var(--pink);
-  background: linear-gradient(180deg, rgba(236, 200, 247, 0.18), rgba(236, 200, 247, 0.08));
-  border-color: rgba(236, 200, 247, 0.34);
-}
-
-.sep {
-  width: 1px;
-  height: 18px;
-  background: rgba(236, 200, 247, 0.22);
-}
-
-.desktop {
-  position: fixed;
-  top: 96px;
-  bottom: 24px;
-  left: 0;
-  right: 0;
-  width: 100vw;
-  transform: none;
-  overflow: hidden;
-}
-
-.window {
-  position: absolute;
-  z-index: 1;
-  min-width: 210px;
-  max-width: 100%;
-  background: linear-gradient(145deg, rgba(247, 240, 245, 0.56), rgba(236, 200, 247, 0.22));
-  border: 1px solid rgba(247, 240, 245, 0.24);
-  border-radius: 18px;
-  box-shadow:
-    0 20px 46px rgba(0, 0, 0, 0.24),
-    0 0 0 1px rgba(255,255,255,0.06),
-    inset 0 1px 0 rgba(255,255,255,0.24);
-  backdrop-filter: blur(20px) saturate(1.18);
-  -webkit-backdrop-filter: blur(20px) saturate(1.18);
-  overflow: hidden;
-}
-
-.window::before {
-  content: "";
-  position: absolute;
-  inset: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.13);
-  border-radius: 14px;
-  pointer-events: none;
-}
-
-.window::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 18% 8%, rgba(255,255,255,0.22), transparent 30%),
-    radial-gradient(circle at 92% 10%, rgba(236,200,247,0.12), transparent 34%);
-  pointer-events: none;
-  opacity: 0.8;
-}
-
-.window.active {
-  border-color: rgba(238, 194, 181, 0.50);
-  box-shadow:
-    0 24px 60px rgba(0, 0, 0, 0.34),
-    0 0 42px rgba(238, 194, 181, 0.14),
-    0 0 0 1px rgba(23, 21, 68, 0.22),
-    inset 0 1px 0 rgba(255,255,255,0.30);
-}
-
-.window-header,
-.modal-header {
-  height: 38px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding-inline: 12px;
-  user-select: none;
-  border-bottom: 1px solid rgba(247, 240, 245, 0.12);
-  background:
-    linear-gradient(90deg, rgba(236, 200, 247, 0.10), transparent 28%, transparent 72%, rgba(23, 21, 68, 0.18)),
-    rgba(13, 12, 13, 0.56);
-  backdrop-filter: blur(16px) saturate(1.12);
-  -webkit-backdrop-filter: blur(16px) saturate(1.12);
-}
-
-.window-header { cursor: grab; }
-.window-header:active { cursor: grabbing; }
-
-.window.active .window-header {
-  background:
-    linear-gradient(90deg, rgba(238,194,181,0.10), transparent 18%, transparent 82%, rgba(236,200,247,0.20)),
-    rgba(23, 21, 68, 0.72);
-  border-bottom-color: rgba(238, 194, 181, 0.26);
-}
-
-.modal-header {
-  background:
-    linear-gradient(90deg, rgba(236, 200, 247, 0.12), transparent 24%, transparent 76%, rgba(23, 21, 68, 0.18)),
-    rgba(13, 12, 13, 0.62);
-  border-bottom-color: rgba(247, 240, 245, 0.16);
-  backdrop-filter: blur(18px) saturate(1.14);
-  -webkit-backdrop-filter: blur(18px) saturate(1.14);
-}
-
-.window-header > span {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: calc(100% - 92px);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-family: var(--decorative-font);
-  font-size: 20px;
-  font-weight: 400;
-  letter-spacing: 0.025em;
-  color: #F7F0F5;
-  white-space: nowrap;
-  text-transform: none;
-}
-
-.window.active .window-header > span { color: #F7F0F5; }
-
-.dots {
-  position: relative;
-  z-index: 1;
-  width: 22px;
-  display: grid;
-  place-items: center;
-  flex: 0 0 22px;
-}
-
-.dots.right {
-  margin-left: auto;
-}
-
-.window-star {
-  display: block;
-  color: rgba(247, 240, 245, 0.46);
-  font-family: Georgia, serif;
-  font-size: 14px;
-  line-height: 1;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.28));
-  transform: translateY(-1px);
-  transition: 0.18s ease;
-}
-
-.window.active .window-star,
-.modal-header .window-star {
-  color: #eec2b5;
-  text-shadow: 0 0 10px rgba(238, 194, 181, 0.32);
-}
-
-.window.active .window-star {
-  transform: translateY(-1px) scale(1.12);
-}
-
-.window-body {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding: 14px;
-  background:
-    radial-gradient(circle at 12px 12px, rgba(255,255,255,0.06) 1px, transparent 1px),
-    linear-gradient(145deg, rgba(247, 240, 245, 0.34), rgba(236, 200, 247, 0.16));
-  background-size: 18px 18px, auto;
-}
-
-.item-card {
-  width: 102px;
-  min-height: 136px;
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  overflow: hidden;
-  border-radius: 14px;
-  border: 1px solid rgba(247, 240, 245, 0.20);
-  background: rgba(255, 255, 255, 0.30);
-  box-shadow:
-    0 10px 20px rgba(0,0,0,0.10),
-    inset 0 1px 0 rgba(255,255,255,0.20);
-  backdrop-filter: blur(12px) saturate(1.08);
-  -webkit-backdrop-filter: blur(12px) saturate(1.08);
-  cursor: pointer;
-  transition: 0.18s ease;
-}
-
-.item-card:hover {
-  transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.42);
-  box-shadow:
-    0 18px 34px rgba(0,0,0,0.18),
-    0 0 24px rgba(236,200,247,0.14);
-  border-color: rgba(236, 200, 247, 0.36);
-}
-
-.item-card:active { transform: translateY(-1px); }
-
-.item-icon {
-  width: 102px;
-  height: 96px;
-  display: grid;
-  place-items: center;
-  background:
-    radial-gradient(circle at 50% 42%, rgba(236, 200, 247, 0.34), transparent 58%),
-    radial-gradient(circle at 30% 18%, rgba(255,255,255,0.42), transparent 28%),
-    linear-gradient(180deg, rgba(255,255,255,0.34) 0%, rgba(80,133,77,0.10) 100%);
-  font-size: 36px;
-  opacity: 0.95;
-  overflow: hidden;
-}
-
-.item-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.item-label {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 40px;
-  padding: 8px 8px 10px;
-  font-family: var(--main-font);
-  font-size: 15px;
-  font-weight: 550;
-  letter-spacing: 0.01em;
-  line-height: 1.18;
-  text-align: center;
-  text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.20);
-  color: var(--text);
-}
-
-.window.large {
-  width: 304px;
-  min-width: 304px;
-}
-
-.window:has(.window-header span) {
-  min-width: 230px;
-}
-
-.window-projects {
-  width: 420px;
-  min-width: 420px;
-}
-
-.window-projects .window-body {
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-}
-
-.window-projects .item-card {
-  width: 122px;
-  min-width: 122px;
-  min-height: 158px;
-  flex: 0 0 122px;
-}
-
-.window-projects .item-icon {
-  width: 122px;
-  height: 114px;
-}
-
-.window-projects .item-label {
-  min-height: 44px;
-  font-size: 12px;
-  white-space: normal;
-  overflow-wrap: anywhere;
-  line-height: 1.2;
-}
-
-.window-games {
-  width: 474px;
-  min-width: 474px;
-  max-width: 100%;
-}
-
-.window-games .item-label {
-  font-size: 12px;
-  white-space: normal;
-  overflow-wrap: anywhere;
-  line-height: 1.2;
-}
-
-.window-games .window-body {
-  flex-wrap: nowrap;
-}
-
-.window-links {
-  width: 250px;
-  min-width: 250px;
-}
-
-.window-encounters {
-  width: 390px;
-  min-width: 390px;
-  max-width: 390px;
-}
-
-.window-encounters .window-body {
-  gap: 12px;
-  padding: 14px;
-  justify-content: center;
-  flex-wrap: nowrap;
-}
-
-.window-encounters .item-card {
-  width: 112px;
-  min-width: 112px;
-  max-width: 112px;
-  min-height: 170px;
-  flex: 0 0 112px;
-}
-
-.window-encounters .item-icon {
-  width: 112px;
-  min-width: 112px;
-  height: 112px;
-}
-
-.window-encounters .item-label {
-  min-height: 56px;
-  padding: 8px 8px 10px;
-  font-size: 13px;
-  font-weight: 550;
-  line-height: 1.16;
-  white-space: normal;
-  overflow-wrap: anywhere;
-}
-
-.window-work {
-  width: 588px;
-  min-width: 588px;
-  max-width: 100%;
-}
-
-.window-work .window-body {
-  gap: 12px;
-  padding: 14px;
-  align-items: stretch;
-  justify-content: flex-start;
-  flex-wrap: nowrap;
-  overflow: hidden;
-}
-
-.window-work .item-card {
-  width: 130px;
-  min-width: 130px;
-  min-height: 204px;
-}
-
-.window-work .item-icon {
-  width: 130px;
-  height: 130px;
-}
-
-.window-work .item-label {
-  min-height: 74px;
-  padding: 8px 8px 10px;
-  font-size: 13px;
-  font-weight: 550;
-  line-height: 1.08;
-  letter-spacing: 0;
-}
-
-.window-links .window-header > span {
-  max-width: calc(100% - 104px);
-}
-
-.window-links .window-body {
-  justify-content: center;
-}
-
-.window.large .window-body {
-  padding: 18px;
-}
-
-.window.large .item-card {
-  width: 262px;
-  min-height: 302px;
-}
-
-.window.large .item-icon {
-  width: 262px;
-  height: 252px;
-  font-size: 68px;
-}
-
-.window-wishlist .item-card {
-  width: 262px;
-  min-height: auto;
-  height: fit-content;
-}
-
-.window-wishlist .window-body {
-  justify-content: center;
-}
-
-.window-wishlist .item-icon {
-  width: 262px;
-  height: auto;
-  aspect-ratio: 5 / 4;
-}
-
-.window-wishlist .item-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.window-wishlist .item-label {
-  font-size: 18px;
-  font-weight: 550;
-  line-height: 1.14;
-  letter-spacing: 0.015em;
-}
-
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 500;
-  display: grid;
-  place-items: center;
-  padding: 18px;
-  background:
-    radial-gradient(circle at 18% 18%, rgba(80, 133, 77, 0.12), transparent 30%),
-    radial-gradient(circle at 82% 20%, rgba(236, 200, 247, 0.12), transparent 28%),
-    rgba(13, 12, 13, 0.52);
-  backdrop-filter: blur(10px) saturate(1.12);
-  -webkit-backdrop-filter: blur(10px) saturate(1.12);
-}
-
-.modal-window {
-  width: min(760px, 96vw);
-  max-height: 90vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  border: 1px solid rgba(247,240,245,0.26);
-  border-radius: 22px;
-  background: linear-gradient(145deg, rgba(247, 240, 245, 0.62), rgba(236, 200, 247, 0.30));
-  color: var(--text);
-  backdrop-filter: blur(24px) saturate(1.18);
-  -webkit-backdrop-filter: blur(24px) saturate(1.18);
-  box-shadow:
-    0 26px 68px rgba(0, 0, 0, 0.46),
-    0 0 48px rgba(236,200,247,0.12),
-    0 0 0 1px rgba(255,255,255,0.07),
-    inset 0 1px 0 rgba(255,255,255,0.30);
-  animation: popIn .16s ease;
-}
-
-@keyframes popIn {
-  from { transform: scale(0.98) translateY(6px); opacity: 0; }
-  to { transform: scale(1) translateY(0); opacity: 1; }
-}
-
-.modal-header {
-  position: relative;
-  top: 0;
-  z-index: 2;
-  flex: 0 0 auto;
-}
-
-.modal-tag {
-  position: relative;
-  z-index: 1;
-  font-family: var(--decorative-font);
-  font-size: 15px;
-  font-weight: 400;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-  color: rgba(247, 240, 245, 0.68);
-}
-
-.modal-header strong {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--main-font);
-  font-size: 20px;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  color: #F7F0F5;
-  white-space: nowrap;
-}
-
-.modal-header button {
-  position: relative;
-  z-index: 1;
-  margin-left: 0;
-  width: 24px;
-  height: 30px;
-  display: grid;
-  place-items: center;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  color: rgba(247, 240, 245, 0.82);
-  font-size: 22px;
-  line-height: 1;
-  cursor: pointer;
-  transition: 0.18s ease;
-}
-
-.modal-header button:hover {
-  background: transparent;
-  color: #eec2b5;
-  transform: scale(1.08);
-}
-
-.modal-body {
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow-y: auto;
-  padding: 28px 32px 34px;
-  font-family: var(--text-font);
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 1.65;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(23, 21, 68, 0.36) rgba(247, 240, 245, 0.10);
-  background:
-    radial-gradient(circle at 16px 16px, rgba(255,255,255,0.055) 1px, transparent 1px),
-    linear-gradient(145deg, rgba(247, 240, 245, 0.40), rgba(236, 200, 247, 0.18));
-  background-size: 20px 20px, auto;
-  color: #181518;
-}
-
-.modal-body p + p { margin-top: 10px; }
-
-.modal-body h3 {
-  margin: 14px 0 6px;
-  font-family: var(--main-font);
-  font-size: 22px;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  color: var(--modal-accent);
-}
-
-.modal-body strong {
-  color: var(--text);
-  font-family: var(--text-font);
-  font-weight: 600;
-}
-
-.modal-hero {
-  height: 204px;
-  display: grid;
-  place-items: center;
-  margin-bottom: 18px;
-  border-radius: 18px;
-  background:
-    radial-gradient(circle at 50% 50%, rgba(236, 200, 247, 0.48), transparent 52%),
-    linear-gradient(180deg, rgba(80, 133, 77, 0.10) 0%, rgba(255,255,255,0.42) 100%);
-  font-size: 72px;
-  overflow: hidden;
-}
-
-.modal-hero img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.project-hero {
-  height: 260px;
-}
-
-.project-top-images {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  flex-wrap: wrap;
-  width: 100%;
-  max-width: 100%;
-  margin: 0 auto 16px;
-}
-
-.top-image-card {
-  width: 148px;
-  margin: 0;
-  padding: 8px;
-  border-radius: 14px;
-}
-
-.top-image-card img {
-  width: 100%;
-  height: 96px;
-  display: block;
-  object-fit: contain;
-  padding: 6px;
-  border-radius: 12px;
-}
-
-.project-logo-card {
-  width: fit-content;
-  max-width: min(340px, 100%);
-  margin: 0 auto 14px;
-  padding: 14px 18px;
-  border-radius: 18px;
-  border: 1px solid rgba(247, 240, 245, 0.18);
-  background:
-    linear-gradient(135deg, rgba(255,255,255,0.36), rgba(236,200,247,0.14)),
-    rgba(255,255,255,0.26);
-  box-shadow:
-    0 12px 26px rgba(0,0,0,0.08),
-    inset 0 1px 0 rgba(255,255,255,0.24);
-  backdrop-filter: blur(12px) saturate(1.08);
-  -webkit-backdrop-filter: blur(12px) saturate(1.08);
-}
-
-.project-logo-card img {
-  max-width: 260px;
-  max-height: 150px;
-  display: block;
-  object-fit: contain;
-  border-radius: 12px;
-}
-
-.project-preview-card {
-  margin-top: 14px;
-  margin-bottom: 14px;
-  padding: 12px;
-  border-radius: 18px;
-  border: 1px solid rgba(247, 240, 245, 0.18);
-  background:
-    linear-gradient(135deg, rgba(255,255,255,0.36), rgba(236,200,247,0.14)),
-    rgba(255,255,255,0.26);
-  box-shadow:
-    0 12px 26px rgba(0,0,0,0.08),
-    inset 0 1px 0 rgba(255,255,255,0.24);
-  backdrop-filter: blur(12px) saturate(1.08);
-  -webkit-backdrop-filter: blur(12px) saturate(1.08);
-}
-
-.project-preview-card img {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  display: block;
-  object-fit: cover;
-  border-radius: 14px;
-  box-shadow: 0 12px 24px rgba(0,0,0,0.14);
-}
-
-.project-intro-card {
-  display: grid;
-  gap: 10px;
-  padding: 16px 18px;
-  border-radius: 18px;
-  border: 1px solid rgba(247, 240, 245, 0.20);
-  background:
-    linear-gradient(135deg, rgba(255,255,255,0.42), rgba(236,200,247,0.16)),
-    rgba(255,255,255,0.28);
-  box-shadow:
-    0 12px 28px rgba(0,0,0,0.08),
-    inset 0 1px 0 rgba(255,255,255,0.30);
-  backdrop-filter: blur(12px) saturate(1.08);
-  -webkit-backdrop-filter: blur(12px) saturate(1.08);
-}
-
-.project-intro-card p {
-  margin: 0;
-}
-
-.project-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 8px;
-}
-
-.project-link {
-  width: fit-content;
-  margin-top: 0;
-}
-
-.project-link.secondary {
-  background: var(--modal-accent-soft);
-  color: var(--modal-accent);
-  box-shadow: none;
-  border: 1px solid var(--modal-accent-border);
-}
-
-.project-status {
-  width: fit-content;
-  margin: 0 0 12px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: var(--modal-accent-soft);
-  color: var(--modal-accent);
-  font-family: var(--main-font);
-  font-size: 13px;
-  font-weight: 400;
-}
-
-.project-meta {
-  display: grid;
-  gap: 8px;
-  margin-top: 14px;
-  padding: 16px 18px;
-  border-radius: 18px;
-  background:
-    linear-gradient(135deg, rgba(255,255,255,0.36), rgba(81,73,94,0.10)),
-    rgba(255,255,255,0.26);
-  border: 1px solid rgba(247,240,245,0.18);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.26);
-  backdrop-filter: blur(12px) saturate(1.08);
-  -webkit-backdrop-filter: blur(12px) saturate(1.08);
-}
-
-.project-meta-row {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 12px;
-  align-items: baseline;
-}
-
-.project-meta-row span {
-  color: var(--muted);
-  font-family: var(--main-font);
-  font-size: 13px;
-}
-
-.project-meta-row strong {
-  font-family: var(--text-font);
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.project-contributions {
-  margin-top: 14px;
-  padding: 16px 18px;
-  border-radius: 18px;
-  border: 1px solid rgba(247, 240, 245, 0.18);
-  background:
-    linear-gradient(135deg, rgba(255,255,255,0.36), rgba(236,200,247,0.14)),
-    rgba(255,255,255,0.26);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.24);
-  backdrop-filter: blur(12px) saturate(1.08);
-  -webkit-backdrop-filter: blur(12px) saturate(1.08);
-}
-
-.project-contributions h3 {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.project-contributions-intro {
-  width: fit-content;
-  margin: 8px auto 14px;
-  padding: 7px 12px;
-  border-radius: 999px;
-  border: 1px solid var(--modal-accent-border);
-  background: rgba(23, 21, 68, 0.14);
-  font-family: var(--main-font);
-  font-size: 13px;
-  color: var(--modal-accent);
-  text-align: center;
-}
-
-.project-contributions ul {
-  margin: 10px 0 0;
-  padding-left: 0;
-  list-style: none;
-  display: grid;
-  gap: 10px;
-  counter-reset: contribution;
-}
-
-.project-contributions li {
-  position: relative;
-  display: grid;
-  grid-template-columns: 20px 1fr;
-  gap: 8px;
-  align-items: start;
-  padding: 12px 14px;
-  border-radius: 16px;
-  border: 1px solid rgba(23, 21, 68, 0.18);
-  background: rgba(255, 255, 255, 0.28);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.22);
-}
-
-.project-contributions li::before {
-  counter-increment: contribution;
-  content: counter(contribution) ".";
-  width: auto;
-  height: auto;
-  display: block;
-  padding-top: 1px;
-  border-radius: 0;
-  background: transparent;
-  border: 0;
-  color: rgba(23, 21, 68, 0.72);
-  font-family: var(--main-font);
-  font-size: 13px;
-  line-height: 1.45;
-  box-shadow: none;
-}
-
-.project-award-card {
-  margin-top: 14px;
-  padding: 16px 18px 18px;
-  border-radius: 18px;
-  border: 1px solid rgba(247, 240, 245, 0.18);
-  background:
-    linear-gradient(135deg, rgba(255,255,255,0.36), rgba(236,200,247,0.14)),
-    rgba(255,255,255,0.26);
-  box-shadow:
-    0 12px 26px rgba(0,0,0,0.06),
-    inset 0 1px 0 rgba(255,255,255,0.24);
-  backdrop-filter: blur(12px) saturate(1.08);
-  -webkit-backdrop-filter: blur(12px) saturate(1.08);
-}
-
-.project-award-card h3 {
-  color: var(--modal-accent);
-  text-align: center;
-  margin-top: 0;
-}
-
-.project-award-card img {
-  width: min(420px, 100%);
-  display: block;
-  margin: 0 auto;
-  padding: 14px;
-  border-radius: 16px;
-  object-fit: contain;
-  background:
-    radial-gradient(circle at 50% 50%, rgba(236, 200, 247, 0.10), transparent 58%),
-    linear-gradient(145deg, rgba(31, 27, 37, 0.96), rgba(13, 12, 13, 0.94));
-  box-shadow:
-    0 12px 26px rgba(0,0,0,0.26),
-    inset 0 1px 0 rgba(255,255,255,0.12);
-}
-
-.compact-award {
-  width: fit-content;
-  margin: 0 auto 14px;
-  padding: 8px;
-  border-radius: 14px;
-}
-
-.compact-award img {
-  width: 150px;
-  max-width: 42vw;
-  padding: 8px;
-  border-radius: 12px;
-}
-
-.large-award {
-  width: min(460px, 100%);
-  margin-bottom: 16px;
-  padding: 12px;
-}
-
-.large-award img {
-  width: 100%;
-  max-width: 100%;
-  padding: 14px;
-  border-radius: 16px;
-}
-
-.project-awards-gallery h3 {
-  text-align: center;
-  margin-top: 0;
-}
-
-.project-award-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.project-award-grid img {
-  width: 100%;
-  margin: 0;
-}
-
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 16px;
-}
-
-.chip {
-  padding: 5px 10px;
-  border-radius: 999px;
-  background: rgba(23, 21, 68, 0.32);
-  border: 1px solid rgba(23, 21, 68, 0.56);
-  color: #14101a;
-  font-family: var(--main-font);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.24);
-}
-
-.chip:nth-child(2n) {
-  background: rgba(23, 21, 68, 0.32);
-  border-color: rgba(23, 21, 68, 0.56);
-}
-
-.modal-link {
-  font-family: var(--main-font);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 18px;
-  padding: 10px 16px;
-  border-radius: 999px;
-  background: var(--modal-accent);
-  color: #F7F0F5;
-  font-size: 16px;
-  font-weight: 400;
-  letter-spacing: 0.015em;
-  box-shadow: 0 10px 20px rgba(23, 21, 68, 0.24);
-}
-
-.modal-link::after {
-  content: "•";
-  color: var(--yellow);
-  font-size: 16px;
-  line-height: 1;
-}
-
-.modal-link.no-dot::after {
-  content: none;
-}
-
-.modal-link.small {
-  margin-top: 10px;
-  padding: 8px 12px;
-  font-size: 11px;
-}
-
-.article-row .modal-link.small {
-  display: flex;
-  width: min(180px, 100%);
-  justify-content: center;
-  margin: 16px auto 0;
-  padding: 10px 22px;
-  font-size: 13px;
-}
-
-.article-row .modal-link.small::after {
-  content: none;
-}
-
-.timeline-item {
-  margin-bottom: 18px;
-  padding-left: 16px;
-  border-left: 2px solid var(--modal-accent-border);
-}
-
-.timeline-item .chips {
-  margin-top: 10px;
-}
-
-.timeline-title {
-  font-family: var(--main-font) !important;
-  font-size: 18px;
-  font-weight: 600 !important;
-  color: #17121d;
-  letter-spacing: 0.005em;
-}
-
-.resume-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 18px;
-}
-
-.resume-actions .modal-link {
-  margin-top: 0;
-}
-
-.resume-list {
-  display: grid;
-  gap: 14px;
-}
-
-.resume-list .press-card strong {
-  font-family: var(--main-font);
-  font-size: 17px;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  color: var(--text);
-}
-
-.resume-experience-note {
-  margin: 18px 0 0;
-  padding: 14px 18px;
-  border-radius: 14px;
-  border-left: 3px solid rgba(23, 21, 68, 0.50);
-  background: rgba(23, 21, 68, 0.10);
-  font-family: var(--main-font);
-  font-size: 15px;
-  line-height: 1.55;
-  color: var(--text);
-  font-weight: 400;
-}
-
-.timeline-item span,
-.article-row span {
-  display: inline-block;
-  margin: 3px 0 6px;
-  color: var(--muted);
-  font-family: var(--main-font);
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0;
-}
-
-.press-list {
-  display: grid;
-  gap: 12px;
-  font-size: 16px;
-}
-
-.press-list h3 {
-  margin-top: 4px;
-  margin-bottom: 2px;
-}
-
-.press-card {
-  position: relative;
-  display: grid;
-  gap: 7px;
-  padding: 16px 18px;
-  border-radius: 20px;
-  border: 1px solid rgba(247, 240, 245, 0.18);
-  background:
-    linear-gradient(135deg, rgba(255,255,255,0.36), rgba(236,200,247,0.14)),
-    rgba(255,255,255,0.24);
-  box-shadow:
-    0 12px 26px rgba(0,0,0,0.06),
-    inset 0 1px 0 rgba(255,255,255,0.24);
-  backdrop-filter: blur(12px) saturate(1.08);
-  -webkit-backdrop-filter: blur(12px) saturate(1.08);
-  overflow: hidden;
-}
-
-.press-card::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 12px;
-  bottom: 12px;
-  width: 3px;
-  border-radius: 999px;
-  background: var(--modal-accent);
-  opacity: 0.75;
-}
-
-.press-card strong {
-  font-family: var(--text-font);
-  font-size: 17px;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1.35;
-}
-
-.press-card p {
-  margin: 0;
-  color: var(--muted);
-  font-family: var(--text-font);
-  font-size: 17px;
-}
-
-.press-year {
-  font-family: var(--main-font);
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0;
-  color: var(--muted);
-}
-
-.press-link {
-  width: fit-content;
-  margin-top: 4px;
-  padding: 7px 12px;
-  border-radius: 999px;
-  background: var(--modal-accent-soft);
-  border: 1px solid var(--modal-accent-border);
-  color: var(--modal-accent);
-  font-family: var(--main-font);
-  font-size: 15px;
-  font-weight: 400;
-  transition: 0.18s ease;
-}
-
-.press-link:hover {
-  background: rgba(23, 21, 68, 0.20);
-  transform: translateY(-1px);
-}
-
-.articles-list {
-  display: grid;
-  gap: 14px;
-}
-
-.article-row {
-  margin-bottom: 0;
-  padding: 18px;
-  border-radius: 20px;
-  border: 1px solid rgba(247, 240, 245, 0.18);
-  background: rgba(255,255,255,0.24);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.24);
-  backdrop-filter: blur(12px) saturate(1.08);
-  -webkit-backdrop-filter: blur(12px) saturate(1.08);
-}
-
-.article-row h3 {
-  margin: 0 auto;
-  color: var(--text);
-  font-family: var(--main-font);
-  font-size: 26px;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  line-height: 1.18;
-  text-align: center;
-  max-width: 34ch;
-}
-
-.article-cover {
-  width: min(320px, 100%);
-  aspect-ratio: 16 / 9;
-  margin: 14px auto;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  border-radius: 14px;
-  border: 1px solid rgba(13, 12, 13, 0.08);
-  background:
-    radial-gradient(circle at 50% 50%, rgba(236, 200, 247, 0.36), transparent 58%),
-    linear-gradient(180deg, rgba(255,255,255,0.72), rgba(80,133,77,0.10));
-  color: var(--muted);
-  font-family: var(--main-font);
-  font-size: 12px;
-}
-
-.article-cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.article-row p {
-  margin: 0 auto;
-  max-width: 62ch;
-  text-align: center;
-  font-family: var(--text-font);
-  font-size: 17px;
-}
-
-.community-section {
-  margin-top: 22px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(13, 12, 13, 0.08);
-}
-
-.community-section h3 {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.community-grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: nowrap;
-  gap: 12px;
-  margin-top: 18px;
-  overflow-x: auto;
-}
-
-.community-card {
-  width: 158px;
-  flex-shrink: 0;
-  display: block;
-  padding: 0;
-  border-radius: 14px;
-  border: 1.5px solid rgba(0, 0, 0, 0.18);
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.14), 0 4px 14px rgba(0,0,0,0.22);
-  overflow: hidden;
-}
-
-.community-card img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 0;
-}
-
-.under-construction {
-  min-height: 220px;
-  display: grid;
-  place-items: center;
-  margin: 0;
-  font-family: var(--main-font);
-  font-size: 24px;
-  color: var(--modal-accent);
-  text-align: center;
-}
-
-.resume-contact-divider {
-  height: 1px;
-  margin: 22px 0 20px;
-  background: linear-gradient(90deg, transparent, rgba(23, 21, 68, 0.22), transparent);
-}
-
-.contact-panel {
-  display: grid;
-  gap: 16px;
-}
-
-.resume-contact-panel h3 {
-  margin: 0 auto 2px;
-  text-align: center;
-}
-
-.contact-panel p {
-  margin: 0 auto;
-  max-width: 58ch;
-  font-family: var(--text-font);
-  font-size: 17px;
-  line-height: 1.65;
-  text-align: center;
-}
-
-.contact-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
-
-.contact-form {
-  display: grid;
-  gap: 12px;
-  width: min(520px, 100%);
-  margin: 8px auto 0;
-}
-
-.contact-form label {
-  display: grid;
-  gap: 6px;
-  font-family: var(--main-font);
-  font-size: 13px;
-  color: var(--modal-accent);
-}
-
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 14px;
-  border: 1px solid var(--modal-accent-border);
-  background: rgba(255, 255, 255, 0.38);
-  color: var(--text);
-  font-family: var(--text-font);
-  font-size: 16px;
-  outline: none;
-  resize: vertical;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.24);
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-  border-color: rgba(23, 21, 68, 0.52);
-  background: rgba(255, 255, 255, 0.52);
-}
-
-.contact-submit {
-  width: fit-content;
-  min-width: 170px;
-  margin: 4px auto 0;
-  cursor: pointer;
-}
-
-.contact-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 128px;
-  padding: 10px 16px;
-  border-radius: 999px;
-  border: 0;
-  background: var(--modal-accent);
-  color: #F7F0F5;
-  font-family: var(--main-font);
-  font-size: 17px;
-  font-weight: 400;
-  box-shadow: 0 10px 20px rgba(23, 21, 68, 0.24);
-  transition: 0.18s ease;
-}
-
-.contact-button:hover {
-  background: #211f5a;
-  transform: translateY(-1px);
-  box-shadow: 0 12px 24px rgba(23, 21, 68, 0.30);
-}
-
-.contact-email {
-  color: var(--modal-accent);
-  font-weight: 400;
-}
-
-footer {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--decorative-font);
-  font-size: 15px;
-  color: rgba(247, 240, 245, 0.54);
-  background: transparent;
-}
-
-.modal-body::-webkit-scrollbar {
-  width: 7px;
-}
-
-.modal-body::-webkit-scrollbar-track {
-  margin: 10px 0 14px;
-  background: rgba(247, 240, 245, 0.10);
-  border-radius: 999px;
-}
-
-.modal-body::-webkit-scrollbar-thumb {
-  border: 2px solid rgba(247, 240, 245, 0.22);
-  border-radius: 999px;
-  background:
-    linear-gradient(180deg, rgba(238, 194, 181, 0.46), rgba(23, 21, 68, 0.34));
-}
-
-.modal-body::-webkit-scrollbar-thumb:hover {
-  background:
-    linear-gradient(180deg, rgba(238, 194, 181, 0.60), rgba(23, 21, 68, 0.48));
-}
-
-@media (max-width: 920px) {
-  .window-projects,
-  .window-games,
-  .window-links,
-  .window-encounters,
-  .window-work,
-  .window.large {
-    min-width: 0;
-    max-width: 100%;
-  }
-
-  .window,
-  .window-projects,
-  .window-games,
-  .window-links,
-  .window-encounters,
-  .window-work,
-  .window.large {
-    position: static;
-    width: min(100%, 680px);
-    max-width: calc(100vw - 36px);
-    margin: 0 auto;
-  }
-
-  .window-wishlist { order: -1; }
-
-  .window-games .window-body,
-  .window-encounters .window-body,
-  .window-projects .window-body,
-  .window-work .window-body {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .window-projects .item-card,
-  .window-games .item-card {
-    flex-shrink: 1;
-  }
-
-  .topbar {
-    position: sticky;
-    height: auto;
-    grid-template-columns: 1fr;
-    justify-items: center;
-    padding-block: 12px;
-  }
-
-  .socials,
-  .nav-actions {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .desktop {
-    position: static;
-    top: 0;
-    display: grid;
-    gap: 18px;
-    padding: 18px;
-    overflow: visible;
-  }
-
-  .app-shell {
-    overflow: visible;
-    padding-bottom: 24px;
-  }
-
-  .window-header { cursor: default; }
-
-  .window-body {
-    overflow-x: visible;
-    flex-wrap: wrap;
-  }
-
-  .window-work .window-body {
-    overflow-x: visible;
-    flex-wrap: wrap;
-  }
-
-  footer {
-    position: static;
-    padding: 12px 0 18px;
-  }
-}
-
-@media (min-width: 521px) and (max-width: 920px) {
-  .topbar {
-    grid-template-columns: 1fr auto 1fr;
-    justify-items: unset;
-    padding: 12px 20px;
-  }
-  .socials { justify-content: flex-start; }
-  .nav-actions { justify-content: flex-end; }
-  .brand {
-    min-width: 0;
-    max-width: 260px;
-  }
-  .brand-name img { width: min(220px, 28vw); max-height: 52px; }
-  .brand-subtitle { font-size: 11px; }
-  .menu-button, .clock { font-size: 13px; padding-inline: 14px; min-height: 38px; }
-  .window, .window-projects, .window-games, .window-links, .window-encounters, .window-work, .window.large {
-    width: min(100%, 600px);
-  }
-}
-
-@media (max-width: 520px) {
-  .community-grid { flex-wrap: wrap; justify-content: center; }
-  .community-card { width: 120px; }
-  .nav-button.about-nav { font-size: 13px; }
-  .article-row h3 { font-size: 22px; }
-  .article-cover { width: 100%; }
-  .brand { min-width: 220px; }
-  .brand-name img { width: min(285px, 86vw); max-height: 50px; }
-  .brand-subtitle { font-size: 10px; margin-top: 4px; }
-  .menu-button,
-  .clock { font-size: 12px; padding-inline: 13px; min-height: 36px; }
-  .window-header > span,
-  .modal-header strong { font-size: 20px; }
-  .modal-about .modal-header strong { font-size: 20px; }
-  .modal-body { padding: 20px; font-size: 16px; }
-  .modal-header strong { max-width: 56%; overflow: hidden; text-overflow: ellipsis; }
-}
-`;
+      `;
+    }
+
+    /* ========================================
+       INDIVIDUAL CASE PAGE
+    ======================================== */
+
+    function casePage(item) {
+      const index = content.cases.indexOf(item);
+      const previous = content.cases[index - 1];
+      const next = content.cases[index + 1];
+
+      return `
+        <a class="back-link" href="#/case-studies">
+          ${icon("back")}
+          Featured Case Studies
+        </a>
+
+        ${heading(item.title + ": " + item.subtitle)}
+
+        <div class="case-banner">
+          <img src="${FRAMEWORK_IMAGE}" alt="">
+        </div>
+
+        ${construction()}
+
+        <nav
+          class="case-pagination"
+          aria-label="Other case studies"
+        >
+          ${
+            previous
+              ? `
+                <a
+                  class="text-link"
+                  href="#/case-studies/${previous.id}"
+                >
+                  ← Previous case
+                </a>
+              `
+              : "<span></span>"
+          }
+
+          ${
+            next
+              ? `
+                <a
+                  class="text-link"
+                  href="#/case-studies/${next.id}"
+                >
+                  Next case →
+                </a>
+              `
+              : ""
+          }
+        </nav>
+      `;
+    }
+
+    /* ========================================
+       INDIVIDUAL PROJECT PAGE
+    ======================================== */
+
+    function projectPage(item, base) {
+      const back = base === "projects"
+        ? "#/projects"
+        : `#/explorations/${
+            base === "research" ? "research" : "game-jams"
+          }`;
+
+      const backLabel = base === "projects"
+        ? "Projects"
+        : "Research, Articles & Game Jams";
+
+      const intro = `
+        <a class="back-link" href="${back}">
+          ${icon("back")}
+          ${backLabel}
+        </a>
+
+        ${heading(item.modalTitle)}
+      `;
+
+      if (item.construction) {
+        return intro + construction();
+      }
+
+      const actions = [
+        {
+          label: item.action,
+          href: item.href
+        },
+
+        {
+          label: item.secondaryAction,
+          href: item.secondaryHref
+        },
+
+        ...(item.extraActions || [])
+      ];
+
+      return intro + `
+        <div class="project-hero">
+          <img
+            src="${escapeHTML(item.projectImage || item.image)}"
+            alt="${escapeHTML(item.modalTitle)}"
+          >
+        </div>
+
+        <p class="project-description">
+          ${escapeHTML(item.description)}
+        </p>
+
+        <div class="project-actions">
+          ${actions.map(action =>
+            externalLink(action.label, action.href)
+          ).join("")}
+        </div>
+
+        ${
+          item.meta
+            ? `
+              <dl class="project-meta">
+                ${item.meta.map(([label, value]) => `
+                  <div>
+                    <dt>${escapeHTML(label)}</dt>
+                    <dd>${escapeHTML(value)}</dd>
+                  </div>
+                `).join("")}
+              </dl>
+            `
+            : ""
+        }
+
+        ${
+          item.contributions
+            ? `
+              <section class="contributions">
+                <h2>My contributions</h2>
+
+                <ul>
+                  ${item.contributions.map(text => `
+                    <li>${escapeHTML(text)}</li>
+                  `).join("")}
+                </ul>
+              </section>
+            `
+            : ""
+        }
+
+        ${
+          item.awardImage
+            ? `
+              <div class="project-award">
+                <img
+                  src="${escapeHTML(item.awardImage)}"
+                  alt="${escapeHTML(item.awardLabel || "Award")}"
+                >
+              </div>
+            `
+            : ""
+        }
+      `;
+    }
+
+    /* ========================================
+       ARTICLES
+    ======================================== */
+
+    function articles() {
+      return `
+        <div class="articles-list">
+          ${content.articles.map(article => `
+            <article class="article-card">
+              <img
+                src="${escapeHTML(article.image)}"
+                alt=""
+                loading="lazy"
+              >
+
+              <div>
+                <span class="eyebrow">Article</span>
+
+                <h2>${escapeHTML(article.title)}</h2>
+
+                <p>${escapeHTML(article.text)}</p>
+              </div>
+            </article>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    /* ========================================
+       RESEARCH / ARTICLES / GAME JAMS
+    ======================================== */
+
+    function explorations(selected = "research") {
+      const allowed = ["research", "articles", "game-jams"];
+
+      if (!allowed.includes(selected)) {
+        selected = "research";
+      }
+
+      const navigationTabs = tabs(
+        "explorations",
+        [
+          ["research", "Research"],
+          ["articles", "Articles"],
+          ["game-jams", "Game Jams"]
+        ],
+        selected,
+        "Research sections"
+      );
+
+      let sectionContent;
+
+      if (selected === "articles") {
+        sectionContent = articles();
+      } else if (selected === "game-jams") {
+        sectionContent = cards(content.games, "game-jams");
+      } else {
+        sectionContent = cards(content.research, "research");
+      }
+
+      return (
+        heading("Research, Articles & Game Jams") +
+        navigationTabs +
+        sectionContent
+      );
+    }
+
+    /* ========================================
+       AWARDS
+    ======================================== */
+
+    function awards() {
+      const entries = [
+        [
+          "Start a Game!",
+          "Gerasim vs Besi",
+          "Finalist · Regions and Languages of Russia"
+        ],
+
+        [
+          "SINEUS",
+          "Gerasim vs Besi",
+          "Finalist · Mythology in Art"
+        ],
+
+        [
+          "Astrum Entertainment",
+          "Paws and Cards",
+          "One of the best works · Conceptualization Basics: 2nd"
+        ]
+      ];
+
+      return `
+        <div class="card-grid">
+          ${entries.map(([title, project, detail]) => `
+            <article class="award-card">
+              <div class="award-icon">
+                ${icon("awards")}
+              </div>
+
+              <span class="year">2024</span>
+
+              <h2>${escapeHTML(title)}</h2>
+              <p>${escapeHTML(project)}</p>
+              <small>${escapeHTML(detail)}</small>
+            </article>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    /* ========================================
+       PRESS BY YEAR
+    ======================================== */
+
+    function press() {
+      return ["2026", "2025", "2024"].map(year => `
+        <section class="press-year-section">
+          <h2>${year}</h2>
+
+          ${
+            content.press[year].length
+              ? `
+                <div class="card-grid">
+                  ${content.press[year].map(item => `
+                    <article class="press-card">
+                      <span class="year">
+                        ${escapeHTML(item.date)}
+                      </span>
+
+                      <h3>${escapeHTML(item.title)}</h3>
+
+                      ${
+                        item.note
+                          ? `<p>${escapeHTML(item.note)}</p>`
+                          : ""
+                      }
+
+                      ${externalLink(item.action, item.href)}
+                    </article>
+                  `).join("")}
+                </div>
+              `
+              : construction()
+          }
+        </section>
+      `).join("");
+    }
+
+    /* ========================================
+       ABOUT / AWARDS / PRESS
+    ======================================== */
+
+    function about(selected = "about") {
+      const allowed = ["about", "awards", "press"];
+
+      if (!allowed.includes(selected)) {
+        selected = "about";
+      }
+
+      const navigationTabs = tabs(
+        "about",
+        [
+          ["about", "About"],
+          ["awards", "Awards"],
+          ["press", "Press"]
+        ],
+        selected,
+        "About sections"
+      );
+
+      let sectionContent;
+
+      if (selected === "awards") {
+        sectionContent = awards();
+      } else if (selected === "press") {
+        sectionContent = press();
+      } else {
+        sectionContent = '<div class="empty-section"></div>';
+      }
+
+      return heading("About") + navigationTabs + sectionContent;
+    }
+
+    /* ========================================
+       PAGE ROUTING
+    ======================================== */
+
+    function render() {
+      const route = location.hash
+        .replace(/^#\/?/, "")
+        .split("/")
+        .filter(Boolean);
+
+      const [page = "home", detail] = route;
+
+      const active = ["research", "game-jams"].includes(page)
+        ? "explorations"
+        : ["awards", "press"].includes(page)
+          ? "about"
+          : page;
+
+      const caseStudy = content.cases.find(
+        item => item.id === detail
+      );
+
+      const collection = page === "projects"
+        ? content.projects
+        : page === "game-jams"
+          ? content.games
+          : page === "research"
+            ? content.research
+            : [];
+
+      const project = collection.find(
+        item => item.id === detail
+      );
+
+      let html;
+
+      let title = navigation.find(
+        item => item.id === active
+      )?.label || "Home";
+
+      if (page === "home") {
+        html =
+          document.getElementById("home-template").innerHTML +
+          contact();
+
+      } else if (
+        page === "case-studies" &&
+        detail &&
+        caseStudy
+      ) {
+        html = casePage(caseStudy);
+        title = caseStudy.title;
+
+      } else if (
+        page === "case-studies" &&
+        !detail
+      ) {
+        html =
+          heading("Featured Case Studies") +
+          cards(content.cases, "case-studies", true);
+
+      } else if (project) {
+        html = projectPage(project, page);
+        title = project.modalTitle;
+
+      } else if (
+        page === "projects" &&
+        !detail
+      ) {
+        html =
+          heading("Projects") +
+          cards(content.projects, "projects");
+
+      } else if (page === "explorations") {
+        html = explorations(detail);
+
+      } else if (
+        ["research", "game-jams"].includes(page) &&
+        !detail
+      ) {
+        html = explorations(page);
+
+      } else if (page === "mentoring") {
+        html =
+          heading("Mentoring & Collaboration") +
+          '<div class="empty-section"></div>' +
+          contact();
+
+      } else if (page === "about") {
+        html = about(detail);
+
+      } else if (
+        ["awards", "press"].includes(page)
+      ) {
+        html = about(page);
+
+      } else {
+        title = "Page not found";
+
+        html =
+          heading(title) +
+          '<a class="text-link" href="#/">Return home</a>';
+      }
+
+      document.getElementById("main-navigation").innerHTML =
+        navigation.map(item => `
+          <a
+            class="nav-link"
+            href="#/${item.id}"
+            aria-label="${item.label}"
+            ${
+              active === item.id
+                ? 'aria-current="page"'
+                : ""
+            }
+          >
+            <span class="nav-icon">
+              ${icon(item.icon)}
+            </span>
+
+            <span class="nav-tooltip" role="tooltip">
+              ${item.label}
+            </span>
+          </a>
+        `).join("");
+
+      main.innerHTML = html;
+
+      document.title =
+        title + " — Valentina Godovets";
+
+      document.getElementById("year").textContent =
+        new Date().getFullYear();
+
+      window.scrollTo(0, 0);
+      main.focus({ preventScroll: true });
+    }
+
+    /* ========================================
+       START
+    ======================================== */
+
+    document
+      .querySelector(".skip-link")
+      .addEventListener("click", event => {
+        event.preventDefault();
+        main.focus();
+      });
+
+    window.addEventListener("hashchange", render);
+
+    render();
+  </script>
+</body>
+</html>
