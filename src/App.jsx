@@ -636,8 +636,18 @@ export default function App(){
   if(!favicon){favicon=document.createElement('link');favicon.rel='icon';document.head.appendChild(favicon)}
   favicon.type='image/png';favicon.href='https://raw.githubusercontent.com/valenandia/valen.github.io/main/Frame%2045.png';
  },[]);
- const [theme,setTheme]=useState(()=>{try{return localStorage.getItem('portfolio-theme')==='night'?'night':'day'}catch{return 'day'}});
- useEffect(()=>{document.documentElement.dataset.theme=theme;try{localStorage.setItem('portfolio-theme',theme)}catch{}},[theme]);
+ const [theme,setTheme]=useState(()=>{try{const saved=localStorage.getItem('portfolio-theme');if(saved==='night'||saved==='day')return saved}catch{}return window.matchMedia('(prefers-color-scheme: dark)').matches?'night':'day'});
+ useEffect(()=>{
+  const system=window.matchMedia('(prefers-color-scheme: dark)');
+  const sync=e=>setTheme(e.matches?'night':'day');
+  system.addEventListener('change',sync);return()=>system.removeEventListener('change',sync);
+ },[]);
+ useEffect(()=>{
+  const root=document.documentElement;root.dataset.theme=theme;root.style.colorScheme=theme==='night'?'dark':'light';
+  try{localStorage.setItem('portfolio-theme',theme)}catch{}
+  let meta=document.querySelector('meta[name="theme-color"]');if(!meta){meta=document.createElement('meta');meta.name='theme-color';document.head.appendChild(meta)}meta.content=theme==='night'?'#191620':'#ffffff';
+  let scheme=document.querySelector('meta[name="color-scheme"]');if(!scheme){scheme=document.createElement('meta');scheme.name='color-scheme';document.head.appendChild(scheme)}scheme.content=theme==='night'?'dark':'light';
+ },[theme]);
  const mainRef=useRef(null);
  useEffect(()=>{const handler=()=>{setRoute(currentRoute());window.scrollTo(0,0)};window.addEventListener('hashchange',handler);return()=>window.removeEventListener('hashchange',handler)},[]);
  const [page='home',detail]=route;
@@ -659,7 +669,7 @@ export default function App(){
  else if(page==='awards')content=<About tab="awards"/>;
  else if(page==='press')content=<About tab="press"/>;
  else content=<><PageTitle title="Page not found"/><a className="text-link" href="#/">Return home <Icon name="arrow"/></a></>;
- return <><style>{newStyles}</style><CursorSparkles/><a className="skip-link" href="#main-content" onClick={e=>{e.preventDefault();mainRef.current?.focus()}}>Skip to content</a><div className="site-frame"><header className="site-header"><button className="theme-toggle" type="button" onClick={()=>setTheme(t=>t==='day'?'night':'day')} aria-label={theme==='day'?'Switch to night mode':'Switch to day mode'} aria-pressed={theme==='night'}><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">{theme==='day'?<path d="M20 14A8 8 0 0 1 10 4a8 8 0 1 0 10 10Z"/>:<><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></>}</svg></button><a href="#/" className="wordmark" aria-label="Valentina Godovets — Home"><img className="brand-image" src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Valentina%20Godovets.png" alt="Valentina Godovets"/><span className="brand-subtitle">{profile.subtitle}</span></a></header><div className="site-layout"><aside className="sidebar"><nav aria-label="Main navigation"><div className="main-nav">{navigation.map(n=><a href={`#/${n.id}`} key={n.id} className={`nav-link ${active===n.id?'active':''}`} aria-label={n.label} aria-current={active===n.id?'page':undefined}><span className="nav-icon"><span className="nav-glyph"><Icon name={n.icon}/></span></span><span className="nav-tooltip" role="tooltip">{n.label}</span></a>)}</div></nav></aside><main id="main-content" ref={mainRef} tabIndex={-1} className={`main-content page-${page}`} key={page+'/'+(detail||'')}>{content}</main></div><footer className="site-footer"><span>© {new Date().getFullYear()} Valentina Godovets</span></footer></div></>;
+ return <><style>{newStyles}</style><CursorSparkles/><a className="skip-link" href="#main-content" onClick={e=>{e.preventDefault();mainRef.current?.focus()}}>Skip to content</a><div className="site-frame" data-theme={theme}><header className="site-header"><a href="#/" className="wordmark" aria-label="Valentina Godovets — Home"><img className="brand-image" src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Valentina%20Godovets.png" alt="Valentina Godovets"/><span className="brand-subtitle">{profile.subtitle}</span></a></header><div className="site-layout"><aside className="sidebar"><nav aria-label="Main navigation"><div className="main-nav">{navigation.map(n=><a href={`#/${n.id}`} key={n.id} className={`nav-link ${active===n.id?'active':''}`} aria-label={n.label} aria-current={active===n.id?'page':undefined}><span className="nav-icon"><span className="nav-glyph"><Icon name={n.icon}/></span></span><span className="nav-tooltip" role="tooltip">{n.label}</span></a>)}</div></nav><div className="sidebar-theme"><button className="theme-toggle" type="button" onClick={()=>setTheme(t=>t==='day'?'night':'day')} aria-label={theme==='day'?'Switch to night mode':'Switch to day mode'} aria-pressed={theme==='night'}><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">{theme==='day'?<path d="M20 14A8 8 0 0 1 10 4a8 8 0 1 0 10 10Z"/>:<><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></>}</svg></button></div></aside><main id="main-content" ref={mainRef} tabIndex={-1} className={`main-content page-${page}`} key={page+'/'+(detail||'')}>{content}</main></div><footer className="site-footer"><span>© {new Date().getFullYear()} Valentina Godovets</span></footer></div></>;
 }
 const newStyles=`
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Cinzel:wght@400;500;600;700&display=swap');
@@ -951,4 +961,106 @@ html[data-theme="night"] ::selection{background:#8864a2;color:#fff}
 .theme-toggle{width:38px;height:38px;padding:0;justify-content:center;gap:0}@media(max-width:600px){.theme-toggle{width:32px;height:32px;padding:0}}
 
 @keyframes cursor-twinkle{0%{opacity:0;transform:translate(-50%,-50%) scale(.35)}18%{opacity:.9;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(calc(-50% + var(--spark-x)),var(--spark-y,18px)) rotate(var(--spark-turn)) scale(.1)}}html[data-theme="night"] .cursor-sparkle{text-shadow:0 0 7px #d7bcfa80}
+
+/* Explicit page surfaces prevent inherited host styles from mixing themes. */
+html[data-theme="day"],html[data-theme="day"] body{background:#fff!important;color:#322c3b!important;color-scheme:light}
+html[data-theme="night"],html[data-theme="night"] body{background:#191620!important;color:#e5ddeb!important;color-scheme:dark}
+html[data-theme] #root{background:transparent!important;min-height:100vh}
+html[data-theme="day"] .brand-image{filter:brightness(0)!important;opacity:1!important}
+html[data-theme="night"] .brand-image{filter:brightness(0) invert(1)!important;opacity:1!important}
+html[data-theme="night"] .original-about-copy,html[data-theme="night"] .original-about-copy p,html[data-theme="night"] .original-about-copy p:first-child{color:#d3c8dd!important}
+html[data-theme="night"] .original-about-copy strong{color:#f0e4fa!important}
+html[data-theme="day"] .original-about-copy,html[data-theme="day"] .original-about-copy p{color:#625a6a!important}
+html[data-theme="day"] .original-about-copy strong{color:#45384f!important}
+.sidebar-theme{margin-top:48px;display:flex;justify-content:flex-start}.sidebar-theme .theme-toggle{position:static;top:auto;right:auto;width:44px;height:44px;border-radius:12px;flex-shrink:0}.sidebar-theme .theme-toggle svg{width:21px;height:21px}
+@media(max-width:800px){.sidebar-theme{margin-top:40px}.sidebar-theme .theme-toggle{width:40px;height:40px}}@media(max-width:480px){.sidebar-theme{margin-top:36px}.sidebar-theme .theme-toggle{width:34px;height:36px;border-radius:9px}.sidebar-theme .theme-toggle svg{width:19px;height:19px}}
+
+
+.site-frame[data-theme="night"]{color-scheme:dark;background:#191620;--ink:#eee8f3;--muted:#b9aec4;--purple:#c9afd9;--line:#494052;--paper:#211c2a;--frame-silver:#61576e;--frame-deep:#95859f;--frame-gold:#bdb5cc;--frame-paper:#27212f}
+
+ .site-frame[data-theme="night"]{background:#191620;color:#e5ddeb}
+ .site-frame[data-theme="night"]::before{background:radial-gradient(ellipse 34% 80% at -5% 25%,#79539842,transparent 82%),radial-gradient(ellipse 32% 80% at 105% 70%,#7a8aa838,transparent 82%)}
+
+.site-frame[data-theme="night"] .brand-image{filter:brightness(0) invert(1);opacity:.94}
+
+.site-frame[data-theme="night"] :is(.bio,.about-story,.education-description,.education-dissertation,.recognition-award-detail,.recognition-milestone .press-card p,.project-description,.project-meta,.contributions,.article-card p,.card-copy p,.cv-intro,.home-cv .portfolio-request,.resume-experience-note){color:#c8bed2}
+
+.site-frame[data-theme="night"] :is(h1,h2,h3,.about-story strong,.education-milestone h2,.education-community h2,.recognition-year-heading,.recognition-milestone .press-card strong,.education-dissertation strong){color:#eee3f7}
+
+.site-frame[data-theme="night"] :is(.brand-subtitle,.site-footer,.education-date,.education-note,.education-degree,.recognition-kind,.press-year,.eyebrow,.recognition-pending){color:#bba8cc}
+
+.site-frame[data-theme="night"] :is(.nav-icon,.social-links a.social-icon-link,.cv-button,.theme-toggle,.education-marker){background:linear-gradient(145deg,#3c304a,#302638);border-color:#655271;color:#d1b5e3;box-shadow:inset 0 1px 0 #ffffff12,0 4px 12px #0002}
+
+.site-frame[data-theme="night"] :is(.nav-link:hover .nav-icon,.nav-link.active .nav-icon,.social-links a.social-icon-link:hover,.cv-button:hover,.theme-toggle:hover){background:linear-gradient(145deg,#51405f,#3b2e47);border-color:#9d7bb2;color:#f0dafa}
+
+.site-frame[data-theme="night"] :is(.case-card,.project-card,.award-card){background:linear-gradient(145deg,#28222f,#211c28);border-color:#61536d;box-shadow:inset 0 0 0 3px #28222f,inset 0 0 0 4px #44374e}
+
+.site-frame[data-theme="night"] :is(.nav-tooltip,.social-tooltip){background:#352a40;color:#eee1f5;border-color:#665573}
+
+.site-frame[data-theme="night"] :is(.text-link,.about-story a,.press-link,.about-bye){color:#d2b2e5}
+
+.site-frame[data-theme="night"] .tabs a{color:#b8a2c9}
+.site-frame[data-theme="night"] .tabs a.selected{color:#f1dffa;background:#9c72ba30}
+
+.site-frame[data-theme="night"] .about-story .about-photo{background:#27222f;border-color:#777180;box-shadow:inset 0 0 0 5px #27222f,inset 0 0 0 6px #655e70}
+
+.site-frame[data-theme="night"] .education-community .community-card{background:transparent;box-shadow:none;border-color:#777180}
+
+.site-frame[data-theme="night"] .about-flourish svg{color:#b9a2c9}
+
+
+/* Theme surfaces and typography across detail pages. */
+.site-frame[data-theme="night"] :is(.pending-content,.empty-section,.project-meta dt,.project-meta dd,.contributions li,.lead,.article-card,.resume-list,.press-card,.recognition-detail,.year,.back-link,.card-copy,.project-actions){color:#c8bed2}
+
+.site-frame[data-theme="night"] :is(.article-card h3,.resume-list strong,.award-card h2,.project-meta dt,.contributions h2){color:#eee3f7}
+
+.site-frame[data-theme="night"] :is(.case-cover,.case-banner,.project-cover,.project-hero,.article-image,.project-award){background-color:#302737;border-color:#756381}
+
+.site-frame[data-theme="night"] :is(.case-cover,.case-banner){background-image:linear-gradient(140deg,#3a2d46,#25202e)}
+
+.site-frame[data-theme="night"] :is(.cover-arrow,.award-icon){background:#44334f;color:#dcc3ec;border-color:#766080}
+
+.site-frame[data-theme="night"] :is(.cover-index,.project-cover-fallback){color:#d7c4e5}
+
+.site-frame[data-theme="night"] :is(.chip,.chips .chip,.education-skills li){background:#362b41!important;color:#d6bfE6!important;border-color:#5e4d6d!important}
+
+.site-frame[data-theme="night"] :is(.project-meta>div,.recognition-row,.case-pagination,.article-card,.award-card,.press-card){border-color:#51445d}
+
+.site-frame[data-theme="night"] .resume-list .press-card{background:#28222f;border:1px solid #51445d;border-radius:12px;padding:20px}
+
+.site-frame[data-theme="night"] .castle-frame::after{border-color:#c2b5cf66}
+
+.site-frame[data-theme="night"] .castle-ornaments{color:#c7c7d8}
+.site-frame[data-theme="night"] .corner-jewel{fill:#a4a6bc;stroke:#e0dfea}
+
+.site-frame[data-theme="night"] .education-timeline:before{background:linear-gradient(#756481,#9295ae 85%,transparent)}
+
+.site-frame[data-theme="night"] :is(.social-tooltip,.nav-tooltip){box-shadow:0 5px 18px #0004}
+
+.site-frame[data-theme="night"] .project-actions a:hover,.site-frame[data-theme="night"] .about-story a:hover{color:#f1ddff}
+
+.site-frame[data-theme="night"] .skip-link{background:#34263f;color:#f1ddff}
+
+.site-frame[data-theme="night"] ::selection{background:#8864a2;color:#fff}
+.site-frame[data-theme="night"] .cursor-sparkle{text-shadow:0 0 7px #d7bcfa80}
+
+
+/* Explicit page surfaces prevent inherited host styles from mixing themes. */
+.site-frame[data-theme="day"], .site-frame[data-theme="day"]{background:#fff!important;color:#322c3b!important;color-scheme:light}
+
+.site-frame[data-theme="night"], .site-frame[data-theme="night"]{background:#191620!important;color:#e5ddeb!important;color-scheme:dark}
+
+.site-frame[data-theme="day"] .brand-image{filter:brightness(0)!important;opacity:1!important}
+
+.site-frame[data-theme="night"] .brand-image{filter:brightness(0) invert(1)!important;opacity:1!important}
+
+.site-frame[data-theme="night"] .original-about-copy,.site-frame[data-theme="night"] .original-about-copy p,.site-frame[data-theme="night"] .original-about-copy p:first-child{color:#d3c8dd!important}
+
+.site-frame[data-theme="night"] .original-about-copy strong{color:#f0e4fa!important}
+
+.site-frame[data-theme="day"] .original-about-copy,.site-frame[data-theme="day"] .original-about-copy p{color:#625a6a!important}
+
+.site-frame[data-theme="day"] .original-about-copy strong{color:#45384f!important}
+.site-frame[data-theme="night"]{background:#191620!important;color:#e5ddeb!important;min-height:100vh}.site-frame[data-theme="day"]{background:#fff!important;color:#322c3b!important;min-height:100vh}
+.site-frame[data-theme="night"] .brand-image{filter:brightness(0) invert(1)!important}.site-frame[data-theme="day"] .brand-image{filter:brightness(0)!important}
 `;
