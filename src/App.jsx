@@ -607,7 +607,7 @@ h1,h2,h3,.text-link,.tabs a,.nav-tooltip,.contact-strip p{font-family:var(--main
 @media(max-width:480px){.site-frame{padding-inline:24px}.site-layout{gap:18px}.page-heading h1{font-size:24px}.card-copy h2{font-size:17px}.home-hero{gap:22px}.nav-link .nav-tooltip{max-width:220px}}
 
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-`
+
 /* Основной шрифт сайта — Aubrey */
 @font-face {
   font-family: "Aubrey";
@@ -632,4 +632,5 @@ body,
 #root *::after {
   font-family: "Aubrey", Georgia, serif !important;
   font-synthesis: weight style !important;
-};
+}
+`;
