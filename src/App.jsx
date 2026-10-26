@@ -94,7 +94,7 @@ const navModals = [
         <p className="resume-experience-note">Nearly 10+ years of experience creating mods for various games and platforms, covering content, cosmetics and NSFW+</p>
 
         <div className="resume-actions">
-          <a className="modal-link no-dot" href="#">DOWNLOAD PDF</a>
+          <a className="text-link" href="mailto:godovets.valya@gmail.com?subject=CV%20PDF%20request">Request CV PDF</a>
         </div>
       </>
     ),
@@ -442,23 +442,48 @@ const cases = [
 const navigation = [
   {id:'projects',label:'Projects',icon:'projects'},
   {id:'case-studies',label:'Featured Case Studies',icon:'cases'},
-  {id:'explorations',label:'Research, Articles & Game Jams',icon:'research'},
+  {id:'explorations',label:'Research & Creative Work',icon:'research'},
   {id:'mentoring',label:'Mentoring & Collaboration',icon:'mentoring'},
   {id:'about',label:'About',icon:'about'},
 ];
 const extraNavigation = [{id:'awards',label:'Awards',icon:'awards'},{id:'press',label:'Press',icon:'press'}];
 function Icon({name, size=22}) {
   const paths={
+    cv:<><path d="M6 3h8l4 4v14H6Z"/><path d="M14 3v5h4M9 13h6M9 16h6M9 10h2"/></>,
     home:<><path d="m3 10 9-7 9 7v11H3Z"/><path d="M9 21v-8h6v8"/></>,
-    projects:<><path d="M3 7h7l2-3h9v16H3Z"/><path d="M3 9h18"/></>,
-    cases:<><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></>,
-    research:<><path d="M12 5C8 2 4 3 2 4v15c4-2 7-1 10 1 3-2 6-3 10-1V4c-3-1-7-2-10 1Zm0 0v15"/><path d="M5 8h4m-4 4h4m6-4h4m-4 4h4"/></>,
-    mentoring:<><path d="m2 8 10-5 10 5-10 5Z"/><path d="M6 10v6c4 3 8 3 12 0v-6M22 8v8"/></>,
-    about:<><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.1"/><path d="M10 17h4"/></>,
+    projects:<>
+      <path d="M6 4h12a2 2 0 0 1 2 2v2h-4V6a2 2 0 0 1 2-2M6 4v14m0-14a2 2 0 0 0-2 2v2h2m10-2v12"/>
+      <path d="M6 18H3v2a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-2H6M9 9h4m-4 3h4m-4 3h2"/>
+      <path d="m12 16 2 1.5V21l-2-1-2 1v-3.5Z" fill="currentColor" opacity=".15"/>
+    </>,
+    cases:<>
+      <path d="M12 3c3 2 5 2 8 2v7c0 5-4 8-8 10-4-2-8-5-8-10V5c3 0 5 0 8-2Z"/>
+      <path d="M12 6c2 1 4 1 5 1v5c0 3-2 5-5 7-3-2-5-4-5-7V7c1 0 3 0 5-1Z" fill="currentColor" opacity=".1" stroke="none"/>
+      <path d="M12 7v10m-4-5h8m-4-5-2 3 2 2 2-2Zm0 10-2-3 2-2 2 2Z"/>
+    </>,
+    research:<>
+      <path d="M12 6C9 3 5 3 2 4v15c4-1 7-1 10 2 3-3 6-3 10-2V4c-3-1-7-1-10 2Zm0 0v15"/>
+      <path d="M5 7c1-.2 3 0 4 1m-4 3c1-.2 3 0 4 1m-4 3h3m7-7c1-1 3-1 4-1m-4 5c1-1 3-1 4-1m-4 4h3"/>
+      <path d="M2 17h2m16 0h2M10 4V2h4v2"/>
+    </>,
+    mentoring:<>
+      <path d="M5 19C7 10 11 4 21 3c0 8-4 13-12 14L5 21m2-5 10-9"/>
+      <path d="m10 12 1-5m2 2 2-4m-2 9 5-1M3 22h11"/>
+      <path d="M9 15c2-5 5-8 10-10-1 5-4 8-10 10Z" fill="currentColor" opacity=".12" stroke="none"/>
+    </>,
+    about:<>
+      <ellipse cx="12" cy="12" rx="8" ry="10"/>
+      <ellipse cx="12" cy="12" rx="6.2" ry="8.2" opacity=".45"/>
+      <path d="M9 17c1-1 2-1 3-2v-2c-1-.5-2-2-2-4a3 3 0 0 1 6 0l1 2-1 1h-1v2l-2 1v1l3 2"/>
+      <path d="M8 19c1-3 3-3 4-4 1 1 4 1 5 4" fill="currentColor" opacity=".15" stroke="none"/>
+    </>,
     awards:<><path d="M7 3h10v5a5 5 0 0 1-10 0ZM7 5H3v3a4 4 0 0 0 5 4m9-7h4v3a4 4 0 0 1-5 4M12 13v6m-5 2h10"/></>,
     press:<><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M7 7h5v5H7Zm9 0h1m-1 4h1M7 16h10"/></>,
     arrow:<><path d="M4 12h16m-6-6 6 6-6 6"/></>,
     back:<><path d="M20 12H4m6-6-6 6 6 6"/></>,
+    linkedin:<><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="7.5" cy="8" r="1" fill="currentColor" stroke="none"/><path d="M7.5 11v6.5M11.5 17.5V11m0 2.5c0-3 5-3 5 0v4" strokeWidth="1.8"/></>,
+    x:<><path d="M4 3h4l12 18h-4L4 3ZM20 3 4 21" strokeWidth="1.5"/></>,
+    substack:<><path d="M5 3h14M5 7h14M5 11h14v11l-7-4-7 4Z" strokeWidth="1.6"/></>,
     external:<><path d="M14 3h7v7m0-7L10 14M10 3H3v18h18v-7"/></>,
     mail:<><rect x="2" y="5" width="20" height="14" rx="2"/><path d="m2 6 10 7L22 6"/></>,
     photo:<><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="2"/><path d="m3 17 5-5 4 4 4-7 5 8"/></>,
@@ -477,21 +502,39 @@ function CaseArt({type}) {
     {type==='ai'&&<><path d="M160 53v30m-60 0h120m-120 0v34m60-34v34m60-34v34" stroke="currentColor" strokeWidth="1.5"/><rect x="138" y="29" width="44" height="26" rx="5" stroke="currentColor"/><rect x="79" y="117" width="42" height="28" rx="5" stroke="currentColor"/><rect x="139" y="117" width="42" height="28" rx="5" stroke="currentColor"/><rect x="199" y="117" width="42" height="28" rx="5" stroke="currentColor"/><circle cx="160" cy="83" r="6" fill="currentColor"/></>}
   </svg>;
 }
+function CastleOrnaments({portrait=false}) {
+  return <span className={`castle-ornaments${portrait?' portrait-ornaments':''}`} aria-hidden="true">
+    {['tl','tr','br','bl'].map(corner=><svg className={`castle-corner castle-${corner}`} key={corner} viewBox="0 0 40 40" fill="none">
+      <path d="M4 35V12a8 8 0 0 1 8-8h23M9 30V16a7 7 0 0 1 7-7h14"/>
+      <path d="M4 22c8 0 9-8 18-18M9 22c7 0 8-6 13-13"/>
+      <path className="corner-jewel" d="m10 10 4-4 4 4-4 4Z"/>
+      <circle cx="4" cy="35" r="1.5"/><circle cx="35" cy="4" r="1.5"/>
+    </svg>)}
+    <span className="castle-crest">✧</span>
+  </span>;
+}
 function PageTitle({eyebrow='Portfolio',title,children}) {
   return <header className="page-heading"><h1>{title}</h1></header>;
 }
 function Contact() {
-  return <div className="contact-strip"><p>Feel free to contact me.</p><div className="social-links"><a href={profile.socials[0].href} target="_blank" rel="noreferrer">LinkedIn <Icon name="external" size={13}/></a><a href={profile.socials[2].href} target="_blank" rel="noreferrer">X <Icon name="external" size={13}/></a><a href={`mailto:${profile.email}`}>Email <Icon name="mail" size={15}/></a></div></div>;
+  const links = [
+    {label:'LinkedIn',icon:'linkedin',href:profile.socials[0].href},
+    {label:'X',icon:'x',href:profile.socials[2].href},
+    {label:'Email',icon:'mail',href:`mailto:${profile.email}`},
+    {label:'Substack',icon:'substack',href:'https://valenandia.substack.com/?r=2l6vdl'},
+  ];
+  return <div className="contact-strip"><p>For collaboration, work or other projects — feel free to connect! Ty!</p><nav className="social-links" aria-label="Contact and social links">{links.map(link=><a key={link.label} className="social-icon-link" href={link.href} aria-label={link.label} target={link.icon==='mail'?undefined:'_blank'} rel={link.icon==='mail'?undefined:'noopener noreferrer'}><Icon name={link.icon} size={21}/><span className="social-tooltip" aria-hidden="true">{link.label}</span></a>)}</nav></div>;
 }
+
 function Home() {
- return <><section className="home-hero"><div className="portrait-wrap"><div className="photo-placeholder" role="img" aria-label="Reserved for Valentina’s portrait"><span className="portrait-corner tl"/><span className="portrait-corner tr"/><span className="portrait-corner bl"/><span className="portrait-corner br"/><div className="portrait-center"><Icon name="photo" size={32}/><span>Portrait coming soon</span></div><span className="portrait-caption">VALENTINA / GAME DESIGNER</span></div></div><div className="home-copy"><div className="bio original-about-copy">{React.Children.toArray(navModals.find(m=>m.id==='about').body.props.children).slice(0,3)}</div></div></section><Contact/></>;
+ return <><section className="home-hero"><div className="portrait-wrap"><div className="photo-placeholder" role="img" aria-label="Reserved for Valentina’s portrait"><span className="portrait-corner tl"/><span className="portrait-corner tr"/><span className="portrait-corner bl"/><span className="portrait-corner br"/><CastleOrnaments portrait/><div className="portrait-center"><Icon name="photo" size={32}/><span>Portrait coming soon</span></div><span className="portrait-caption">VALENTINA / GAME DESIGNER</span></div></div><div className="home-copy"><div className="bio original-about-copy">{React.Children.toArray(navModals.find(m=>m.id==='about').body.props.children).slice(0,3)}</div></div></section><section className="home-cv" aria-label="CV and detailed portfolio"><p className="cv-intro">You can check my CV here.</p><a className="cv-button" href="#/cv"><Icon name="cv" size={21}/> View CV</a><p className="portfolio-request">Detailed portfolio on Notion available upon request.</p></section><Contact/></>;
 }
-function CaseGrid(){return <><PageTitle eyebrow="Selected work" title="Featured Case Studies">Frameworks, mechanics, and spaces — a closer look at my design work.</PageTitle><div className="card-grid case-grid">{cases.map((c,i)=><a className="case-card" key={c.id} href={`#/case-studies/${c.id}`}><div className={`case-cover ${c.color}`}><span className="cover-index">CASE / {String(i+1).padStart(2,'0')}</span><img className="framework-placeholder" src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(1).png" alt="" loading="lazy"/><span className="cover-arrow"><Icon name="arrow" size={18}/></span></div><div className="card-copy"><span className="eyebrow">{c.category}</span><h2>{c.title}</h2><p>{c.subtitle}</p></div></a>)}</div></>}
-function CasePage({item}){return <article className="case-page"><a className="back-link" href="#/case-studies"><Icon name="back" size={16}/> Featured Case Studies</a><PageTitle title={`${item.title}: ${item.subtitle}`}/><div className={`case-banner ${item.color}`}><img className="framework-placeholder" src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(1).png" alt=""/></div><div className="pending-content"><p>Under construction</p></div><nav className="case-pagination" aria-label="Other case studies">{cases.indexOf(item)>0?<a className="text-link" href={`#/case-studies/${cases[cases.indexOf(item)-1].id}`}><Icon name="back" size={16}/> Previous case</a>:<span/>}{cases.indexOf(item)<cases.length-1&&<a className="text-link" href={`#/case-studies/${cases[cases.indexOf(item)+1].id}`}>Next case <Icon name="arrow" size={16}/></a>}</nav></article>}
-function ProjectGrid({items,base}){return <div className="card-grid">{items.map(item=><a className="project-card" key={item.id} href={`#/${base}/${item.id}`}><div className="project-cover"><img src={item.image} alt="" loading="lazy" onError={e=>{e.currentTarget.style.display='none';}}/><span className="project-cover-fallback">{item.modalTitle}</span><span className="cover-arrow"><Icon name="arrow" size={18}/></span></div><div className="card-copy"><span className="eyebrow">{item.tag}</span><h2>{item.modalTitle}</h2>{item.status&&<p>{item.status}</p>}</div></a>)}</div>}
-function ProjectPage({item,base}){return <article><a className="back-link" href={`#/${base}`}><Icon name="back" size={16}/>{base==='projects'?'Projects':'Research, Articles & Game Jams'}</a><PageTitle eyebrow={item.tag} title={item.modalTitle}>{item.status}</PageTitle>{item.body?<div className="pending-content">{item.body}</div>:<><div className="project-hero"><img src={item.projectImage||item.image} alt={item.modalTitle}/></div><p className="project-description">{item.description}</p><div className="project-actions">{[{label:item.action,href:item.href},{label:item.secondaryAction,href:item.secondaryHref},...(item.extraActions||[])].filter(a=>a.href&&a.href!=='#').map(a=><a className="text-link" key={a.label} href={a.href} target="_blank" rel="noreferrer">{a.label} <Icon name="external" size={14}/></a>)}</div>{item.meta&&<dl className="project-meta">{item.meta.map(([k,v])=><div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>}{item.contributions&&<section className="contributions"><h2>My contributions</h2><ul>{item.contributions.map(c=><li key={c}>{c}</li>)}</ul></section>}{item.awardImage&&<div className="project-award"><img src={item.awardImage} alt={item.awardLabel}/></div>}</>}</article>}
-function Article({title,text,image}){return <article className="article-card"><div className="article-image"><img src={image} alt="" loading="lazy"/></div><div><span className="eyebrow">Article</span><h3>{title}</h3><p>{text}</p></div></article>}
-function Explorations({tab}){const selected=['research','articles','game-jams'].includes(tab)?tab:'research';return <><PageTitle eyebrow="Beyond the frameworks" title="Research, Articles & Game Jams"/><nav className="tabs" aria-label="Research sections">{[['research','Research'],['articles','Articles'],['game-jams','Game Jams']].map(([id,label])=><a key={id} className={selected===id?'selected':''} href={`#/explorations/${id}`} aria-current={selected===id?'page':undefined}>{label}</a>)}</nav>{selected==='research'?<ProjectGrid items={windows.find(w=>w.id==='links').items} base="research"/>:selected==='game-jams'?<ProjectGrid items={windows.find(w=>w.id==='games').items} base="game-jams"/>:navModals.find(m=>m.id==='articles').body}</>}
+function CaseGrid(){return <><PageTitle eyebrow="Selected work" title="Featured Case Studies">Frameworks, mechanics, and spaces — a closer look at my design work.</PageTitle><div className="card-grid case-grid">{cases.map((c,i)=><a className="case-card" key={c.id} href={`#/case-studies/${c.id}`}><div className={`case-cover castle-frame ${c.color}`}><CastleOrnaments/><span className="cover-index">CASE / {String(i+1).padStart(2,'0')}</span><img className="framework-placeholder" src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(1).png" alt="" loading="lazy"/><span className="cover-arrow"><Icon name="arrow" size={18}/></span></div><div className="card-copy"><span className="eyebrow">{c.category}</span><h2>{c.title}</h2><p>{c.subtitle}</p></div></a>)}</div></>}
+function CasePage({item}){return <article className="case-page"><a className="back-link" href="#/case-studies"><Icon name="back" size={16}/> Featured Case Studies</a><PageTitle title={`${item.title}: ${item.subtitle}`}/><div className={`case-banner castle-frame ${item.color}`}><CastleOrnaments/><img className="framework-placeholder" src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(1).png" alt=""/></div><div className="pending-content"><p>Under construction</p></div><nav className="case-pagination" aria-label="Other case studies">{cases.indexOf(item)>0?<a className="text-link" href={`#/case-studies/${cases[cases.indexOf(item)-1].id}`}><Icon name="back" size={16}/> Previous case</a>:<span/>}{cases.indexOf(item)<cases.length-1&&<a className="text-link" href={`#/case-studies/${cases[cases.indexOf(item)+1].id}`}>Next case <Icon name="arrow" size={16}/></a>}</nav></article>}
+function ProjectGrid({items,base}){return <div className="card-grid">{items.map(item=><a className="project-card" key={item.id} href={`#/${base}/${item.id}`}><div className="project-cover castle-frame"><CastleOrnaments/><img src={item.image} alt="" loading="lazy" onError={e=>{e.currentTarget.style.display='none';}}/><span className="project-cover-fallback">{item.modalTitle}</span><span className="cover-arrow"><Icon name="arrow" size={18}/></span></div><div className="card-copy"><span className="eyebrow">{item.tag}</span><h2>{item.modalTitle}</h2>{item.status&&<p>{item.status}</p>}</div></a>)}</div>}
+function ProjectPage({item,base}){return <article><a className="back-link" href={`#/${base}`}><Icon name="back" size={16}/>{base==='projects'?'Projects':'Research & Creative Work'}</a><PageTitle eyebrow={item.tag} title={item.modalTitle}>{item.status}</PageTitle>{item.body?<div className="pending-content">{item.body}</div>:<><div className="project-hero castle-frame"><CastleOrnaments/><img src={item.projectImage||item.image} alt={item.modalTitle}/></div><p className="project-description">{item.description}</p><div className="project-actions">{[{label:item.action,href:item.href},{label:item.secondaryAction,href:item.secondaryHref},...(item.extraActions||[])].filter(a=>a.href&&a.href!=='#').map(a=><a className="text-link" key={a.label} href={a.href} target="_blank" rel="noreferrer">{a.label} <Icon name="external" size={14}/></a>)}</div>{item.meta&&<dl className="project-meta">{item.meta.map(([k,v])=><div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>}{item.contributions&&<section className="contributions"><h2>My contributions</h2><ul>{item.contributions.map(c=><li key={c}>{c}</li>)}</ul></section>}{item.awardImage&&<div className="project-award castle-frame"><CastleOrnaments/><img src={item.awardImage} alt={item.awardLabel}/></div>}</>}</article>}
+function Article({title,text,image}){return <article className="article-card"><div className="article-image castle-frame"><CastleOrnaments/><img src={image} alt="" loading="lazy"/></div><div><span className="eyebrow">Article</span><h3>{title}</h3><p>{text}</p></div></article>}
+function Explorations({tab}){const selected=['research','articles','game-jams','modding'].includes(tab)?tab:'research';return <><PageTitle eyebrow="Beyond the frameworks" title="Research & Creative Work"/><nav className="tabs" aria-label="Research sections">{[['research','Research'],['articles','Articles'],['game-jams','Game Jams'],['modding','Modding']].map(([id,label])=><a key={id} className={selected===id?'selected':''} href={`#/explorations/${id}`} aria-current={selected===id?'page':undefined}>{label}</a>)}</nav>{selected==='modding'?<div className="pending-content"><p>Under construction</p></div>:selected==='research'?<ProjectGrid items={windows.find(w=>w.id==='links').items} base="research"/>:selected==='game-jams'?<ProjectGrid items={windows.find(w=>w.id==='games').items} base="game-jams"/>:navModals.find(m=>m.id==='articles').body}</>}
 function Awards(){return <div className="card-grid awards-grid">{[
 ['2024','Start a Game!','Gerasim vs Besi','Finalist · Regions and Languages of Russia'],
 ['2024','SINEUS','Gerasim vs Besi','Finalist · Mythology in Art'],
@@ -504,8 +547,36 @@ function Press(){
  return <div className="press-years">{groups.map(group=><section className="press-year-section" key={group.year}><h2>{group.year}</h2>{group.items.length?<div className="card-grid press-grid">{group.items}</div>:<div className="pending-content"><p>Under construction</p></div>}</section>)}</div>;
 }
 function About({tab}){
- const selected=['about','awards','press'].includes(tab)?tab:'about';
- return <><PageTitle title="About"/><nav className="tabs" aria-label="About sections">{[['about','About'],['awards','Awards'],['press','Press']].map(([id,label])=><a key={id} className={selected===id?'selected':''} href={`#/about/${id}`} aria-current={selected===id?'page':undefined}>{label}</a>)}</nav>{selected==='awards'?<Awards/>:selected==='press'?<Press/>:<div className="about-empty-section"/>}</>;
+ const selected=['about','education','awards','press'].includes(tab)?tab:'about';
+ return <><PageTitle title="About"/><nav className="tabs" aria-label="About sections">{[['about','About'],['education','Education'],['awards','Awards'],['press','Press']].map(([id,label])=><a key={id} className={selected===id?'selected':''} href={`#/about/${id}`} aria-current={selected===id?'page':undefined}>{label}</a>)}</nav>{selected==='education'?<div className="pending-content"><p>Under construction</p></div>:selected==='awards'?<Awards/>:selected==='press'?<Press/>:<div className="about-empty-section"/>}</>;
+}
+function CursorSparkles(){
+ const layer=useRef(null);
+ useEffect(()=>{
+  const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
+  let previous=0,lastX=null,lastY=null;
+  const sparkle=e=>{
+   if(motion.matches||e.pointerType!=='mouse'||!layer.current)return;
+   const now=performance.now();
+   if(now-previous<48||(lastX!==null&&Math.hypot(e.clientX-lastX,e.clientY-lastY)<9))return;
+   previous=now;lastX=e.clientX;lastY=e.clientY;
+   if(layer.current.childElementCount>=18)layer.current.firstChild.remove();
+   const star=document.createElement('span');
+   star.className='cursor-sparkle';star.textContent='✦';
+   star.style.left=`${e.clientX+(Math.random()-.5)*12}px`;
+   star.style.top=`${e.clientY+(Math.random()-.5)*12}px`;
+   star.style.fontSize=`${7+Math.random()*6}px`;
+   star.style.color=Math.random()>.5?'#baa0cd':'#b9bec9';
+   star.style.setProperty('--spark-x',`${(Math.random()-.5)*26}px`);
+   star.style.setProperty('--spark-turn',`${(Math.random()-.5)*100}deg`);
+   star.addEventListener('animationend',()=>star.remove(),{once:true});
+   layer.current.appendChild(star);
+  };
+  window.addEventListener('pointermove',sparkle,{passive:true});
+  const container=layer.current;
+  return()=>{window.removeEventListener('pointermove',sparkle);container?.replaceChildren()};
+ },[]);
+ return <div className="cursor-sparkles" ref={layer} aria-hidden="true"/>;
 }
 function currentRoute(){return window.location.hash.replace(/^#\/?/,'').split('/').filter(Boolean)}
 export default function App(){
@@ -526,15 +597,16 @@ export default function App(){
  else if(page==='explorations')content=<Explorations tab={detail}/>;
  else if(page==='research'||page==='game-jams')content=<Explorations tab={page}/>;
  else if(page==='mentoring')content=<><PageTitle eyebrow="Working together" title="Mentoring & Collaboration"/><div className="empty-section"/><Contact/></>;
+ else if(page==='cv')content=<><PageTitle title="CV"/>{navModals.find(m=>m.id==='resume').body}</>;
  else if(page==='about')content=<About tab={detail}/>;
  else if(page==='awards')content=<About tab="awards"/>;
  else if(page==='press')content=<About tab="press"/>;
  else content=<><PageTitle title="Page not found"/><a className="text-link" href="#/">Return home <Icon name="arrow"/></a></>;
- return <><style>{newStyles}</style><a className="skip-link" href="#main-content" onClick={e=>{e.preventDefault();mainRef.current?.focus()}}>Skip to content</a><div className="site-frame"><header className="site-header"><a href="#/" className="wordmark" aria-label="Valentina Godovets — Home"><img className="brand-image" src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Valentina%20Godovets.png" alt="Valentina Godovets"/><span className="brand-subtitle">{profile.subtitle}</span></a></header><div className="site-layout"><aside className="sidebar"><nav aria-label="Main navigation"><div className="main-nav">{navigation.map(n=><a href={`#/${n.id}`} key={n.id} className={`nav-link ${active===n.id?'active':''}`} aria-label={n.label} aria-current={active===n.id?'page':undefined}><span className="nav-icon"><Icon name={n.icon}/></span><span className="nav-tooltip" role="tooltip">{n.label}</span></a>)}</div></nav></aside><main id="main-content" ref={mainRef} tabIndex={-1} className={`main-content page-${page}`} key={page+'/'+(detail||'')}>{content}</main></div><footer className="site-footer"><span>© {new Date().getFullYear()} Valentina Godovets</span></footer></div></>;
+ return <><style>{newStyles}</style><CursorSparkles/><a className="skip-link" href="#main-content" onClick={e=>{e.preventDefault();mainRef.current?.focus()}}>Skip to content</a><div className="site-frame"><header className="site-header"><a href="#/" className="wordmark" aria-label="Valentina Godovets — Home"><img className="brand-image" src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Valentina%20Godovets.png" alt="Valentina Godovets"/><span className="brand-subtitle">{profile.subtitle}</span></a></header><div className="site-layout"><aside className="sidebar"><nav aria-label="Main navigation"><div className="main-nav">{navigation.map(n=><a href={`#/${n.id}`} key={n.id} className={`nav-link ${active===n.id?'active':''}`} aria-label={n.label} aria-current={active===n.id?'page':undefined}><span className="nav-icon"><span className="nav-glyph"><Icon name={n.icon}/></span></span><span className="nav-tooltip" role="tooltip">{n.label}</span></a>)}</div></nav></aside><main id="main-content" ref={mainRef} tabIndex={-1} className={`main-content page-${page}`} key={page+'/'+(detail||'')}>{content}</main></div><footer className="site-footer"><span>© {new Date().getFullYear()} Valentina Godovets</span></footer></div></>;
 }
 const newStyles=`
-@import url('https://fonts.googleapis.com/css2?family=Eagle+Lake&family=Cormorant+Garamond:wght@500;600;700;800&family=Share+Tech+Mono&display=swap');
-:root{font-family:"Times New Roman",Times,serif;color:#322c3b;background:#fff;font-synthesis:none;--ink:#322c3b;--muted:#78717f;--purple:#736081;--line:#ded8e2;--paper:#fff}*{box-sizing:border-box}body{margin:0}a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}a,button{-webkit-tap-highlight-color:transparent}a:focus-visible,button:focus-visible{outline:2px solid #806a95;outline-offset:5px}svg{flex-shrink:0}img{display:block;max-width:100%}h1,h2,h3,p{margin:0}button{cursor:pointer}.site-frame{max-width:1600px;margin:auto;padding:0 48px}.site-header{height:145px;display:flex;align-items:center;justify-content:space-between;border:0;gap:25px}.wordmark{font-family:"Eagle Lake",Georgia,serif;font-size:clamp(27px,3.1vw,46px);letter-spacing:.025em;display:flex;align-items:center;gap:21px;white-space:nowrap}.wordmark-star{font-family:Georgia,serif;font-size:30px;color:#95829e;transition:transform .6s}.wordmark:hover .wordmark-star{transform:rotate(90deg)}.header-note{font-size:10px;letter-spacing:.17em;color:var(--muted);white-space:nowrap}.site-layout{display:grid;grid-template-columns:244px minmax(0,1fr);gap:54px;min-height:calc(100vh - 207px)}.sidebar{border:0;padding:48px 28px 40px 0;display:flex;flex-direction:column;align-self:start;position:sticky;top:0;min-height:640px}.main-nav,.secondary-nav{display:flex;flex-direction:column;gap:13px}.nav-link{display:grid;grid-template-columns:40px 1fr 10px;align-items:center;gap:12px;font-size:12px;font-weight:500;line-height:1.5;color:#6c6473;transition:color .2s}.nav-icon{height:40px;width:40px;border:1px solid #d5ccd9;display:flex;align-items:center;justify-content:center;border-radius:9px;transition:background .2s,border-color .2s}.nav-marker{opacity:0;font-size:14px}.nav-link:hover,.nav-link.active{color:#493451}.nav-link:hover .nav-icon{background:#ece5f0;border-color:#ac97b7}.nav-link.active .nav-icon{background:#e6dce9;border-color:#ad96b7}.nav-link.active .nav-marker{opacity:1}.secondary-nav{border:0;margin-top:29px;padding-top:27px;gap:10px}.secondary-nav .nav-icon{height:33px;width:40px;border-color:transparent}.sidebar-home{font-size:11px;display:flex;align-items:center;gap:9px;margin:30px 0 0 13px;color:var(--muted)}.sidebar-home:hover{color:var(--purple)}.sidebar-signature{font-size:10px;line-height:1.8;color:#9c94a1;margin-top:48px;margin-left:13px}.main-content{padding:48px 0 70px;min-width:0;outline:none;animation:appear .28s ease}.home-hero{display:grid;grid-template-columns:minmax(210px,.92fr) minmax(260px,1.08fr);gap:clamp(30px,4.3vw,68px);align-items:center;padding:16px 0 55px;min-height:535px}.photo-placeholder{aspect-ratio:4/5;background:#e9e1ed;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid #ddd0e2;border-radius:110px 110px 3px 3px;color:#9a86a3}.photo-placeholder:before,.photo-placeholder:after{content:'';position:absolute;border:1px solid #d9cadd;border-radius:50%;width:175%;height:110%;top:42%;left:-35%;transform:rotate(-25deg)}.photo-placeholder:after{top:51%;left:-5%;transform:rotate(25deg)}.portrait-center{display:flex;flex-direction:column;gap:15px;align-items:center;position:relative;z-index:1;color:#887291}.portrait-center span{font-size:11px;letter-spacing:.04em}.portrait-caption{position:absolute;bottom:22px;font-size:8px;letter-spacing:.18em;color:#887291;z-index:1}.portrait-note{display:block;font-family:Georgia,serif;font-style:italic;font-size:11px;line-height:1.6;margin-top:14px;color:#9b8fa1;text-align:center}.portrait-corner{display:none}.eyebrow{text-transform:uppercase;letter-spacing:.13em;font-size:9px;line-height:1.7;font-weight:600;color:#8a7696}.home-copy h1{font-family:"Eagle Lake",Georgia,serif;font-size:clamp(38px,3.9vw,57px);font-weight:400;letter-spacing:-.04em;line-height:1.15;margin:16px 0 22px}.title-dot{color:#9d80ac}.lead{font-size:18px;line-height:1.55;letter-spacing:-.025em;margin-bottom:22px}.bio{max-width:400px;color:#78717f;font-size:12px;line-height:1.95}.bio p+p{margin-top:13px}.text-link{display:inline-flex;align-items:center;gap:14px;font-size:11px;font-weight:500;line-height:1.5;border-bottom:1px solid #b5a1bf;padding-bottom:7px;color:#60466e}.text-link:hover{color:#34203f;border-color:#34203f}.hero-cta{margin-top:26px}.contact-strip{border:0;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:26px 0;margin-top:12px}.contact-strip>div:first-child{display:flex;align-items:center;gap:16px}.small-star{font-size:26px;color:#a98fb5}.contact-strip p{font-family:"Eagle Lake",Georgia,serif;font-size:23px}.social-links{display:flex;gap:27px}.social-links a{display:flex;gap:8px;align-items:center;font-size:10px;white-space:nowrap;color:#6b5d74}.social-links a:hover{color:#35203f}.site-footer{border:0;padding:22px 0;display:flex;justify-content:space-between;align-items:center;gap:15px;font-size:9px;color:#918797;letter-spacing:.025em}.site-footer a{color:#6c5b77}.page-heading{margin:2px 0 35px;max-width:800px}.page-heading h1{font-family:"Eagle Lake",Georgia,serif;font-weight:400;font-size:clamp(35px,3.4vw,49px);line-height:1.15;letter-spacing:-.025em;margin-top:13px}.page-intro{font-size:12px;color:var(--muted);line-height:1.8;margin-top:15px;max-width:540px}.card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px 22px}.case-card,.project-card{min-width:0;display:block}.case-cover{aspect-ratio:1.6;position:relative;overflow:hidden;border-radius:3px;transition:transform .25s,box-shadow .25s}.mauve{background:#e5dce9;color:#83668d}.sage{background:#e0e7df;color:#71856a}.rose{background:#efdddd;color:#ae777d}.lavender{background:#e2def0;color:#8b77a4}.sand{background:#ece4d8;color:#ab9474}.slate{background:#e0e4e9;color:#778597}.mint{background:#dce8e4;color:#6f9989}.case-art{height:100%;width:100%;display:block}.cover-index{position:absolute;top:15px;left:16px;font-size:8px;font-weight:500;letter-spacing:.12em;z-index:1}.cover-arrow{position:absolute;bottom:12px;right:14px;display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;border:1px solid currentColor;opacity:.6;transition:transform .2s}.case-card:hover .case-cover,.project-card:hover .project-cover{transform:translateY(-3px);box-shadow:0 8px 20px #58416012}.case-card:hover .cover-arrow,.project-card:hover .cover-arrow{transform:rotate(-35deg);opacity:1}.card-copy{padding:17px 1px 0}.card-copy .eyebrow{font-size:8px;letter-spacing:.1em}.card-copy h2{font-size:14px;line-height:1.55;font-weight:550;letter-spacing:-.015em;margin-top:7px}.card-copy p{font-size:11px;line-height:1.7;color:#8c8193;margin-top:6px}.back-link{display:inline-flex;align-items:center;gap:9px;color:#8a7b94;font-size:10px;margin-bottom:30px}.back-link:hover{color:#493451}.case-banner{height:250px;border-radius:3px}.case-banner .case-art{width:min(100%,480px);margin:auto}.case-page .page-heading h1{max-width:800px}.pending-content{border:0;padding:35px 0;margin-top:35px;color:var(--muted);font-size:14px}.pending-content p{margin-top:10px}.case-pagination{display:flex;justify-content:space-between;gap:30px;margin-top:45px}.project-cover{aspect-ratio:1.45;background:#e8e1eb;position:relative;border-radius:3px;overflow:hidden;transition:transform .2s,box-shadow .2s;color:#6d5878}.project-cover img{position:relative;width:100%;height:100%;object-fit:cover;z-index:1}.project-cover-fallback{position:absolute;inset:0;display:grid;place-items:center;padding:25px;font-family:"Eagle Lake",Georgia,serif;font-size:25px;text-align:center}.project-cover .cover-arrow{z-index:2;background:#faf7fc;border-color:#d2c7d8;opacity:1;bottom:10px;right:10px}.project-hero{max-height:420px;overflow:hidden;background:#ebe5ee}.project-hero img{width:100%;height:100%;max-height:420px;object-fit:contain}.project-description{font-size:15px;line-height:1.9;margin:30px 0 24px;max-width:740px;color:#6e6376}.project-actions{display:flex;gap:25px;flex-wrap:wrap;margin:20px 0 35px}.project-meta{border:0;margin:30px 0}.project-meta>div{display:grid;grid-template-columns:130px 1fr;gap:20px;border:0;padding:15px 0;font-size:12px;line-height:1.7}.project-meta dt{color:var(--muted)}.project-meta dd{margin:0}.contributions h2{font-family:"Eagle Lake",Georgia,serif;font-size:30px;font-weight:400}.contributions ul{padding-left:18px;color:#776a80;font-size:13px;line-height:1.85}.contributions li{margin:12px 0}.project-award{margin-top:30px}.project-award img{max-height:260px;object-fit:contain}.tabs{display:flex;gap:30px;border:0;margin-bottom:32px}.tabs a{font-size:12px;color:var(--muted);padding:0 0 13px;position:relative}.tabs a.selected{color:#513a60}.tabs a.selected:after{content:'';position:absolute;height:2px;background:#8a7099;bottom:-1px;left:0;right:0}.articles-list{display:flex;flex-direction:column;gap:30px}.article-card{display:grid;grid-template-columns:180px 1fr;gap:26px;padding-bottom:30px;border:0}.article-image{aspect-ratio:1.4;background:#e8e2eb;overflow:hidden;border-radius:3px}.article-image img{height:100%;width:100%;object-fit:cover}.article-card h3{font-size:16px;font-weight:500;line-height:1.5;margin:5px 0 12px}.article-card p{font-size:12px;line-height:1.9;color:var(--muted)}.empty-section{min-height:350px}.recognition-list{border:0}.recognition-row{display:grid;grid-template-columns:60px 1fr 30px;gap:20px;align-items:center;border:0;padding:30px 0}.year{font-size:11px;color:#8e7c98}.recognition-row h2{font-size:19px;font-weight:500}.recognition-row p{font-size:13px;margin-top:8px}.recognition-detail{display:block;font-size:11px;color:#8a7c93;margin-top:8px;line-height:1.7}.recognition-row svg{color:#9f8aa9}.press-list>h3{font-family:"Eagle Lake",Georgia,serif;font-size:27px;font-weight:400;margin:30px 0 16px;color:#927e9d}.press-list>h3:first-child{margin-top:0}.press-card{padding:20px 0;border:0;display:flex;flex-direction:column;align-items:flex-start;gap:10px}.press-year{font-size:10px;color:#8a7c93}.press-card strong{font-size:15px;font-weight:500;line-height:1.7}.press-card p{font-size:12px;color:var(--muted)}.press-link{font-size:10px;border-bottom:1px solid #bfacc9;padding-bottom:5px;color:#70547e}.skip-link{position:fixed;top:-60px;left:20px;background:#fff;padding:10px;z-index:50;font-size:13px}.skip-link:focus{top:10px}.under-construction{font-size:14px;color:#8b7d94}@keyframes appear{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Cinzel:wght@400;500;600;700&display=swap');
+:root{font-family:"Lora", Georgia, serif;color:#322c3b;background:#fff;font-synthesis:none;--ink:#322c3b;--muted:#78717f;--purple:#736081;--line:#ded8e2;--paper:#fff}*{box-sizing:border-box}body{margin:0}a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}a,button{-webkit-tap-highlight-color:transparent}a:focus-visible,button:focus-visible{outline:2px solid #806a95;outline-offset:5px}svg{flex-shrink:0}img{display:block;max-width:100%}h1,h2,h3,p{margin:0}button{cursor:pointer}.site-frame{max-width:1600px;margin:auto;padding:0 48px}.site-header{height:145px;display:flex;align-items:center;justify-content:space-between;border:0;gap:25px}.wordmark{font-family:"Cinzel", Georgia, serif;font-size:clamp(27px,3.1vw,46px);letter-spacing:.025em;display:flex;align-items:center;gap:21px;white-space:nowrap}.wordmark-star{font-family:"Lora", Georgia, serif;font-size:30px;color:#95829e;transition:transform .6s}.wordmark:hover .wordmark-star{transform:rotate(90deg)}.header-note{font-size:10px;letter-spacing:.17em;color:var(--muted);white-space:nowrap}.site-layout{display:grid;grid-template-columns:244px minmax(0,1fr);gap:54px;min-height:calc(100vh - 207px)}.sidebar{border:0;padding:48px 28px 40px 0;display:flex;flex-direction:column;align-self:start;position:sticky;top:0;min-height:640px}.main-nav,.secondary-nav{display:flex;flex-direction:column;gap:13px}.nav-link{display:grid;grid-template-columns:40px 1fr 10px;align-items:center;gap:12px;font-size:12px;font-weight:500;line-height:1.5;color:#6c6473;transition:color .2s}.nav-icon{height:40px;width:40px;border:1px solid #d5ccd9;display:flex;align-items:center;justify-content:center;border-radius:9px;transition:background .2s,border-color .2s}.nav-marker{opacity:0;font-size:14px}.nav-link:hover,.nav-link.active{color:#493451}.nav-link:hover .nav-icon{background:#ece5f0;border-color:#ac97b7}.nav-link.active .nav-icon{background:#e6dce9;border-color:#ad96b7}.nav-link.active .nav-marker{opacity:1}.secondary-nav{border:0;margin-top:29px;padding-top:27px;gap:10px}.secondary-nav .nav-icon{height:33px;width:40px;border-color:transparent}.sidebar-home{font-size:11px;display:flex;align-items:center;gap:9px;margin:30px 0 0 13px;color:var(--muted)}.sidebar-home:hover{color:var(--purple)}.sidebar-signature{font-size:10px;line-height:1.8;color:#9c94a1;margin-top:48px;margin-left:13px}.main-content{padding:48px 0 70px;min-width:0;outline:none;animation:appear .28s ease}.home-hero{display:grid;grid-template-columns:minmax(210px,.92fr) minmax(260px,1.08fr);gap:clamp(30px,4.3vw,68px);align-items:center;padding:16px 0 55px;min-height:535px}.photo-placeholder{aspect-ratio:4/5;background:#e9e1ed;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid #ddd0e2;border-radius:110px 110px 3px 3px;color:#9a86a3}.photo-placeholder:before,.photo-placeholder:after{content:'';position:absolute;border:1px solid #d9cadd;border-radius:50%;width:175%;height:110%;top:42%;left:-35%;transform:rotate(-25deg)}.photo-placeholder:after{top:51%;left:-5%;transform:rotate(25deg)}.portrait-center{display:flex;flex-direction:column;gap:15px;align-items:center;position:relative;z-index:1;color:#887291}.portrait-center span{font-size:11px;letter-spacing:.04em}.portrait-caption{position:absolute;bottom:22px;font-size:8px;letter-spacing:.18em;color:#887291;z-index:1}.portrait-note{display:block;font-family:"Lora", Georgia, serif;font-style:italic;font-size:11px;line-height:1.6;margin-top:14px;color:#9b8fa1;text-align:center}.portrait-corner{display:none}.eyebrow{text-transform:uppercase;letter-spacing:.13em;font-size:9px;line-height:1.7;font-weight:600;color:#8a7696}.home-copy h1{font-family:"Cinzel", Georgia, serif;font-size:clamp(38px,3.9vw,57px);font-weight:400;letter-spacing:-.04em;line-height:1.15;margin:16px 0 22px}.title-dot{color:#9d80ac}.lead{font-size:18px;line-height:1.55;letter-spacing:-.025em;margin-bottom:22px}.bio{max-width:400px;color:#78717f;font-size:12px;line-height:1.95}.bio p+p{margin-top:13px}.text-link{display:inline-flex;align-items:center;gap:14px;font-size:11px;font-weight:500;line-height:1.5;border-bottom:1px solid #b5a1bf;padding-bottom:7px;color:#60466e}.text-link:hover{color:#34203f;border-color:#34203f}.hero-cta{margin-top:26px}.contact-strip{border:0;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:26px 0;margin-top:12px}.contact-strip>div:first-child{display:flex;align-items:center;gap:16px}.small-star{font-size:26px;color:#a98fb5}.contact-strip p{font-family:"Cinzel", Georgia, serif;font-size:23px}.social-links{display:flex;gap:27px}.social-links a{display:flex;gap:8px;align-items:center;font-size:10px;white-space:nowrap;color:#6b5d74}.social-links a:hover{color:#35203f}.site-footer{border:0;padding:22px 0;display:flex;justify-content:space-between;align-items:center;gap:15px;font-size:9px;color:#918797;letter-spacing:.025em}.site-footer a{color:#6c5b77}.page-heading{margin:2px 0 35px;max-width:800px}.page-heading h1{font-family:"Cinzel", Georgia, serif;font-weight:400;font-size:clamp(35px,3.4vw,49px);line-height:1.15;letter-spacing:-.025em;margin-top:13px}.page-intro{font-size:12px;color:var(--muted);line-height:1.8;margin-top:15px;max-width:540px}.card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px 22px}.case-card,.project-card{min-width:0;display:block}.case-cover{aspect-ratio:1.6;position:relative;overflow:hidden;border-radius:3px;transition:transform .25s,box-shadow .25s}.mauve{background:#e5dce9;color:#83668d}.sage{background:#e0e7df;color:#71856a}.rose{background:#efdddd;color:#ae777d}.lavender{background:#e2def0;color:#8b77a4}.sand{background:#ece4d8;color:#ab9474}.slate{background:#e0e4e9;color:#778597}.mint{background:#dce8e4;color:#6f9989}.case-art{height:100%;width:100%;display:block}.cover-index{position:absolute;top:15px;left:16px;font-size:8px;font-weight:500;letter-spacing:.12em;z-index:1}.cover-arrow{position:absolute;bottom:12px;right:14px;display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;border:1px solid currentColor;opacity:.6;transition:transform .2s}.case-card:hover .case-cover,.project-card:hover .project-cover{transform:translateY(-3px);box-shadow:0 8px 20px #58416012}.case-card:hover .cover-arrow,.project-card:hover .cover-arrow{transform:rotate(-35deg);opacity:1}.card-copy{padding:17px 1px 0}.card-copy .eyebrow{font-size:8px;letter-spacing:.1em}.card-copy h2{font-size:14px;line-height:1.55;font-weight:550;letter-spacing:-.015em;margin-top:7px}.card-copy p{font-size:11px;line-height:1.7;color:#8c8193;margin-top:6px}.back-link{display:inline-flex;align-items:center;gap:9px;color:#8a7b94;font-size:10px;margin-bottom:30px}.back-link:hover{color:#493451}.case-banner{height:250px;border-radius:3px}.case-banner .case-art{width:min(100%,480px);margin:auto}.case-page .page-heading h1{max-width:800px}.pending-content{border:0;padding:35px 0;margin-top:35px;color:var(--muted);font-size:14px}.pending-content p{margin-top:10px}.case-pagination{display:flex;justify-content:space-between;gap:30px;margin-top:45px}.project-cover{aspect-ratio:1.45;background:#e8e1eb;position:relative;border-radius:3px;overflow:hidden;transition:transform .2s,box-shadow .2s;color:#6d5878}.project-cover img{position:relative;width:100%;height:100%;object-fit:cover;z-index:1}.project-cover-fallback{position:absolute;inset:0;display:grid;place-items:center;padding:25px;font-family:"Cinzel", Georgia, serif;font-size:25px;text-align:center}.project-cover .cover-arrow{z-index:2;background:#faf7fc;border-color:#d2c7d8;opacity:1;bottom:10px;right:10px}.project-hero{max-height:420px;overflow:hidden;background:#ebe5ee}.project-hero img{width:100%;height:100%;max-height:420px;object-fit:contain}.project-description{font-size:15px;line-height:1.9;margin:30px 0 24px;max-width:740px;color:#6e6376}.project-actions{display:flex;gap:25px;flex-wrap:wrap;margin:20px 0 35px}.project-meta{border:0;margin:30px 0}.project-meta>div{display:grid;grid-template-columns:130px 1fr;gap:20px;border:0;padding:15px 0;font-size:12px;line-height:1.7}.project-meta dt{color:var(--muted)}.project-meta dd{margin:0}.contributions h2{font-family:"Cinzel", Georgia, serif;font-size:30px;font-weight:400}.contributions ul{padding-left:18px;color:#776a80;font-size:13px;line-height:1.85}.contributions li{margin:12px 0}.project-award{margin-top:30px}.project-award img{max-height:260px;object-fit:contain}.tabs{display:flex;gap:30px;border:0;margin-bottom:32px}.tabs a{font-size:12px;color:var(--muted);padding:0 0 13px;position:relative}.tabs a.selected{color:#513a60}.tabs a.selected:after{content:'';position:absolute;height:2px;background:#8a7099;bottom:-1px;left:0;right:0}.articles-list{display:flex;flex-direction:column;gap:30px}.article-card{display:grid;grid-template-columns:180px 1fr;gap:26px;padding-bottom:30px;border:0}.article-image{aspect-ratio:1.4;background:#e8e2eb;overflow:hidden;border-radius:3px}.article-image img{height:100%;width:100%;object-fit:cover}.article-card h3{font-size:16px;font-weight:500;line-height:1.5;margin:5px 0 12px}.article-card p{font-size:12px;line-height:1.9;color:var(--muted)}.empty-section{min-height:350px}.recognition-list{border:0}.recognition-row{display:grid;grid-template-columns:60px 1fr 30px;gap:20px;align-items:center;border:0;padding:30px 0}.year{font-size:11px;color:#8e7c98}.recognition-row h2{font-size:19px;font-weight:500}.recognition-row p{font-size:13px;margin-top:8px}.recognition-detail{display:block;font-size:11px;color:#8a7c93;margin-top:8px;line-height:1.7}.recognition-row svg{color:#9f8aa9}.press-list>h3{font-family:"Cinzel", Georgia, serif;font-size:27px;font-weight:400;margin:30px 0 16px;color:#927e9d}.press-list>h3:first-child{margin-top:0}.press-card{padding:20px 0;border:0;display:flex;flex-direction:column;align-items:flex-start;gap:10px}.press-year{font-size:10px;color:#8a7c93}.press-card strong{font-size:15px;font-weight:500;line-height:1.7}.press-card p{font-size:12px;color:var(--muted)}.press-link{font-size:10px;border-bottom:1px solid #bfacc9;padding-bottom:5px;color:#70547e}.skip-link{position:fixed;top:-60px;left:20px;background:#fff;padding:10px;z-index:50;font-size:13px}.skip-link:focus{top:10px}.under-construction{font-size:14px;color:#8b7d94}@keyframes appear{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 @media(min-width:1450px){.home-hero{padding-top:35px;min-height:630px}.home-copy h1{font-size:64px}.bio{font-size:14px}.lead{font-size:22px}.home-hero .portrait-wrap{max-width:380px}.site-layout{gap:75px;grid-template-columns:255px minmax(0,1fr)}}
 @media(max-width:1100px){.site-frame{padding:0 30px}.site-layout{grid-template-columns:200px minmax(0,1fr);gap:30px}.sidebar{padding-right:20px}.nav-link{font-size:11px;gap:9px;grid-template-columns:35px 1fr 8px}.nav-icon{width:35px;height:35px}.secondary-nav .nav-icon{width:35px}.home-hero{gap:30px;grid-template-columns:.85fr 1.15fr;min-height:485px}.home-copy h1{font-size:39px}.lead{font-size:16px}.bio{font-size:11px}.card-grid{gap:26px 16px}.card-copy h2{font-size:12px}.contact-strip{flex-wrap:wrap}.contact-strip p{font-size:22px}.cover-index{font-size:7px;left:10px;top:10px}}
 @media(max-width:800px){.site-frame{padding:0 20px}.site-header{height:110px}.wordmark{font-size:30px;gap:12px}.wordmark-star{font-size:23px}.header-note{display:none}.site-layout{grid-template-columns:65px minmax(0,1fr);gap:24px}.sidebar{padding:30px 16px 30px 0;min-height:520px}.nav-link{display:flex;justify-content:center;position:relative}.nav-link>span:not(.nav-icon){display:none}.nav-icon{width:41px;height:41px;border-radius:8px}.nav-link:hover:after{content:attr(aria-label);position:absolute;left:50px;background:#fff;padding:8px;font-size:12px;z-index:5}.secondary-nav .nav-icon{width:41px;height:34px}.sidebar-home{margin:28px 0 0;justify-content:center;font-size:0;gap:0}.sidebar-home svg{width:19px;height:19px}.sidebar-signature{display:none}.main-content{padding-top:30px}.home-hero{display:flex;flex-direction:column;align-items:stretch;padding-top:0;gap:32px}.portrait-wrap{max-width:330px;width:90%;align-self:center}.home-copy{max-width:500px}.home-copy h1{font-size:46px}.bio{font-size:13px;max-width:none}.lead{font-size:20px}.card-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 18px}.card-copy h2{font-size:14px}.contact-strip{gap:20px}.social-links{gap:22px}.site-footer>span:nth-child(2){display:none}.article-card{grid-template-columns:1fr}.article-image{max-width:340px}.page-heading h1{font-size:36px}.project-meta>div{grid-template-columns:100px 1fr}.tabs{gap:20px}.tabs a{font-size:11px}}
@@ -543,8 +615,8 @@ const newStyles=`
 :root{color-scheme:light;background:#fff}body,.site-frame{background:#fff!important;color:#322c3b}
 .site-header{height:170px;justify-content:center;text-align:center;padding:30px 0;gap:0}
 .wordmark{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;white-space:normal}
-.brand-image{width:min(500px,70vw);height:auto;filter:brightness(0);max-height:92px;object-fit:contain}
-.brand-subtitle{font-family:"Times New Roman",Times,serif;font-size:11px;letter-spacing:.16em;line-height:1.5;color:#78717f;font-weight:400}
+.brand-image{width:min(560px,76vw);height:auto;filter:brightness(0);max-height:104px;object-fit:contain}
+.brand-subtitle{font-family:"Lora", Georgia, serif;font-size:11px;letter-spacing:.16em;line-height:1.5;color:#78717f;font-weight:400}
 .site-layout{grid-template-columns:64px minmax(0,1fr);gap:54px;min-height:calc(100vh - 235px)}
 .sidebar{padding:48px 0 30px;min-height:0;z-index:10}
 .main-nav{gap:18px}.nav-link{display:flex;position:relative;width:44px;justify-content:center;gap:0}
@@ -553,17 +625,17 @@ const newStyles=`
 .nav-link:hover .nav-tooltip,.nav-link:focus-visible .nav-tooltip{opacity:1;visibility:visible}
 .nav-link:hover:after{content:none}.nav-link.active .nav-icon{background:#ece5f0}
 .contact-strip{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:19px;margin-top:10px;padding:30px 0}
-.contact-strip p{font-family:"Eagle Lake",Georgia,serif;font-size:28px;font-weight:400}
+.contact-strip p{font-family:"Cinzel", Georgia, serif;font-size:28px;font-weight:400}
 .social-links{justify-content:center;gap:30px}.social-links a{font-size:11px}
 .site-footer{justify-content:center;text-align:center}.text-link,.press-link{border:0}.tabs a.selected:after{display:none}.tabs a.selected{font-weight:600}
-.about-empty-section{min-height:120px}.about-section{margin-top:30px;margin-bottom:60px}.about-section-title{font-family:"Eagle Lake",Georgia,serif;font-size:36px;font-weight:400;line-height:1.3;margin-bottom:24px}.about-section .recognition-row{padding:22px 0}.about-section .press-list>h3{font-size:24px}
+.about-empty-section{min-height:120px}.about-section{margin-top:30px;margin-bottom:60px}.about-section-title{font-family:"Cinzel", Georgia, serif;font-size:36px;font-weight:400;line-height:1.3;margin-bottom:24px}.about-section .recognition-row{padding:22px 0}.about-section .press-list>h3{font-size:24px}
 @media(min-width:1450px){.site-layout{grid-template-columns:64px minmax(0,1fr);gap:75px}.home-hero{grid-template-columns:minmax(280px,.92fr) minmax(300px,1.08fr)}}
 @media(max-width:1100px){.site-layout{grid-template-columns:54px minmax(0,1fr);gap:35px}.nav-link,.nav-icon{width:42px;height:42px}.sidebar{padding-right:0}}
-@media(max-width:800px){.site-header{height:145px}.brand-image{width:min(450px,75vw)}.brand-subtitle{font-size:9px}.site-layout{grid-template-columns:45px minmax(0,1fr);gap:24px}.sidebar{padding-top:30px;padding-right:0;min-height:0}.nav-link,.nav-icon{width:40px;height:40px}.nav-link>span.nav-tooltip{display:block!important}.home-hero{max-width:570px;margin:auto}.contact-strip{width:100%}.about-section-title{font-size:32px}}
-@media(max-width:480px){.site-header{height:125px;padding:25px 0}.brand-image{width:85vw}.brand-subtitle{font-size:8px;letter-spacing:.1em}.site-layout{grid-template-columns:36px minmax(0,1fr);gap:16px}.nav-link,.nav-icon{width:34px;height:36px}.main-nav{gap:15px}.nav-link .nav-tooltip{font-size:11px;max-width:245px;white-space:normal;width:max-content;padding:9px 11px}.contact-strip p{font-size:25px}.social-links{gap:25px}.social-links a{font-size:10px}}
+@media(max-width:800px){.site-header{height:145px}.brand-image{width:min(500px,80vw)}.brand-subtitle{font-size:9px}.site-layout{grid-template-columns:45px minmax(0,1fr);gap:24px}.sidebar{padding-top:30px;padding-right:0;min-height:0}.nav-link,.nav-icon{width:40px;height:40px}.nav-link>span.nav-tooltip{display:block!important}.home-hero{max-width:570px;margin:auto}.contact-strip{width:100%}.about-section-title{font-size:32px}}
+@media(max-width:480px){.site-header{height:125px;padding:25px 0}.brand-image{width:88vw}.brand-subtitle{font-size:8px;letter-spacing:.1em}.site-layout{grid-template-columns:36px minmax(0,1fr);gap:16px}.nav-link,.nav-icon{width:34px;height:36px}.main-nav{gap:15px}.nav-link .nav-tooltip{font-size:11px;max-width:245px;white-space:normal;width:max-content;padding:9px 11px}.contact-strip p{font-size:25px}.social-links{gap:25px}.social-links a{font-size:10px}}
 
 /* Original portfolio typography, violet/pink palette and framework artwork. */
-:root{--text-font:"Times New Roman",Times,serif;--main-font:"Eagle Lake",Georgia,serif;--decorative-font:"Cormorant Garamond",Georgia,serif;--pink:#ECC8F7;--deep-violet:#171544;--peach:#eec2b5;--ink:#181518}
+:root{--text-font:"Lora", Georgia, serif;--main-font:"Cinzel", Georgia, serif;--decorative-font:"Cinzel", Georgia, serif;--pink:#ECC8F7;--deep-violet:#171544;--peach:#eec2b5;--ink:#181518}
 body,.site-frame{font-family:var(--text-font);color:var(--ink)}
 h1,h2,h3,.text-link,.tabs a,.nav-tooltip,.contact-strip p{font-family:var(--main-font);font-weight:400}
 .brand-subtitle{font-family:var(--decorative-font);font-size:15px;color:#67506d;letter-spacing:.055em;text-transform:uppercase}
@@ -576,7 +648,7 @@ h1,h2,h3,.text-link,.tabs a,.nav-tooltip,.contact-strip p{font-family:var(--main
 .nav-link:hover .nav-icon,.nav-link.active .nav-icon{background:radial-gradient(circle at 18% 8%,#eec2b580,transparent 65%),linear-gradient(145deg,#a184b3,#30234d);border-color:#eec2b5;box-shadow:inset 0 1px 0 #fff8,0 5px 16px #76538032}
 .nav-link .nav-tooltip{font-family:var(--decorative-font);font-size:17px;color:#43324f;background:#f7f0f5;box-shadow:0 6px 22px #17154420}
 .case-cover,.case-banner{background:#171544}.framework-placeholder{width:100%;height:100%;object-fit:cover;display:block}.case-banner{height:300px}.case-banner .framework-placeholder{object-fit:contain;background:#fff}
-.cover-index{color:#fff;font-family:"Share Tech Mono",monospace;text-shadow:0 1px 4px #171544;font-size:10px}.case-cover .cover-arrow{color:#fff;background:#17154466;opacity:1}
+.cover-index{color:#fff;font-family:"Lora", Georgia, serif;text-shadow:0 1px 4px #171544;font-size:10px}.case-cover .cover-arrow{color:#fff;background:#17154466;opacity:1}
 .card-copy h2{font-family:var(--main-font);font-size:15px;font-weight:400;line-height:1.7;letter-spacing:0}.card-copy p{font-size:15px;line-height:1.6;color:#75637e}.card-copy .eyebrow{font-size:12px}
 .contact-strip p{font-size:27px;line-height:1.65}.social-links a{font-family:var(--main-font);font-size:13px}.text-link{font-size:13px}.tabs{gap:30px;flex-wrap:wrap}.tabs a{font-size:14px;color:#806788}.tabs a.selected{font-weight:400;color:#171544;background:#ecc8f733;border-radius:7px;padding:9px 14px;margin-top:-9px}.tabs a:not(.selected){padding-left:2px;padding-right:2px}
 .award-card{padding:14px 0}.award-icon{height:90px;display:flex;align-items:center;color:#806189}.award-card h2{font-size:18px;line-height:1.7;margin:10px 0}.award-card p{font-size:16px;line-height:1.6}.award-card .year{font-family:var(--decorative-font);font-size:16px;color:#8c7295}.recognition-detail{font-size:14px;line-height:1.7}
@@ -606,31 +678,144 @@ h1,h2,h3,.text-link,.tabs a,.nav-tooltip,.contact-strip p{font-family:var(--main
 @media(max-width:600px){.site-frame{padding-inline:24px}.home-hero{grid-template-columns:minmax(0,1fr);max-width:430px;gap:24px}.home-hero .portrait-wrap{width:min(100%,270px);max-width:270px;justify-self:center}.home-copy{max-width:none}.original-about-copy,.original-about-copy p:first-child{font-size:17px;line-height:1.8}.original-about-copy p+p{margin-top:18px}}
 @media(max-width:480px){.site-frame{padding-inline:24px}.site-layout{gap:18px}.page-heading h1{font-size:24px}.card-copy h2{font-size:17px}.home-hero{gap:22px}.nav-link .nav-tooltip{max-width:220px}}
 
+body, .site-frame { font-family: "Lora", Georgia, serif; }
+.original-about-copy, .original-about-copy p:first-child {
+  font-family: "Lora", Georgia, serif;
+  font-size: 17px;
+  line-height: 1.9;
+  color: #4c4254;
+}
+.original-about-copy strong { font-weight: 600; }
+h1, h2, h3, .card-copy h2, .contact-strip p {
+  font-family: "Cinzel", Georgia, serif;
+  font-weight: 600;
+}
+.brand-subtitle, .eyebrow, .nav-link .nav-tooltip {
+  font-family: "Cinzel", Georgia, serif;
+}
+.social-links a, .text-link, .tabs a, .site-footer {
+  font-family: "Lora", Georgia, serif;
+}
+@media (max-width: 600px) {
+  .original-about-copy, .original-about-copy p:first-child { font-size: 16px; line-height: 1.85; }
+}
+/* Castlecore: pale silver-lilac frames with engraved corners. */
+:root { --frame-silver:#c9bbd0; --frame-deep:#897493; --frame-gold:#bba487; --frame-paper:#fdfbfe; }
+.page-heading h1 { font-family:"Cinzel",Georgia,serif; font-size:clamp(23px,2.25vw,31px); font-weight:500; letter-spacing:.035em; line-height:1.5; }
+.card-copy h2 { font-family:"Cinzel",Georgia,serif; font-size:17px; font-weight:500; line-height:1.6; letter-spacing:.01em; }
+.brand-subtitle { font-family:"Lora",Georgia,serif; font-size:11px; letter-spacing:.14em; }
+.eyebrow { font-family:"Lora",Georgia,serif; font-size:10px; letter-spacing:.07em; }
+.nav-link .nav-tooltip { font-family:"Lora",Georgia,serif; font-size:12px; }
+.contact-strip p { font-family:"Cinzel",Georgia,serif; font-size:24px; font-weight:400; letter-spacing:.025em; }
+.case-card,.project-card {
+  position:relative; display:block; min-width:0; padding:10px;
+  background:linear-gradient(145deg,#fff 65%,#f8f4fa);
+  border:1px solid var(--frame-silver); border-radius:15px 15px 7px 7px;
+  box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 4px #ede6f0,0 5px 17px #5c42660c;
+  transition:transform .2s,border-color .2s,box-shadow .2s;
+}
+.case-card:hover,.project-card:hover { transform:translateY(-4px);border-color:#a58bb4;box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 4px #e8ddee,0 10px 25px #63466f16; }
+.case-card:hover .case-cover,.project-card:hover .project-cover { transform:none;box-shadow:none; }
+.card-copy { padding:19px 12px 17px; }
+.card-copy p { font-size:13px; line-height:1.8; }
+.card-copy .eyebrow { font-size:9px; }
+.castle-frame { position:relative; isolation:isolate; border:1px solid var(--frame-deep); overflow:hidden; border-radius:9px 9px 3px 3px; }
+.castle-frame::after { content:'';position:absolute;inset:5px;border:1px solid #e1d7e6a6;border-radius:5px 5px 1px 1px;pointer-events:none;z-index:3; }
+.castle-ornaments { position:absolute;inset:0;display:block;pointer-events:none;z-index:4;color:#e4d6b5; }
+.castle-corner { position:absolute;width:35px;height:35px;stroke:currentColor;stroke-width:1;filter:drop-shadow(0 1px 1px #30243866); }
+.castle-corner .corner-jewel { fill:#dbcbb5;stroke:#f5e7d2; }
+.castle-tl { top:6px;left:6px; }
+.castle-tr { top:6px;right:6px;transform:rotate(90deg); }
+.castle-br { bottom:6px;right:6px;transform:rotate(180deg); }
+.castle-bl { bottom:6px;left:6px;transform:rotate(270deg); }
+.castle-crest { position:absolute;top:0;left:50%;transform:translateX(-50%);font-family:Georgia,serif;font-size:24px;line-height:1.2;text-shadow:0 1px 2px #30243888; }
+.case-cover,.project-cover { border-radius:9px 9px 3px 3px; }
+.cover-index { top:20px;left:22px;font-size:8px; }
+.cover-arrow { bottom:17px;right:17px; }
+.case-cover .framework-placeholder { filter:saturate(.82); }
+.photo-placeholder {
+  border:1px solid #ae97ba;border-radius:46% 46% 5px 5px;
+  background:radial-gradient(ellipse at 50% 22%,#f7f1fa 0%,#e8dfef 70%);
+  box-shadow:0 0 0 5px #fff,0 0 0 6px #d6c8de,0 0 0 10px #f8f4fb,0 0 0 11px #ddd2e3,0 12px 30px #735e7f15;
+}
+.photo-placeholder::before {
+  content:'';position:absolute;inset:8px;width:auto;height:auto;top:8px;left:8px;
+  border:1px solid #c8b5d3;border-radius:inherit;transform:none;
+}
+.photo-placeholder::after {
+  content:'';position:absolute;inset:14px;width:auto;height:auto;top:14px;left:14px;
+  border:1px solid #fff9;border-radius:inherit;transform:none;
+}
+.portrait-ornaments { color:#927c9e; }
+.portrait-ornaments .castle-tl,.portrait-ornaments .castle-tr { display:none; }
+.portrait-ornaments .castle-corner { filter:none;width:43px;height:43px; }
+.portrait-ornaments .corner-jewel { fill:#ccb8d5;stroke:#aa90b8; }
+.portrait-ornaments .castle-crest { top:13px;font-size:28px;color:#a48ab0;text-shadow:0 1px 0 #fff; }
+.portrait-caption { bottom:34px; }
+.article-image { border-radius:10px;padding:7px;background:#f8f3fb; }
+.article-image img { border-radius:5px; }
+.article-image .castle-ornaments { color:#9f88ad; }
+.article-image .castle-corner { filter:none; }
+.project-hero,.project-award { padding:13px;background:#faf7fc;border-radius:13px;margin-bottom:20px; }
+.project-hero img,.project-award img { position:relative;z-index:1;background:white;margin:auto; }
+.project-hero .castle-ornaments,.project-award .castle-ornaments { color:#a48aaa; }
+.project-hero .castle-corner,.project-award .castle-corner { filter:none; }
+.project-award { width:fit-content;max-width:100%; }
+.case-banner { height:340px;padding:13px;background:linear-gradient(145deg,#f6f0f9,#e8dfef); }
+.case-banner .framework-placeholder { border-radius:4px;background:transparent; }
+.case-banner .castle-ornaments { color:#ac93ad; }
+.case-banner .castle-corner { filter:none;width:44px;height:44px; }
+.award-card { border:1px solid #d3c3db;padding:20px;border-radius:13px 13px 5px 5px;background:linear-gradient(150deg,#fff,#f9f5fb);box-shadow:inset 0 0 0 4px #fff,inset 0 0 0 5px #eee6f2; }
+.award-card h2 { font-family:"Cinzel",Georgia,serif;font-size:17px; }
+@media(max-width:800px) {
+  .page-heading h1 { font-size:27px; }
+  .card-copy h2 { font-size:16px; }
+  .card-copy { padding:17px 9px 13px; }
+  .contact-strip p { font-size:21px; }
+}
+@media(max-width:480px) {
+  .page-heading h1 { font-size:23px; }
+  .card-copy h2 { font-size:17px; }
+  .photo-placeholder { box-shadow:0 0 0 4px #fff,0 0 0 5px #d6c8de,0 0 0 8px #f8f4fb,0 0 0 9px #ddd2e3; }
+  .home-hero { gap:30px; }
+  .contact-strip p { font-size:20px; }
+  .case-banner { height:220px; }
+}
+
+/* Simple pastel buttons with illustrated castlecore symbols. */
+.nav-glyph { display:flex;align-items:center;justify-content:center; }
+.nav-glyph>svg { width:25px;height:25px;stroke-width:1.25; }
+@media(max-width:480px) { .nav-glyph>svg { width:21px;height:21px; } }
+
+/* Icon-only social links, matching the pale navigation buttons. */
+.social-links { display:flex;align-items:center;justify-content:center;gap:16px;padding-bottom:24px; }
+.social-links a.social-icon-link {
+  position:relative;display:flex;align-items:center;justify-content:center;flex:0 0 42px;
+  width:42px;height:42px;padding:0;gap:0;border:1px solid #d8c8e3;border-radius:12px;
+  color:#745584;background:radial-gradient(circle at 18% 10%,#fff9,transparent 65%),linear-gradient(145deg,#f2e8f8,#dacce8);
+  box-shadow:inset 0 1px 0 #fff,0 4px 12px #80618d18;transition:transform .2s,background .2s,border-color .2s;
+}
+.social-links a.social-icon-link:hover,.social-links a.social-icon-link:focus-visible {
+  color:#61406f;border-color:#c9a8d5;background:radial-gradient(circle at 18% 8%,#fff9,transparent 65%),linear-gradient(145deg,#f1deef,#e2cceb);
+  transform:translateY(-2px);
+}
+.social-tooltip {
+  position:absolute;left:50%;top:calc(100% + 8px);transform:translateX(-50%);pointer-events:none;
+  color:#715c7d;font-family:"Lora",Georgia,serif;font-size:11px;font-weight:400;line-height:1.5;
+  white-space:nowrap;opacity:0;visibility:hidden;transition:opacity .15s;
+}
+.social-icon-link:hover .social-tooltip,.social-icon-link:focus-visible .social-tooltip { opacity:1;visibility:visible; }
+@media(max-width:480px) {
+  .social-links { gap:12px; }
+  .social-links a.social-icon-link { width:40px;height:40px;flex-basis:40px; }
+}
+
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
-/* Основной шрифт сайта — Aubrey */
-@font-face {
-  font-family: "Aubrey";
-  src: url("https://raw.githubusercontent.com/valenandia/valen.github.io/main/AUBREY1__.TTF")
-    format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+.cv-links{display:flex;flex-wrap:wrap;gap:18px 26px;margin-top:25px}.portfolio-request{font-family:"Lora",Georgia,serif;font-size:13px;line-height:1.8;color:#78717f;margin-top:17px}.portfolio-request a:hover{color:#60466e}.resume-list{display:grid;gap:24px}.resume-experience-note{line-height:1.8;margin:24px 0}
 
-:root {
-  --text-font: "Aubrey", Georgia, serif;
-  --main-font: "Aubrey", Georgia, serif;
-  --decorative-font: "Aubrey", Georgia, serif;
-}
+.home-cv{display:flex;flex-direction:column;align-items:center;text-align:center;padding:14px 16px 30px;margin:0 auto;max-width:700px}.cv-intro{font-family:"Lora",Georgia,serif;font-size:16px;line-height:1.8;color:#62576b}.cv-button{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;margin-top:17px;min-height:42px;padding:10px 22px;border:1px solid #d8c8e3;border-radius:12px;color:#745584;background:radial-gradient(circle at 18% 10%,#fff9,transparent 65%),linear-gradient(145deg,#f2e8f8,#dacce8);box-shadow:inset 0 1px 0 #fff,0 4px 12px #80618d18;font-family:"Lora",Georgia,serif;font-size:15px;letter-spacing:0;transition:transform .2s,background .2s,border-color .2s}.cv-button:hover,.cv-button:focus-visible{color:#61406f;border-color:#c9a8d5;background:radial-gradient(circle at 18% 8%,#fff9,transparent 65%),linear-gradient(145deg,#f1deef,#e2cceb);transform:translateY(-2px)}.home-cv .portfolio-request{margin-top:20px;max-width:440px;line-height:1.9}.home-cv .portfolio-request a{border-bottom:1px dotted #c9bbd0;padding-bottom:3px}
+.home-cv .portfolio-request{font-size:16px;max-width:520px;color:#62576b}
 
-html,
-body,
-#root,
-#root *,
-#root *::before,
-#root *::after {
-  font-family: "Aubrey", Georgia, serif !important;
-  font-synthesis: weight style !important;
-}
+.cursor-sparkles{position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden}.cursor-sparkle{position:absolute;display:block;line-height:1;font-family:Georgia,serif;pointer-events:none;animation:cursor-twinkle 750ms ease-out forwards;will-change:transform,opacity;text-shadow:0 0 5px #dfcee760}@keyframes cursor-twinkle{0%{opacity:0;transform:translate(-50%,-50%) scale(.35)}18%{opacity:.85;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(calc(-50% + var(--spark-x)),18px) rotate(var(--spark-turn)) scale(.1)}}@media(prefers-reduced-motion:reduce){.cursor-sparkles{display:none}}@media print{.cursor-sparkles{display:none}}
 `;
