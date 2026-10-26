@@ -137,6 +137,12 @@ const navModals = [
     body: (
       <div className="press-list">
         <h3>2025</h3>
+        <article className="press-card">
+          <span className="press-year">July, 2025 · Women in Games</span>
+          <strong>Women in Games Ambassador</strong>
+          <p>Became an Individual Ambassador for Women in Games in July 2025.</p>
+          <a className="press-link" href="https://www.womeningames.org/a-warm-welcome-to-our-new-individual-ambassadors-of-july-2025/" target="_blank" rel="noopener noreferrer">Read announcement</a>
+        </article>
 
         <article className="press-card">
           <span className="press-year">May, 2025 · Cyber.Sports.ru</span>
@@ -166,8 +172,8 @@ const navModals = [
 
         <article className="press-card">
           <span className="press-year">August, 2024 · Astrum Entertainment</span>
-          <strong>One of the best work on the course — “Paws and Cards”</strong>
-          <p>Conceptualization Basics: 2nd</p>
+          <strong>One of the best works on the course — “Paws and Cards”</strong>
+          
           <a className="press-link" href="https://drive.google.com/drive/folders/134ZJqQUbmhEh2ZzI4UrpnsukokoDOdwK" target="_blank" rel="noreferrer">View Press</a>
         </article>
       </div>
@@ -552,9 +558,9 @@ function AboutStory(){
  const photo=(label)=><div className="about-photo castle-frame"><CastleOrnaments/><Icon name="photo" size={30}/><span>{label}</span></div>;
  return <div className="about-story">
  <div className="about-story-row"><div className="about-photo castle-frame has-gallery-photo"><img src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/photo_2026-10-26_18-26-00.jpg" alt="Valentina Godovets" loading="lazy"/><CastleOrnaments/></div><div>
- <p>I’ve been a <strong>game girl since I was 11</strong>, when my dad introduced me to <em>The Elder Scrolls III: Morrowind</em>. This franchise helped shape me into the person who loves games and is curious about what makes them tick.</p>
+ <p>I’ve been a <strong>game girl since I was 11</strong>, when my dad introduced me to <em>The Elder Scrolls III: Morrowind</em>. This franchise helped shape me into someone who loves games and is curious about what makes them tick.</p>
  <p>Through the franchise, <strong>I became a modder</strong>. First, I made <strong>cosmetic mods</strong>, then moved on to <strong>gameplay mods</strong>. This experience shaped me as a professional. I’ve created mods for different games and series — basically, wherever I could — to <strong>make the gameplay better or introduce mechanics</strong> that the original games didn’t offer.</p>
- <p>Over the years, I also became an MMO player, spending <strong>10+ years</strong> in total exploring online worlds. I think I was a pretty good player and <strong>raid leader</strong>, too!</p>
+ <p>Over the years, I also became an MMO player, with <strong>10+ years</strong> spent exploring online worlds. I think I was a pretty good player and <strong>raid leader</strong>, too!</p>
  <p>My online activities eventually led me to participate in <strong>game jams with fellow modders</strong>, where we gained a lot of real-world experience. Through game jams, I found indie teams and worked with them to <strong>bring our games to completion</strong>.</p>
  <p>And that’s how I became a proud member of the gaming community! I love bringing all of this experience into my work.</p>
  </div></div>
@@ -572,9 +578,25 @@ function AboutStory(){
  </div><div className="about-photo-gallery">{['photo_2026-10-26_18-16-08 (3).jpg','photo_2026-10-26_18-16-08 (2).jpg','photo_2026-10-26_18-16-08.jpg'].map((name,i)=><div className="about-photo castle-frame has-gallery-photo" key={name}><img src={`https://raw.githubusercontent.com/valenandia/valen.github.io/main/${encodeURIComponent(name)}`} alt={`Valentina Godovets — personal photo ${i+1}`} loading="lazy"/><CastleOrnaments/></div>)}</div>
  <p className="about-bye">Bye!</p></div>;
 }
+function Education(){
+ const entries=[
+ {date:'Aug 2024 – Oct 2024',school:'Code Coven: Computer Games and Programming Skills',degree:'Additional education',note:'',text:'Participated in the Code Coven Sparks Accelerator, where I worked with Build a Rocket Boy to improve my game design skills, develop new game concepts, and gain industry insights.',skills:['Game Design','Everywhere']},
+ {date:'Sep 2018 – Jun 2020',school:'Higher School of Economics: Digital Economy',degree:'Master’s degree',note:'',text:'Graduated from HSE University with a master’s degree in Digital Economy. The dissertation is dedicated to identifying promising digital technologies of economic agents using the example of blockchain.',skills:['Digital Economy','Statistics']},
+ {date:'Sep 2017',school:'Wargaming: Game Design: Beyond the Game',degree:'Course',note:'',text:'Educational course focusing on the fundamentals of video game development and design.',skills:[]},
+ {date:'2012 – 2016',school:'Art School',degree:'Art education',note:'',text:'Studied drawing and graphic arts.',skills:[]}
+ ];
+ const badges=React.Children.toArray(navModals.find(m=>m.id==='about').body.props.children).find(c=>c.props?.className==='community-grid');
+ return <div className="education-page"><ol className="education-timeline">{entries.map(entry=><li className="education-milestone" key={entry.school}><span className="education-marker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 21V7h4V3h3v4h2V3h3v4h4v14ZM4 11h16M9 21v-5a3 3 0 0 1 6 0v5M7 13v2m10-2v2"/></svg></span><article><p className="education-date">{entry.date}</p><h2>{entry.school}</h2><p className="education-degree">{entry.degree}</p>{entry.text&&<p className="education-description">{entry.text}</p>}</article></li>)}</ol><section className="education-community"><AboutDivider/><h2>Part of the Community</h2>{badges}</section></div>;
+}
+function Recognition(){
+ const groups=[{year:'2026',items:[]},{year:'2025',items:[]},{year:'2024',items:[]}];let year='2025';
+ React.Children.toArray(navModals.find(m=>m.id==='press').body.props.children).forEach(child=>{if(child.type==='h3')year=String(child.props.children);else if(child.type==='article')groups.find(g=>g.year===year)?.items.push(child)});
+ const awards=[{title:'Start a Game!',project:'Gerasim vs Besi',detail:'Finalist · Regions and Languages of Russia'},{title:'SINEUS',project:'Gerasim vs Besi',detail:'Finalist · Mythology in Art'},{title:'Astrum Entertainment',project:'Paws and Cards',detail:'Conceptualization Basics: 2nd'}];
+ return <div className="recognition-timeline-page">{groups.map(group=><section key={group.year} className="recognition-year"><h2 className="recognition-year-heading">{group.year}</h2><ol className="education-timeline">{group.items.length?group.items.map((item,i)=><li className="education-milestone recognition-milestone" key={i}><span className="education-marker" aria-hidden="true"><Icon name={group.year==='2024'?'awards':'projects'} size={22}/></span><div><span className="recognition-kind">{group.year==='2024'?'Award & Press':React.Children.toArray(item.props.children).some(child=>child.type==='strong'&&String(child.props.children).includes('Women in Games Ambassador'))?'Ambassadorship':'Press'}</span>{item}{group.year==='2024'&&awards[i]&&<p className="recognition-award-detail">{awards[i].detail}</p>}</div></li>):<li className="education-milestone recognition-milestone"><span className="education-marker" aria-hidden="true"><Icon name="projects" size={22}/></span><p className="recognition-pending">Under construction</p></li>}</ol></section>)}</div>;
+}
 function About({tab}){
- const selected=['about','education','awards','press'].includes(tab)?tab:'about';
- return <><PageTitle title="About"/><nav className="tabs" aria-label="About sections">{[['about','About'],['education','Education'],['awards','Awards'],['press','Press']].map(([id,label])=><a key={id} className={selected===id?'selected':''} href={`#/about/${id}`} aria-current={selected===id?'page':undefined}>{label}</a>)}</nav>{selected==='education'?<div className="pending-content"><p>Under construction</p></div>:selected==='awards'?<Awards/>:selected==='press'?<Press/>:<AboutStory/>}</>;
+ const selected=['awards','press'].includes(tab)?'recognition':['about','education','recognition'].includes(tab)?tab:'about';
+ return <><PageTitle title="About"/><nav className="tabs" aria-label="About sections">{[['about','About'],['education','Education'],['recognition','Recognition']].map(([id,label])=><a key={id} className={selected===id?'selected':''} href={`#/about/${id}`} aria-current={selected===id?'page':undefined}>{label}</a>)}</nav>{selected==='education'?<Education/>:selected==='recognition'?<Recognition/>:<AboutStory/>}</>;
 }
 function CursorSparkles(){
  const layer=useRef(null);
@@ -861,4 +883,14 @@ h1, h2, h3, .card-copy h2, .contact-strip p {
 .about-photo.has-gallery-photo{padding:6px}.has-gallery-photo>img{width:100%;height:100%;object-fit:cover;object-position:center;border-radius:9px 9px 3px 3px;min-height:0}.has-gallery-photo .castle-ornaments{z-index:2;pointer-events:none}
 
 .about-bye{text-align:center;font-family:"Cinzel",Georgia,serif;font-size:25px;color:#80678e;margin-top:30px!important;letter-spacing:.04em}
+
+.about-work-copy,.about-hobbies{max-width:none;width:100%;margin-inline:0}.about-photo-gallery{max-width:780px;width:100%;gap:20px}.about-story .about-photo{border-color:#b6bac5;box-shadow:inset 0 0 0 5px #fafbfc,inset 0 0 0 6px #d8dbe2;background:#eef0f4}.about-story .about-photo::after{border-color:#d8dce4b3}.about-story .about-photo .castle-ornaments{color:#d7dce6}.about-story .about-photo .corner-jewel{fill:#c3cad7;stroke:#edf0f6}.about-story .about-photo .castle-crest{display:none}@media(max-width:600px){.about-photo-gallery{gap:12px;max-width:600px}}@media(max-width:380px){.about-photo-gallery{max-width:260px}}
+
+.about-story-row,.about-work-copy,.about-hobbies{width:100%;max-width:740px;margin-inline:auto}.about-story-row{grid-template-columns:minmax(180px,.8fr) minmax(0,1.2fr);gap:30px}@media(max-width:700px){.about-story-row{grid-template-columns:minmax(0,1fr);gap:24px}}
+
+.education-page{max-width:820px;margin:0 auto;font-family:"Lora",Georgia,serif}.education-timeline{list-style:none;margin:0;padding:0 0 0 52px;position:relative}.education-timeline:before{content:'';position:absolute;left:17px;top:18px;bottom:22px;width:1px;background:linear-gradient(#d4cadb,#aeb6c6 85%,transparent)}.education-milestone{position:relative;padding:0 0 45px 18px}.education-milestone:last-child{padding-bottom:8px}.education-marker{position:absolute;left:-52px;top:0;width:36px;height:38px;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#faf6fd,#e7e1ee);border:1px solid #c6bfce;border-radius:10px;color:#8e7d9e;box-shadow:inset 0 1px 0 white}.education-marker svg{width:23px;height:23px;stroke:currentColor;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}.education-date{font-size:12px;letter-spacing:.04em;color:#8e7d9e;margin-bottom:10px}.education-milestone h2{font-family:"Cinzel",Georgia,serif;font-size:20px;line-height:1.5;font-weight:500;color:#4d4059}.education-degree{font-size:16px;line-height:1.8;margin-top:10px;color:#62566c}.education-note{font-size:13px;color:#8a8192;margin-top:6px}.education-description,.education-dissertation{font-size:15px;line-height:1.9;color:#706777;margin-top:18px}.education-dissertation strong{font-weight:600;color:#584a63}.education-skills{display:flex;flex-wrap:wrap;gap:9px;list-style:none;padding:0;margin:18px 0 0}.education-skills li{font-size:11px;line-height:1.5;border:1px solid #e0d8e7;border-radius:7px;padding:6px 10px;color:#80698e;background:#faf7fc}.education-community h2{text-align:center;font-family:"Cinzel",Georgia,serif;font-size:21px;font-weight:500;margin:20px 0 28px}.education-community .community-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.education-community .community-card{display:flex;align-items:center;justify-content:center;padding:12px;border:1px solid #d6d1dc;border-radius:12px;min-height:110px}.education-community .community-card img{max-height:110px;width:100%;object-fit:contain}@media(max-width:600px){.education-timeline{padding-left:38px}.education-marker{left:-38px;width:30px;height:34px}.education-timeline:before{left:14px}.education-milestone{padding-left:12px}.education-milestone h2{font-size:17px}.education-degree{font-size:15px}.education-community .community-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}}
+
+.education-milestone h2,.education-community h2{font-weight:700;color:#50355f}.education-degree{color:#685174;font-weight:500}
+
+.recognition-timeline-page{max-width:820px;margin:0 auto}.recognition-year+.recognition-year{margin-top:34px}.recognition-year-heading{font-family:"Cinzel",Georgia,serif;font-size:24px;font-weight:700;color:#50355f;margin-bottom:23px}.recognition-kind{display:block;font-family:"Lora",Georgia,serif;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#8e7d9e;margin-bottom:12px}.recognition-milestone .press-card{padding:0;background:none;border:0;box-shadow:none;display:flex;flex-direction:column;align-items:flex-start;gap:12px}.recognition-milestone .press-card strong{font-family:"Cinzel",Georgia,serif;font-size:18px;line-height:1.6;font-weight:600;color:#50355f}.recognition-milestone .press-year{font-size:12px;color:#8a8192}.recognition-milestone .press-link{font-family:"Lora",Georgia,serif;font-size:13px;color:#765487;text-decoration:underline;text-underline-offset:4px}.recognition-award-detail,.recognition-milestone .press-card p{font-family:"Lora",Georgia,serif;font-size:14px;line-height:1.8;color:#706777}.recognition-award-detail{margin-top:13px}.recognition-pending{font-family:"Lora",Georgia,serif;color:#8a8192;padding-top:7px;font-size:14px}
 `;
