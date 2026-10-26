@@ -604,32 +604,40 @@ function CursorSparkles(){
  useEffect(()=>{
   const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
   let previous=0,lastX=null,lastY=null;
-  const sparkle=e=>{
-   if(motion.matches||e.pointerType!=='mouse'||!layer.current)return;
-   const now=performance.now();
-   if(now-previous<48||(lastX!==null&&Math.hypot(e.clientX-lastX,e.clientY-lastY)<9))return;
-   previous=now;lastX=e.clientX;lastY=e.clientY;
-   if(layer.current.childElementCount>=18)layer.current.firstChild.remove();
-   const star=document.createElement('span');
-   star.className='cursor-sparkle';star.textContent='✦';
-   star.style.left=`${e.clientX+(Math.random()-.5)*12}px`;
-   star.style.top=`${e.clientY+(Math.random()-.5)*12}px`;
-   star.style.fontSize=`${7+Math.random()*6}px`;
-   star.style.color=Math.random()>.5?'#baa0cd':'#b9bec9';
-   star.style.setProperty('--spark-x',`${(Math.random()-.5)*26}px`);
-   star.style.setProperty('--spark-turn',`${(Math.random()-.5)*100}deg`);
-   star.addEventListener('animationend',()=>star.remove(),{once:true});
-   layer.current.appendChild(star);
+  const emit=(x,y,burst=false)=>{
+   if(motion.matches||!layer.current)return;
+   if(layer.current.childElementCount>=32)layer.current.firstChild.remove();
+   const night=document.documentElement.dataset.theme==='night';
+   const star=document.createElement('span');star.className='cursor-sparkle';star.textContent='✦';
+   star.style.left=`${x+(Math.random()-.5)*12}px`;star.style.top=`${y+(Math.random()-.5)*12}px`;
+   star.style.fontSize=`${(burst?9:7)+Math.random()*6}px`;
+   star.style.color=Math.random()>.5?(night?'#dfc6fa':'#aa83c4'):(night?'#e1e7f5':'#a9b1c2');
+   star.style.setProperty('--spark-x',`${(Math.random()-.5)*(burst?85:26)}px`);
+   star.style.setProperty('--spark-y',`${burst?(Math.random()-.5)*75:18}px`);
+   star.style.setProperty('--spark-turn',`${(Math.random()-.5)*140}deg`);
+   star.addEventListener('animationend',()=>star.remove(),{once:true});layer.current.appendChild(star);
   };
-  window.addEventListener('pointermove',sparkle,{passive:true});
-  const container=layer.current;
-  return()=>{window.removeEventListener('pointermove',sparkle);container?.replaceChildren()};
+  const move=e=>{
+   if(e.pointerType!=='mouse')return;
+   const now=performance.now();if(now-previous<48||(lastX!==null&&Math.hypot(e.clientX-lastX,e.clientY-lastY)<9))return;
+   previous=now;lastX=e.clientX;lastY=e.clientY;emit(e.clientX,e.clientY);
+  };
+  const touch=e=>{if(e.pointerType==='touch'||e.pointerType==='pen'){for(let i=0;i<7;i++)emit(e.clientX,e.clientY,true)}};
+  window.addEventListener('pointermove',move,{passive:true});window.addEventListener('pointerdown',touch,{passive:true});
+  const container=layer.current;return()=>{window.removeEventListener('pointermove',move);window.removeEventListener('pointerdown',touch);container?.replaceChildren()};
  },[]);
  return <div className="cursor-sparkles" ref={layer} aria-hidden="true"/>;
 }
 function currentRoute(){return window.location.hash.replace(/^#\/?/,'').split('/').filter(Boolean)}
 export default function App(){
  const [route,setRoute]=useState(currentRoute);
+ useEffect(()=>{
+  let favicon=document.querySelector('link[rel="icon"]');
+  if(!favicon){favicon=document.createElement('link');favicon.rel='icon';document.head.appendChild(favicon)}
+  favicon.type='image/png';favicon.href='https://raw.githubusercontent.com/valenandia/valen.github.io/main/Frame%2045.png';
+ },[]);
+ const [theme,setTheme]=useState(()=>{try{return localStorage.getItem('portfolio-theme')==='night'?'night':'day'}catch{return 'day'}});
+ useEffect(()=>{document.documentElement.dataset.theme=theme;try{localStorage.setItem('portfolio-theme',theme)}catch{}},[theme]);
  const mainRef=useRef(null);
  useEffect(()=>{const handler=()=>{setRoute(currentRoute());window.scrollTo(0,0)};window.addEventListener('hashchange',handler);return()=>window.removeEventListener('hashchange',handler)},[]);
  const [page='home',detail]=route;
@@ -651,7 +659,7 @@ export default function App(){
  else if(page==='awards')content=<About tab="awards"/>;
  else if(page==='press')content=<About tab="press"/>;
  else content=<><PageTitle title="Page not found"/><a className="text-link" href="#/">Return home <Icon name="arrow"/></a></>;
- return <><style>{newStyles}</style><CursorSparkles/><a className="skip-link" href="#main-content" onClick={e=>{e.preventDefault();mainRef.current?.focus()}}>Skip to content</a><div className="site-frame"><header className="site-header"><a href="#/" className="wordmark" aria-label="Valentina Godovets — Home"><img className="brand-image" src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Valentina%20Godovets.png" alt="Valentina Godovets"/><span className="brand-subtitle">{profile.subtitle}</span></a></header><div className="site-layout"><aside className="sidebar"><nav aria-label="Main navigation"><div className="main-nav">{navigation.map(n=><a href={`#/${n.id}`} key={n.id} className={`nav-link ${active===n.id?'active':''}`} aria-label={n.label} aria-current={active===n.id?'page':undefined}><span className="nav-icon"><span className="nav-glyph"><Icon name={n.icon}/></span></span><span className="nav-tooltip" role="tooltip">{n.label}</span></a>)}</div></nav></aside><main id="main-content" ref={mainRef} tabIndex={-1} className={`main-content page-${page}`} key={page+'/'+(detail||'')}>{content}</main></div><footer className="site-footer"><span>© {new Date().getFullYear()} Valentina Godovets</span></footer></div></>;
+ return <><style>{newStyles}</style><CursorSparkles/><a className="skip-link" href="#main-content" onClick={e=>{e.preventDefault();mainRef.current?.focus()}}>Skip to content</a><div className="site-frame"><header className="site-header"><button className="theme-toggle" type="button" onClick={()=>setTheme(t=>t==='day'?'night':'day')} aria-label={theme==='day'?'Switch to night mode':'Switch to day mode'} aria-pressed={theme==='night'}><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">{theme==='day'?<path d="M20 14A8 8 0 0 1 10 4a8 8 0 1 0 10 10Z"/>:<><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></>}</svg></button><a href="#/" className="wordmark" aria-label="Valentina Godovets — Home"><img className="brand-image" src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Valentina%20Godovets.png" alt="Valentina Godovets"/><span className="brand-subtitle">{profile.subtitle}</span></a></header><div className="site-layout"><aside className="sidebar"><nav aria-label="Main navigation"><div className="main-nav">{navigation.map(n=><a href={`#/${n.id}`} key={n.id} className={`nav-link ${active===n.id?'active':''}`} aria-label={n.label} aria-current={active===n.id?'page':undefined}><span className="nav-icon"><span className="nav-glyph"><Icon name={n.icon}/></span></span><span className="nav-tooltip" role="tooltip">{n.label}</span></a>)}</div></nav></aside><main id="main-content" ref={mainRef} tabIndex={-1} className={`main-content page-${page}`} key={page+'/'+(detail||'')}>{content}</main></div><footer className="site-footer"><span>© {new Date().getFullYear()} Valentina Godovets</span></footer></div></>;
 }
 const newStyles=`
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Cinzel:wght@400;500;600;700&display=swap');
@@ -901,4 +909,46 @@ h1, h2, h3, .card-copy h2, .contact-strip p {
 body{background:#fff;isolation:isolate}body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 28% 65% at 0% 24%,rgba(214,191,235,.23),transparent 78%),radial-gradient(ellipse 25% 68% at 100% 72%,rgba(192,201,221,.23),transparent 78%),radial-gradient(ellipse 38% 28% at 85% 0%,rgba(227,213,240,.13),transparent 80%)}@media(max-width:600px){body::before{background:radial-gradient(ellipse 28% 70% at 0% 30%,rgba(214,191,235,.16),transparent 80%),radial-gradient(ellipse 28% 70% at 100% 70%,rgba(192,201,221,.17),transparent 80%)}}@media print{body::before{display:none}}
 
 .education-community .community-grid{align-items:center}.education-community .community-card{padding:0;min-height:0;height:auto;display:block;background:transparent;box-shadow:none}.education-community .community-card img{display:block;width:100%;height:auto;max-height:none;padding:0;object-fit:initial}.education-community .community-card::after{inset:4px}
+
+body::before{z-index:0;background:radial-gradient(ellipse 32% 75% at -5% 25%,rgba(202,170,229,.42),transparent 82%),radial-gradient(ellipse 30% 80% at 105% 70%,rgba(174,187,213,.38),transparent 82%),radial-gradient(ellipse 48% 30% at 75% -10%,rgba(218,198,235,.24),transparent 85%)}#root{position:relative;z-index:1;background:transparent}@media(max-width:600px){body::before{background:radial-gradient(ellipse 35% 80% at -8% 30%,rgba(202,170,229,.28),transparent 82%),radial-gradient(ellipse 35% 80% at 108% 70%,rgba(174,187,213,.27),transparent 82%)}}
+
+.site-header{position:relative}.theme-toggle{position:absolute;right:0;top:24px;display:inline-flex;align-items:center;gap:8px;border:1px solid #d8c8e3;border-radius:12px;background:linear-gradient(145deg,#f2e8f8,#dacce8);color:#745584;padding:9px 12px;font-family:"Lora",Georgia,serif;font-size:12px;z-index:2}.theme-toggle:hover{border-color:#ad8dbe}
+html[data-theme="night"]{color-scheme:dark;background:#191620;--ink:#eee8f3;--muted:#b9aec4;--purple:#c9afd9;--line:#494052;--paper:#211c2a;--frame-silver:#61576e;--frame-deep:#95859f;--frame-gold:#bdb5cc;--frame-paper:#27212f}
+html[data-theme="night"] body{background:#191620;color:#e5ddeb}html[data-theme="night"] body::before{background:radial-gradient(ellipse 34% 80% at -5% 25%,#79539842,transparent 82%),radial-gradient(ellipse 32% 80% at 105% 70%,#7a8aa838,transparent 82%)}
+html[data-theme="night"] .brand-image{filter:brightness(0) invert(1);opacity:.94}
+html[data-theme="night"] :is(.bio,.about-story,.education-description,.education-dissertation,.recognition-award-detail,.recognition-milestone .press-card p,.project-description,.project-meta,.contributions,.article-card p,.card-copy p,.cv-intro,.home-cv .portfolio-request,.resume-experience-note){color:#c8bed2}
+html[data-theme="night"] :is(h1,h2,h3,.about-story strong,.education-milestone h2,.education-community h2,.recognition-year-heading,.recognition-milestone .press-card strong,.education-dissertation strong){color:#eee3f7}
+html[data-theme="night"] :is(.brand-subtitle,.site-footer,.education-date,.education-note,.education-degree,.recognition-kind,.press-year,.eyebrow,.recognition-pending){color:#bba8cc}
+html[data-theme="night"] :is(.nav-icon,.social-links a.social-icon-link,.cv-button,.theme-toggle,.education-marker){background:linear-gradient(145deg,#3c304a,#302638);border-color:#655271;color:#d1b5e3;box-shadow:inset 0 1px 0 #ffffff12,0 4px 12px #0002}
+html[data-theme="night"] :is(.nav-link:hover .nav-icon,.nav-link.active .nav-icon,.social-links a.social-icon-link:hover,.cv-button:hover,.theme-toggle:hover){background:linear-gradient(145deg,#51405f,#3b2e47);border-color:#9d7bb2;color:#f0dafa}
+html[data-theme="night"] :is(.case-card,.project-card,.award-card){background:linear-gradient(145deg,#28222f,#211c28);border-color:#61536d;box-shadow:inset 0 0 0 3px #28222f,inset 0 0 0 4px #44374e}
+html[data-theme="night"] :is(.nav-tooltip,.social-tooltip){background:#352a40;color:#eee1f5;border-color:#665573}
+html[data-theme="night"] :is(.text-link,.about-story a,.press-link,.about-bye){color:#d2b2e5}
+html[data-theme="night"] .tabs a{color:#b8a2c9}html[data-theme="night"] .tabs a.selected{color:#f1dffa;background:#9c72ba30}
+html[data-theme="night"] .about-story .about-photo{background:#27222f;border-color:#777180;box-shadow:inset 0 0 0 5px #27222f,inset 0 0 0 6px #655e70}
+html[data-theme="night"] .education-community .community-card{background:transparent;box-shadow:none;border-color:#777180}
+html[data-theme="night"] .about-flourish svg{color:#b9a2c9}
+@media(max-width:600px){.theme-toggle{top:8px;padding:7px 9px;gap:5px;font-size:10px}.theme-toggle svg{width:15px;height:15px}}@media print{.theme-toggle{display:none}}
+
+/* Theme surfaces and typography across detail pages. */
+html[data-theme="night"] :is(.pending-content,.empty-section,.project-meta dt,.project-meta dd,.contributions li,.lead,.article-card,.resume-list,.press-card,.recognition-detail,.year,.back-link,.card-copy,.project-actions){color:#c8bed2}
+html[data-theme="night"] :is(.article-card h3,.resume-list strong,.award-card h2,.project-meta dt,.contributions h2){color:#eee3f7}
+html[data-theme="night"] :is(.case-cover,.case-banner,.project-cover,.project-hero,.article-image,.project-award){background-color:#302737;border-color:#756381}
+html[data-theme="night"] :is(.case-cover,.case-banner){background-image:linear-gradient(140deg,#3a2d46,#25202e)}
+html[data-theme="night"] :is(.cover-arrow,.award-icon){background:#44334f;color:#dcc3ec;border-color:#766080}
+html[data-theme="night"] :is(.cover-index,.project-cover-fallback){color:#d7c4e5}
+html[data-theme="night"] :is(.chip,.chips .chip,.education-skills li){background:#362b41!important;color:#d6bfE6!important;border-color:#5e4d6d!important}
+html[data-theme="night"] :is(.project-meta>div,.recognition-row,.case-pagination,.article-card,.award-card,.press-card){border-color:#51445d}
+html[data-theme="night"] .resume-list .press-card{background:#28222f;border:1px solid #51445d;border-radius:12px;padding:20px}
+html[data-theme="night"] .castle-frame::after{border-color:#c2b5cf66}
+html[data-theme="night"] .castle-ornaments{color:#c7c7d8}html[data-theme="night"] .corner-jewel{fill:#a4a6bc;stroke:#e0dfea}
+html[data-theme="night"] .education-timeline:before{background:linear-gradient(#756481,#9295ae 85%,transparent)}
+html[data-theme="night"] :is(.social-tooltip,.nav-tooltip){box-shadow:0 5px 18px #0004}
+html[data-theme="night"] .project-actions a:hover,html[data-theme="night"] .about-story a:hover{color:#f1ddff}
+html[data-theme="night"] .skip-link{background:#34263f;color:#f1ddff}
+html[data-theme="night"] ::selection{background:#8864a2;color:#fff}
+
+.theme-toggle{width:38px;height:38px;padding:0;justify-content:center;gap:0}@media(max-width:600px){.theme-toggle{width:32px;height:32px;padding:0}}
+
+@keyframes cursor-twinkle{0%{opacity:0;transform:translate(-50%,-50%) scale(.35)}18%{opacity:.9;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(calc(-50% + var(--spark-x)),var(--spark-y,18px)) rotate(var(--spark-turn)) scale(.1)}}html[data-theme="night"] .cursor-sparkle{text-shadow:0 0 7px #d7bcfa80}
 `;
