@@ -636,17 +636,12 @@ export default function App(){
   if(!favicon){favicon=document.createElement('link');favicon.rel='icon';document.head.appendChild(favicon)}
   favicon.type='image/png';favicon.href='https://raw.githubusercontent.com/valenandia/valen.github.io/main/Frame%2045.png';
  },[]);
- const [theme,setTheme]=useState(()=>{try{const saved=localStorage.getItem('portfolio-theme');if(saved==='night'||saved==='day')return saved}catch{}return window.matchMedia('(prefers-color-scheme: dark)').matches?'night':'day'});
+ const [theme,setTheme]=useState(()=>{try{return localStorage.getItem('portfolio-manual-theme')==='night'?'night':'day'}catch{return 'day'}});
  useEffect(()=>{
-  const system=window.matchMedia('(prefers-color-scheme: dark)');
-  const sync=e=>setTheme(e.matches?'night':'day');
-  system.addEventListener('change',sync);return()=>system.removeEventListener('change',sync);
- },[]);
- useEffect(()=>{
-  const root=document.documentElement;root.dataset.theme=theme;root.style.colorScheme=theme==='night'?'dark':'light';
-  try{localStorage.setItem('portfolio-theme',theme)}catch{}
+  const root=document.documentElement;root.dataset.theme=theme;root.style.colorScheme='only light';
+  try{localStorage.setItem('portfolio-manual-theme',theme)}catch{}
   let meta=document.querySelector('meta[name="theme-color"]');if(!meta){meta=document.createElement('meta');meta.name='theme-color';document.head.appendChild(meta)}meta.content=theme==='night'?'#191620':'#ffffff';
-  let scheme=document.querySelector('meta[name="color-scheme"]');if(!scheme){scheme=document.createElement('meta');scheme.name='color-scheme';document.head.appendChild(scheme)}scheme.content=theme==='night'?'dark':'light';
+  let scheme=document.querySelector('meta[name="color-scheme"]');if(!scheme){scheme=document.createElement('meta');scheme.name='color-scheme';document.head.appendChild(scheme)}scheme.content='only light';
  },[theme]);
  const mainRef=useRef(null);
  useEffect(()=>{const handler=()=>{setRoute(currentRoute());window.scrollTo(0,0)};window.addEventListener('hashchange',handler);return()=>window.removeEventListener('hashchange',handler)},[]);
@@ -669,7 +664,7 @@ export default function App(){
  else if(page==='awards')content=<About tab="awards"/>;
  else if(page==='press')content=<About tab="press"/>;
  else content=<><PageTitle title="Page not found"/><a className="text-link" href="#/">Return home <Icon name="arrow"/></a></>;
- return <><style>{newStyles}</style><CursorSparkles/><a className="skip-link" href="#main-content" onClick={e=>{e.preventDefault();mainRef.current?.focus()}}>Skip to content</a><div className="site-frame" data-theme={theme}><header className="site-header"><a href="#/" className="wordmark" aria-label="Valentina Godovets — Home"><img className="brand-image" src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Valentina%20Godovets.png" alt="Valentina Godovets"/><span className="brand-subtitle">{profile.subtitle}</span></a></header><div className="site-layout"><aside className="sidebar"><nav aria-label="Main navigation"><div className="main-nav">{navigation.map(n=><a href={`#/${n.id}`} key={n.id} className={`nav-link ${active===n.id?'active':''}`} aria-label={n.label} aria-current={active===n.id?'page':undefined}><span className="nav-icon"><span className="nav-glyph"><Icon name={n.icon}/></span></span><span className="nav-tooltip" role="tooltip">{n.label}</span></a>)}</div></nav><div className="sidebar-theme"><button className="theme-toggle" type="button" onClick={()=>setTheme(t=>t==='day'?'night':'day')} aria-label={theme==='day'?'Switch to night mode':'Switch to day mode'} aria-pressed={theme==='night'}><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">{theme==='day'?<path d="M20 14A8 8 0 0 1 10 4a8 8 0 1 0 10 10Z"/>:<><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></>}</svg></button></div></aside><main id="main-content" ref={mainRef} tabIndex={-1} className={`main-content page-${page}`} key={page+'/'+(detail||'')}>{content}</main></div><footer className="site-footer"><span>© {new Date().getFullYear()} Valentina Godovets</span></footer></div></>;
+ return <><style>{newStyles}</style><CursorSparkles/><a className="skip-link" href="#main-content" onClick={e=>{e.preventDefault();mainRef.current?.focus()}}>Skip to content</a><div className="site-frame" data-theme={theme}><header className="site-header"><a href="#/" className="wordmark" aria-label="Valentina Godovets — Home"><img className="brand-image" style={{filter:theme==='night'?'brightness(0) invert(1)':'brightness(0)',colorScheme:'only light'}} src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Valentina%20Godovets.png" alt="Valentina Godovets"/><span className="brand-subtitle">{profile.subtitle}</span></a></header><div className="site-layout"><aside className="sidebar"><nav aria-label="Main navigation"><div className="main-nav">{navigation.map(n=><a href={`#/${n.id}`} key={n.id} className={`nav-link ${active===n.id?'active':''}`} aria-label={n.label} aria-current={active===n.id?'page':undefined}><span className="nav-icon"><span className="nav-glyph"><Icon name={n.icon}/></span></span><span className="nav-tooltip" role="tooltip">{n.label}</span></a>)}</div></nav><div className="sidebar-theme"><button className="theme-toggle" type="button" onClick={()=>setTheme(t=>t==='day'?'night':'day')} aria-label={theme==='day'?'Switch to night mode':'Switch to day mode'} aria-pressed={theme==='night'}><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">{theme==='day'?<path d="M20 14A8 8 0 0 1 10 4a8 8 0 1 0 10 10Z"/>:<><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></>}</svg></button></div></aside><main id="main-content" ref={mainRef} tabIndex={-1} className={`main-content page-${page}`} key={page+'/'+(detail||'')}>{content}</main></div><footer className="site-footer"><span>© {new Date().getFullYear()} Valentina Godovets</span></footer></div></>;
 }
 const newStyles=`
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Cinzel:wght@400;500;600;700&display=swap');
@@ -1063,4 +1058,10 @@ html[data-theme="day"] .original-about-copy strong{color:#45384f!important}
 .site-frame[data-theme="day"] .original-about-copy strong{color:#45384f!important}
 .site-frame[data-theme="night"]{background:#191620!important;color:#e5ddeb!important;min-height:100vh}.site-frame[data-theme="day"]{background:#fff!important;color:#322c3b!important;min-height:100vh}
 .site-frame[data-theme="night"] .brand-image{filter:brightness(0) invert(1)!important}.site-frame[data-theme="day"] .brand-image{filter:brightness(0)!important}
+
+/* Both custom palettes are authored explicitly; disable browser auto-darkening. */
+:root,html[data-theme],html[data-theme] body,.site-frame[data-theme]{color-scheme:only light!important}
+.site-frame[data-theme="day"]{--ink:#322c3b;--muted:#78717f;--purple:#736081;--line:#ded8e2;--paper:#fff;background-color:#fff!important}
+.site-frame[data-theme="night"]{--ink:#eee8f3;--muted:#b9aec4;--purple:#c9afd9;--line:#494052;--paper:#211c2a;background-color:#191620!important}
+.brand-image,.home-portrait,.about-photo img{color-scheme:only light!important;forced-color-adjust:none}
 `;
