@@ -510,7 +510,7 @@ function CastleOrnaments({portrait=false}) {
       <path className="corner-jewel" d="m10 10 4-4 4 4-4 4Z"/>
       <circle cx="4" cy="35" r="1.5"/><circle cx="35" cy="4" r="1.5"/>
     </svg>)}
-    <span className="castle-crest">✧</span>
+    {!portrait&&<span className="castle-crest">✧</span>}
   </span>;
 }
 function PageTitle({eyebrow='Portfolio',title,children}) {
@@ -527,7 +527,7 @@ function Contact() {
 }
 
 function Home() {
- return <><section className="home-hero"><div className="portrait-wrap"><div className="photo-placeholder" role="img" aria-label="Reserved for Valentina’s portrait"><span className="portrait-corner tl"/><span className="portrait-corner tr"/><span className="portrait-corner bl"/><span className="portrait-corner br"/><CastleOrnaments portrait/><div className="portrait-center"><Icon name="photo" size={32}/><span>Portrait coming soon</span></div><span className="portrait-caption">VALENTINA / GAME DESIGNER</span></div></div><div className="home-copy"><div className="bio original-about-copy">{React.Children.toArray(navModals.find(m=>m.id==='about').body.props.children).slice(0,3)}</div></div></section><section className="home-cv" aria-label="CV and detailed portfolio"><p className="cv-intro">You can check my CV here.</p><a className="cv-button" href="#/cv"><Icon name="cv" size={21}/> View CV</a><p className="portfolio-request">Detailed portfolio on Notion available upon request.</p></section><Contact/></>;
+ return <><section className="home-hero"><div className="portrait-wrap"><div className="photo-placeholder has-portrait"><img className="home-portrait" src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/Main_photo.jpg" alt="Valentina Godovets" fetchPriority="high"/><CastleOrnaments portrait/></div></div><div className="home-copy"><div className="bio original-about-copy">{React.Children.toArray(navModals.find(m=>m.id==='about').body.props.children).slice(0,3)}</div></div></section><section className="home-cv" aria-label="CV and detailed portfolio"><p className="cv-intro">You can check my CV here.</p><a className="cv-button" href="#/cv"><Icon name="cv" size={21}/> View CV</a><p className="portfolio-request">Detailed portfolio on Notion available upon request.</p></section><Contact/></>;
 }
 function CaseGrid(){return <><PageTitle eyebrow="Selected work" title="Featured Case Studies">Frameworks, mechanics, and spaces — a closer look at my design work.</PageTitle><div className="card-grid case-grid">{cases.map((c,i)=><a className="case-card" key={c.id} href={`#/case-studies/${c.id}`}><div className={`case-cover castle-frame ${c.color}`}><CastleOrnaments/><span className="cover-index">CASE / {String(i+1).padStart(2,'0')}</span><img className="framework-placeholder" src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(1).png" alt="" loading="lazy"/><span className="cover-arrow"><Icon name="arrow" size={18}/></span></div><div className="card-copy"><span className="eyebrow">{c.category}</span><h2>{c.title}</h2><p>{c.subtitle}</p></div></a>)}</div></>}
 function CasePage({item}){return <article className="case-page"><a className="back-link" href="#/case-studies"><Icon name="back" size={16}/> Featured Case Studies</a><PageTitle title={`${item.title}: ${item.subtitle}`}/><div className={`case-banner castle-frame ${item.color}`}><CastleOrnaments/><img className="framework-placeholder" src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(1).png" alt=""/></div><div className="pending-content"><p>Under construction</p></div><nav className="case-pagination" aria-label="Other case studies">{cases.indexOf(item)>0?<a className="text-link" href={`#/case-studies/${cases[cases.indexOf(item)-1].id}`}><Icon name="back" size={16}/> Previous case</a>:<span/>}{cases.indexOf(item)<cases.length-1&&<a className="text-link" href={`#/case-studies/${cases[cases.indexOf(item)+1].id}`}>Next case <Icon name="arrow" size={16}/></a>}</nav></article>}
@@ -615,7 +615,7 @@ const newStyles=`
 :root{color-scheme:light;background:#fff}body,.site-frame{background:#fff!important;color:#322c3b}
 .site-header{height:170px;justify-content:center;text-align:center;padding:30px 0;gap:0}
 .wordmark{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;white-space:normal}
-.brand-image{width:min(560px,76vw);height:auto;filter:brightness(0);max-height:104px;object-fit:contain}
+.brand-image{width:min(644px,87vw);height:auto;filter:brightness(0);max-height:120px;object-fit:contain}
 .brand-subtitle{font-family:"Lora", Georgia, serif;font-size:11px;letter-spacing:.16em;line-height:1.5;color:#78717f;font-weight:400}
 .site-layout{grid-template-columns:64px minmax(0,1fr);gap:54px;min-height:calc(100vh - 235px)}
 .sidebar{padding:48px 0 30px;min-height:0;z-index:10}
@@ -631,8 +631,8 @@ const newStyles=`
 .about-empty-section{min-height:120px}.about-section{margin-top:30px;margin-bottom:60px}.about-section-title{font-family:"Cinzel", Georgia, serif;font-size:36px;font-weight:400;line-height:1.3;margin-bottom:24px}.about-section .recognition-row{padding:22px 0}.about-section .press-list>h3{font-size:24px}
 @media(min-width:1450px){.site-layout{grid-template-columns:64px minmax(0,1fr);gap:75px}.home-hero{grid-template-columns:minmax(280px,.92fr) minmax(300px,1.08fr)}}
 @media(max-width:1100px){.site-layout{grid-template-columns:54px minmax(0,1fr);gap:35px}.nav-link,.nav-icon{width:42px;height:42px}.sidebar{padding-right:0}}
-@media(max-width:800px){.site-header{height:145px}.brand-image{width:min(500px,80vw)}.brand-subtitle{font-size:9px}.site-layout{grid-template-columns:45px minmax(0,1fr);gap:24px}.sidebar{padding-top:30px;padding-right:0;min-height:0}.nav-link,.nav-icon{width:40px;height:40px}.nav-link>span.nav-tooltip{display:block!important}.home-hero{max-width:570px;margin:auto}.contact-strip{width:100%}.about-section-title{font-size:32px}}
-@media(max-width:480px){.site-header{height:125px;padding:25px 0}.brand-image{width:88vw}.brand-subtitle{font-size:8px;letter-spacing:.1em}.site-layout{grid-template-columns:36px minmax(0,1fr);gap:16px}.nav-link,.nav-icon{width:34px;height:36px}.main-nav{gap:15px}.nav-link .nav-tooltip{font-size:11px;max-width:245px;white-space:normal;width:max-content;padding:9px 11px}.contact-strip p{font-size:25px}.social-links{gap:25px}.social-links a{font-size:10px}}
+@media(max-width:800px){.site-header{height:145px}.brand-image{width:min(575px,90vw)}.brand-subtitle{font-size:9px}.site-layout{grid-template-columns:45px minmax(0,1fr);gap:24px}.sidebar{padding-top:30px;padding-right:0;min-height:0}.nav-link,.nav-icon{width:40px;height:40px}.nav-link>span.nav-tooltip{display:block!important}.home-hero{max-width:570px;margin:auto}.contact-strip{width:100%}.about-section-title{font-size:32px}}
+@media(max-width:480px){.site-header{height:125px;padding:25px 0}.brand-image{width:100%;max-width:100%}.brand-subtitle{font-size:8px;letter-spacing:.1em}.site-layout{grid-template-columns:36px minmax(0,1fr);gap:16px}.nav-link,.nav-icon{width:34px;height:36px}.main-nav{gap:15px}.nav-link .nav-tooltip{font-size:11px;max-width:245px;white-space:normal;width:max-content;padding:9px 11px}.contact-strip p{font-size:25px}.social-links{gap:25px}.social-links a{font-size:10px}}
 
 /* Original portfolio typography, violet/pink palette and framework artwork. */
 :root{--text-font:"Lora", Georgia, serif;--main-font:"Cinzel", Georgia, serif;--decorative-font:"Cinzel", Georgia, serif;--pink:#ECC8F7;--deep-violet:#171544;--peach:#eec2b5;--ink:#181518}
@@ -818,4 +818,6 @@ h1, h2, h3, .card-copy h2, .contact-strip p {
 .home-cv .portfolio-request{font-size:16px;max-width:520px;color:#62576b}
 
 .cursor-sparkles{position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden}.cursor-sparkle{position:absolute;display:block;line-height:1;font-family:Georgia,serif;pointer-events:none;animation:cursor-twinkle 750ms ease-out forwards;will-change:transform,opacity;text-shadow:0 0 5px #dfcee760}@keyframes cursor-twinkle{0%{opacity:0;transform:translate(-50%,-50%) scale(.35)}18%{opacity:.85;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(calc(-50% + var(--spark-x)),18px) rotate(var(--spark-turn)) scale(.1)}}@media(prefers-reduced-motion:reduce){.cursor-sparkles{display:none}}@media print{.cursor-sparkles{display:none}}
+
+.photo-placeholder.has-portrait{background:#eee6f2}.has-portrait .home-portrait{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}.photo-placeholder.has-portrait:before,.photo-placeholder.has-portrait:after{display:none}.has-portrait .castle-ornaments{z-index:2}
 `;
