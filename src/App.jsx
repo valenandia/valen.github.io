@@ -188,35 +188,6 @@ const windows = [
     accent: "purple",
     items: [
       {
-        id: "project-1",
-        icon: "🎮",
-        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202026-05-28%20150131.png",
-        label: "STORE SIMULATOR",
-        modalTitle: "Store Simulator",
-        tag: "PROJECT",
-        status: "In production, 2026",
-        description: "Store Simulator is a management simulator developed on Unreal Engine 5. My work focuses on game design, location customization, mini-game balance, and feature completion during production.",
-        meta: [
-          ["Genre", "Management Simulator"],
-          ["Role", "Game Designer"],
-          ["Involvement", "October 2023 — Present"],
-          ["Platforms", "TBA"],
-          ["Engine", "Unreal Engine 5"],
-        ],
-        contributions: [
-          "Assisted in the creation and documentation of game design documents, including documents about features, customization, and game balance.",
-          "Contributed to the creation of mechanics prototypes and screen UI mockups.",
-          "Assisted in the implementation of game content using engines such as Unreal Engine and Unity.",
-          "Collaborated with artists, programmers, and other team members to create game features.",
-          "Participated in gameplay testing sessions and provided feedback.",
-          "Took on additional tasks and responsibilities as needed to support the overall development.",
-        ],
-        action: "VIEW PROJECT",
-        href: "https://eriars.com/en/store-simulator-en/",
-        secondaryAction: "GDD EXAMPLE",
-        secondaryHref: "#",
-      },
-      {
         id: "project-2",
         icon: "🎮",
         image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/photo_2026-09-01_17-46-20.jpg",
@@ -227,6 +198,34 @@ const windows = [
         description: "Under construction",
       },
       {
+        id: "project-1",
+        icon: "🎮",
+        image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202026-10-28%20135125.png",
+        label: "STORE SIMULATOR",
+        modalTitle: "Store Simulator",
+        tag: "PROJECT · Eriars",
+        description: "Store Simulator is a management simulator developed on Unreal Engine 5. My work focuses on game design, location customization, mini-game balance, and feature completion during production.",
+        meta: [
+          ["Genre", "Management Simulator"],
+          ["Role", "Game Designer"],
+          ["Involvement", "October 2023 — Present"],
+          ["Platforms", "TBA"],
+          ["Engine", "Unreal Engine 5"],
+        ],
+        contributions: [
+          "Created and maintained detailed game design documents, including core gameplay systems.",
+          "Designed player customization systems and connected them with other gameplay mechanics.",
+          "Worked on UX design within my areas of responsibility, including screen flows, screen maps, interface adjustments, and usability improvements.",
+          "Researched and conceptualized mini-games to support the game’s design.",
+          "Built prototypes of gameplay mechanics using Unreal Engine and GameMaker.",
+          "Transferred and structured narrative and gameplay information in Articy, collaborated through GitHub, and implemented iterative corrections.",
+        ],
+        action: "VIEW PROJECT",
+        href: "https://eriars.com/en/store-simulator-en/",
+        secondaryAction: "GDD EXAMPLE",
+        secondaryHref: "#",
+      },
+      {
         id: "project-3",
         icon: "🎮",
         image: "https://raw.githubusercontent.com/valenandia/valen.github.io/main/images%20(1).jpg",
@@ -234,12 +233,12 @@ const windows = [
         label: "TAMRIEL REBUILT",
         modalTitle: "Tamriel Rebuilt",
         tag: "PROJECT",
-        status: "Somewhere in 2010s — 2019",
+        status: "Occasional contributions · Until 2020",
         description: "Tamriel Rebuilt is a large-scale TES III mod project for Morrowind and OpenMW. My work combined game generalist tasks, level design, quest work, narrative design, and testing across Tamriel’s mainland regions.",
         meta: [
           ["Genre", "TES III: Mod"],
           ["Role", "Game Generalist, Level Designer, Narrative Designer"],
-          ["Involvement", "2010s — 2019"],
+          ["Involvement", "Occasional contributions until 2020"],
           ["Platforms", "Nexus Mods"],
           ["Engine", "OpenMW"],
         ],
@@ -533,7 +532,7 @@ function Home() {
 }
 function CaseGrid(){return <><PageTitle eyebrow="Selected work" title="Featured Case Studies">Frameworks, mechanics, and spaces — a closer look at my design work.</PageTitle><div className="card-grid case-grid">{cases.map((c,i)=><a className="case-card" key={c.id} href={`#/case-studies/${c.id}`}><div className={`case-cover castle-frame ${c.color}`}><CastleOrnaments/><span className="cover-index">CASE / {String(i+1).padStart(2,'0')}</span><img className="framework-placeholder" src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(1).png" alt="" loading="lazy"/><span className="cover-arrow"><Icon name="arrow" size={18}/></span></div><div className="card-copy"><span className="eyebrow">{c.category}</span><h2>{c.title}</h2><p>{c.subtitle}</p></div></a>)}</div></>}
 function CasePage({item}){return <article className="case-page"><a className="back-link" href="#/case-studies"><Icon name="back" size={16}/> Featured Case Studies</a><PageTitle title={`${item.title}: ${item.subtitle}`}/><div className={`case-banner castle-frame ${item.color}`}><CastleOrnaments/><img className="framework-placeholder" src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/thinking...%20(1).png" alt=""/></div><div className="pending-content"><p>Under construction</p></div><nav className="case-pagination" aria-label="Other case studies">{cases.indexOf(item)>0?<a className="text-link" href={`#/case-studies/${cases[cases.indexOf(item)-1].id}`}><Icon name="back" size={16}/> Previous case</a>:<span/>}{cases.indexOf(item)<cases.length-1&&<a className="text-link" href={`#/case-studies/${cases[cases.indexOf(item)+1].id}`}>Next case <Icon name="arrow" size={16}/></a>}</nav></article>}
-function ProjectGrid({items,base}){return <div className="card-grid">{items.map(item=><a className="project-card" key={item.id} href={`#/${base}/${item.id}`}><div className="project-cover castle-frame"><CastleOrnaments/><img src={item.image} alt="" loading="lazy" onError={e=>{e.currentTarget.style.display='none';}}/><span className="project-cover-fallback">{item.modalTitle}</span><span className="cover-arrow"><Icon name="arrow" size={18}/></span></div><div className="card-copy"><span className="eyebrow">{item.tag}</span><h2>{item.modalTitle}</h2>{item.status&&<p>{item.status}</p>}</div></a>)}</div>}
+function ProjectGrid({items,base}){return <div className="card-grid">{items.map(item=><a className="project-card" key={item.id} href={`#/${base}/${item.id}`}><div className={`project-cover castle-frame ${base==='projects'&&item.id==='project-2'?'nyphs-cover-left':''}`}><CastleOrnaments/><img src={item.image} alt="" loading="lazy" onError={e=>{e.currentTarget.style.display='none';}}/><span className="project-cover-fallback">{item.modalTitle}</span><span className="cover-arrow"><Icon name="arrow" size={18}/></span></div><div className="card-copy"><span className="eyebrow">{item.tag}</span><h2>{item.modalTitle}</h2>{item.status&&<p>{item.status}</p>}</div></a>)}</div>}
 function NyphsProject(){
  const sections=[
  {title:'Core Gameplay Loop & Systems',text:'I led the game design work, designing the core gameplay loop and connecting core and meta-systems. My work brought together exploration, puzzles, creature care, progression, and player customization into a coherent gameplay experience.'},
@@ -543,7 +542,22 @@ function NyphsProject(){
  ];
  return <article className="project-detail-page nyphs-case"><a className="back-link" href="#/projects"><Icon name="back" size={16}/>Projects</a><PageTitle title="Traces of Nyphs"/><p className="project-company-label">Drakaura.Games · Game Designer</p><div className="project-hero castle-frame"><CastleOrnaments/><img src="https://raw.githubusercontent.com/valenandia/valen.github.io/main/b13b50_bedf2f82d8af47408f1359c267e8d8e4~mv2.avif" alt="Traces of Nyphs"/></div><div className="nyphs-copy"><p><strong>Traces of Nyphs</strong> is a cozy, story-driven exploration adventure. Play as Aiva, a young research assistant, explore a forgotten land, solve magical puzzles, and care for mysterious creatures called Nyphs.</p><div className="nyphs-links"><a className="cv-button" href="https://store.steampowered.com/app/4013130/Traces_of_Nyphs/" target="_blank" rel="noopener noreferrer">Steam<Icon name="external" size={14}/></a><a className="cv-button" href="https://www.drakaura.com/" target="_blank" rel="noopener noreferrer">Official Website<Icon name="external" size={14}/></a></div><dl className="nyphs-facts"><div><dt>Studio</dt><dd>Drakaura.Games</dd></div><div><dt>Role</dt><dd>Game Designer</dd></div><div><dt>Involvement</dt><dd>Apr 2025 – Present</dd></div><div><dt>Focus</dt><dd>Systems Design · Level Design · UX · Balancing</dd></div></dl><AboutDivider/><section><h2>My Role</h2><p>I led the game design work on Traces of Nyphs, shaping its core gameplay loop and connecting exploration, creature care, puzzles, and progression. My work covered systems design, level design, balancing, and design and UX documentation.</p></section>{sections.map((section,index)=><React.Fragment key={section.title}><AboutDivider/><section className={section.image?`nyphs-design-row ${index%2===0?'nyphs-image-left':''}`:''}><div><h2>{section.title}</h2><p>{section.text}</p></div>{section.image&&<div className="other-placeholder castle-frame nyphs-screenshot"><CastleOrnaments/>{section.src?<img className="nyphs-section-image" src={section.src} alt={section.image} loading="lazy"/>:<><Icon name="photo" size={30}/><span>{section.image}</span></>}</div>}</section></React.Fragment>)}<p className="nyphs-confidential">Design documentation and internal workflows are confidential and are not shown in this portfolio.</p></div></article>;
 }
-function ProjectPage({item,base}){if(base==='projects'&&item.id==='project-2')return <NyphsProject/>;return <article className="project-detail-page"><a className="back-link" href={`#/${base}`}><Icon name="back" size={16}/>{base==='projects'?'Projects':'Research & Creative Work'}</a><PageTitle eyebrow={item.tag} title={item.modalTitle}>{item.status}</PageTitle><p className="project-company-label">{item.tag}</p>{item.body?<div className="pending-content">{item.body}</div>:<><div className="project-hero castle-frame"><CastleOrnaments/><img src={item.projectImage||item.image} alt={item.modalTitle}/></div><p className="project-description">{item.description}</p><div className="project-actions">{[{label:item.action,href:item.href},{label:item.secondaryAction,href:item.secondaryHref},...(item.extraActions||[])].filter(a=>a.href&&a.href!=='#').map(a=><a className="text-link" key={a.label} href={a.href} target="_blank" rel="noreferrer">{a.label} <Icon name="external" size={14}/></a>)}</div>{item.meta&&<dl className="project-meta">{item.meta.map(([k,v])=><div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>}{item.contributions&&<section className="contributions"><h2>My contributions</h2><ul>{item.contributions.map(c=><li key={c}>{c}</li>)}</ul></section>}{item.awardImage&&<div className="project-award castle-frame"><CastleOrnaments/><img src={item.awardImage} alt={item.awardLabel}/></div>}</>}</article>}
+function StoreSimulatorProject({item}){
+ const sections=[
+ {title:'Game Design Documentation & Core Systems',text:'I created and maintained detailed game design documents, including the development of core gameplay systems. I translated design ideas into structured requirements and updated the documentation as the work evolved.'},
+ {title:'Player Customization',text:'I designed player customization systems and connected them with other gameplay mechanics, considering how customization fits into the wider player experience.'},
+ {title:'UX Design',text:'Within my areas of responsibility, I worked on screen flows, screen maps, interface adjustments, and usability improvements, documenting interactions and refining them through iteration.'},
+ {title:'Mini-games & Prototyping',text:'I researched and conceptualized mini-games to support the game’s design. I also built prototypes of different gameplay mechanics using Unreal Engine and GameMaker to explore and iterate on design ideas.',image:'Gameplay prototype screenshot',src:'https://raw.githubusercontent.com/valenandia/valen.github.io/main/Screenshot%202026-10-28%20135321.png'},
+ {title:'Articy & Collaboration',text:'I transferred and structured narrative and gameplay information in Articy. I collaborated through GitHub and implemented iterative corrections, keeping design information aligned with ongoing development.',image:'Articy & Collaboration',src:'https://raw.githubusercontent.com/valenandia/valen.github.io/main/photo_2025-04-09_19-10-03.jpg'}
+ ];
+ return <article className="project-detail-page nyphs-case"><a className="back-link" href="#/projects"><Icon name="back" size={16}/>Projects</a><PageTitle title="Store Simulator"/><p className="project-company-label">Eriars · Game Designer</p><div className="nyphs-copy"><p>A management simulator project under the working title <strong>Store Simulator</strong>. My work covered game design documentation, core systems, player customization, UX, mini-game concepts, and gameplay prototyping.</p><div className="nyphs-links"><a className="cv-button" href="https://eriars.com/en/store-simulator-en/" target="_blank" rel="noopener noreferrer">Official Website<Icon name="external" size={14}/></a></div><dl className="nyphs-facts"><div><dt>Studio</dt><dd>Eriars</dd></div><div><dt>Role</dt><dd>Game Designer</dd></div><div><dt>Project</dt><dd>Management Simulator</dd></div><div><dt>Tools</dt><dd>Unreal Engine · GameMaker · Articy · GitHub</dd></div></dl><AboutDivider/><section><h2>My Role</h2><p>I contributed to the project’s game design, developing documentation and systems, working on customization and UX, and prototyping gameplay mechanics. I also structured design information in Articy and supported iterative development through GitHub.</p></section>{sections.map((section,index)=><React.Fragment key={section.title}><AboutDivider/><section className={section.image?`nyphs-design-row ${index%2===0?'nyphs-image-left':''}`:''}><div><h2>{section.title}</h2><p>{section.text}</p></div>{section.image&&<div className="other-placeholder castle-frame nyphs-screenshot"><CastleOrnaments/>{section.src?<img className="nyphs-section-image" src={section.src} alt={section.image} loading="lazy"/>:<><Icon name="photo" size={30}/><span>{section.image}</span></>}</div>}</section></React.Fragment>)}<p className="nyphs-confidential">The project is currently in development. Internal documentation and unreleased materials cannot be shared publicly at this stage.</p></div></article>;
+}
+function TamrielProject(){
+ const base='https://raw.githubusercontent.com/valenandia/valen.github.io/main/';
+ const sections=[{title:'Level Design & World Building',text:'I contributed to exterior landscapes, settlements, and interior spaces using Morrowind’s Construction Set, working within the project’s established world and lore.',image:'Gallery_OE18.png',alt:'Tamriel Rebuilt landscape screenshot'}, {title:'Quests & Narrative',text:'My contributions included quest work and character narratives, supporting exploration and the player’s connection to the world.',image:'Gallery_OE1_0.png',alt:'Tamriel Rebuilt gameplay screenshot'}, {title:'Testing & Iteration',text:'I tested quests and gameplay to help identify issues with functionality, balance, and the overall player experience.',image:'Gallery_OE5.png',alt:'Tamriel Rebuilt environment screenshot'}];
+ return <article className="project-detail-page nyphs-case"><a className="back-link" href="#/projects"><Icon name="back" size={16}/>Projects</a><PageTitle title="Tamriel Rebuilt"/><p className="project-company-label">Community Mod Project · Game Generalist, Level &amp; Narrative Design</p><div className="nyphs-copy"><p><strong>Tamriel Rebuilt</strong> is a large-scale community mod for <em>The Elder Scrolls III: Morrowind</em>, expanding the game beyond Vvardenfell to the Morrowind mainland. Created by volunteer artists, modders, and writers, the project builds on the world, lore, and atmosphere of the original game.</p><div className="nyphs-links"><a className="cv-button" href="https://www.nexusmods.com/morrowind/mods/42145" target="_blank" rel="noopener noreferrer">Nexus Mods<Icon name="external" size={14}/></a><a className="cv-button" href="https://www.tamriel-rebuilt.org/" target="_blank" rel="noopener noreferrer">Official Website<Icon name="external" size={14}/></a><a className="cv-button" href="https://www.youtube.com/watch?v=UMLOgIC7yrM&t=46s" target="_blank" rel="noopener noreferrer">Update 17.09 · Video<Icon name="external" size={14}/></a></div><dl className="nyphs-facts"><div><dt>Project</dt><dd>Community-developed Morrowind expansion</dd></div><div><dt>Role</dt><dd>Game Generalist · Level Design · Narrative Design</dd></div><div><dt>Involvement</dt><dd>Occasional contributions until 2020</dd></div><div><dt>Tools</dt><dd>Morrowind Construction Set</dd></div></dl><AboutDivider/><section><h2>My Contribution</h2><p>I participated in Tamriel Rebuilt on an occasional basis until 2020. My work combined level design, quest and narrative contributions, world building, and testing within a collaborative modding community.</p></section><div className="tamriel-map castle-frame"><CastleOrnaments/><img src={base+'E7YAil0.png'} alt="Tamriel Rebuilt world map" loading="lazy"/></div>{sections.map((section,index)=><React.Fragment key={section.title}><AboutDivider/><section className={`nyphs-design-row ${index%2===1?'nyphs-image-left':''}`}><div><h2>{section.title}</h2><p>{section.text}</p></div><div className="castle-frame nyphs-screenshot"><CastleOrnaments/><img className="nyphs-section-image" src={base+section.image} alt={section.alt} loading="lazy"/></div></section></React.Fragment>)}<AboutDivider/><div className="tamriel-map castle-frame"><CastleOrnaments/><img src={base+'TR1609RegionMap.jpg'} alt="Tamriel Rebuilt regional map from update 16.09" loading="lazy"/></div><p className="nyphs-confidential">Images and maps are sourced from Tamriel Rebuilt materials across different project updates and are shown to illustrate the project. They do not represent individual authorship of the pictured areas. All rights belong to their respective creators.</p></div></article>;
+}
+function ProjectPage({item,base}){if(base==='projects'&&item.id==='project-3')return <TamrielProject/>;if(base==='projects'&&item.id==='project-1')return <StoreSimulatorProject item={item}/>;if(base==='projects'&&item.id==='project-2')return <NyphsProject/>;return <article className="project-detail-page"><a className="back-link" href={`#/${base}`}><Icon name="back" size={16}/>{base==='projects'?'Projects':'Research & Creative Work'}</a><PageTitle eyebrow={item.tag} title={item.modalTitle}>{item.status}</PageTitle><p className="project-company-label">{item.tag}</p>{item.body?<div className="pending-content">{item.body}</div>:<><div className="project-hero castle-frame"><CastleOrnaments/><img src={item.projectImage||item.image} alt={item.modalTitle}/></div><p className="project-description">{item.description}</p><div className="project-actions">{[{label:item.action,href:item.href},{label:item.secondaryAction,href:item.secondaryHref},...(item.extraActions||[])].filter(a=>a.href&&a.href!=='#').map(a=><a className="text-link" key={a.label} href={a.href} target="_blank" rel="noreferrer">{a.label} <Icon name="external" size={14}/></a>)}</div>{item.meta&&<dl className="project-meta">{item.meta.map(([k,v])=><div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>}{item.contributions&&<section className="contributions"><h2>My contributions</h2><ul>{item.contributions.map(c=><li key={c}>{c}</li>)}</ul></section>}{item.awardImage&&<div className="project-award castle-frame"><CastleOrnaments/><img src={item.awardImage} alt={item.awardLabel}/></div>}</>}</article>}
 function Article({title,text,image,href}){return <article className="article-card editorial-article"><div className="article-media"><div className="article-image castle-frame"><CastleOrnaments/><img src={image} alt={title} loading="lazy"/></div><div className="article-link-buttons">{href?<a className="cv-button article-read-button" href={href} target="_blank" rel="noopener noreferrer">Read article <Icon name="external" size={14}/></a>:<button type="button" className="cv-button article-read-button" disabled title="Link coming soon">Read article <Icon name="external" size={14}/></button>}</div></div><div className="article-information"><span className="eyebrow">Article</span><h3>{title}</h3><p>{text}</p></div></article>}
 function GameJamList(){return <div className="articles-list game-jam-list">{windows.find(w=>w.id==='games').items.map(item=><article className="article-card" key={item.id}><div className="jam-media"><div className="article-image castle-frame"><CastleOrnaments/><img src={item.image} alt={item.modalTitle} loading="lazy"/></div><div className="jam-link-buttons">{[{label:item.action,href:item.href},{label:item.secondaryAction,href:item.secondaryHref},...(item.extraActions||[])].filter(link=>link.href&&link.href!=='#').map(link=><a className="cv-button" key={link.label} href={link.href} target="_blank" rel="noopener noreferrer">{link.label}<Icon name="external" size={14}/></a>)}</div></div><div className="jam-information"><span className="eyebrow">Game Jam · {item.status}</span><h3>{item.modalTitle}</h3><p>{item.description}</p><dl className="jam-meta">{item.meta?.map(([key,value])=><div key={key}><dt>{key}</dt><dd>{value}</dd></div>)}</dl>{item.contributions&&<ul className="jam-contributions">{item.contributions.map(text=><li key={text}>{text}</li>)}</ul>}</div></article>)}</div>}
 function OtherWork(){
@@ -1147,4 +1161,11 @@ html[data-theme="day"] .original-about-copy strong{color:#45384f!important}
 .nyphs-design-row.nyphs-image-left{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}.nyphs-image-left>div:first-child{grid-column:2;grid-row:1}.nyphs-image-left>.nyphs-screenshot{grid-column:1;grid-row:1}@media(max-width:650px){.nyphs-design-row.nyphs-image-left{grid-template-columns:minmax(0,1fr)}.nyphs-image-left>div:first-child{grid-column:1;grid-row:1}.nyphs-image-left>.nyphs-screenshot{grid-column:1;grid-row:2}}
 
 .nyphs-screenshot:has(.nyphs-section-image){aspect-ratio:auto;min-height:0;padding:4px;background:transparent}.nyphs-section-image{width:100%;height:auto;display:block;border-radius:4px}
+
+.project-cover.nyphs-cover-left img{object-position:left center}
+
+/* Keep logo breathing room inside the themed surface. */
+.site-header{margin-top:0;height:150px;padding-top:32px;padding-bottom:14px}@media(max-width:800px){.site-header{margin-top:0;height:135px;padding-top:27px;padding-bottom:12px}}@media(max-width:480px){.site-header{margin-top:0;height:122px;padding-top:24px;padding-bottom:12px}}
+
+.tamriel-map{margin:25px auto;max-width:740px;padding:4px}.tamriel-map img{width:100%;height:auto;display:block}.tamriel-map .castle-ornaments{color:#d7dce6}
 `;
