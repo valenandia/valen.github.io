@@ -427,11 +427,11 @@ const windows = [
 ];
 
 const cases = [
-  {id:'combat-design', title:'Mission & Encounter Design', subtitle:"The Witch's Escape — Stealth-Action Mission", category:'Mission & Encounter Design', symbol:'combat', color:'mauve'},
-  {id:'npc-ai', title:'AI Systems Design', subtitle:'Fairy Town — NPC Behavior & Daily Life Simulation', category:'AI Systems Design', symbol:'ai', color:'mint'},
+  {id:'combat-design', title:'Mission & Encounter Design', subtitle:'"Sinner Way" — Stealth-Action Mission', category:'Mission & Encounter Design', symbol:'combat', color:'mauve'},
+  {id:'npc-ai', title:'AI Systems Design', subtitle:'"Fairy Town" — NPC Behavior & Daily Life Simulation', category:'AI Systems Design', symbol:'ai', color:'mint'},
   {id:'dungeon-design', title:'Level Design', subtitle:'Dungeon Level Design & Gameplay Metrics — PvE & PvP Dungeon Spaces', category:'Level Design', symbol:'dungeon', color:'slate'},
   {id:'magic-performance', title:'Combat Systems Design', subtitle:'Magic Performance — Outfit-Based Builds & Crowd Combat Mechanics', category:'Combat Systems Design', symbol:'magic', color:'lavender'},
-  {id:'blood-hp', title:'Resource Systems Design', subtitle:'The Hunger of Fever — Multi-Resource Economy & Spirit State Systems', category:'Resource Systems Design', symbol:'blood', color:'rose'},
+  {id:'blood-hp', title:'Resource Systems Design', subtitle:'Village "Bud Luck" — Multi-Resource Economy & Spirit State Systems', category:'Resource Systems Design', symbol:'blood', color:'rose'},
   {id:'environment-puzzles', title:'Puzzle Design', subtitle:'Environment Puzzle Framework — Open-World Adventure Puzzle Design', category:'Puzzle Design', symbol:'puzzle', color:'sage'},
 ];
 const navigation = [
